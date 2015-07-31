@@ -30,7 +30,12 @@ define(function(require) {
          * {@link Input} 构造器
          * @method Input
          */
-        Input: require('ui/Input')
+        Input: require('ui/Input'),
+        /**
+         * {@link Textarea} 构造器
+         * @method Textarea
+         */
+        Textarea: require('ui/Textarea')
     });
 
     return bizui;

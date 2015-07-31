@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/bizdevfe/biz-ui.svg?branch=master)](https://travis-ci.org/bizdevfe/biz-ui)
 
 ##Features
-* Include 14 types of UI components: Button.
+* Include 14 types of UI components: Button, Input, Textarea.
 * IE9+, Firefox, Chrome, Safari and Opera supported.
 
 ##Usage
