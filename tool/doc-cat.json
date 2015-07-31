@@ -1,0 +1,14 @@
+[
+    {
+        "name": "BizUI Framework",
+        "groups": [
+            {
+                "name": "Components",
+                "classes": [
+                    "bizui",
+                    "Button"
+                ]
+            }
+        ]
+    }
+]

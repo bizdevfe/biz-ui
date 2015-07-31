@@ -1,0 +1,11 @@
+{
+    "--title": "BizUI Framework",
+    "--output": "../doc",
+    "--categories": "doc-cat.json",
+    "--": [
+        "../src/bizui.js",
+        "../src/ui/Button.js"
+    ],
+    "--external": ["HTMLElement", "jQuery"],
+    "--welcome": "../README.md"
+}
