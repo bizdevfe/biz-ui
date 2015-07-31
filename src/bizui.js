@@ -25,7 +25,12 @@ define(function(require) {
          * {@link Button} 构造器
          * @method Button
          */
-        Button: require('ui/Button')
+        Button: require('ui/Button'),
+        /**
+         * {@link Input} 构造器
+         * @method Input
+         */
+        Input: require('ui/Input')
     });
 
     return bizui;

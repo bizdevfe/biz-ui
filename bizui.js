@@ -431,7 +431,7 @@ define('ui/Button',['require'],function(require) {
     /**
      * Button constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/1/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/2/)
      * @constructor
      * @param {HTMLElement|jQuery} button 目标元素
      * @param {Object} [options] 参数
@@ -572,7 +572,159 @@ define('ui/Button',['require'],function(require) {
 /**
  * @ignore
  */
-define('bizui',['require','ui/Button'],function(require) {
+define('ui/Input',['require'],function(require) {
+    /**
+     * Input constructor
+     *
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/)
+     * @constructor
+     * @param {HTMLElement|jQuery} input 目标元素
+     * @param {Object} [options] 参数
+     * @param {Boolean} [options.disabled] 是否禁用
+     * @param {Function} [options.onEnter] 按回车回调
+     */
+    function Input(input, options) {
+        if (input instanceof jQuery) {
+            if (input.length > 0) {
+                input = input[0]; //只取第一个元素
+            } else {
+                return;
+            }
+        }
+
+        if (!isInput(input)) {
+            return;
+        }
+
+        this.main = input;
+        this.$main = $(this.main);
+        this.options = $.extend({}, options || {});
+        this.init(this.options);
+    }
+
+    var defaultClass = 'biz-input',
+        disableClass = 'biz-input-disable',
+        hoverClass = 'biz-input-hover',
+        focusClass = 'biz-input-focus';
+
+    Input.prototype = {
+        /**
+         * 初始化
+         * @param {Object} [options] 参数
+         * @protected
+         */
+        init: function(options) {
+            this.$main.addClass(defaultClass);
+
+            if (options.disabled) {
+                this.disable();
+            }
+
+            if (options.onEnter) {
+                var self = this;
+                this.$main.on('keydown.bizInput', function(e) {
+                    if (e.keyCode === 13) {
+                        options.onEnter.call(self, e);
+                    }
+                });
+            }
+
+            this.$main.on('mouseover.bizInput', function(e) {
+                $(this).addClass(hoverClass);
+            }).on('mouseout.bizInput', function(e) {
+                $(this).removeClass(hoverClass);
+            }).on('focus.bizInput', function(e) {
+                $(this).addClass(focusClass);
+            }).on('blur.bizInput', function(e) {
+                $(this).removeClass(focusClass);
+            });
+        },
+
+        /**
+         * 激活
+         */
+        enable: function() {
+            this.main.disabled = false;
+            this.$main.removeClass(disableClass);
+        },
+
+        /**
+         * 禁用
+         */
+        disable: function() {
+            this.main.disabled = true;
+            this.$main.addClass(disableClass);
+        },
+
+        /**
+         * 销毁
+         */
+        destroy: function() {
+            this.$main.removeClass(defaultClass + ' ' + disableClass);
+            this.$main.off('keydown.bizInput')
+                .off('mouseover.bizInput')
+                .off('mouseout.bizInput')
+                .off('focus.bizInput')
+                .off('blur.bizInput');
+        }
+    };
+
+    function isInput(elem) {
+        return elem.nodeType === 1 &&
+            elem.tagName.toLowerCase() === 'input' &&
+            elem.getAttribute('type').toLowerCase() === 'text';
+    }
+
+    var dataKey = 'bizInput';
+
+    $.extend($.fn, {
+        bizInput: function(method, options) {
+            var input;
+            switch (method) {
+                case 'enable':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.disable();
+                        }
+                    });
+                    break;
+                case 'destroy':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) && isInput(this)) {
+                            $(this).data(dataKey, new Input(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Input;
+});
+
+/**
+ * @ignore
+ */
+define('bizui',['require','ui/Button','ui/Input'],function(require) {
     /**
      * 命名空间
      * @class bizui
@@ -596,7 +748,12 @@ define('bizui',['require','ui/Button'],function(require) {
          * {@link Button} 构造器
          * @method Button
          */
-        Button: require('ui/Button')
+        Button: require('ui/Button'),
+        /**
+         * {@link Input} 构造器
+         * @method Input
+         */
+        Input: require('ui/Input')
     });
 
     return bizui;

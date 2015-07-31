@@ -6,7 +6,8 @@
                 "name": "Components",
                 "classes": [
                     "bizui",
-                    "Button"
+                    "Button",
+                    "Input"
                 ]
             }
         ]

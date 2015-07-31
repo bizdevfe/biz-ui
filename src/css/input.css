@@ -1,0 +1,35 @@
+/**
+ * Input
+ */
+
+.biz-input,
+.biz-textarea {
+    padding: 5px;
+    color: #333;
+    border: 1px #e2e2e2 solid;
+    border-radius: 2px;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    outline: none
+}
+.biz-input {
+    height: 18px;
+    line-height: 18px
+}
+.biz-textarea {
+    line-height: 20px;
+    resize: none
+}
+.biz-input-hover,
+.biz-textarea-hover {
+    border-color: #ccc
+}
+.biz-input-focus,
+.biz-textarea-focus {
+    border-color: #007aff
+}
+.biz-input-disable,
+.biz-textarea-disable {
+    background: #f1f1f1;
+    color: #b6b6b6
+}
