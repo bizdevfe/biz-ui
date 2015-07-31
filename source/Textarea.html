@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+<span id='Textarea-method-constructor'><span id='Textarea'>    /**
+</span></span>     * Textarea constructor
+     *
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/)
+     * @constructor
+     * @param {HTMLElement|jQuery} textarea 目标元素
+     * @param {Object} [options] 参数
+     * @param {Boolean} [options.disabled] 是否禁用
+     */
+    function Textarea(textarea, options) {
+        if (textarea instanceof jQuery) {
+            if (textarea.length &gt; 0) {
+                textarea = textarea[0]; //只取第一个元素
+            } else {
+                return;
+            }
+        }
+
+        if (!isTextarea(textarea)) {
+            return;
+        }
+
+        this.main = textarea;
+        this.$main = $(this.main);
+        this.options = $.extend({}, options || {});
+        this.init(this.options);
+    }
+
+    var defaultClass = 'biz-textarea',
+        disableClass = 'biz-textarea-disable',
+        hoverClass = 'biz-textarea-hover',
+        focusClass = 'biz-textarea-focus';
+
+    Textarea.prototype = {
+<span id='Textarea-method-init'>        /**
+</span>         * 初始化
+         * @param {Object} [options] 参数
+         * @protected
+         */
+        init: function(options) {
+            this.$main.addClass(defaultClass);
+
+            if (options.disabled) {
+                this.disable();
+            }
+
+            this.$main.on('mouseover.bizTextarea', function(e) {
+                $(this).addClass(hoverClass);
+            }).on('mouseout.bizTextarea', function(e) {
+                $(this).removeClass(hoverClass);
+            }).on('focus.bizTextarea', function(e) {
+                $(this).addClass(focusClass);
+            }).on('blur.bizTextarea', function(e) {
+                $(this).removeClass(focusClass);
+            });
+        },
+
+<span id='Textarea-method-enable'>        /**
+</span>         * 激活
+         */
+        enable: function() {
+            this.main.disabled = false;
+            this.$main.removeClass(disableClass);
+        },
+
+<span id='Textarea-method-disable'>        /**
+</span>         * 禁用
+         */
+        disable: function() {
+            this.main.disabled = true;
+            this.$main.addClass(disableClass);
+        },
+
+<span id='Textarea-method-length'>        /**
+</span>         * 获取文本长度（去除回车）
+         * @return {Number} 文本长度
+         */
+        length: function() {
+            return this.main.value.replace(/\r?\n/g, '').length;
+        },
+
+<span id='Textarea-method-destroy'>        /**
+</span>         * 销毁
+         */
+        destroy: function() {
+            this.$main.removeClass(defaultClass + ' ' + disableClass);
+            this.$main.off('mouseover.bizTextarea')
+                .off('mouseout.bizTextarea')
+                .off('focus.bizTextarea')
+                .off('blur.bizTextarea');
+        }
+    };
+
+    function isTextarea(elem) {
+        return elem.nodeType === 1 &amp;&amp; elem.tagName.toLowerCase() === 'textarea';
+    }
+
+    var dataKey = 'bizTextarea';
+
+    $.extend($.fn, {
+        bizTextarea: function(method, options) {
+            var textarea;
+            switch (method) {
+                case 'enable':
+                    this.each(function() {
+                        textarea = $(this).data(dataKey);
+                        if (textarea) {
+                            textarea.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        textarea = $(this).data(dataKey);
+                        if (textarea) {
+                            textarea.disable();
+                        }
+                    });
+                    break;
+                case 'destroy':
+                    this.each(function() {
+                        textarea = $(this).data(dataKey);
+                        if (textarea) {
+                            textarea.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                case 'length':
+                    return this.length !== 0 ? this.data(dataKey).length() : null;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) &amp;&amp; isTextarea(this)) {
+                            $(this).data(dataKey, new Textarea(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Textarea;
+});
+</pre>
+</body>
+</html>
