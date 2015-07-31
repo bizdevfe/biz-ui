@@ -19,70 +19,74 @@
 </span> * @ignore
  */
 define(function(require) {
-<span id='Button-method-constructor'><span id='Button'>    /**
-</span></span>     * Button constructor
+<span id='Input-method-constructor'><span id='Input'>    /**
+</span></span>     * Input constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/2/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/)
      * @constructor
-     * @param {HTMLElement|jQuery} button 目标元素
+     * @param {HTMLElement|jQuery} input 目标元素
      * @param {Object} [options] 参数
-     * @param {String} [options.theme] 主题
-     * @param {String} [options.label] 文字
      * @param {Boolean} [options.disabled] 是否禁用
-     * @param {Function} [options.onClick] 点击回调
+     * @param {Function} [options.onEnter] 按回车回调
      */
-    function Button(button, options) {
-        if (button instanceof jQuery) {
-            if (button.length &gt; 0) {
-                button = button[0]; //只取第一个元素
+    function Input(input, options) {
+        if (input instanceof jQuery) {
+            if (input.length &gt; 0) {
+                input = input[0]; //只取第一个元素
             } else {
                 return;
             }
         }
 
-        if (!isButton(button)) {
+        if (!isInput(input)) {
             return;
         }
 
-        this.main = button;
+        this.main = input;
         this.$main = $(this.main);
         this.options = $.extend({}, options || {});
         this.init(this.options);
     }
 
-    var defaultClass = 'biz-button',
-        disableClass = 'biz-button-disable',
-        prefix = 'biz-button-';
+    var defaultClass = 'biz-input',
+        disableClass = 'biz-input-disable',
+        hoverClass = 'biz-input-hover',
+        focusClass = 'biz-input-focus';
 
-    Button.prototype = {
-<span id='Button-method-init'>        /**
+    Input.prototype = {
+<span id='Input-method-init'>        /**
 </span>         * 初始化
          * @param {Object} [options] 参数
          * @protected
          */
         init: function(options) {
             this.$main.addClass(defaultClass);
-            if (options.theme) {
-                this.$main.addClass(prefix + options.theme);
-            }
-
-            if (options.label) {
-                this.$main.html(options.label);
-            }
 
             if (options.disabled) {
                 this.disable();
             }
 
-            if (options.onClick) {
+            if (options.onEnter) {
                 var self = this;
-                this.$main.on('click.bizButton', function(e) {
-                    options.onClick.call(self, e);
+                this.$main.on('keydown.bizInput', function(e) {
+                    if (e.keyCode === 13) {
+                        options.onEnter.call(self, e);
+                    }
                 });
             }
+
+            this.$main.on('mouseover.bizInput', function(e) {
+                $(this).addClass(hoverClass);
+            }).on('mouseout.bizInput', function(e) {
+                $(this).removeClass(hoverClass);
+            }).on('focus.bizInput', function(e) {
+                $(this).addClass(focusClass);
+            }).on('blur.bizInput', function(e) {
+                $(this).removeClass(focusClass);
+            });
         },
 
-<span id='Button-method-enable'>        /**
+<span id='Input-method-enable'>        /**
 </span>         * 激活
          */
         enable: function() {
@@ -90,7 +94,7 @@ define(function(require) {
             this.$main.removeClass(disableClass);
         },
 
-<span id='Button-method-disable'>        /**
+<span id='Input-method-disable'>        /**
 </span>         * 禁用
          */
         disable: function() {
@@ -98,57 +102,60 @@ define(function(require) {
             this.$main.addClass(disableClass);
         },
 
-<span id='Button-method-destroy'>        /**
+<span id='Input-method-destroy'>        /**
 </span>         * 销毁
          */
         destroy: function() {
             this.$main.removeClass(defaultClass + ' ' + disableClass);
-            if (this.options.theme) {
-                this.$main.removeClass(prefix + this.options.theme);
-            }
-            this.$main.off('click.bizButton');
+            this.$main.off('keydown.bizInput')
+                .off('mouseover.bizInput')
+                .off('mouseout.bizInput')
+                .off('focus.bizInput')
+                .off('blur.bizInput');
         }
     };
 
-    function isButton(elem) {
-        return elem.nodeType === 1 &amp;&amp; elem.tagName.toLowerCase() === 'button';
+    function isInput(elem) {
+        return elem.nodeType === 1 &amp;&amp;
+            elem.tagName.toLowerCase() === 'input' &amp;&amp;
+            elem.getAttribute('type').toLowerCase() === 'text';
     }
 
-    var dataKey = 'bizButton';
+    var dataKey = 'bizInput';
 
     $.extend($.fn, {
-        bizButton: function(method, options) {
-            var button;
+        bizInput: function(method, options) {
+            var input;
             switch (method) {
                 case 'enable':
                     this.each(function() {
-                        button = $(this).data(dataKey);
-                        if (button) {
-                            button.enable();
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.enable();
                         }
                     });
                     break;
                 case 'disable':
                     this.each(function() {
-                        button = $(this).data(dataKey);
-                        if (button) {
-                            button.disable();
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.disable();
                         }
                     });
                     break;
                 case 'destroy':
                     this.each(function() {
-                        button = $(this).data(dataKey);
-                        if (button) {
-                            button.destroy();
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.destroy();
                             $(this).data(dataKey, null);
                         }
                     });
                     break;
                 default:
                     this.each(function() {
-                        if (!$(this).data(dataKey) &amp;&amp; isButton(this)) {
-                            $(this).data(dataKey, new Button(this, method));
+                        if (!$(this).data(dataKey) &amp;&amp; isInput(this)) {
+                            $(this).data(dataKey, new Input(this, method));
                         }
                     });
             }
@@ -157,7 +164,7 @@ define(function(require) {
         }
     });
 
-    return Button;
+    return Input;
 });
 </pre>
 </body>
