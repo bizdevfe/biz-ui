@@ -1,6 +1,7 @@
 languages:
   JavaScript: true
 exclude_paths:
-  - "src/loader/*.js"
-  - "tool/*.js"
-  - "*.js"
+  - "src/loader/almond.js"
+  - "tool/r.js"
+  - "bizui.js"
+  - "bizui.min.js"

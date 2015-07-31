@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A jQuery plugin for business UI components",
   "keywords": "jQuery plugin",
-  "homepage": "bizdevfe.github.io/biz-ui",
+  "homepage": "http://bizdevfe.github.io/biz-ui",
   "maintainers": [
     {
       "name": "rickyleung",
