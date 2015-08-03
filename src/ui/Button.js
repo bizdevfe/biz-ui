@@ -5,14 +5,13 @@ define(function(require) {
     /**
      * Button constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/2/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/3/)
      * @constructor
      * @param {HTMLElement|jQuery} button 目标元素
      * @param {Object} [options] 参数
      * @param {String} [options.theme] 主题
      * @param {String} [options.label] 文字
      * @param {Boolean} [options.disabled] 是否禁用
-     * @param {Function} [options.onClick] 点击回调
      */
     function Button(button, options) {
         if (button instanceof jQuery) {
@@ -56,13 +55,6 @@ define(function(require) {
             if (options.disabled) {
                 this.disable();
             }
-
-            if (options.onClick) {
-                var self = this;
-                this.$main.on('click.bizButton', function(e) {
-                    options.onClick.call(self, e);
-                });
-            }
         },
 
         /**
@@ -89,7 +81,6 @@ define(function(require) {
             if (this.options.theme) {
                 this.$main.removeClass(prefix + this.options.theme);
             }
-            this.$main.off('click.bizButton');
         }
     };
 

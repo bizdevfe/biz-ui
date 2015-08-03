@@ -6,7 +6,8 @@
         "../src/bizui.js",
         "../src/ui/Button.js",
         "../src/ui/Input.js",
-        "../src/ui/Textarea.js"
+        "../src/ui/Textarea.js",
+        "../src/ui/Radio.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

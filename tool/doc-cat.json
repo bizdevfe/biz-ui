@@ -8,7 +8,8 @@
                     "bizui",
                     "Button",
                     "Input",
-                    "Textarea"
+                    "Textarea",
+                    "Radio"
                 ]
             }
         ]

@@ -77,3 +77,38 @@
     background: #f1f1f1;
     color: #b6b6b6
 }
+.biz-label {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    padding-left: 20px;
+    margin-right: 10px;
+    height: 19px;
+    line-height: 19px;
+    display: inline-block;
+    background-image: url(img/bizui.png);
+    background-repeat: no-repeat
+}
+.biz-radio-unchecked {
+    background-position: 0 -120px
+}
+.biz-radio-unchecked-hover {
+    background-position: 0 -140px
+}
+.biz-radio-checked {
+    background-position: 0 -160px
+}
+.biz-radio-checked-hover {
+    background-position: 0 -180px
+}
+.biz-radio-unchecked-disabled {
+    color: #b6b6b6;
+    background-position: 0 -200px;
+    cursor: default
+}
+.biz-radio-checked-disabled {
+    color: #b6b6b6;
+    background-position: 0 -220px;
+    cursor: default
+}

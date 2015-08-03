@@ -26,16 +26,24 @@ define(function(require) {
          * @method Button
          */
         Button: require('ui/Button'),
+
         /**
          * {@link Input} 构造器
          * @method Input
          */
         Input: require('ui/Input'),
+
         /**
          * {@link Textarea} 构造器
          * @method Textarea
          */
-        Textarea: require('ui/Textarea')
+        Textarea: require('ui/Textarea'),
+
+        /**
+         * {@link Radio} 构造器
+         * @method Radio
+         */
+        Radio: require('ui/Radio')
     });
 
     return bizui;
