@@ -1,0 +1,55 @@
+/**
+ * Select
+ */
+
+.selectBox-dropdown {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    background: #fff;
+    border-radius: 2px;
+    border: solid 1px #e2e2e2
+}
+.selectBox-dropdown:hover,
+.selectBox-dropdown:focus {
+    border-color: #007aff
+}
+.selectBox-dropdown .selectBox-label {
+    padding: 0 8px
+}
+.selectBox-dropdown .selectBox-arrow {
+    border-left: 0;
+    background: url(img/bizui.png) 0 -240px;
+}
+.selectBox-dropdown:hover .selectBox-arrow,
+.selectBox-dropdown:focus .selectBox-arrow {
+    border-left: 0;
+    background: url(img/bizui.png) 0 -270px;
+}
+.selectBox-dropdown-menu {
+    border: solid 1px #007aff;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.selectBox-options.selectBox-options-top,
+.selectBox-options.selectBox-options-bottom {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px
+}
+.selectBox-options li.selectBox-hover a {
+    background-color: #eee;
+}
+.selectBox-options li.selectBox-selected a {
+    background-color: #007aff;
+    color: #fff
+}
+.selectBox-disabled:hover,
+.selectBox-disabled:focus {
+    border-color: #e2e2e2
+}
+.selectBox-disabled:hover .selectBox-arrow,
+.selectBox-disabled:focus .selectBox-arrow {
+    border-left: 0;
+    background: url(img/bizui.png) 0 -240px;
+}

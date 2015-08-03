@@ -8,7 +8,8 @@
         "../src/ui/Input.js",
         "../src/ui/Textarea.js",
         "../src/ui/Radio.js",
-        "../src/ui/Checkbox.js"
+        "../src/ui/Checkbox.js",
+        "../src/ui/Select.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

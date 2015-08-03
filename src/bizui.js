@@ -49,7 +49,13 @@ define(function(require) {
          * {@link Checkbox} 构造器
          * @method Checkbox
          */
-        Checkbox: require('ui/Checkbox')
+        Checkbox: require('ui/Checkbox'),
+
+        /**
+         * {@link Select} 构造器
+         * @method Select
+         */
+        Select: require('ui/Select')
     });
 
     return bizui;
