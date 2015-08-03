@@ -2497,7 +2497,7 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
     /**
      * Select constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/3/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/)
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数
