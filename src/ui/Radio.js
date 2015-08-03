@@ -22,9 +22,21 @@ define(function(require) {
             return;
         }
 
+        /**
+         * @property {HTMLElement} main `input`元素
+         */
         this.main = radio;
+
+        /**
+         * @property {jQuery} $main `input`元素的$包装
+         */
         this.$main = $(this.main);
-        this.group = $('input[name="' + this.$main.attr('name') + '"]');
+
+        /**
+         * @property {Array} $group 同组选项
+         */
+        this.$group = $('input[name="' + this.$main.attr('name') + '"]');
+
         this.init();
     }
 
@@ -47,18 +59,21 @@ define(function(require) {
                 id = this.$main.attr('id');
             this.$main.after('<label for="' + id + '">' + title + '</label>').hide();
 
-            this.label = this.$main.next();
-            this.label.addClass(defaultClass);
+            /**
+             * @property {jQuery} $label `label`元素的$包装
+             */
+            this.$label = this.$main.next();
+            this.$label.addClass(defaultClass);
 
             //初始状态
             if (this.main.checked) {
-                this.label.addClass(this.main.disabled ? checkedDisabled : checked);
+                this.$label.addClass(this.main.disabled ? checkedDisabled : checked);
             } else {
-                this.label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
+                this.$label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
             }
 
             var self = this;
-            this.label.on('mouseover.bizRadio', function(e) {
+            this.$label.on('mouseover.bizRadio', function(e) {
                 if (!self.main.disabled) {
                     $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
                 }
@@ -68,7 +83,7 @@ define(function(require) {
                 }
             }).on('click.bizRadio', function(e) {
                 if (!self.main.disabled) {
-                    self.group.bizRadio('uncheck');
+                    self.$group.bizRadio('uncheck');
                     $(this).attr('class', defaultClass + ' ' + checked + ' ' + checkedHover);
                 }
             });
@@ -78,9 +93,9 @@ define(function(require) {
          * 勾选
          */
         check: function() {
-            this.group.bizRadio('uncheck');
+            this.$group.bizRadio('uncheck');
             this.main.checked = true;
-            this.label.attr('class', defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
         },
 
         /**
@@ -88,7 +103,7 @@ define(function(require) {
          */
         uncheck: function() {
             this.main.checked = false;
-            this.label.attr('class', defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
         },
 
         /**
@@ -96,7 +111,7 @@ define(function(require) {
          */
         enable: function() {
             this.main.disabled = false;
-            this.label.attr('class', defaultClass + ' ' + (this.main.checked ? checked : unchecked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.checked ? checked : unchecked));
         },
 
         /**
@@ -104,7 +119,7 @@ define(function(require) {
          */
         disable: function() {
             this.main.disabled = true;
-            this.label.attr('class', defaultClass + ' ' + (this.main.checkedDisabled ? checked : uncheckedDisabled));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.checkedDisabled ? checked : uncheckedDisabled));
         },
 
         /**
@@ -120,7 +135,7 @@ define(function(require) {
          */
         destroy: function() {
             this.$main.show();
-            this.label.off('mouseover.bizRadio')
+            this.$label.off('mouseover.bizRadio')
                 .off('mouseout.bizRadio')
                 .off('click.bizRadio')
                 .remove();

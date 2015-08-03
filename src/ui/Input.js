@@ -25,8 +25,16 @@ define(function(require) {
             return;
         }
 
+        /**
+         * @property {HTMLElement} main `input`元素
+         */
         this.main = input;
+
+        /**
+         * @property {jQuery} $main `input`元素的$包装
+         */
         this.$main = $(this.main);
+
         this.options = $.extend({}, options || {});
         this.init(this.options);
     }
