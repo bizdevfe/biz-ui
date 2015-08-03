@@ -43,7 +43,13 @@ define(function(require) {
          * {@link Radio} 构造器
          * @method Radio
          */
-        Radio: require('ui/Radio')
+        Radio: require('ui/Radio'),
+
+        /**
+         * {@link Checkbox} 构造器
+         * @method Checkbox
+         */
+        Checkbox: require('ui/Checkbox')
     });
 
     return bizui;

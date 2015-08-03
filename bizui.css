@@ -112,3 +112,25 @@
     background-position: 0 -220px;
     cursor: default
 }
+.biz-checkbox-unchecked {
+    background-position: 0 0
+}
+.biz-checkbox-unchecked-hover {
+    background-position: 0 -20px
+}
+.biz-checkbox-checked {
+    background-position: 0 -40px
+}
+.biz-checkbox-checked-hover {
+    background-position: 0 -60px
+}
+.biz-checkbox-unchecked-disabled {
+    color: #b6b6b6;
+    background-position: 0 -80px;
+    cursor: default
+}
+.biz-checkbox-checked-disabled {
+    color: #b6b6b6;
+    background-position: 0 -100px;
+    cursor: default
+}

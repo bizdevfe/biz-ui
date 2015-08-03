@@ -9,7 +9,8 @@
                     "Button",
                     "Input",
                     "Textarea",
-                    "Radio"
+                    "Radio",
+                    "Checkbox"
                 ]
             }
         ]
