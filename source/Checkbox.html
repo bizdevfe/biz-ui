@@ -39,9 +39,21 @@ define(function(require) {
             return;
         }
 
+<span id='Checkbox-property-main'>        /**
+</span>         * @property {HTMLElement} main `input`元素
+         */
         this.main = checkbox;
+
+<span id='Checkbox-property-S-main'>        /**
+</span>         * @property {jQuery} $main `input`元素的$包装
+         */
         this.$main = $(this.main);
-        this.group = $('input[name=&quot;' + this.$main.attr('name') + '&quot;]');
+
+<span id='Checkbox-property-S-group'>        /**
+</span>         * @property {Array} $group 同组选项
+         */
+        this.$group = $('input[name=&quot;' + this.$main.attr('name') + '&quot;]');
+
         this.init();
     }
 
@@ -64,18 +76,21 @@ define(function(require) {
                 id = this.$main.attr('id');
             this.$main.after('&lt;label for=&quot;' + id + '&quot;&gt;' + title + '&lt;/label&gt;').hide();
 
-            this.label = this.$main.next();
-            this.label.addClass(defaultClass);
+<span id='Checkbox-property-S-label'>            /**
+</span>             * @property {jQuery} $label `label`元素的$包装
+             */
+            this.$label = this.$main.next();
+            this.$label.addClass(defaultClass);
 
             //初始状态
             if (this.main.checked) {
-                this.label.addClass(this.main.disabled ? checkedDisabled : checked);
+                this.$label.addClass(this.main.disabled ? checkedDisabled : checked);
             } else {
-                this.label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
+                this.$label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
             }
 
             var self = this;
-            this.label.on('mouseover.bizCheckbox', function(e) {
+            this.$label.on('mouseover.bizCheckbox', function(e) {
                 if (!self.main.disabled) {
                     $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
                 }
@@ -99,7 +114,7 @@ define(function(require) {
          */
         check: function() {
             this.main.checked = true;
-            this.label.attr('class', defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
         },
 
 <span id='Checkbox-method-uncheck'>        /**
@@ -107,7 +122,7 @@ define(function(require) {
          */
         uncheck: function() {
             this.main.checked = false;
-            this.label.attr('class', defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
         },
 
 <span id='Checkbox-method-enable'>        /**
@@ -115,7 +130,7 @@ define(function(require) {
          */
         enable: function() {
             this.main.disabled = false;
-            this.label.attr('class', defaultClass + ' ' + (this.main.checked ? checked : unchecked));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.checked ? checked : unchecked));
         },
 
 <span id='Checkbox-method-disable'>        /**
@@ -123,7 +138,7 @@ define(function(require) {
          */
         disable: function() {
             this.main.disabled = true;
-            this.label.attr('class', defaultClass + ' ' + (this.main.checkedDisabled ? checked : uncheckedDisabled));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.checkedDisabled ? checked : uncheckedDisabled));
         },
 
 <span id='Checkbox-method-val'>        /**
@@ -139,7 +154,7 @@ define(function(require) {
          */
         destroy: function() {
             this.$main.show();
-            this.label.off('mouseover.bizCheckbox')
+            this.$label.off('mouseover.bizCheckbox')
                 .off('mouseout.bizCheckbox')
                 .off('click.bizCheckbox')
                 .remove();

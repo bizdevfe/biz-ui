@@ -42,8 +42,16 @@ define(function(require) {
             return;
         }
 
+<span id='Input-property-main'>        /**
+</span>         * @property {HTMLElement} main `input`元素
+         */
         this.main = input;
+
+<span id='Input-property-S-main'>        /**
+</span>         * @property {jQuery} $main `input`元素的$包装
+         */
         this.$main = $(this.main);
+
         this.options = $.extend({}, options || {});
         this.init(this.options);
     }
