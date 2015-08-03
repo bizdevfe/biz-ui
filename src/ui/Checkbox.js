@@ -121,7 +121,7 @@ define(function(require) {
          */
         disable: function() {
             this.main.disabled = true;
-            this.$label.attr('class', defaultClass + ' ' + (this.main.checkedDisabled ? checked : uncheckedDisabled));
+            this.$label.attr('class', defaultClass + ' ' + (this.main.checked ? checkedDisabled : uncheckedDisabled));
         },
 
         /**
