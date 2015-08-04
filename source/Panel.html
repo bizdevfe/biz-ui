@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+<span id='Panel-method-constructor'><span id='Panel'>    /**
+</span></span>     * Panel constructor
+     *
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/4govkm96/)
+     * @constructor
+     * @param {HTMLElement|jQuery} panel 目标元素
+     * @param {Object} [options] 参数
+     * @param {Number} [options.marginLeft] 左边距
+     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(){}, theme: ''}
+     */
+    function Panel(panel, options) {
+        if (panel instanceof jQuery) {
+            if (panel.length &gt; 0) {
+                panel = panel[0]; //只取第一个元素
+            } else {
+                return;
+            }
+        }
+
+        if (!isPanel(panel)) {
+            return;
+        }
+
+<span id='Panel-property-main'>        /**
+</span>         * @property {HTMLElement} main `panel`元素
+         */
+        this.main = panel;
+
+<span id='Panel-property-S-main'>        /**
+</span>         * @property {jQuery} $main `panel`元素的$包装
+         */
+        this.$main = $(this.main);
+
+        var defaultOption = {
+            marginLeft: 200,
+            buttons: []
+        };
+        this.options = $.extend(defaultOption, options || {});
+        this.init(this.options);
+    }
+
+    var defaultClass = 'biz-panel';
+
+    Panel.prototype = {
+<span id='Panel-method-init'>        /**
+</span>         * 初始化
+         * @param {Object} [options] 参数
+         * @protected
+         */
+        init: function(options) {
+            var title = this.$main.attr('title'),
+                content = this.$main.html(),
+                self = this;
+            this.orginContent = content;
+
+            this.$main.hide()
+                .addClass(defaultClass)
+                .removeAttr('title')
+                .html([
+                    '&lt;div class=&quot;biz-panel-margin&quot;&gt;&lt;/div&gt;',
+                    '&lt;div class=&quot;biz-panel-body&quot;&gt;',
+                    '&lt;h1 class=&quot;biz-panel-title&quot;&gt;', title, '&lt;/h1&gt;',
+                    '&lt;div class=&quot;biz-panel-content&quot;&gt;', content, '&lt;/div&gt;',
+                    '&lt;div class=&quot;biz-panel-bottom&quot;&gt;&lt;/div&gt;&lt;/div&gt;'
+                ].join(''))
+                .after('&lt;div class=&quot;biz-mask&quot; style=&quot;display:none&quot;&gt;&lt;/div&gt;');
+
+            this.$main.find('.biz-panel-margin').css({
+                width: options.marginLeft
+            });
+
+            var bottom = this.$main.find('.biz-panel-bottom');
+            $.each(options.buttons, function(index, button) {
+                $('&lt;button&gt;' + button.text + '&lt;/button&gt;')
+                    .bizButton({
+                        theme: button.theme
+                    })
+                    .click(function(e) {
+                        button.click.call(self, e);
+                    })
+                    .appendTo(bottom);
+            });
+        },
+
+<span id='Panel-method-open'>        /**
+</span>         * 打开
+         */
+        open: function() {
+            $('body').css({
+                overflow: 'hidden'
+            });
+
+            this.$main.next().show();
+
+            var self = this;
+            this.$main
+                .css({
+                    top: Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+                })
+                .show()
+                .animate({
+                    left: 0
+                }, 300, function() {
+                    self.$main.find('.biz-panel-body')[0].scrollTop = 0;
+                });
+        },
+
+<span id='Panel-method-close'>        /**
+</span>         * 关闭
+         */
+        close: function() {
+            var self = this;
+            this.$main
+                .animate({
+                    left: Math.max(document.body.offsetWidth, document.documentElement.offsetWidth)
+                }, 300, function() {
+                    self.$main.hide();
+                    self.$main.next().hide();
+                    $('body').css({
+                        overflow: 'visible'
+                    });
+                });
+        },
+
+<span id='Panel-method-destroy'>        /**
+</span>         * 销毁
+         */
+        destroy: function() {
+            this.$main.removeClass(defaultClass)
+                .attr('title', this.$main.find('.biz-panel-title').text())
+                .removeAttr('style')
+                .hide();
+            this.$main.find('.biz-panel-bottom button').bizButton('destroy');
+            this.$main.html(this.orginContent)
+                .next()
+                .remove();
+            this.orginContent = null;
+        }
+    };
+
+    function isPanel(elem) {
+        return elem.nodeType === 1 &amp;&amp;
+            elem.tagName.toLowerCase() === 'div' &amp;&amp;
+            elem.hasAttribute('title');
+    }
+
+    var dataKey = 'bizPanel';
+
+    $.extend($.fn, {
+        bizPanel: function(method, options) {
+            var panel;
+            switch (method) {
+                case 'open':
+                    this.each(function() {
+                        panel = $(this).data(dataKey);
+                        if (panel) {
+                            panel.open();
+                        }
+                    });
+                    break;
+                case 'close':
+                    this.each(function() {
+                        panel = $(this).data(dataKey);
+                        if (panel) {
+                            panel.close();
+                        }
+                    });
+                    break;
+                case 'destroy':
+                    this.each(function() {
+                        panel = $(this).data(dataKey);
+                        if (panel) {
+                            panel.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) &amp;&amp; isPanel(this)) {
+                            $(this).data(dataKey, new Panel(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Panel;
+});
+</pre>
+</body>
+</html>
