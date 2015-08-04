@@ -10,7 +10,8 @@
         "../src/ui/Radio.js",
         "../src/ui/Checkbox.js",
         "../src/ui/Select.js",
-        "../src/ui/Dialog.js"
+        "../src/ui/Dialog.js",
+        "../src/ui/Panel.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

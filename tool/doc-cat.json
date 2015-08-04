@@ -12,7 +12,8 @@
                     "Radio",
                     "Checkbox",
                     "Select",
-                    "Dialog"
+                    "Dialog",
+                    "Panel"
                 ]
             }
         ]

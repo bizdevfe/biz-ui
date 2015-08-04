@@ -61,7 +61,13 @@ define(function(require) {
          * {@link Dialog} 构造器
          * @method Dialog
          */
-        Dialog: require('ui/Dialog')
+        Dialog: require('ui/Dialog'),
+
+        /**
+         * {@link Panel} 构造器
+         * @method Panel
+         */
+        Panel: require('ui/Panel')
     });
 
     return bizui;

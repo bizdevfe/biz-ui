@@ -89,7 +89,8 @@ define(function(require) {
                 $('<button>' + button.text + '</button>')
                     .bizButton({
                         theme: button.theme
-                    }).click(function(e) {
+                    })
+                    .click(function(e) {
                         button.click.call(self, e);
                     })
                     .appendTo(bottom);
