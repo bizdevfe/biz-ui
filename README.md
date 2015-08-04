@@ -10,6 +10,9 @@
 ##Features
 * Include 9 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Page.
 * IE9+, Firefox, Chrome, Safari and Opera supported.
+* Import other awesome components with the constant API using Adapter Pattern.
+
+<img src="http://bizdevfe.github.io/biz-ui/img/adapter.png" />
 
 ##Usage
 Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https://github.com/bizdevfe/biz-ui/releases).
@@ -41,6 +44,8 @@ To initialize:
 See [http://bizdevfe.github.io/biz-ui](http://bizdevfe.github.io/biz-ui).
 
 ##Build
+Do the code inspection, optimization or API generation here:
+
     $ cd tool
     $ build.sh
 
