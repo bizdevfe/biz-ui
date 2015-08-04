@@ -575,7 +575,7 @@ define('ui/Input',['require'],function(require) {
     /**
      * Input constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/1/)
      * @constructor
      * @param {HTMLElement|jQuery} input 目标元素
      * @param {Object} [options] 参数
@@ -735,7 +735,7 @@ define('ui/Textarea',['require'],function(require) {
     /**
      * Textarea constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/1/)
      * @constructor
      * @param {HTMLElement|jQuery} textarea 目标元素
      * @param {Object} [options] 参数
@@ -2497,7 +2497,7 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
     /**
      * Select constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/1/)
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数

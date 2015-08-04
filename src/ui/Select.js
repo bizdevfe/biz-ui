@@ -7,7 +7,7 @@ define(function(require) {
     /**
      * Select constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/1/)
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数

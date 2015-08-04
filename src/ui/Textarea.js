@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Textarea constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/1/)
      * @constructor
      * @param {HTMLElement|jQuery} textarea 目标元素
      * @param {Object} [options] 参数

@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Input constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/)
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/1/)
      * @constructor
      * @param {HTMLElement|jQuery} input 目标元素
      * @param {Object} [options] 参数
