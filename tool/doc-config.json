@@ -9,7 +9,8 @@
         "../src/ui/Textarea.js",
         "../src/ui/Radio.js",
         "../src/ui/Checkbox.js",
-        "../src/ui/Select.js"
+        "../src/ui/Select.js",
+        "../src/ui/Dialog.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

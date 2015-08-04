@@ -11,7 +11,8 @@
                     "Textarea",
                     "Radio",
                     "Checkbox",
-                    "Select"
+                    "Select",
+                    "Dialog"
                 ]
             }
         ]

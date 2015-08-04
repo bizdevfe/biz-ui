@@ -55,7 +55,13 @@ define(function(require) {
          * {@link Select} 构造器
          * @method Select
          */
-        Select: require('ui/Select')
+        Select: require('ui/Select'),
+
+        /**
+         * {@link Dialog} 构造器
+         * @method Dialog
+         */
+        Dialog: require('ui/Dialog')
     });
 
     return bizui;
