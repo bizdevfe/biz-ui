@@ -13,7 +13,8 @@
                     "Checkbox",
                     "Select",
                     "Dialog",
-                    "Panel"
+                    "Panel",
+                    "Tooltip"
                 ]
             }
         ]

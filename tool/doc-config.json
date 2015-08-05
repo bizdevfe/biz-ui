@@ -11,7 +11,8 @@
         "../src/ui/Checkbox.js",
         "../src/ui/Select.js",
         "../src/ui/Dialog.js",
-        "../src/ui/Panel.js"
+        "../src/ui/Panel.js",
+        "../src/ui/Tooltip.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

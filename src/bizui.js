@@ -22,52 +22,58 @@ define(function(require) {
 
     $.extend(bizui, {
         /**
-         * {@link Button} 构造器
+         * {@link Button} constructor
          * @method Button
          */
         Button: require('ui/Button'),
 
         /**
-         * {@link Input} 构造器
+         * {@link Input} constructor
          * @method Input
          */
         Input: require('ui/Input'),
 
         /**
-         * {@link Textarea} 构造器
+         * {@link Textarea} constructor
          * @method Textarea
          */
         Textarea: require('ui/Textarea'),
 
         /**
-         * {@link Radio} 构造器
+         * {@link Radio} constructor
          * @method Radio
          */
         Radio: require('ui/Radio'),
 
         /**
-         * {@link Checkbox} 构造器
+         * {@link Checkbox} constructor
          * @method Checkbox
          */
         Checkbox: require('ui/Checkbox'),
 
         /**
-         * {@link Select} 构造器
+         * {@link Select} constructor
          * @method Select
          */
         Select: require('ui/Select'),
 
         /**
-         * {@link Dialog} 构造器
+         * {@link Dialog} constructor
          * @method Dialog
          */
         Dialog: require('ui/Dialog'),
 
         /**
-         * {@link Panel} 构造器
+         * {@link Panel} constructor
          * @method Panel
          */
-        Panel: require('ui/Panel')
+        Panel: require('ui/Panel'),
+
+        /**
+         * {@link Tooltip} method
+         * @method Tooltip
+         */
+        Tooltip: require('ui/Tooltip')
     });
 
     return bizui;
