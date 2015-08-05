@@ -12,7 +12,8 @@
         "../src/ui/Select.js",
         "../src/ui/Dialog.js",
         "../src/ui/Panel.js",
-        "../src/ui/Tooltip.js"
+        "../src/ui/Tooltip.js",
+        "../src/ui/Tab.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

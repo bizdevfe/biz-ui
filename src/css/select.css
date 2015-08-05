@@ -30,7 +30,7 @@
 .selectBox-dropdown-menu {
     border: solid 1px #007aff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px
 }
 .selectBox-options.selectBox-options-top,
 .selectBox-options.selectBox-options-bottom {
@@ -38,7 +38,7 @@
     border-bottom-right-radius: 2px
 }
 .selectBox-options li.selectBox-hover a {
-    background-color: #eee;
+    background-color: #eee
 }
 .selectBox-options li.selectBox-selected a {
     background-color: #007aff;
@@ -51,5 +51,5 @@
 .selectBox-disabled:hover .selectBox-arrow,
 .selectBox-disabled:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px;
+    background: url(img/bizui.png) 0 -240px
 }

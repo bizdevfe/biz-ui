@@ -14,7 +14,8 @@
                     "Select",
                     "Dialog",
                     "Panel",
-                    "Tooltip"
+                    "Tooltip",
+                    "Tab"
                 ]
             }
         ]

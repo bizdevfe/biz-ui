@@ -154,11 +154,11 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
     display: inline-block;
-    cursor: default;
+    cursor: default
 }
 .selectBox-dropdown:focus,
 .selectBox-dropdown:focus .selectBox-arrow {
-    border-color: #666;
+    border-color: #666
 }
 .selectBox-dropdown.selectBox-menuShowing-bottom {
     -moz-border-radius-bottomleft: 0;
@@ -166,7 +166,7 @@
     -webkit-border-bottom-left-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0
 }
 .selectBox-dropdown.selectBox-menuShowing-top {
     -moz-border-radius-topleft: 0;
@@ -174,13 +174,13 @@
     -webkit-border-top-left-radius: 0;
     -webkit-border-top-right-radius: 0;
     border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-right-radius: 0
 }
 .selectBox-dropdown .selectBox-label {
     padding: 2px 8px;
     display: inline-block;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hidden
 }
 .selectBox-dropdown .selectBox-arrow {
     position: absolute;
@@ -189,7 +189,7 @@
     width: 23px;
     height: 100%;
     background: url(img/jquery.selectBox-arrow.gif) 50% center no-repeat;
-    border-left: solid 1px #BBB;
+    border-left: solid 1px #BBB
 }
 .selectBox-dropdown-menu {
     position: absolute;
@@ -203,7 +203,7 @@
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
     box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch
 }
 .selectBox-inline {
     min-width: 150px;
@@ -213,20 +213,19 @@
     display: inline-block;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    border-radius: 4px;
-    overflow: auto;
+    border-radius: 4px overflow: auto;
 }
 .selectBox-inline:focus {
-    border-color: #666;
+    border-color: #666
 }
 .selectBox-options,
-.selectBox-options LI,
-.selectBox-options LI A {
+.selectBox-options li,
+.selectBox-options li a {
     list-style: none;
     display: block;
     cursor: default;
     padding: 0;
-    margin: 0;
+    margin: 0
 }
 .selectBox-options.selectBox-options-top {
     border-bottom: none;
@@ -236,7 +235,7 @@
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-right-radius: 5px
 }
 .selectBox-options.selectBox-options-bottom {
     border-top: none;
@@ -245,46 +244,45 @@
     -webkit-border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px
 }
-.selectBox-options LI A {
+.selectBox-options li a {
     line-height: 1.5;
     padding: 0 .5em;
     white-space: nowrap;
     overflow: hidden;
-    background: 6px center no-repeat;
+    background: 6px center no-repeat
 }
-.selectBox-options LI.selectBox-hover A {
-    background-color: #EEE;
+.selectBox-options li.selectBox-hover a {
+    background-color: #EEE
 }
-.selectBox-options LI.selectBox-disabled A {
+.selectBox-options li.selectBox-disabled a {
     color: #888;
-    background-color: transparent;
+    background-color: transparent
 }
-.selectBox-options LI.selectBox-selected A {
-    background-color: #C8DEF4;
+.selectBox-options li.selectBox-selected a {
+    background-color: #C8DEF4
 }
 .selectBox-options .selectBox-optgroup {
     color: #666;
     background: #EEE;
     font-weight: bold;
     line-height: 1.5;
-    padding: 0 .3em;
-    white-space: nowrap;
+    padding: 0 .3em white-space: nowrap;
 }
 .selectBox.selectBox-disabled {
-    color: #888 !important;
+    color: #888 !important
 }
 .selectBox-dropdown.selectBox-disabled .selectBox-arrow {
     opacity: .5;
     filter: alpha(opacity=50);
-    border-color: #666;
+    border-color: #666
 }
 .selectBox-inline.selectBox-disabled {
-    color: #888 !important;
+    color: #888 !important
 }
-.selectBox-inline.selectBox-disabled .selectBox-options A {
-    background-color: transparent !important;
+.selectBox-inline.selectBox-disabled .selectBox-options a {
+    background-color: transparent !important
 }
 .selectBox-dropdown {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
@@ -314,7 +312,7 @@
 .selectBox-dropdown-menu {
     border: solid 1px #007aff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px
 }
 .selectBox-options.selectBox-options-top,
 .selectBox-options.selectBox-options-bottom {
@@ -322,7 +320,7 @@
     border-bottom-right-radius: 2px
 }
 .selectBox-options li.selectBox-hover a {
-    background-color: #eee;
+    background-color: #eee
 }
 .selectBox-options li.selectBox-selected a {
     background-color: #007aff;
@@ -335,7 +333,7 @@
 .selectBox-disabled:hover .selectBox-arrow,
 .selectBox-disabled:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px;
+    background: url(img/bizui.png) 0 -240px
 }
 .biz-dialog {
     position: fixed;
@@ -355,7 +353,7 @@
     font-weight: normal;
     color: #fff;
     background: #707070;
-    position: relative;
+    position: relative
 }
 .biz-dialog-close {
     position: absolute;
@@ -437,44 +435,80 @@
     position: absolute;
     z-index: 1002;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px
 }
 #biz-tooltip.black {
     background: rgba(0, 0, 0, 0.95);
-    color: #fff;
+    color: #fff
 }
 #biz-tooltip.white {
     background: rgba(255, 255, 255, 0.95);
-    color: #222;
+    color: #222
 }
 #biz-tooltip .arrow {
     width: 11px;
     height: 11px;
     position: absolute;
     background-image: url(img/bizui.png);
-    background-repeat: no-repeat;
+    background-repeat: no-repeat
 }
 #biz-tooltip.black.top .arrow {
-    background-position: 0 -310px;
+    background-position: 0 -310px
 }
 #biz-tooltip.black.right .arrow {
-    background-position: 0 -321px;
+    background-position: 0 -321px
 }
 #biz-tooltip.black.bottom .arrow {
-    background-position: -11px -310px;
+    background-position: -11px -310px
 }
 #biz-tooltip.black.left .arrow {
-    background-position: -11px -321px;
+    background-position: -11px -321px
 }
 #biz-tooltip.white.top .arrow {
-    background-position: 0 -332px;
+    background-position: 0 -332px
 }
 #biz-tooltip.white.right .arrow {
-    background-position: -0 -343px;
+    background-position: -0 -343px
 }
 #biz-tooltip.white.bottom .arrow {
-    background-position: -11px -332px;
+    background-position: -11px -332px
 }
 #biz-tooltip.white.left .arrow {
-    background-position: -11px -343px;
+    background-position: -11px -343px
+}
+.biz-tab {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px
+}
+.biz-tab > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 36px;
+    line-height: 36px;
+    background: #ccc
+}
+.biz-tab > ul li {
+    float: left;
+    padding: 0 40px;
+    border-left: 1px solid #fff;
+    background: #707070;
+    color: #fff;
+    text-align: center;
+    cursor: pointer
+}
+.biz-tab > ul li:first-child {
+    border-left: 0
+}
+.biz-tab > ul li:hover {
+    background: #999999
+}
+.biz-tab > ul li.active {
+    background: #fff;
+    color: #455052;
+    cursor: default
+}
+.biz-tab > div {
+    padding: 10px;
+    background: #fff
 }

@@ -73,7 +73,13 @@ define(function(require) {
          * {@link Tooltip} method
          * @method Tooltip
          */
-        Tooltip: require('ui/Tooltip')
+        Tooltip: require('ui/Tooltip'),
+
+        /**
+         * {@link Tab} constructor
+         * @method Tab
+         */
+        Tab: require('ui/Tab')
     });
 
     return bizui;
