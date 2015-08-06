@@ -27,7 +27,7 @@ define(function(require) {
      * @param {HTMLElement|jQuery} tab 目标元素
      * @param {Object} [options] 参数
      * @param {String} [options.event] 切换tab事件
-     * @param {Function} [options.onChange] 切换回调
+     * @param {Function} [options.onChange] 切换回调(data, event)
      */
     function Tab(tab, options) {
         if (tab instanceof jQuery) {
@@ -96,7 +96,7 @@ define(function(require) {
                         options.onChange.call(self, {
                             title: curTab.text(),
                             index: index
-                        });
+                        }, e);
                     }
                 }
             });

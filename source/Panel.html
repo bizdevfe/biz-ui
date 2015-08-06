@@ -27,7 +27,7 @@ define(function(require) {
      * @param {HTMLElement|jQuery} panel 目标元素
      * @param {Object} [options] 参数
      * @param {Number} [options.marginLeft] 左边距
-     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(){}, theme: ''}
+     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
      */
     function Panel(panel, options) {
         if (panel instanceof jQuery) {
