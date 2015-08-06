@@ -8,7 +8,7 @@
 <img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />
 
 ##Features
-* Include 14 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Tooltip, Tab, Page, Calendar, Tree, Table.
+* Include 14 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Tooltip, Tab, Page, Tree, Calendar, Table.
 * IE9+, Firefox, Chrome, Safari and Opera supported.
 * Import other awesome components with the constant API using Adapter Pattern.
 
@@ -40,7 +40,7 @@ To initialize:
 	// or create instance by constructor
 	var button = new bizui.Button($('button'));
 
-##API documentation and examples
+##API documentation and demos
 See [http://bizdevfe.github.io/biz-ui](http://bizdevfe.github.io/biz-ui).
 
 ##Build

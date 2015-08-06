@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Checkbox constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/Lcp5mpLt/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/Lcp5mpLt/)
      * @constructor
      * @param {HTMLElement|jQuery} checkbox 目标元素
      */

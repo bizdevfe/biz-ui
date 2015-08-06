@@ -7,7 +7,7 @@ define(function(require) {
     /**
      * Page constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/b73bLbqx/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/b73bLbqx/)
      * @constructor
      * @param {HTMLElement|jQuery} page 目标元素
      * @param {Object} [options] 参数

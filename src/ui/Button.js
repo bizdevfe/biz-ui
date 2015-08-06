@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Button constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/3/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/3/)
      * @constructor
      * @param {HTMLElement|jQuery} button 目标元素
      * @param {Object} [options] 参数

@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Dialog constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/j5agtk3u/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/j5agtk3u/)
      * @constructor
      * @param {HTMLElement|jQuery} dialog 目标元素
      * @param {Object} [options] 参数

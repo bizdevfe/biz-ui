@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Tab constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/9t1nzb07/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/9t1nzb07/)
      * @constructor
      * @param {HTMLElement|jQuery} tab 目标元素
      * @param {Object} [options] 参数

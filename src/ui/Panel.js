@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Panel constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/4govkm96/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/4govkm96/)
      * @constructor
      * @param {HTMLElement|jQuery} panel 目标元素
      * @param {Object} [options] 参数

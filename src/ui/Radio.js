@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Radio constructor
      *
-     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/o74stme1/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/o74stme1/)
      * @constructor
      * @param {HTMLElement|jQuery} radio 目标元素
      */

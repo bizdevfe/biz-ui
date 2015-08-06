@@ -16,7 +16,8 @@
                     "Panel",
                     "Tooltip",
                     "Tab",
-                    "Page"
+                    "Page",
+                    "Tree"
                 ]
             }
         ]

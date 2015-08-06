@@ -9,6 +9,11 @@ define(function(require) {
      */
     var bizui = {};
 
+    /**
+     * @property {String} version 版本号
+     */
+    bizui.version = '2.0.0';
+
     var origin = window.bizui;
 
     /**
@@ -85,7 +90,13 @@ define(function(require) {
          * {@link Page} constructor
          * @method Page
          */
-        Page: require('ui/Page')
+        Page: require('ui/Page'),
+
+        /**
+         * {@link Tree} constructor
+         * @method Tree
+         */
+        Tree: require('ui/Tree')
     });
 
     return bizui;
