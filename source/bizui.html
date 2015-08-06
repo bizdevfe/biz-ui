@@ -26,6 +26,11 @@ define(function(require) {
      */
     var bizui = {};
 
+<span id='bizui-property-version'>    /**
+</span>     * @property {String} version 版本号
+     */
+    bizui.version = '2.0.0';
+
     var origin = window.bizui;
 
 <span id='bizui-method-noConflict'>    /**
@@ -102,7 +107,13 @@ define(function(require) {
 </span>         * {@link Page} constructor
          * @method Page
          */
-        Page: require('ui/Page')
+        Page: require('ui/Page'),
+
+<span id='bizui-method-Tree'>        /**
+</span>         * {@link Tree} constructor
+         * @method Tree
+         */
+        Tree: require('ui/Tree')
     });
 
     return bizui;

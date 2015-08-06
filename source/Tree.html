@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+    var JSTree = require('dep/jquery.jstree');
+
+<span id='Tree-method-constructor'><span id='Tree'>    /**
+</span></span>     * Tree constructor
+     *
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/cysonubv/)
+     *
+     * More details about options, methods and events, see [jstree API](https://www.jstree.com/api/)
+     * @constructor
+     * @param {HTMLElement|jQuery} tree 目标元素
+     * @param {Object} [options] 参数
+     */
+    function Tree(tree, options) {
+        this.instance = JSTree.create(tree, options);
+    }
+
+    Tree.prototype = {
+<span id='Tree-method-ins'>        /**
+</span>         * 返回jstree实例
+         * @return {Object}
+         */
+        ins: function() {
+            return this.instance;
+        },
+
+<span id='Tree-method-destroy'>        /**
+</span>         * 销毁
+         */
+        destroy: function() {
+            this.instance.destroy();
+        }
+    };
+
+    function isTree(elem) {
+        return elem.nodeType === 1 &amp;&amp; elem.tagName.toLowerCase() === 'div';
+    }
+
+    var dataKey = 'bizTree';
+
+    $.extend($.fn, {
+        bizTree: function(method, options) {
+            var tree;
+            switch (method) {
+                case 'ins':
+                    return this.data(dataKey).ins();
+                case 'destroy':
+                    this.each(function() {
+                        tree = $(this).data(dataKey);
+                        if (tree) {
+                            tree.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) &amp;&amp; isTree(this)) {
+                            $(this).data(dataKey, new Tree(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Tree;
+});
+</pre>
+</body>
+</html>
