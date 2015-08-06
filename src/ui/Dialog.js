@@ -11,7 +11,7 @@ define(function(require) {
      * @param {Object} [options] 参数
      * @param {Number} [options.width] 宽度
      * @param {Number} [options.height] 高度
-     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(){}, theme: ''}
+     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
      */
     function Dialog(dialog, options) {
         if (dialog instanceof jQuery) {

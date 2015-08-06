@@ -13,7 +13,8 @@
         "../src/ui/Dialog.js",
         "../src/ui/Panel.js",
         "../src/ui/Tooltip.js",
-        "../src/ui/Tab.js"
+        "../src/ui/Tab.js",
+        "../src/ui/Page.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

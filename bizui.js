@@ -580,7 +580,7 @@ define('ui/Input',['require'],function(require) {
      * @param {HTMLElement|jQuery} input 目标元素
      * @param {Object} [options] 参数
      * @param {Boolean} [options.disabled] 是否禁用
-     * @param {Function} [options.onEnter] 按回车回调
+     * @param {Function} [options.onEnter] 按回车回调(event)
      */
     function Input(input, options) {
         if (input instanceof jQuery) {
@@ -2640,7 +2640,7 @@ define('ui/Dialog',['require'],function(require) {
      * @param {Object} [options] 参数
      * @param {Number} [options.width] 宽度
      * @param {Number} [options.height] 高度
-     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(){}, theme: ''}
+     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
      */
     function Dialog(dialog, options) {
         if (dialog instanceof jQuery) {
@@ -2882,7 +2882,7 @@ define('ui/Panel',['require'],function(require) {
      * @param {HTMLElement|jQuery} panel 目标元素
      * @param {Object} [options] 参数
      * @param {Number} [options.marginLeft] 左边距
-     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(){}, theme: ''}
+     * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
      */
     function Panel(panel, options) {
         if (panel instanceof jQuery) {
@@ -3366,7 +3366,7 @@ define('ui/Tab',['require'],function(require) {
      * @param {HTMLElement|jQuery} tab 目标元素
      * @param {Object} [options] 参数
      * @param {String} [options.event] 切换tab事件
-     * @param {Function} [options.onChange] 切换回调
+     * @param {Function} [options.onChange] 切换回调(data, event)
      */
     function Tab(tab, options) {
         if (tab instanceof jQuery) {
@@ -3435,7 +3435,7 @@ define('ui/Tab',['require'],function(require) {
                         options.onChange.call(self, {
                             title: curTab.text(),
                             index: index
-                        });
+                        }, e);
                     }
                 }
             });
@@ -3487,7 +3487,508 @@ define('ui/Tab',['require'],function(require) {
 /**
  * @ignore
  */
-define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Radio','ui/Checkbox','ui/Select','ui/Dialog','ui/Panel','ui/Tooltip','ui/Tab'],function(require) {
+define('dep/jquery.simplePagination',['require'],function(require) {
+    var methods = {
+        init: function(options) {
+            var o = $.extend({
+                items: 1,
+                itemsOnPage: 1,
+                pages: 0,
+                displayedPages: 5,
+                edges: 2,
+                currentPage: 0,
+                hrefTextPrefix: '#page-',
+                hrefTextSuffix: '',
+                prevText: 'Prev',
+                nextText: 'Next',
+                ellipseText: '&hellip;',
+                cssStyle: 'light-theme',
+                listStyle: '',
+                labelMap: [],
+                selectOnClick: true,
+                nextAtFront: false,
+                invertPageOrder: false,
+                useStartEdge: true,
+                useEndEdge: true,
+                onPageClick: function(pageNumber, event) {
+                    // Callback triggered when a page is clicked
+                    // Page number is given as an optional parameter
+                },
+                onInit: function() {
+                    // Callback triggered immediately after initialization
+                }
+            }, options || {});
+
+            var self = this;
+
+            o.pages = o.pages ? o.pages : Math.ceil(o.items / o.itemsOnPage) ? Math.ceil(o.items / o.itemsOnPage) : 1;
+            if (o.currentPage) {
+                o.currentPage = o.currentPage - 1;
+            } else {
+                o.currentPage = !o.invertPageOrder ? 0 : o.pages - 1;
+            }
+            o.halfDisplayed = o.displayedPages / 2;
+
+            this.each(function() {
+                self.addClass(o.cssStyle + ' simple-pagination').data('pagination', o);
+                methods._draw.call(self);
+            });
+
+            o.onInit();
+
+            return this;
+        },
+
+        selectPage: function(page) {
+            methods._selectPage.call(this, page - 1);
+            return this;
+        },
+
+        prevPage: function() {
+            var o = this.data('pagination');
+            if (!o.invertPageOrder) {
+                if (o.currentPage > 0) {
+                    methods._selectPage.call(this, o.currentPage - 1);
+                }
+            } else {
+                if (o.currentPage < o.pages - 1) {
+                    methods._selectPage.call(this, o.currentPage + 1);
+                }
+            }
+            return this;
+        },
+
+        nextPage: function() {
+            var o = this.data('pagination');
+            if (!o.invertPageOrder) {
+                if (o.currentPage < o.pages - 1) {
+                    methods._selectPage.call(this, o.currentPage + 1);
+                }
+            } else {
+                if (o.currentPage > 0) {
+                    methods._selectPage.call(this, o.currentPage - 1);
+                }
+            }
+            return this;
+        },
+
+        getPagesCount: function() {
+            return this.data('pagination').pages;
+        },
+
+        setPagesCount: function(count) {
+            this.data('pagination').pages = count;
+        },
+
+        getCurrentPage: function() {
+            return this.data('pagination').currentPage + 1;
+        },
+
+        destroy: function() {
+            this.empty();
+            return this;
+        },
+
+        drawPage: function(page) {
+            var o = this.data('pagination');
+            o.currentPage = page - 1;
+            this.data('pagination', o);
+            methods._draw.call(this);
+            return this;
+        },
+
+        redraw: function() {
+            methods._draw.call(this);
+            return this;
+        },
+
+        disable: function() {
+            var o = this.data('pagination');
+            o.disabled = true;
+            this.data('pagination', o);
+            methods._draw.call(this);
+            return this;
+        },
+
+        enable: function() {
+            var o = this.data('pagination');
+            o.disabled = false;
+            this.data('pagination', o);
+            methods._draw.call(this);
+            return this;
+        },
+
+        updateItems: function(newItems) {
+            var o = this.data('pagination');
+            o.items = newItems;
+            o.pages = methods._getPages(o);
+            this.data('pagination', o);
+            methods._draw.call(this);
+            methods._selectPage.call(this, 0);
+        },
+
+        updateItemsOnPage: function(itemsOnPage) {
+            var o = this.data('pagination');
+            o.itemsOnPage = itemsOnPage;
+            o.pages = methods._getPages(o);
+            this.data('pagination', o);
+            methods._selectPage.call(this, 0);
+            return this;
+        },
+
+        getItemsOnPage: function() {
+            return this.data('pagination').itemsOnPage;
+        },
+
+        _draw: function() {
+            var o = this.data('pagination'),
+                interval = methods._getInterval(o),
+                i,
+                tagName,
+                begin,
+                end;
+
+            methods.destroy.call(this);
+
+            tagName = (typeof this.prop === 'function') ? this.prop('tagName') : this.attr('tagName');
+
+            var $panel = tagName === 'UL' ? this : $('<ul' + (o.listStyle ? ' class="' + o.listStyle + '"' : '') + '></ul>').appendTo(this);
+
+            // Generate Prev link
+            if (o.prevText) {
+                methods._appendItem.call(this, !o.invertPageOrder ? o.currentPage - 1 : o.currentPage + 1, {
+                    text: o.prevText,
+                    classes: 'prev'
+                });
+            }
+
+            // Generate Next link (if option set for at front)
+            if (o.nextText && o.nextAtFront) {
+                methods._appendItem.call(this, !o.invertPageOrder ? o.currentPage + 1 : o.currentPage - 1, {
+                    text: o.nextText,
+                    classes: 'next'
+                });
+            }
+
+            // Generate start edges
+            if (!o.invertPageOrder) {
+                if (interval.start > 0 && o.edges > 0) {
+                    if (o.useStartEdge) {
+                        end = Math.min(o.edges, interval.start);
+                        for (i = 0; i < end; i++) {
+                            methods._appendItem.call(this, i);
+                        }
+                    }
+                    if (o.edges < interval.start && (interval.start - o.edges != 1)) {
+                        $panel.append('<li class="disabled"><span class="ellipse">' + o.ellipseText + '</span></li>');
+                    } else if (interval.start - o.edges == 1) {
+                        methods._appendItem.call(this, o.edges);
+                    }
+                }
+            } else {
+                if (interval.end < o.pages && o.edges > 0) {
+                    if (o.useStartEdge) {
+                        begin = Math.max(o.pages - o.edges, interval.end);
+                        for (i = o.pages - 1; i >= begin; i--) {
+                            methods._appendItem.call(this, i);
+                        }
+                    }
+
+                    if (o.pages - o.edges > interval.end && (o.pages - o.edges - interval.end != 1)) {
+                        $panel.append('<li class="disabled"><span class="ellipse">' + o.ellipseText + '</span></li>');
+                    } else if (o.pages - o.edges - interval.end == 1) {
+                        methods._appendItem.call(this, interval.end);
+                    }
+                }
+            }
+
+            // Generate interval links
+            if (!o.invertPageOrder) {
+                for (i = interval.start; i < interval.end; i++) {
+                    methods._appendItem.call(this, i);
+                }
+            } else {
+                for (i = interval.end - 1; i >= interval.start; i--) {
+                    methods._appendItem.call(this, i);
+                }
+            }
+
+            // Generate end edges
+            if (!o.invertPageOrder) {
+                if (interval.end < o.pages && o.edges > 0) {
+                    if (o.pages - o.edges > interval.end && (o.pages - o.edges - interval.end != 1)) {
+                        $panel.append('<li class="disabled"><span class="ellipse">' + o.ellipseText + '</span></li>');
+                    } else if (o.pages - o.edges - interval.end == 1) {
+                        methods._appendItem.call(this, interval.end);
+                    }
+                    if (o.useEndEdge) {
+                        begin = Math.max(o.pages - o.edges, interval.end);
+                        for (i = begin; i < o.pages; i++) {
+                            methods._appendItem.call(this, i);
+                        }
+                    }
+                }
+            } else {
+                if (interval.start > 0 && o.edges > 0) {
+                    if (o.edges < interval.start && (interval.start - o.edges != 1)) {
+                        $panel.append('<li class="disabled"><span class="ellipse">' + o.ellipseText + '</span></li>');
+                    } else if (interval.start - o.edges == 1) {
+                        methods._appendItem.call(this, o.edges);
+                    }
+
+                    if (o.useEndEdge) {
+                        end = Math.min(o.edges, interval.start);
+                        for (i = end - 1; i >= 0; i--) {
+                            methods._appendItem.call(this, i);
+                        }
+                    }
+                }
+            }
+
+            // Generate Next link (unless option is set for at front)
+            if (o.nextText && !o.nextAtFront) {
+                methods._appendItem.call(this, !o.invertPageOrder ? o.currentPage + 1 : o.currentPage - 1, {
+                    text: o.nextText,
+                    classes: 'next'
+                });
+            }
+        },
+
+        _getPages: function(o) {
+            var pages = Math.ceil(o.items / o.itemsOnPage);
+            return pages || 1;
+        },
+
+        _getInterval: function(o) {
+            return {
+                start: Math.ceil(o.currentPage > o.halfDisplayed ? Math.max(Math.min(o.currentPage - o.halfDisplayed, (o.pages - o.displayedPages)), 0) : 0),
+                end: Math.ceil(o.currentPage > o.halfDisplayed ? Math.min(o.currentPage + o.halfDisplayed, o.pages) : Math.min(o.displayedPages, o.pages))
+            };
+        },
+
+        _appendItem: function(pageIndex, opts) {
+            var self = this,
+                options, $link, o = self.data('pagination'),
+                $linkWrapper = $('<li></li>'),
+                $ul = self.find('ul');
+
+            pageIndex = pageIndex < 0 ? 0 : (pageIndex < o.pages ? pageIndex : o.pages - 1);
+
+            options = {
+                text: pageIndex + 1,
+                classes: ''
+            };
+
+            if (o.labelMap.length && o.labelMap[pageIndex]) {
+                options.text = o.labelMap[pageIndex];
+            }
+
+            options = $.extend(options, opts || {});
+
+            if (pageIndex == o.currentPage || o.disabled) {
+                if (o.disabled || options.classes === 'prev' || options.classes === 'next') {
+                    $linkWrapper.addClass('disabled');
+                } else {
+                    $linkWrapper.addClass('active');
+                }
+                $link = $('<span class="current">' + (options.text) + '</span>');
+            } else {
+                //$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '" class="page-link">' + (options.text) + '</a>');
+                $link = $('<a href="javascript:void(0)" class="page-link">' + (options.text) + '</a>');
+                $link.click(function(event) {
+                    return methods._selectPage.call(self, pageIndex, event);
+                });
+            }
+
+            if (options.classes) {
+                $link.addClass(options.classes);
+            }
+
+            $linkWrapper.append($link);
+
+            if ($ul.length) {
+                $ul.append($linkWrapper);
+            } else {
+                self.append($linkWrapper);
+            }
+        },
+
+        _selectPage: function(pageIndex, event) {
+            var o = this.data('pagination');
+            o.currentPage = pageIndex;
+            if (o.selectOnClick) {
+                methods._draw.call(this);
+            }
+            return o.onPageClick(pageIndex + 1, event);
+        }
+
+    };
+
+    $.fn.pagination = function(method) {
+
+        // Method calling logic
+        if (methods[method] && method.charAt(0) != '_') {
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            return methods.init.apply(this, arguments);
+        } else {
+            $.error('Method ' + method + ' does not exist on jQuery.pagination');
+        }
+
+    };
+
+    return methods;
+});
+
+/**
+ * @ignore
+ */
+define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
+    var Pagination = require('dep/jquery.simplePagination');
+
+    /**
+     * Page constructor
+     *
+     * [See example on JSFiddle](http://jsfiddle.net/bizdevfe/b73bLbqx/)
+     * @constructor
+     * @param {HTMLElement|jQuery} page 目标元素
+     * @param {Object} [options] 参数
+     * @param {Number} [options.pageSize] 每页条数
+     * @param {Number} [options.pageNumber] 当前页码
+     * @param {Number} [options.totalNumber] 总条数
+     * @param {String} [options.prevText] 前一页文字
+     * @param {String} [options.nextText] 后一页文字
+     * @param {Function} [options.onPageClick] 页码点击回调(pageNumber, event)
+     */
+    function Page(page, options) {
+        this.instance = Pagination.init.call($(page), {
+            itemsOnPage: options.pageSize,
+            currentPage: options.pageNumber,
+            items: options.totalNumber,
+            prevText: options.prevText || '◀',
+            nextText: options.nextText || '▶',
+            onPageClick: options.onPageClick
+        });
+    }
+
+    Page.prototype = {
+        /**
+         * 设置每页条数, 同时页码置为1
+         * @param {Number} pageSize 每页条数
+         * @fires onPageClick
+         */
+        setPageSize: function(pageSize) {
+            this.instance.pagination('updateItemsOnPage', pageSize);
+        },
+
+        /**
+         * 设置当前页码
+         * @param {Number} pageNumber 当前页码
+         * @fires onPageClick
+         */
+        setPageNumber: function(pageNumber) {
+            this.instance.pagination('selectPage', pageNumber);
+        },
+
+        /**
+         * 设置总条数, 同时页码置为1
+         * @param {Number} totalNumber 总条数
+         * @fires onPageClick
+         */
+        setTotalNumber: function(totalNumber) {
+            this.instance.pagination('updateItems', totalNumber);
+        },
+
+        /**
+         * 获取当前页码
+         * @return {Number} 当前页码
+         */
+        getPageNumber: function() {
+            return this.instance.pagination('getCurrentPage');
+        },
+
+        /**
+         * 获取总条数
+         * @return {Number} 总条数
+         */
+        getTotalNumber: function() {
+            return this.instance.pagination('getPagesCount');
+        },
+
+        /**
+         * 销毁
+         */
+        destroy: function() {
+            this.instance.pagination('destroy');
+        }
+    };
+
+    function isPage(elem) {
+        return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
+    }
+
+    var dataKey = 'bizPage';
+
+    $.extend($.fn, {
+        bizPage: function(method, options) {
+            var page;
+            switch (method) {
+                case 'setPageSize':
+                    this.each(function() {
+                        page = $(this).data(dataKey);
+                        if (page) {
+                            page.setPageSize(options);
+                        }
+                    });
+                    break;
+                case 'setPageNumber':
+                    this.each(function() {
+                        page = $(this).data(dataKey);
+                        if (page) {
+                            page.setPageNumber(options);
+                        }
+                    });
+                    break;
+                case 'setTotalNumber':
+                    this.each(function() {
+                        page = $(this).data(dataKey);
+                        if (page) {
+                            page.setTotalNumber(options);
+                        }
+                    });
+                    break;
+                case 'getPageNumber':
+                    return this.data(dataKey).getPageNumber();
+                case 'getTotalNumber':
+                    return this.data(dataKey).getTotalNumber();
+                case 'destroy':
+                    this.each(function() {
+                        page = $(this).data(dataKey);
+                        if (page) {
+                            page.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) && isPage(this)) {
+                            $(this).data(dataKey, new Page(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Page;
+});
+
+/**
+ * @ignore
+ */
+define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Radio','ui/Checkbox','ui/Select','ui/Dialog','ui/Panel','ui/Tooltip','ui/Tab','ui/Page'],function(require) {
     /**
      * 命名空间
      * @class bizui
@@ -3565,7 +4066,13 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Radio','ui/Ch
          * {@link Tab} constructor
          * @method Tab
          */
-        Tab: require('ui/Tab')
+        Tab: require('ui/Tab'),
+
+        /**
+         * {@link Page} constructor
+         * @method Page
+         */
+        Page: require('ui/Page')
     });
 
     return bizui;

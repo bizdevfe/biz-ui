@@ -15,7 +15,8 @@
                     "Dialog",
                     "Panel",
                     "Tooltip",
-                    "Tab"
+                    "Tab",
+                    "Page"
                 ]
             }
         ]

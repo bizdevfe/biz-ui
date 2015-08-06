@@ -20,12 +20,12 @@
 }
 .selectBox-dropdown .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px;
+    background: url(img/bizui.png) 6px -240px;
 }
 .selectBox-dropdown:hover .selectBox-arrow,
 .selectBox-dropdown:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -270px;
+    background: url(img/bizui.png) 6px -270px;
 }
 .selectBox-dropdown-menu {
     border: solid 1px #007aff;
@@ -36,6 +36,9 @@
 .selectBox-options.selectBox-options-bottom {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px
+}
+.selectBox-options li a {
+    line-height: 28px
 }
 .selectBox-options li.selectBox-hover a {
     background-color: #eee

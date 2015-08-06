@@ -1,0 +1,35 @@
+/**
+ * Page
+ */
+
+.simple-pagination {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.simple-pagination .disabled .current {
+    border: 1px #f1f1f1 solid;
+    background: #f1f1f1;
+    color: #b6b6b6
+}
+.light-theme span,
+.light-theme a {
+    border-radius: 2px;
+    box-shadow: none;
+    height: 28px;
+    line-height: 28px;
+}
+.light-theme .current {
+    box-shadow: none;
+    border: 1px #007aff solid;
+    background: #007aff;
+    color: #fff
+}
+.light-theme a {
+    text-decoration: none;
+    border: 1px #e2e2e2 solid;
+    background: #fff;
+    color: #333
+}
+.light-theme a:hover {
+    border: 1px #ccc solid;
+}

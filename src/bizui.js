@@ -79,7 +79,13 @@ define(function(require) {
          * {@link Tab} constructor
          * @method Tab
          */
-        Tab: require('ui/Tab')
+        Tab: require('ui/Tab'),
+
+        /**
+         * {@link Page} constructor
+         * @method Page
+         */
+        Page: require('ui/Page')
     });
 
     return bizui;

@@ -302,12 +302,12 @@
 }
 .selectBox-dropdown .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px;
+    background: url(img/bizui.png) 6px -240px;
 }
 .selectBox-dropdown:hover .selectBox-arrow,
 .selectBox-dropdown:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -270px;
+    background: url(img/bizui.png) 6px -270px;
 }
 .selectBox-dropdown-menu {
     border: solid 1px #007aff;
@@ -318,6 +318,9 @@
 .selectBox-options.selectBox-options-bottom {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px
+}
+.selectBox-options li a {
+    line-height: 28px
 }
 .selectBox-options li.selectBox-hover a {
     background-color: #eee
@@ -511,4 +514,103 @@
 .biz-tab > div {
     padding: 10px;
     background: #fff
+}
+ul.simple-pagination {
+    list-style: none;
+}
+.simple-pagination {
+    display: block;
+    overflow: hidden;
+    padding: 0 5px 5px 0;
+    margin: 0;
+}
+.simple-pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.simple-pagination li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+}
+.light-theme a,
+.light-theme span {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+    text-align: center;
+    border: 1px solid #BBB;
+    min-width: 14px;
+    padding: 0 7px;
+    margin: 0 5px 0 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: #efefef;
+    
+    background: -moz-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #efefef));
+    
+    background: -webkit-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    
+    background: -o-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    
+    background: -ms-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    
+    background: linear-gradient(top, #ffffff 0%, #efefef 100%);
+    
+}
+.light-theme a:hover {
+    text-decoration: none;
+    background: #FCFCFC;
+}
+.light-theme .current {
+    background: #666;
+    color: #FFF;
+    border-color: #444;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 1), 0 0 2px rgba(0, 0, 0, 0.3) inset;
+    cursor: default;
+}
+.light-theme .ellipse {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    font-weight: bold;
+    cursor: default;
+}
+.simple-pagination {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.simple-pagination .disabled .current {
+    border: 1px #f1f1f1 solid;
+    background: #f1f1f1;
+    color: #b6b6b6
+}
+.light-theme span,
+.light-theme a {
+    border-radius: 2px;
+    box-shadow: none;
+    height: 28px;
+    line-height: 28px;
+}
+.light-theme .current {
+    box-shadow: none;
+    border: 1px #007aff solid;
+    background: #007aff;
+    color: #fff
+}
+.light-theme a {
+    text-decoration: none;
+    border: 1px #e2e2e2 solid;
+    background: #fff;
+    color: #333
+}
+.light-theme a:hover {
+    border: 1px #ccc solid;
 }
