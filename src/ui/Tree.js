@@ -7,7 +7,7 @@ define(function(require) {
     /**
      * Tree constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/cysonubv/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/cysonubv/1/)
      *
      * More details about options, methods and events, see [jstree API](https://www.jstree.com/api/)
      * @constructor
