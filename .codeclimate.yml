@@ -3,6 +3,7 @@ languages:
 exclude_paths:
   - "src/loader/*.js"
   - "src/dep/*.js"
+  - "src/ui/Tooltip.js"
   - "tool/*.js"
   - "bizui.js"
   - "bizui.min.js"
