@@ -96,7 +96,13 @@ define(function(require) {
          * {@link Tree} constructor
          * @method Tree
          */
-        Tree: require('ui/Tree')
+        Tree: require('ui/Tree'),
+
+        /**
+         * {@link Calendar} constructor
+         * @method Calendar
+         */
+        Calendar: require('ui/Calendar')
     });
 
     return bizui;

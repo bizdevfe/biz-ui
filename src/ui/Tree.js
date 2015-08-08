@@ -20,7 +20,7 @@ define(function(require) {
 
     Tree.prototype = {
         /**
-         * 返回jstree实例
+         * 获取jstree实例
          * @return {Object}
          */
         ins: function() {

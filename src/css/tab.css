@@ -27,7 +27,7 @@
     border-left: 0
 }
 .biz-tab > ul li:hover {
-    background: #999999
+    background: #999
 }
 .biz-tab > ul li.active {
     background: #fff;

@@ -15,7 +15,8 @@
         "../src/ui/Tooltip.js",
         "../src/ui/Tab.js",
         "../src/ui/Page.js",
-        "../src/ui/Tree.js"
+        "../src/ui/Tree.js",
+        "../src/ui/Calendar.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

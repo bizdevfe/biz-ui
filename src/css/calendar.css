@@ -1,0 +1,60 @@
+/**
+ * Calendar
+ */
+
+.biz-calendar {
+    background: url(img/bizui.png) right -355px no-repeat
+}
+.datepicker {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 0;
+    padding: 0
+}
+.datepicker.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    float: left;
+    display: none;
+    min-width: 160px;
+    list-style: none;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
+    line-height: 30px;
+}
+.datepicker table {
+    background: #707070;
+    border-collapse: collapse
+}
+.datepicker thead {
+    color: #fff
+}
+.datepicker-days thead tr:first-child th:hover,
+.datepicker-months thead tr:first-child th:hover,
+.datepicker-years thead tr:first-child th:hover {
+    background: #999
+}
+.datepicker-days thead tr:last-child {
+    background: #fff;
+    color: #333;
+    font-weight: normal
+}
+.datepicker tbody {
+    background: #fff
+}
+.datepicker tbody td {
+    border: 1px #e2e2e2 solid
+}
+.datepicker tfoot {
+    background: #fff;
+    color: #333
+}
+.datepicker tfoot tr th:hover {
+    background: #eee
+}
+.datepicker-dropdown:before,
+.datepicker-dropdown:after {
+    display: none
+}

@@ -3,5 +3,7 @@
   "globals": {
     "define": true
   },
-  "curly": true
+  "curly": false,
+  "sub": true,
+  "laxbreak": true
 }
