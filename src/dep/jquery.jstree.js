@@ -2,7 +2,7 @@
  * @ignore
  */
 define(function(require) {
-    /*!
+    /*
      * if using jslint please allow for the jQuery global and use following options:
      * jslint: browser: true, ass: true, bitwise: true, continue: true, nomen: true, plusplus: true, regexp: true, unparam: true, todo: true, white: true
      */
@@ -3400,7 +3400,7 @@ define(function(require) {
                             'left': this.element.scrollLeft(),
                             'top': this.element.scrollTop()
                         },
-                        /*!
+                        /*
 					'themes' : {
 						'name' : this.get_theme(),
 						'icons' : this._data.core.themes.icons,
@@ -4625,7 +4625,7 @@ define(function(require) {
             w = this.element.width();
             a = obj.children('.jstree-anchor');
             s = $('<span>');
-            /*!
+            /*
 			oi = obj.children("i:visible"),
 			ai = a.children("i:visible"),
 			w1 = oi.width() * oi.length,
@@ -5889,7 +5889,7 @@ define(function(require) {
                     });
                     $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp);
                 }, this))
-            /*!
+            /*
 				.on("mousedown.jstree touchstart.jstree", ".jstree-wholerow", function (e) {
 						if(e.target === e.currentTarget) {
 							var a = $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor");
