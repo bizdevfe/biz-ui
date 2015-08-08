@@ -20,17 +20,17 @@ Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https
 Together with jQuery, include bizui.js in your page:
 
     <script src="jquery.js" type="text/javascript"></script>
-    <script src="bizui.js" type="text/javascript"></script>
+    <script src="jquery.bizui.js" type="text/javascript"></script>
 
 jQuery 2.x or later is recommended. Older versions might work as well, but they are not tested.
 
 Include the CSS file:
 
-    <link href="bizui.css" rel="stylesheet" type="text/css" />
+    <link href="jquery.bizui.css" rel="stylesheet" type="text/css" />
 
 You can also load bizui.js as a AMD module:
 
-    var bizui = require('bizui');
+    var bizui = require('jquery.bizui');
 
 To initialize:
 

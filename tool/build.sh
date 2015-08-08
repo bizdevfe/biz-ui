@@ -27,9 +27,9 @@ if [ $? -ne 0 ]
 fi
 
 #optimize
-node r.js -o cssIn=../src/css/main.css out=../bizui.css
-node r.js -o cssIn=../src/css/main.css out=../bizui.min.css preserveLicenseComments=false optimizeCss=standard
-node r.js -o r-config.js out=../bizui.js optimize=none
-node r.js -o r-config.js out=../bizui.min.js
+node r.js -o cssIn=../src/css/main.css out=../dist/jquery.bizui.css
+node r.js -o cssIn=../src/css/main.css out=../dist/jquery.bizui.min.css preserveLicenseComments=false optimizeCss=standard
+node r.js -o r-config.js out=../dist/jquery.bizui.js optimize=none
+node r.js -o r-config.js out=../dist/jquery.bizui.min.js
 
 echo "Congratulations, build done!"
