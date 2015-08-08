@@ -1,7 +1,7 @@
 languages:
   JavaScript: true
 exclude_paths:
-  - "src/dist/*.js"
+  - "dist/*.js"
   - "src/dep/*.js"
   - "src/loader/*.js"
   - "src/ui/Tooltip.js"
