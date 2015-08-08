@@ -1,9 +1,8 @@
 languages:
   JavaScript: true
 exclude_paths:
-  - "src/loader/*.js"
+  - "src/dist/*.js"
   - "src/dep/*.js"
+  - "src/loader/*.js"
   - "src/ui/Tooltip.js"
   - "tool/*.js"
-  - "bizui.js"
-  - "bizui.min.js"
