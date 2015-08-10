@@ -73,6 +73,23 @@ $('#dimension').bizTab();
 $('#add').bizButton().click(function() {
     $('#panel').bizPanel('open');
 });
+$('#query').bizButton({
+    theme: 'dark'
+});
+
+/**
+ * Table 
+ */
+$('.cost-data').bizTable({
+    headFixed: true,
+    selectable: true,
+    onSort: function() {
+        
+    },
+    onEdit: function() {
+        
+    }
+});
 
 /**
  * Page 

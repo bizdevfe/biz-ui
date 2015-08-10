@@ -11,6 +11,7 @@
 
 <body>
 <header>
+    <div id="logo"></div>
     <h1>BizUI Framework</h1>
 </header>
 <div id="main">
@@ -62,7 +63,38 @@
             </div>
         </div>
         
-        <div class="block">data grid</div>
+        <div class="block"><button id="query">Query</button></div>
+        
+        <table class="cost-data">
+            <tr>
+                <th>Region</th>
+                <th sortable des>Cost</th>
+                <th sortable asc>Cost Per Cust</th>
+                <th sortable>Click</th>
+                <th sortable>CPC</th>
+            </tr>
+            <tr class="sum">
+                <td class="l">Summation</td>
+                <td>500.00</td>
+                <td>8.90</td>
+                <td>35</td>
+                <td>1.95</td>
+            </tr>
+            <tr>
+                <td class="l">North</td>
+                <td editable>200.00</td>
+                <td>8.50</td>
+                <td>20</td>
+                <td>1.80</td>
+            </tr>
+            <tr>
+                <td class="l">East</td>
+                <td editable>300.00</td>
+                <td>9.30</td>
+                <td>15</td>
+                <td>2.10</td>
+            </tr>
+        </table>
         
         <div class="block">
             <div class="page-group">
