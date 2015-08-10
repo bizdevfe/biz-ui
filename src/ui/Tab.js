@@ -53,7 +53,7 @@ define(function(require) {
         init: function(options) {
             this.$main.addClass(defaultClass);
             this.tabs = this.$main.find('ul li');
-            this.contents = this.$main.find('div > div').hide();
+            this.contents = this.$main.children('div').children('div').hide();
             $(this.tabs[0]).addClass('active');
             $(this.contents[0]).show();
 
