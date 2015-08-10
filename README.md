@@ -28,7 +28,7 @@ Include the CSS file:
 
     <link href="jquery.bizui.css" rel="stylesheet" type="text/css" />
 
-You can also load bizui.js as a AMD module:
+You can also load jquery.bizui.js as a AMD module:
 
     var bizui = require('jquery.bizui');
 
