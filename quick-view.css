@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px
+}
+header h1{
+    color: #333;
+    padding: 10px 30px;
+    margin: 0;
+    background: #f3f3f3
+}
+#main {
+    overflow: hidden;
+    border-bottom: 1px #e2e2e2 solid
+}
+#menu {
+    width: 200px;
+    float: left
+}
+#content {
+    margin-left: 200px;
+    min-height: 500px;
+    border-left: 1px #e2e2e2 solid
+}
+footer {
+    height: 40px;
+    line-height: 40px;
+    text-align: center
+}
+footer a {
+    color: #333;
+    text-decoration: none
+}
+.block {padding-left: 20px; margin: 10px 0}
+
+.page-group {overflow: hidden; height: 30px}
+.page-group .page-size {float: left; margin-right: 10px}
+.page-group .page {float: left}
+.page-group .page-number {float: left; margin-right: 10px; width: 30px}
+.page-group .go {float: left}
+.page-group .text {float: left; height: 30px; line-height: 30px; margin-right: 10px}
+.page-group .selectBox-dropdown {min-width: 65px}
