@@ -10,7 +10,8 @@
     border-radius: 2px;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    outline: none
+    outline: none;
+    vertical-align: middle
 }
 .biz-input {
     height: 18px;

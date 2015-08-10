@@ -2778,6 +2778,8 @@ define('ui/Dialog',['require'],function(require) {
                     alert.bizDialog('destroy').remove();
                 }
             }]
+        }).next().css({
+            zIndex: 1002
         });
         alert.find('.biz-dialog-close').remove();
         alert.bizDialog('open');
@@ -2813,6 +2815,8 @@ define('ui/Dialog',['require'],function(require) {
                 },
                 theme: 'dark'
             }]
+        }).next().css({
+            zIndex: 1002
         });
         confirm.find('.biz-dialog-close').remove();
         confirm.bizDialog('open');

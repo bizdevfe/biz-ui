@@ -18,7 +18,8 @@
     font-size: 14px;
     cursor: pointer;
     text-align: center;
-    outline: none
+    outline: none;
+    vertical-align: middle
 }
 .biz-button {
     background: #007aff
@@ -54,7 +55,8 @@
     border-radius: 2px;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    outline: none
+    outline: none;
+    vertical-align: middle
 }
 .biz-input {
     height: 18px;
@@ -344,7 +346,7 @@
     left: 50%;
     background: #fff;
     box-shadow: 0 0 8px #888;
-    z-index: 1001;
+    z-index: 1003;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif
 }
 .biz-dialog-title {
@@ -436,7 +438,7 @@
     max-width: 300px;
     display: none;
     position: absolute;
-    z-index: 1002;
+    z-index: 1004;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
