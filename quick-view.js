@@ -45,17 +45,13 @@ $('#menu').on("loaded.jstree", function(e, data) {
 });
 
 /**
- * Tabs 
- */
-$('#dimension').bizTab();
-
-/**
  * Region Content 
  */
 $('#region').bizSelect();
 $('#range').bizCalendar({
     startDate: '2010-01-01',
-    endDate: '2020-12-31'
+    endDate: '2020-12-31',
+    language: 'en'
 });
 
 /**
@@ -65,6 +61,11 @@ $('#client').bizSelect();
 $('#keyword').bizInput();
 $('input[name="vip"]').bizCheckbox();
 $('input[name="client"]').bizRadio();
+
+/**
+ * Tabs 
+ */
+$('#dimension').bizTab();
 
 /**
  * Button
@@ -82,10 +83,7 @@ $('.page-size').bizSelect().change(function(e) {
 $('.page').bizPage({
     pageSize: 10,
     pageNumber: 1,
-    totalNumber: 200,
-    onPageClick: function(pageNumber) {
-        console.log(pageNumber);
-    }
+    totalNumber: 200
 });
 $('.page-number').bizInput({
     onEnter: go
@@ -144,7 +142,8 @@ $('#panel').bizPanel({
 $('#name').bizInput();
 $('#description').bizTextarea();
 $('#effective').bizCalendar({
-    startDate: new Date()
+    startDate: new Date(),
+    language: 'en'
 });
 
 /**
