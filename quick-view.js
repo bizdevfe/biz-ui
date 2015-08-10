@@ -143,3 +143,13 @@ $('#panel').bizPanel({
 });
 $('#name').bizInput();
 $('#description').bizTextarea();
+$('#effective').bizCalendar({
+    startDate: new Date()
+});
+
+/**
+ * Tooltip 
+ */
+bizui.Tooltip({
+    margin: 8
+});
