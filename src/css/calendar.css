@@ -5,6 +5,9 @@
 .biz-calendar {
     background: url(img/bizui.png) right -355px no-repeat
 }
+.biz-range {
+    display: inline-block
+}
 .datepicker {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
