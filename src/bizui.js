@@ -102,7 +102,13 @@ define(function(require) {
          * {@link Calendar} constructor
          * @method Calendar
          */
-        Calendar: require('ui/Calendar')
+        Calendar: require('ui/Calendar'),
+
+        /**
+         * {@link Table} constructor
+         * @method Table
+         */
+        Table: require('ui/Table')
     });
 
     return bizui;

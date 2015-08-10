@@ -325,7 +325,7 @@
     line-height: 28px
 }
 .selectBox-options li.selectBox-hover a {
-    background-color: #e7f4f9
+    background-color: #eff8ff
 }
 .selectBox-options li.selectBox-selected a {
     background-color: #007aff;
@@ -904,7 +904,7 @@ ul.simple-pagination {
     transition: background-color 0.15s, box-shadow 0.15s;
 }
 .jstree-default .jstree-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
     border-radius: 2px;
     box-shadow: inset 0 0 1px #cccccc;
 }
@@ -949,13 +949,13 @@ ul.simple-pagination {
     box-shadow: none;
 }
 .jstree-default.jstree-checkbox-no-clicked .jstree-clicked.jstree-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked {
     background: transparent;
 }
 .jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default > .jstree-striped {
     min-width: 100%;
@@ -974,7 +974,7 @@ ul.simple-pagination {
     box-sizing: border-box;
 }
 .jstree-default .jstree-wholerow-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default .jstree-wholerow-clicked {
     background: #beebff;
@@ -2323,4 +2323,53 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .datepicker-dropdown:before,
 .datepicker-dropdown:after {
     display: none
+}
+.biz-table {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    color: #333;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px
+}
+.biz-table th {
+    padding: 5px 8px;
+    background-color: #707070;
+    color: #fff;
+    border: 1px #555 solid;
+    white-space: nowrap;
+    font-weight: normal
+}
+.biz-table th[sortable] {
+    cursor: pointer;
+    background-image: url(img/bizui.png);
+    background-position: right -385px;
+    background-repeat: no-repeat
+}
+.biz-table th[sortable]:hover {
+    background-color: #888;
+}
+.biz-table th[asc] {
+    background-position: right -415px
+}
+.biz-table th[des] {
+    background-position: right -445px
+}
+.biz-table td {
+    border: 1px #e2e2e2 solid;
+    padding: 5px 8px;
+    text-align: right
+}
+.biz-table td.l {
+    text-align: left
+}
+.biz-table td[editable]:hover {
+    border-color: #007aff
+}
+.biz-table tr:hover {
+    background: #eff8ff
+}
+.biz-table tr.sum {
+    background: #fffbe5;
+    font-weight: bold
 }

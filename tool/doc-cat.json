@@ -18,7 +18,8 @@
                     "Tab",
                     "Page",
                     "Tree",
-                    "Calendar"
+                    "Calendar",
+                    "Table"
                 ]
             }
         ]

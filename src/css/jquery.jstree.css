@@ -288,7 +288,7 @@
     transition: background-color 0.15s, box-shadow 0.15s;
 }
 .jstree-default .jstree-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
     border-radius: 2px;
     box-shadow: inset 0 0 1px #cccccc;
 }
@@ -333,13 +333,13 @@
     box-shadow: none;
 }
 .jstree-default.jstree-checkbox-no-clicked .jstree-clicked.jstree-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked {
     background: transparent;
 }
 .jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default > .jstree-striped {
     min-width: 100%;
@@ -358,7 +358,7 @@
     box-sizing: border-box;
 }
 .jstree-default .jstree-wholerow-hovered {
-    background: #e7f4f9;
+    background: #eff8ff;
 }
 .jstree-default .jstree-wholerow-clicked {
     background: #beebff;
