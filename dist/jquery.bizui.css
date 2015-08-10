@@ -1479,8 +1479,10 @@ ul.simple-pagination {
 .jstree-default .jstree-node,
 .jstree-default .jstree-wholerow,
 .jstree-default .jstree-anchor {
-    height: 30px;
     line-height: 30px
+}
+.jstree-default .jstree-wholerow {
+    height: auto
 }
 .jstree-default .jstree-icon:empty {
     margin-top: 3px
