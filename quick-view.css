@@ -3,7 +3,7 @@ body {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
-header h1{
+header h1 {
     color: #fff;
     padding: 10px 30px;
     margin: 0;
@@ -41,15 +41,48 @@ footer a {
     text-decoration: none
 }
 
-.block {padding-left: 20px; margin: 10px 0; line-height: 30px}
-.block label.title {display:inline-block; width: 110px}
-.page-group {overflow: hidden; height: 30px}
-.page-group .page-size {float: left; margin-right: 10px}
-.page-group .page {float: left}
-.page-group .page-number {float: left; margin-right: 10px; width: 30px}
-.page-group .go {float: left}
-.page-group .text {float: left; height: 30px; line-height: 30px; margin-right: 10px}
-.page-group .selectBox-dropdown {min-width: 65px}
-
-#description {width: 400px; height: 200px}
-
+.block {
+    padding-left: 20px;
+    margin: 10px 0;
+    line-height: 30px
+}
+.block label.title {
+    display: inline-block;
+    width: 110px;
+    vertical-align: middle
+}
+.cost-data tr th:first-child, .cost-data tr td:first-child {
+    border-left: 0
+}
+.page-group {
+    overflow: hidden;
+    height: 30px
+}
+.page-group .page-size {
+    float: left;
+    margin-right: 10px
+}
+.page-group .page {
+    float: left
+}
+.page-group .page-number {
+    float: left;
+    margin-right: 10px;
+    width: 30px
+}
+.page-group .go {
+    float: left
+}
+.page-group .text {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 10px
+}
+.page-group .selectBox-dropdown {
+    min-width: 65px
+}
+#description {
+    width: 400px;
+    height: 200px
+}
