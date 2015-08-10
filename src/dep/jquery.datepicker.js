@@ -1766,9 +1766,21 @@ define(function(require) {
         months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         today: "今日",
-        format: "yyyy年mm月dd日",
+        clear: "清空",
         weekStart: 1,
-        clear: "清空"
+        format: "yyyy年mm月dd日"
+    };
+
+    $.fn.datepicker.dates["en"] = {
+        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        today: "Today",
+        clear: "Clear",
+        weekStart: 1,
+        format: "dd/mm/yyyy"
     };
 
     /* DATEPICKER DATA-API

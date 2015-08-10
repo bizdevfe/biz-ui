@@ -34,7 +34,7 @@ define(function(require) {
         this.instance = Datepicker.call($(calendar), {
             autoclose: true,
             format: 'yyyy-mm-dd',
-            language: 'zh-CN',
+            language: options.language || 'zh-CN',
             orientation: 'top left',
             weekStart: 1,
             todayHighlight: options.todayHighlight,
