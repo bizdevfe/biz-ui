@@ -21,42 +21,50 @@
             </ul>
             <div>
                 <div>
-                    <div class="block">Region:
+                    <div class="block">
+                        <label class="title">Choose Region:</label>
                         <select id="region">
                             <option>North</option>
                             <option>East</option>
                             <option>South</option>
                             <option>West</option>
                         </select>
+                        <button id="add">Add Region</button>
                     </div>
-                    <div class="block">Range:
-                        <div class="biz-range">
+                    <div class="block">
+                        <label class="title">Choose Range:</label>
+                        <div id="range" class="biz-range">
                             <input type="text" value="2015-07-01" />
                             <span>至</span>
                             <input type="text" value="2015-09-30" />
                         </div>
                     </div>
                 </div>
-                <div>Choose Client: 
-                    <select id="client">
-                        <option>ID</option>
-                        <option>Name</option>
-                    </select>
-                    <input type="text" id="keyword" />
+                <div>
+                    <div class="block">
+                        <label class="title">Choose Client:</label>
+                        <select id="client">
+                            <option>ID</option>
+                            <option>Name</option>
+                        </select>
+                        <input type="text" id="keyword" />
+                        <input type="checkbox" name="vip" value="vip" id="vip" title="VIP Client" />
+                    </div>
+                    <div class="block">
+                        <label class="title">Choose Type:</label>
+                        <input type="radio" name="client" value="1" id="1" title="Gold" checked />
+                        <input type="radio" name="client" value="2" id="2" title="Silver" />
+                        <input type="radio" name="client" value="3" id="3" title="Platinum" />
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="block">
-            <button id="query">Search</button>
-        </div>
-        
-        <div class="block">
-            <button id="add">New Daily Report</button>
-        </div>
+        <div class="block">table</div>
         
         <div class="block">
             <div class="page-group">
+                <span class="text">Page Size: </span>
                 <select class="page-size">
                     <option>10</option>
                     <option>20</option>
@@ -70,8 +78,9 @@
         </div>
     </div>
 </div>
-<div id="panel" title="Title">
-    Account Name: <input type="text" id="name" />
+<div id="panel" title="Add Region">
+<div class="block"><label class="title">Region Name: </label><input type="text" id="name" /></div>
+<div class="block"><label class="title" style="vertical-align:top">Description: </label><textarea id="description"></textarea></div>
 </div>
 <footer><a href="https://github.com/bizdevfe/biz-ui/">Follow me on Github</a></footer>
 <script src="quick-view.js"></script>

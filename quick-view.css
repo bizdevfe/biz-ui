@@ -4,10 +4,10 @@ body {
     font-size: 14px
 }
 header h1{
-    color: #333;
+    color: #fff;
     padding: 10px 30px;
     margin: 0;
-    background: #f3f3f3
+    background: #333
 }
 #main {
     overflow: hidden;
@@ -31,7 +31,9 @@ footer a {
     color: #333;
     text-decoration: none
 }
-.block {padding-left: 20px; margin: 10px 0}
+
+.block {padding-left: 20px; margin: 10px 0; line-height: 30px}
+.block label.title {display:inline-block; width: 110px}
 
 .page-group {overflow: hidden; height: 30px}
 .page-group .page-size {float: left; margin-right: 10px}
@@ -40,3 +42,6 @@ footer a {
 .page-group .go {float: left}
 .page-group .text {float: left; height: 30px; line-height: 30px; margin-right: 10px}
 .page-group .selectBox-dropdown {min-width: 65px}
+
+#description {width: 400px; height: 200px}
+

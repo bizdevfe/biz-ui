@@ -1,3 +1,6 @@
+/**
+ * Tree
+ */
 var menuData = [
     {
         id: 100,
@@ -34,33 +37,48 @@ var menuData = [
         ]
     }
 ];
-
-$('#menu').bizTree({
-    core: {
-        data: menuData
-    },
+$('#menu').on("loaded.jstree", function(e, data) {
+    data.instance.select_node(210);
+}).bizTree({
+    core: {data: menuData},
     plugins : ['wholerow']
 });
 
+/**
+ * Tabs 
+ */
 $('#dimension').bizTab();
+
+/**
+ * Region Content 
+ */
 $('#region').bizSelect();
-$('.biz-range').bizCalendar({
+$('#range').bizCalendar({
     startDate: '2010-01-01',
     endDate: '2020-12-31'
 });
+
+/**
+ * Client Content 
+ */
 $('#client').bizSelect();
 $('#keyword').bizInput();
+$('input[name="vip"]').bizCheckbox();
+$('input[name="client"]').bizRadio();
 
-
-$('#add').bizButton();
-$('#query').bizButton({
-    theme: 'dark'
+/**
+ * Button
+ */
+$('#add').bizButton().click(function() {
+    $('#panel').bizPanel('open');
 });
 
+/**
+ * Page 
+ */
 $('.page-size').bizSelect().change(function(e) {
     $('.page').bizPage('setPageSize', e.target.value);
 });
-
 $('.page').bizPage({
     pageSize: 10,
     pageNumber: 1,
@@ -69,13 +87,10 @@ $('.page').bizPage({
         console.log(pageNumber);
     }
 });
-
 $('.page-number').bizInput({
     onEnter: go
 });
-
 $('.go').bizButton().click(go);
-
 function go() {
     var value = parseInt($('.page-number').val(), 10),
         totalNumber = $('.page').bizPage('getTotalNumber');
@@ -88,12 +103,33 @@ function go() {
     }
 }
 
+/**
+ * Panel & Dialog 
+ */
 $('#panel').bizPanel({
     buttons: [
         {
-            text: 'Create Account',
+            text: 'Add',
             click: function() {
-                this.close();
+                var name = $.trim($('#name').val()),
+                    panel = this;
+                if (name === '') {
+                    bizui.Dialog.alert({
+                        title: 'Wanning',
+                        content: 'Region name required!',
+                        ok: 'OK'
+                    });
+                } else {
+                    bizui.Dialog.confirm({
+                        title: 'Confirmation',
+                        content: 'Add new region?',
+                        ok: 'Yes',
+                        cancel: 'No',
+                        onOK: function() {
+                            panel.close();
+                        }
+                    });
+                }
             }
         },
         {
@@ -105,9 +141,5 @@ $('#panel').bizPanel({
         }
     ]
 });
-
 $('#name').bizInput();
-
-$('#add').click(function() {
-    $('#panel').bizPanel('open');
-});
+$('#description').bizTextarea();
