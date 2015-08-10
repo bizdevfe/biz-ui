@@ -7,6 +7,8 @@
 
 <img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />
 
+Have a [quick view of biz-ui](http://bizdevfe.github.io/biz-ui/quick-view.html).
+
 ##Features
 * Include 14 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Tooltip, Tab, Page, Tree, Calendar, Table.
 * IE9+, Firefox, Chrome, Safari and Opera supported.
