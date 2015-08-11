@@ -19,7 +19,7 @@
     font-weight: normal
 }
 .biz-table th[sortable] {
-    cursor: pointer;
+    padding-right: 30px;
     background-image: url(img/bizui.png);
     background-position: right -385px;
     background-repeat: no-repeat
@@ -36,18 +36,54 @@
 .biz-table td {
     border: 1px #e2e2e2 solid;
     padding: 5px 8px;
-    text-align: right
+    text-align: right;
+    outline: none
 }
 .biz-table td.l {
     text-align: left
 }
-.biz-table td[editable]:hover {
-    border-color: #007aff
-}
+.biz-table tr.selected,
 .biz-table tr:hover {
     background: #eff8ff
 }
 .biz-table tr.sum {
     background: #fffbe5;
     font-weight: bold
+}
+.biz-table .biz-label {
+    margin-right: 0
+}
+.biz-table .biz-checkbox-unchecked {
+    background-position: 2px 0
+}
+.biz-table .biz-checkbox-unchecked-hover {
+    background-position: 2px -20px
+}
+.biz-table .biz-checkbox-checked {
+    background-position: 2px -40px
+}
+.biz-table .biz-checkbox-checked-hover {
+    background-position: 2px -60px
+}
+.biz-table .biz-checkbox-unchecked-disabled {
+    background-position: 2px -80px
+}
+.biz-table .biz-checkbox-checked-disabled {
+    background-position: 2px -100px
+}
+.biz-table td[editable] {
+    padding-right: 30px;
+    background-image: url(img/bizui.png);
+    background-position: right -475px;
+    background-repeat: no-repeat
+}
+.biz-table td[editable]:hover {
+    cursor: pointer
+}
+.biz-table-editor {
+    border: 1px #007aff solid;
+    outline: none
+}
+.biz-table-editor.error {
+    border: 1px #ea6153 solid;
 }
