@@ -83,12 +83,14 @@ $('#query').bizButton({
 $('.cost-data').bizTable({
     headFixed: true,
     selectable: true,
-    onSort: function() {
-        
+    resizable: true,
+    onSort: function(data) {
+        console.log(data);
     },
-    onEdit: function() {
-        
-    }
+    onChange: function(newValue) {
+        console.log(newValue);
+    },
+    changePattern: /^\d*(\.)?\d+$/ //number
 });
 
 /**

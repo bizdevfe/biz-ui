@@ -66,34 +66,38 @@
         <div class="block"><button id="query">Query</button></div>
         
         <table class="cost-data">
-            <tr>
-                <th>Region</th>
-                <th sortable des>Cost</th>
-                <th sortable asc>Cost Per Cust</th>
-                <th sortable>Click</th>
-                <th sortable>CPC</th>
-            </tr>
-            <tr class="sum">
-                <td class="l">Summation</td>
-                <td>500.00</td>
-                <td>8.90</td>
-                <td>35</td>
-                <td>1.95</td>
-            </tr>
-            <tr>
-                <td class="l">North</td>
-                <td editable>200.00</td>
-                <td>8.50</td>
-                <td>20</td>
-                <td>1.80</td>
-            </tr>
-            <tr>
-                <td class="l">East</td>
-                <td editable>300.00</td>
-                <td>9.30</td>
-                <td>15</td>
-                <td>2.10</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th sortable des field="cost">Cost</th>
+                    <th sortable field="costPerCust">Cost Per Cust</th>
+                    <th sortable field="click">Click</th>
+                    <th sortable field="cpc">CPC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="sum" unselectable>
+                    <td class="l">Summation</td>
+                    <td>500.00</td>
+                    <td>8.90</td>
+                    <td>35</td>
+                    <td>1.95</td>
+                </tr>
+                <tr id="100">
+                    <td class="l">North</td>
+                    <td editable>200.00</td>
+                    <td>8.50</td>
+                    <td>20</td>
+                    <td>1.80</td>
+                </tr>
+                <tr id="200">
+                    <td class="l">East</td>
+                    <td editable>300.00</td>
+                    <td>9.30</td>
+                    <td>15</td>
+                    <td>2.10</td>
+                </tr>
+            </tbody>
         </table>
         
         <div class="block">
