@@ -2,19 +2,23 @@
   "name": "biz-ui",
   "version": "2.0.0",
   "description": "A jQuery plugin for business UI components",
-  "keywords": "jQuery plugin",
+  "keywords": ["jQuery plugin", "Button", "Input", "Textarea", "Radio", "Checkbox", "Select", "Dialog", "Panel", "Tooltip", "Tab", "Page", "Tree", "Calendar", "Table"],
   "homepage": "http://bizdevfe.github.io/biz-ui",
+  "bugs": {
+    "url" : "https://github.com/bizdevfe/biz-ui/issues"
+  },
+  "license": "MIT",
   "maintainers": [
     {
       "name": "rickyleung",
       "email": "hyenasa@gmail.com"
     }
   ],
+  "main": "./src/bizui.js",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/bizdevfe/biz-ui.git"
   },
-  "main": "./src/bizui.js",
   "dependencies": {
     "jquery": "2.x"
   },
@@ -23,6 +27,5 @@
     "js-beautify": "1.5.x",
     "almond": "0.2.x",
     "requirejs": "2.1.x"
-  },
-  "license": "MIT"
+  }
 }
