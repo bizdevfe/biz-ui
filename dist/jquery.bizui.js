@@ -2504,7 +2504,7 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
      * @param {Boolean} [options.loop] 上下键是否循环选项
      */
     function Select(select, options) {
-        options = $.extend(defaultOption, options || {});
+        options = $.extend({}, options || {});
 
         this.instance = new SelectBox($(select), {
             loopOptions: options.loop
