@@ -65,7 +65,11 @@ $('input[name="client"]').bizRadio();
 /**
  * Tabs 
  */
-$('#dimension').bizTab();
+$('#dimension').bizTab({
+    onChange: function(data) {
+        $('.cost-data').html(data.index === 0 ? $('#tpl-region').html() : $('#tpl-client').html()).bizTable('refresh');
+    }
+});
 
 /**
  * Button
@@ -80,8 +84,7 @@ $('#query').bizButton({
 /**
  * Table 
  */
-$('.cost-data').bizTable({
-    headFixed: true,
+$('.cost-data').html($('#tpl-region').html()).bizTable({
     selectable: true,
     resizable: true,
     onSort: function(data) {
