@@ -36,6 +36,8 @@ define(function(require) {
      * @param {Function} [options.onPageClick] 页码点击回调(pageNumber, event)
      */
     function Page(page, options) {
+        options = $.extend({}, options || {});
+
         this.instance = Pagination.init.call($(page), {
             itemsOnPage: options.pageSize,
             currentPage: options.pageNumber,
