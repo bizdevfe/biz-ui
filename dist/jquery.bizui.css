@@ -2330,10 +2330,10 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 }
 .rc-handle {
     position: absolute;
-    width: 7px;
+    width: 15px;
     cursor: ew-resize;
-    margin-left: -3px;
-    z-index: 2;
+    margin-left: -7px;
+    z-index: 1004;
 }
 table.rc-table-resizing {
     cursor: ew-resize;
@@ -2363,7 +2363,8 @@ table.rc-table-resizing thead > th > a {
     padding-right: 30px;
     background-image: url(img/bizui.png);
     background-position: right -385px;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    cursor: pointer
 }
 .biz-table th[sortable]:hover {
     background-color: #888;

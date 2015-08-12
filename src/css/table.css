@@ -22,7 +22,8 @@
     padding-right: 30px;
     background-image: url(img/bizui.png);
     background-position: right -385px;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    cursor: pointer
 }
 .biz-table th[sortable]:hover {
     background-color: #888;
