@@ -17,7 +17,7 @@ define(function(require) {
      * @param {Boolean} [options.headFixed] 表头跟随
      * @param {Function} [options.onSort] 排序回调({data, event), th含sortable属性可排序, 含des属性为降序，asc属性为升序, field属性为排序项
      * @param {Function} [options.onChange] 修改单元格回调(newValue, event), td含editable属性可编辑
-     * @param {object} [options.changePattern] 修改单元格正则, 不合法输入不会触发onChange
+     * @param {Object} [options.changePattern] 修改单元格正则, 不合法输入不会触发onChange
      */
     function Table(table, options) {
         if (table instanceof jQuery) {

@@ -435,7 +435,7 @@ define('ui/Button',['require'],function(require) {
      * @constructor
      * @param {HTMLElement|jQuery} button 目标元素
      * @param {Object} [options] 参数
-     * @param {String} [options.theme] 主题
+     * @param {String} [options.theme] 主题（dark）
      * @param {String} [options.label] 文字
      * @param {Boolean} [options.disabled] 是否禁用
      */
@@ -2497,13 +2497,18 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
     /**
      * Select constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/2/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/3/)
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数
+     * @param {Boolean} [options.loop] 上下键是否循环选项
      */
     function Select(select, options) {
-        this.instance = new SelectBox($(select), options);
+        options = $.extend(defaultOption, options || {});
+
+        this.instance = new SelectBox($(select), {
+            loopOptions: options.loop
+        });
 
         /**
          * @property {HTMLElement} main `select`元素
@@ -3865,6 +3870,8 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
      * @param {Function} [options.onPageClick] 页码点击回调(pageNumber, event)
      */
     function Page(page, options) {
+        options = $.extend({}, options || {});
+
         this.instance = Pagination.init.call($(page), {
             itemsOnPage: options.pageSize,
             currentPage: options.pageNumber,
@@ -12822,7 +12829,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
      * @param {Boolean} [options.headFixed] 表头跟随
      * @param {Function} [options.onSort] 排序回调({data, event), th含sortable属性可排序, 含des属性为降序，asc属性为升序, field属性为排序项
      * @param {Function} [options.onChange] 修改单元格回调(newValue, event), td含editable属性可编辑
-     * @param {object} [options.changePattern] 修改单元格正则, 不合法输入不会触发onChange
+     * @param {Object} [options.changePattern] 修改单元格正则, 不合法输入不会触发onChange
      */
     function Table(table, options) {
         if (table instanceof jQuery) {

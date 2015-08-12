@@ -7,13 +7,18 @@ define(function(require) {
     /**
      * Select constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/2/)
+     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/3/)
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数
+     * @param {Boolean} [options.loop] 上下键是否循环选项
      */
     function Select(select, options) {
-        this.instance = new SelectBox($(select), options);
+        options = $.extend(defaultOption, options || {});
+
+        this.instance = new SelectBox($(select), {
+            loopOptions: options.loop
+        });
 
         /**
          * @property {HTMLElement} main `select`元素
