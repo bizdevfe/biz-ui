@@ -32,12 +32,13 @@ header h1 {
     border-left: 1px #e2e2e2 solid
 }
 footer {
+    color: #333;
     height: 40px;
     line-height: 40px;
     text-align: center
 }
 footer a {
-    color: #333;
+    color: #007aff;
     text-decoration: none
 }
 
