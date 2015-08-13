@@ -3,18 +3,16 @@
  */
 
 .biz-table {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
     width: 100%;
     border: 0;
-    border-collapse: collapse;
-    color: #333;
-    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px
+    border-collapse: collapse
 }
 .biz-table th {
     padding: 5px 8px;
-    background-color: #707070;
-    color: #fff;
-    border: 1px #555 solid;
+    border-width: 1px;
+    border-style: solid;
     white-space: nowrap;
     font-weight: normal
 }
@@ -25,9 +23,6 @@
     background-repeat: no-repeat;
     cursor: pointer
 }
-.biz-table th[sortable]:hover {
-    background-color: #888;
-}
 .biz-table th[asc] {
     background-position: right -415px
 }
@@ -35,7 +30,8 @@
     background-position: right -445px
 }
 .biz-table td {
-    border: 1px #e2e2e2 solid;
+    border-width: 1px;
+    border-style: solid;
     padding: 5px 8px;
     text-align: right;
     outline: none
@@ -43,12 +39,7 @@
 .biz-table td.l {
     text-align: left
 }
-.biz-table tr.selected,
-.biz-table tr:hover {
-    background: #eff8ff
-}
 .biz-table tr.sum {
-    background: #fffbe5;
     font-weight: bold
 }
 .biz-table .biz-label {
@@ -82,9 +73,7 @@
     cursor: pointer
 }
 .biz-table-editor {
-    border: 1px #007aff solid;
+    border-width: 1px;
+    border-style: solid;
     outline: none
-}
-.biz-table-editor.error {
-    border: 1px #ea6153 solid;
 }

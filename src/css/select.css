@@ -7,13 +7,9 @@
     font-size: 14px;
     height: 28px;
     line-height: 28px;
-    background: #fff;
     border-radius: 2px;
-    border: solid 1px #e2e2e2
-}
-.selectBox-dropdown:hover,
-.selectBox-dropdown:focus {
-    border-color: #007aff
+    border-width: 1px;
+    border-style: solid
 }
 .selectBox-dropdown .selectBox-label {
     padding: 0 8px
@@ -28,9 +24,10 @@
     background: url(img/bizui.png) 6px -270px;
 }
 .selectBox-dropdown-menu {
-    border: solid 1px #007aff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid
 }
 .selectBox-options.selectBox-options-top,
 .selectBox-options.selectBox-options-bottom {
@@ -40,19 +37,8 @@
 .selectBox-options li a {
     line-height: 28px
 }
-.selectBox-options li.selectBox-hover a {
-    background-color: #eff8ff
-}
-.selectBox-options li.selectBox-selected a {
-    background-color: #007aff;
-    color: #fff
-}
-.selectBox-disabled:hover,
-.selectBox-disabled:focus {
-    border-color: #e2e2e2
-}
 .selectBox-disabled:hover .selectBox-arrow,
 .selectBox-disabled:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px
+    background: url(img/bizui.png) 6px -240px;
 }

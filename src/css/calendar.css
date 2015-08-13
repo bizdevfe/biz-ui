@@ -22,40 +22,18 @@
     display: none;
     min-width: 160px;
     list-style: none;
-    background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    color: #333;
-    line-height: 30px;
+    line-height: 30px
 }
 .datepicker table {
-    background: #707070;
     border-collapse: collapse
 }
-.datepicker thead {
-    color: #fff
-}
-.datepicker-days thead tr:first-child th:hover,
-.datepicker-months thead tr:first-child th:hover,
-.datepicker-years thead tr:first-child th:hover {
-    background: #999
+.datepicker tbody td {
+    border-width: 1px;
+    border-style: solid
 }
 .datepicker-days thead tr:last-child {
-    background: #fff;
-    color: #333;
     font-weight: normal
-}
-.datepicker tbody {
-    background: #fff
-}
-.datepicker tbody td {
-    border: 1px #e2e2e2 solid
-}
-.datepicker tfoot {
-    background: #fff;
-    color: #333
-}
-.datepicker tfoot tr th:hover {
-    background: #eee
 }
 .datepicker-dropdown:before,
 .datepicker-dropdown:after {

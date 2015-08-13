@@ -6,7 +6,6 @@
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
     cursor: pointer;
-    color: #333;
     padding-left: 20px;
     margin-right: 10px;
     height: 19px;
@@ -29,12 +28,10 @@
     background-position: 0 -180px
 }
 .biz-radio-unchecked-disabled {
-    color: #b6b6b6;
     background-position: 0 -200px;
     cursor: default
 }
 .biz-radio-checked-disabled {
-    color: #b6b6b6;
     background-position: 0 -220px;
     cursor: default
 }

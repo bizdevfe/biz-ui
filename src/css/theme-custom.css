@@ -1,0 +1,128 @@
+/**
+ * primary color
+ */
+
+.biz-button {
+    background-color: rgba(0, 122, 255, 1)
+}
+.biz-input-focus,
+.biz-textarea-focus,
+.selectBox-dropdown:hover,
+.selectBox-dropdown:focus,
+.selectBox-dropdown-menu,
+.biz-table-editor {
+    border-color: rgba(0, 122, 255, 1)
+}
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:focus,
+.datepicker table tr td.active:hover:focus,
+.datepicker table tr td.active.disabled:focus,
+.datepicker table tr td.active.disabled:hover:focus,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.active,
+.open .dropdown-toggle.datepicker table tr td.active:hover,
+.open .dropdown-toggle.datepicker table tr td.active.disabled,
+.open .dropdown-toggle.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active:hover:hover,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active:focus,
+.datepicker table tr td span.active:hover:focus,
+.datepicker table tr td span.active.disabled:focus,
+.datepicker table tr td span.active.disabled:hover:focus,
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td span.active,
+.open .dropdown-toggle.datepicker table tr td span.active:hover,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled:hover,
+.light-theme .current {
+    background-color: rgba(0, 122, 255, 1);
+    border-color: rgba(0, 122, 255, 1)
+}
+/**
+ * primary hover color
+ */
+
+.biz-button:hover {
+    background-color: rgba(0, 122, 255, 0.8)
+}
+.biz-button:active {
+    background-color: rgba(0, 122, 255, 1)
+}
+.selectBox-options li.selectBox-hover a,
+.biz-table tr.selected,
+.biz-table tr:hover {
+    background-color: rgba(0, 122, 255, 0.1)
+}
+/**
+ * assistant color
+ */
+
+.biz-button-dark,
+.biz-dialog-title,
+.biz-panel-title,
+.biz-tab > ul li,
+.jstree-default .jstree-wholerow-hovered,
+.biz-table th,
+.datepicker table {
+    background-color: rgba(112, 112, 112, 1)
+}
+/**
+ * assistant hover color
+ */
+
+.biz-button-dark:hover,
+.biz-tab > ul li:hover,
+.datepicker-days thead tr:first-child th:hover,
+.datepicker-months thead tr:first-child th:hover,
+.datepicker-years thead tr:first-child th:hover {
+    background-color: rgba(112, 112, 112, 0.8);
+}
+.biz-table th[sortable]:hover {
+    background-color: rgba(112, 112, 112, 0.9);
+}
+.biz-button-dark:active {
+    background-color: rgba(112, 112, 112, 1)
+}
+/**
+ * high priority color
+ */
+
+.jstree-default .jstree-wholerow-clicked,
+.selectBox-options li.selectBox-selected a {
+    background: rgba(0, 122, 255, 1)
+}
+/**
+ * text color
+ */
+
+.biz-button,
+.biz-button-dark,
+.light-theme .current,
+.biz-dialog-title,
+.biz-panel-title,
+.biz-tab > ul li,
+.jstree-default .jstree-wholerow-hovered,
+.jstree-default .jstree-wholerow-clicked,
+.selectBox-options li.selectBox-selected a,
+.biz-table th {
+    color: rgba(255, 255, 255, 1)
+}

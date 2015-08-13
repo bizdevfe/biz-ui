@@ -11,30 +11,22 @@
     padding: 0;
     list-style: none;
     height: 36px;
-    line-height: 36px;
-    background: #ccc
+    line-height: 36px
 }
 .biz-tab > ul li {
     float: left;
     padding: 0 40px;
-    border-left: 1px solid #fff;
-    background: #707070;
-    color: #fff;
+    border-left-width: 1px;
+    border-left-style: solid;
     text-align: center;
     cursor: pointer
 }
 .biz-tab > ul li:first-child {
     border-left: 0
 }
-.biz-tab > ul li:hover {
-    background: #999
-}
 .biz-tab > ul li.active {
-    background: #fff;
-    color: #455052;
     cursor: default
 }
 .biz-tab > div {
-    padding: 10px;
-    background: #fff
+    padding: 10px
 }

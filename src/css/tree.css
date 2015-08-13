@@ -3,7 +3,6 @@
  */
 
 .jstree {
-    background: #fff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
@@ -17,22 +16,6 @@
 }
 .jstree-default .jstree-icon:empty {
     margin-top: 3px
-}
-.jstree-default .jstree-wholerow-hovered {
-    background: #707070
-}
-.jstree-default .jstree-wholerow-clicked {
-    background: #007aff
-}
-.jstree-default > .jstree-wholerow-ul .jstree-hovered,
-.jstree-default > .jstree-wholerow-ul .jstree-clicked {
-    color: #fff
-}
-.jstree-default > .jstree-wholerow-ul .jstree-disabled {
-    color: #666
-}
-.jstree-node[aria-disabled="true"] > .jstree-wholerow-clicked {
-    background: #efefef
 }
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-hovered ~ .jstree-ocl,
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-clicked ~ .jstree-ocl {

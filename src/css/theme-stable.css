@@ -1,0 +1,159 @@
+/**
+ * Input, Textarea
+ */
+
+.biz-input,
+.biz-textarea {
+    color: #333;
+    border-color: #e2e2e2;
+    background-color: #fff
+}
+.biz-input-hover,
+.biz-textarea-hover {
+    border-color: #ccc
+}
+.biz-input-disable,
+.biz-textarea-disable {
+    background: #f1f1f1;
+    color: #b6b6b6
+}
+/**
+ * Radio, Checkbox
+ */
+
+.biz-label {
+    color: #333
+}
+.biz-radio-unchecked-disabled,
+.biz-radio-checked-disabled,
+.biz-checkbox-unchecked-disabled,
+.biz-checkbox-checked-disabled {
+    color: #b6b6b6
+}
+/**
+ * Select
+ */
+
+.selectBox-dropdown {
+    color: #333;
+    background: #fff;
+    border-color: #e2e2e2
+}
+.selectBox-dropdown-menu {
+    background-color: #fff
+}
+.selectBox.selectBox-disabled {
+    color: #b6b6b6
+}
+/**
+ * Dialog, Panel
+ */
+
+.biz-dialog,
+.biz-panel-body {
+    background-color: #fff
+}
+/**
+ * Tab
+ */
+
+.biz-tab > ul {
+    background-color: #eee
+}
+.biz-tab > ul li {
+    border-left-color: #fff
+}
+.biz-tab > ul li.active,
+.biz-tab > ul li.active:hover {
+    background-color: #fff;
+    color: #333
+}
+.biz-tab > div {
+    background-color: #fff
+}
+/**
+ * Page
+ */
+
+.simple-pagination .disabled .current {
+    border-color: #f1f1f1;
+    background-color: #f1f1f1;
+    color: #b6b6b6
+}
+.light-theme a {
+    border-color: #e2e2e2;
+    background: #fff;
+    color: #333
+}
+.light-theme a:hover {
+    border-color: #ccc
+}
+/**
+ * Tree
+ */
+
+.jstree {
+    background-color: #fff
+}
+.jstree-default > .jstree-wholerow-ul .jstree-hovered,
+.jstree-default > .jstree-wholerow-ul .jstree-clicked {
+    color: #fff
+}
+.jstree-default > .jstree-wholerow-ul .jstree-disabled {
+    color: #b6b6b6
+}
+.jstree-node[aria-disabled="true"] > .jstree-wholerow-clicked {
+    background-color: #f1f1f1
+}
+/**
+ * Calendar
+ */
+
+.datepicker.dropdown-menu {
+    background-color: #fff;
+    color: #333
+}
+.datepicker thead {
+    color: #fff
+}
+.datepicker-days thead tr:last-child {
+    background-color: #fff;
+    color: #333
+}
+.datepicker tbody {
+    background-color: #fff
+}
+.datepicker tbody td {
+    border-color: #e2e2e2
+}
+.datepicker tfoot {
+    background-color: #fff;
+    color: #333
+}
+.datepicker tfoot tr th:hover {
+    background-color: #eee
+}
+/**
+ * Table
+ */
+
+.biz-table {
+    color: #333;
+    background-color: #fff
+}
+.biz-table th {
+    border-color: #555
+}
+.biz-table td {
+    border-color: #e2e2e2
+}
+.biz-table tr.sum,
+.biz-table tr.sum:hover {
+    background-color: #fffbe5
+}
+.biz-table-editor {
+    background-color: #fff
+}
+.biz-table-editor.error {
+    border-color: #ea6153
+}

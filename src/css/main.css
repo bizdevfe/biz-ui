@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v2.0.0
+ * @version v1.0.1
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -24,3 +24,6 @@
 @import url("calendar.css");
 @import url("jquery.resizableColumns.css");
 @import url("table.css");
+@import url("theme-stable.css");
+@import url("theme-custom.css");
+@import url("theme-high-priority.css");

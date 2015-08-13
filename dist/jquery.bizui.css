@@ -1,11 +1,13 @@
 /**
  * BizUI Framework
- * @version v2.0.0
+ * @version v1.0.1
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
 @charset "UTF-8";
 .biz-button {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
     display: inline-block;
     height: 30px;
     line-height: normal;
@@ -13,48 +15,22 @@
     padding: 5px 15px;
     border: 0;
     border-radius: 2px;
-    color: #fff;
-    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px;
     cursor: pointer;
     text-align: center;
     outline: none;
     vertical-align: middle
 }
-.biz-button {
-    background: #007aff
-}
-.biz-button:hover {
-    background: #4ca1fe
-}
-.biz-button:active {
-    background: #006de2
-}
-.biz-button-dark {
-    background: #707070
-}
-.biz-button-dark:hover {
-    background: #8b8b8b
-}
-.biz-button-dark:active {
-    background: #3a3a3a
-}
 .biz-button-disable {
-    background: #dedede;
-    color: #c2c2c2;
     cursor: default
-}
-.biz-button-disable:hover {
-    background: #dedede
 }
 .biz-input,
 .biz-textarea {
-    padding: 5px;
-    color: #333;
-    border: 1px #e2e2e2 solid;
-    border-radius: 2px;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
     outline: none;
     vertical-align: middle
 }
@@ -66,24 +42,10 @@
     line-height: 20px;
     resize: none
 }
-.biz-input-hover,
-.biz-textarea-hover {
-    border-color: #ccc
-}
-.biz-input-focus,
-.biz-textarea-focus {
-    border-color: #007aff
-}
-.biz-input-disable,
-.biz-textarea-disable {
-    background: #f1f1f1;
-    color: #b6b6b6
-}
 .biz-label {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
     cursor: pointer;
-    color: #333;
     padding-left: 20px;
     margin-right: 10px;
     height: 19px;
@@ -106,12 +68,10 @@
     background-position: 0 -180px
 }
 .biz-radio-unchecked-disabled {
-    color: #b6b6b6;
     background-position: 0 -200px;
     cursor: default
 }
 .biz-radio-checked-disabled {
-    color: #b6b6b6;
     background-position: 0 -220px;
     cursor: default
 }
@@ -128,12 +88,10 @@
     background-position: 0 -60px
 }
 .biz-checkbox-unchecked-disabled {
-    color: #b6b6b6;
     background-position: 0 -80px;
     cursor: default
 }
 .biz-checkbox-checked-disabled {
-    color: #b6b6b6;
     background-position: 0 -100px;
     cursor: default
 }
@@ -292,13 +250,9 @@
     font-size: 14px;
     height: 28px;
     line-height: 28px;
-    background: #fff;
     border-radius: 2px;
-    border: solid 1px #e2e2e2
-}
-.selectBox-dropdown:hover,
-.selectBox-dropdown:focus {
-    border-color: #007aff
+    border-width: 1px;
+    border-style: solid
 }
 .selectBox-dropdown .selectBox-label {
     padding: 0 8px
@@ -313,9 +267,10 @@
     background: url(img/bizui.png) 6px -270px;
 }
 .selectBox-dropdown-menu {
-    border: solid 1px #007aff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid
 }
 .selectBox-options.selectBox-options-top,
 .selectBox-options.selectBox-options-bottom {
@@ -325,27 +280,15 @@
 .selectBox-options li a {
     line-height: 28px
 }
-.selectBox-options li.selectBox-hover a {
-    background-color: #eff8ff
-}
-.selectBox-options li.selectBox-selected a {
-    background-color: #007aff;
-    color: #fff
-}
-.selectBox-disabled:hover,
-.selectBox-disabled:focus {
-    border-color: #e2e2e2
-}
 .selectBox-disabled:hover .selectBox-arrow,
 .selectBox-disabled:focus .selectBox-arrow {
     border-left: 0;
-    background: url(img/bizui.png) 0 -240px
+    background: url(img/bizui.png) 6px -240px;
 }
 .biz-dialog {
     position: fixed;
     top: 50%;
     left: 50%;
-    background: #fff;
     box-shadow: 0 0 8px #888;
     z-index: 1003;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif
@@ -357,8 +300,6 @@
     line-height: 40px;
     font-size: 14px;
     font-weight: normal;
-    color: #fff;
-    background: #707070;
     position: relative
 }
 .biz-dialog-close {
@@ -411,8 +352,6 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background: #fff;
-    border-left: 1px #999 solid;
     box-shadow: -3px 0 8px #aaa
 }
 .biz-panel-title {
@@ -420,10 +359,7 @@
     padding: 30px 0 0 60px;
     height: 40px;
     line-height: 40px;
-    font-size: 14px;
-    color: #333;
-    background: #fff;
-    border-bottom: 1px #e2e2e2 solid
+    font-size: 14px
 }
 .biz-panel-content {
     padding: 25px 60px
@@ -439,7 +375,7 @@
     max-width: 300px;
     display: none;
     position: absolute;
-    z-index: 1004;
+    z-index: 99999;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
@@ -491,32 +427,24 @@
     padding: 0;
     list-style: none;
     height: 36px;
-    line-height: 36px;
-    background: #ccc
+    line-height: 36px
 }
 .biz-tab > ul li {
     float: left;
     padding: 0 40px;
-    border-left: 1px solid #fff;
-    background: #707070;
-    color: #fff;
+    border-left-width: 1px;
+    border-left-style: solid;
     text-align: center;
     cursor: pointer
 }
 .biz-tab > ul li:first-child {
     border-left: 0
 }
-.biz-tab > ul li:hover {
-    background: #999
-}
 .biz-tab > ul li.active {
-    background: #fff;
-    color: #455052;
     cursor: default
 }
 .biz-tab > div {
-    padding: 10px;
-    background: #fff
+    padding: 10px
 }
 ul.simple-pagination {
     list-style: none;
@@ -591,9 +519,8 @@ ul.simple-pagination {
     font-size: 14px;
 }
 .simple-pagination .disabled .current {
-    border: 1px #f1f1f1 solid;
-    background: #f1f1f1;
-    color: #b6b6b6
+    border-width: 1px;
+    border-style: solid
 }
 .light-theme span,
 .light-theme a {
@@ -603,19 +530,18 @@ ul.simple-pagination {
     line-height: 28px;
 }
 .light-theme .current {
-    box-shadow: none;
-    border: 1px #007aff solid;
-    background: #007aff;
-    color: #fff
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none
 }
 .light-theme a {
-    text-decoration: none;
-    border: 1px #e2e2e2 solid;
-    background: #fff;
-    color: #333
+    border-width: 1px;
+    border-style: solid;
+    text-decoration: none
 }
 .light-theme a:hover {
-    border: 1px #ccc solid;
+    border-width: 1px;
+    border-style: solid
 }
 .jstree-node,
 .jstree-children,
@@ -1475,7 +1401,6 @@ ul.simple-pagination {
     background: transparent;
 }
 .jstree {
-    background: #fff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
@@ -1489,22 +1414,6 @@ ul.simple-pagination {
 }
 .jstree-default .jstree-icon:empty {
     margin-top: 3px
-}
-.jstree-default .jstree-wholerow-hovered {
-    background: #707070
-}
-.jstree-default .jstree-wholerow-clicked {
-    background: #007aff
-}
-.jstree-default > .jstree-wholerow-ul .jstree-hovered,
-.jstree-default > .jstree-wholerow-ul .jstree-clicked {
-    color: #fff
-}
-.jstree-default > .jstree-wholerow-ul .jstree-disabled {
-    color: #666
-}
-.jstree-node[aria-disabled="true"] > .jstree-wholerow-clicked {
-    background: #efefef
 }
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-hovered ~ .jstree-ocl,
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-clicked ~ .jstree-ocl {
@@ -1893,7 +1802,7 @@ fieldset[disabled] .datepicker table tr td.range.today.disabled:hover.active {
 .open .dropdown-toggle.datepicker table tr td.selected.disabled:hover {
     color: #ffffff;
     background-color: #858585;
-    border-color: #373737;
+    border-color: #858585;
 }
 .datepicker table tr td.selected:active,
 .datepicker table tr td.selected:hover:active,
@@ -2002,8 +1911,8 @@ fieldset[disabled] .datepicker table tr td.selected.disabled:hover.active {
 .open .dropdown-toggle.datepicker table tr td.active.disabled,
 .open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
     color: #ffffff;
-    background-color: #007aff;
-    border-color: #007aff;
+    background-color: #3276b1;
+    border-color: #3276b1;
 }
 .datepicker table tr td.active:active,
 .datepicker table tr td.active:hover:active,
@@ -2131,8 +2040,8 @@ fieldset[disabled] .datepicker table tr td.active.disabled:hover.active {
 .open .dropdown-toggle.datepicker table tr td span.active.disabled,
 .open .dropdown-toggle.datepicker table tr td span.active.disabled:hover {
     color: #ffffff;
-    background-color: #007aff;
-    border-color: #007aff;
+    background-color: #3276b1;
+    border-color: #3276b1;
 }
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover:active,
@@ -2286,40 +2195,18 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     display: none;
     min-width: 160px;
     list-style: none;
-    background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    color: #333;
-    line-height: 30px;
+    line-height: 30px
 }
 .datepicker table {
-    background: #707070;
     border-collapse: collapse
 }
-.datepicker thead {
-    color: #fff
-}
-.datepicker-days thead tr:first-child th:hover,
-.datepicker-months thead tr:first-child th:hover,
-.datepicker-years thead tr:first-child th:hover {
-    background: #999
+.datepicker tbody td {
+    border-width: 1px;
+    border-style: solid
 }
 .datepicker-days thead tr:last-child {
-    background: #fff;
-    color: #333;
     font-weight: normal
-}
-.datepicker tbody {
-    background: #fff
-}
-.datepicker tbody td {
-    border: 1px #e2e2e2 solid
-}
-.datepicker tfoot {
-    background: #fff;
-    color: #333
-}
-.datepicker tfoot tr th:hover {
-    background: #eee
 }
 .datepicker-dropdown:before,
 .datepicker-dropdown:after {
@@ -2333,7 +2220,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     width: 15px;
     cursor: ew-resize;
     margin-left: -7px;
-    z-index: 1004;
+    z-index: 2;
 }
 table.rc-table-resizing {
     cursor: ew-resize;
@@ -2344,18 +2231,16 @@ table.rc-table-resizing thead > th > a {
     cursor: ew-resize;
 }
 .biz-table {
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
     width: 100%;
     border: 0;
-    border-collapse: collapse;
-    color: #333;
-    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
-    font-size: 14px
+    border-collapse: collapse
 }
 .biz-table th {
     padding: 5px 8px;
-    background-color: #707070;
-    color: #fff;
-    border: 1px #555 solid;
+    border-width: 1px;
+    border-style: solid;
     white-space: nowrap;
     font-weight: normal
 }
@@ -2366,9 +2251,6 @@ table.rc-table-resizing thead > th > a {
     background-repeat: no-repeat;
     cursor: pointer
 }
-.biz-table th[sortable]:hover {
-    background-color: #888;
-}
 .biz-table th[asc] {
     background-position: right -415px
 }
@@ -2376,7 +2258,8 @@ table.rc-table-resizing thead > th > a {
     background-position: right -445px
 }
 .biz-table td {
-    border: 1px #e2e2e2 solid;
+    border-width: 1px;
+    border-style: solid;
     padding: 5px 8px;
     text-align: right;
     outline: none
@@ -2384,12 +2267,7 @@ table.rc-table-resizing thead > th > a {
 .biz-table td.l {
     text-align: left
 }
-.biz-table tr.selected,
-.biz-table tr:hover {
-    background: #eff8ff
-}
 .biz-table tr.sum {
-    background: #fffbe5;
     font-weight: bold
 }
 .biz-table .biz-label {
@@ -2423,9 +2301,243 @@ table.rc-table-resizing thead > th > a {
     cursor: pointer
 }
 .biz-table-editor {
-    border: 1px #007aff solid;
+    border-width: 1px;
+    border-style: solid;
     outline: none
 }
+.biz-input,
+.biz-textarea {
+    color: #333;
+    border-color: #e2e2e2;
+    background-color: #fff
+}
+.biz-input-hover,
+.biz-textarea-hover {
+    border-color: #ccc
+}
+.biz-input-disable,
+.biz-textarea-disable {
+    background: #f1f1f1;
+    color: #b6b6b6
+}
+.biz-label {
+    color: #333
+}
+.biz-radio-unchecked-disabled,
+.biz-radio-checked-disabled,
+.biz-checkbox-unchecked-disabled,
+.biz-checkbox-checked-disabled {
+    color: #b6b6b6
+}
+.selectBox-dropdown {
+    color: #333;
+    background: #fff;
+    border-color: #e2e2e2
+}
+.selectBox-dropdown-menu {
+    background-color: #fff
+}
+.selectBox.selectBox-disabled {
+    color: #b6b6b6
+}
+.biz-dialog,
+.biz-panel-body {
+    background-color: #fff
+}
+.biz-tab > ul {
+    background-color: #eee
+}
+.biz-tab > ul li {
+    border-left-color: #fff
+}
+.biz-tab > ul li.active,
+.biz-tab > ul li.active:hover {
+    background-color: #fff;
+    color: #333
+}
+.biz-tab > div {
+    background-color: #fff
+}
+.simple-pagination .disabled .current {
+    border-color: #f1f1f1;
+    background-color: #f1f1f1;
+    color: #b6b6b6
+}
+.light-theme a {
+    border-color: #e2e2e2;
+    background: #fff;
+    color: #333
+}
+.light-theme a:hover {
+    border-color: #ccc
+}
+.jstree {
+    background-color: #fff
+}
+.jstree-default > .jstree-wholerow-ul .jstree-hovered,
+.jstree-default > .jstree-wholerow-ul .jstree-clicked {
+    color: #fff
+}
+.jstree-default > .jstree-wholerow-ul .jstree-disabled {
+    color: #b6b6b6
+}
+.jstree-node[aria-disabled="true"] > .jstree-wholerow-clicked {
+    background-color: #f1f1f1
+}
+.datepicker.dropdown-menu {
+    background-color: #fff;
+    color: #333
+}
+.datepicker thead {
+    color: #fff
+}
+.datepicker-days thead tr:last-child {
+    background-color: #fff;
+    color: #333
+}
+.datepicker tbody {
+    background-color: #fff
+}
+.datepicker tbody td {
+    border-color: #e2e2e2
+}
+.datepicker tfoot {
+    background-color: #fff;
+    color: #333
+}
+.datepicker tfoot tr th:hover {
+    background-color: #eee
+}
+.biz-table {
+    color: #333;
+    background-color: #fff
+}
+.biz-table th {
+    border-color: #555
+}
+.biz-table td {
+    border-color: #e2e2e2
+}
+.biz-table tr.sum,
+.biz-table tr.sum:hover {
+    background-color: #fffbe5
+}
+.biz-table-editor {
+    background-color: #fff
+}
 .biz-table-editor.error {
-    border: 1px #ea6153 solid;
+    border-color: #ea6153
+}
+.biz-button {
+    background-color: rgba(0, 122, 255, 1)
+}
+.biz-input-focus,
+.biz-textarea-focus,
+.selectBox-dropdown:hover,
+.selectBox-dropdown:focus,
+.selectBox-dropdown-menu,
+.biz-table-editor {
+    border-color: rgba(0, 122, 255, 1)
+}
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:focus,
+.datepicker table tr td.active:hover:focus,
+.datepicker table tr td.active.disabled:focus,
+.datepicker table tr td.active.disabled:hover:focus,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.active,
+.open .dropdown-toggle.datepicker table tr td.active:hover,
+.open .dropdown-toggle.datepicker table tr td.active.disabled,
+.open .dropdown-toggle.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active:hover:hover,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active:focus,
+.datepicker table tr td span.active:hover:focus,
+.datepicker table tr td span.active.disabled:focus,
+.datepicker table tr td span.active.disabled:hover:focus,
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td span.active,
+.open .dropdown-toggle.datepicker table tr td span.active:hover,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled:hover,
+.light-theme .current {
+    background-color: rgba(0, 122, 255, 1);
+    border-color: rgba(0, 122, 255, 1)
+}
+.biz-button:hover {
+    background-color: rgba(0, 122, 255, 0.8)
+}
+.biz-button:active {
+    background-color: rgba(0, 122, 255, 1)
+}
+.selectBox-options li.selectBox-hover a,
+.biz-table tr.selected,
+.biz-table tr:hover {
+    background-color: rgba(0, 122, 255, 0.1)
+}
+.biz-button-dark,
+.biz-dialog-title,
+.biz-panel-title,
+.biz-tab > ul li,
+.jstree-default .jstree-wholerow-hovered,
+.biz-table th,
+.datepicker table {
+    background-color: rgba(112, 112, 112, 1)
+}
+.biz-button-dark:hover,
+.biz-tab > ul li:hover,
+.datepicker-days thead tr:first-child th:hover,
+.datepicker-months thead tr:first-child th:hover,
+.datepicker-years thead tr:first-child th:hover {
+    background-color: rgba(112, 112, 112, 0.8);
+}
+.biz-table th[sortable]:hover {
+    background-color: rgba(112, 112, 112, 0.9);
+}
+.biz-button-dark:active {
+    background-color: rgba(112, 112, 112, 1)
+}
+.jstree-default .jstree-wholerow-clicked,
+.selectBox-options li.selectBox-selected a {
+    background: rgba(0, 122, 255, 1)
+}
+.biz-button,
+.biz-button-dark,
+.light-theme .current,
+.biz-dialog-title,
+.biz-panel-title,
+.biz-tab > ul li,
+.jstree-default .jstree-wholerow-hovered,
+.jstree-default .jstree-wholerow-clicked,
+.selectBox-options li.selectBox-selected a,
+.biz-table th {
+    color: rgba(255, 255, 255, 1)
+}
+.biz-button-disable,
+.biz-button-disable:hover {
+    background-color: #dedede;
+    color: #b6b6b6
+}
+.selectBox-disabled:hover,
+.selectBox-disabled:focus {
+    border-color: #e2e2e2
 }
