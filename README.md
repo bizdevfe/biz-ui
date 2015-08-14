@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/bizdevfe/biz-ui/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/biz-ui)
 [![Build Status](https://travis-ci.org/bizdevfe/biz-ui.svg?branch=master)](https://travis-ci.org/bizdevfe/biz-ui)
 
-BizUI is a jQuery plugin for business UI components, have a [quick view](http://bizdevfe.github.io/biz-ui/quick-view.html):
+BizUI is a jQuery plugin for business UI components, have a [quick view](http://bizdevfe.github.io/biz-ui/quickview/):
 
 <img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />
 
