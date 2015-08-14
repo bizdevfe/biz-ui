@@ -29,6 +29,7 @@ header h1 {
 #content {
     margin-left: 200px;
     min-height: 500px;
+    padding-bottom: 30px;
     border-left: 1px #e2e2e2 solid
 }
 footer {
@@ -38,7 +39,7 @@ footer {
     text-align: center
 }
 footer a {
-    color: #007aff;
+    color: #888;
     text-decoration: none
 }
 
