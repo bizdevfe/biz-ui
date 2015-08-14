@@ -3,17 +3,22 @@ body {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
-header h1 {
-    color: #fff;
-    padding: 10px 30px;
-    margin: 0;
+header {
+    overflow: hidden;
     background: #333
+}
+header h1 {
+    float: left;
+    color: #fff;
+    margin: 0;
+    height: 60px;
+    line-height: 60px
 }
 #logo {
     float: left;
     width: 40px;
     height: 40px;
-    margin: 9px 20px 8px 20px;
+    margin: 10px 20px;
     background: #333 url(https://avatars2.githubusercontent.com/u/6337289?v=3&s=200) left center no-repeat;
     background-size: 40px;
     border-radius: 20px
@@ -36,6 +41,7 @@ footer {
     color: #333;
     height: 40px;
     line-height: 40px;
+    padding: 20px 0;
     text-align: center
 }
 footer a {
