@@ -1,9 +1,5 @@
-/**
- * Modify the three follow colors to change theme
- */
-
 .biz-button {
-    background-color: #d35400;
+    background-color: #007aff;
 }
 .biz-input-focus,
 .biz-textarea-focus,
@@ -11,7 +7,7 @@
 .selectBox-dropdown:focus,
 .selectBox-dropdown-menu,
 .biz-table-editor {
-    border-color: #d35400;
+    border-color: #007aff;
 }
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active:hover:hover,
@@ -54,23 +50,23 @@
 .open .dropdown-toggle.datepicker table tr td span.active.disabled,
 .open .dropdown-toggle.datepicker table tr td span.active.disabled:hover,
 .light-theme .current {
-    background-color: #d35400;
-    border-color: #d35400;
+    background-color: #007aff;
+    border-color: #007aff;
 }
 /**
  * primary hover color
  */
 
 .biz-button:hover {
-    background-color: #ff6a07;
+    background-color: #3395ff;
 }
 .biz-button:active {
-    background-color: #ba4a00;
+    background-color: #006ee6;
 }
 .selectBox-options li.selectBox-hover a,
 .biz-table tr.selected,
 .biz-table tr:hover {
-    background-color: #ffd5ba;
+    background-color: #e5f2ff;
 }
 /**
  * assistant color
@@ -83,7 +79,7 @@
 .jstree-default .jstree-wholerow-hovered,
 .biz-table th,
 .datepicker table {
-    background-color: #2c3e50;
+    background-color: #707070;
 }
 /**
  * assistant hover color
@@ -94,13 +90,13 @@
 .datepicker-days thead tr:first-child th:hover,
 .datepicker-months thead tr:first-child th:hover,
 .datepicker-years thead tr:first-child th:hover {
-    background-color: #3e5771;
+    background-color: #8a8a8a;
 }
 .biz-table th[sortable]:hover {
-    background-color: #354b60;
+    background-color: #7d7d7d;
 }
 .biz-button-dark:active {
-    background-color: #233140;
+    background-color: #636363;
 }
 /**
  * high priority color
@@ -108,7 +104,7 @@
 
 .jstree-default .jstree-wholerow-clicked,
 .selectBox-options li.selectBox-selected a {
-    background: #d35400;
+    background: #007aff;
 }
 /**
  * text color
