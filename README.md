@@ -17,7 +17,7 @@ BizUI is a jQuery plugin for business UI components, have a [quick view](http://
 ##Usage
 Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https://github.com/bizdevfe/biz-ui/releases).
 
-Together with jQuery, include bizui.js in your page:
+Together with jQuery, include BizUI in your page:
 
     <script src="jquery.js" type="text/javascript"></script>
     <script src="jquery.bizui.js" type="text/javascript"></script>
@@ -28,7 +28,7 @@ Include the CSS file:
 
     <link href="jquery.bizui.css" rel="stylesheet" type="text/css" />
 
-You can also load jquery.bizui.js as a AMD module:
+You can also load BizUI as a AMD module:
 
     var bizui = require('jquery.bizui');
 

@@ -2429,7 +2429,7 @@ table.rc-table-resizing thead > th > a {
     border-color: #ea6153
 }
 .biz-button {
-    background-color: rgba(0, 122, 255, 1)
+    background-color: #d35400;
 }
 .biz-input-focus,
 .biz-textarea-focus,
@@ -2437,7 +2437,7 @@ table.rc-table-resizing thead > th > a {
 .selectBox-dropdown:focus,
 .selectBox-dropdown-menu,
 .biz-table-editor {
-    border-color: rgba(0, 122, 255, 1)
+    border-color: #d35400;
 }
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active:hover:hover,
@@ -2480,19 +2480,19 @@ table.rc-table-resizing thead > th > a {
 .open .dropdown-toggle.datepicker table tr td span.active.disabled,
 .open .dropdown-toggle.datepicker table tr td span.active.disabled:hover,
 .light-theme .current {
-    background-color: rgba(0, 122, 255, 1);
-    border-color: rgba(0, 122, 255, 1)
+    background-color: #d35400;
+    border-color: #d35400;
 }
 .biz-button:hover {
-    background-color: rgba(0, 122, 255, 0.8)
+    background-color: #ff6a07;
 }
 .biz-button:active {
-    background-color: rgba(0, 122, 255, 1)
+    background-color: #ba4a00;
 }
 .selectBox-options li.selectBox-hover a,
 .biz-table tr.selected,
 .biz-table tr:hover {
-    background-color: rgba(0, 122, 255, 0.1)
+    background-color: #ffd5ba;
 }
 .biz-button-dark,
 .biz-dialog-title,
@@ -2501,24 +2501,24 @@ table.rc-table-resizing thead > th > a {
 .jstree-default .jstree-wholerow-hovered,
 .biz-table th,
 .datepicker table {
-    background-color: rgba(112, 112, 112, 1)
+    background-color: #2c3e50;
 }
 .biz-button-dark:hover,
 .biz-tab > ul li:hover,
 .datepicker-days thead tr:first-child th:hover,
 .datepicker-months thead tr:first-child th:hover,
 .datepicker-years thead tr:first-child th:hover {
-    background-color: rgba(112, 112, 112, 0.8);
+    background-color: #3e5771;
 }
 .biz-table th[sortable]:hover {
-    background-color: rgba(112, 112, 112, 0.9);
+    background-color: #354b60;
 }
 .biz-button-dark:active {
-    background-color: rgba(112, 112, 112, 1)
+    background-color: #233140;
 }
 .jstree-default .jstree-wholerow-clicked,
 .selectBox-options li.selectBox-selected a {
-    background: rgba(0, 122, 255, 1)
+    background: #d35400;
 }
 .biz-button,
 .biz-button-dark,
@@ -2530,7 +2530,7 @@ table.rc-table-resizing thead > th > a {
 .jstree-default .jstree-wholerow-clicked,
 .selectBox-options li.selectBox-selected a,
 .biz-table th {
-    color: rgba(255, 255, 255, 1)
+    color: #ffffff;
 }
 .biz-button-disable,
 .biz-button-disable:hover {

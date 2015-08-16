@@ -13,6 +13,9 @@ V="1.0.1"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/loader/start.frag"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/css/main.css"
 
+#less
+lessc ../src/css/theme-custom.less ../src/css/theme-custom.css
+
 #beautify
 css-beautify -r ../src/css/*.css
 js-beautify -r ../src/*.js
