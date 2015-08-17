@@ -103,7 +103,7 @@
     color: #b6b6b6
 }
 .jstree-node[aria-disabled="true"] > .jstree-wholerow-clicked {
-    background-color: #f1f1f1
+    background-color: #efefef
 }
 /**
  * Calendar
