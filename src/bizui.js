@@ -12,7 +12,7 @@ define(function(require) {
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.1';
+    bizui.version = '1.0.2';
 
     var origin = window.bizui;
 
@@ -43,6 +43,12 @@ define(function(require) {
          * @method Textarea
          */
         Textarea: require('ui/Textarea'),
+
+        /**
+         * {@link Textline} constructor
+         * @method Textline
+         */
+        Textline: require('ui/Textline'),
 
         /**
          * {@link Radio} constructor

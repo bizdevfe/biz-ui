@@ -1,8 +1,10 @@
-.biz-button {
+.biz-button,
+.biz-textline div {
     background-color: #007aff;
 }
 .biz-input-focus,
 .biz-textarea-focus,
+.biz-textline textarea.biz-textline-focus,
 .selectBox-dropdown:hover,
 .selectBox-dropdown:focus,
 .selectBox-dropdown-menu,
@@ -112,6 +114,7 @@
 
 .biz-button,
 .biz-button-dark,
+.biz-textline pre,
 .light-theme .current,
 .biz-dialog-title,
 .biz-panel-title,

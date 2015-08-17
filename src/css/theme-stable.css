@@ -3,17 +3,20 @@
  */
 
 .biz-input,
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     color: #333;
     border-color: #e2e2e2;
     background-color: #fff
 }
 .biz-input-hover,
-.biz-textarea-hover {
+.biz-textarea-hover,
+.biz-textline textarea.biz-textline-hover {
     border-color: #ccc
 }
 .biz-input-disable,
-.biz-textarea-disable {
+.biz-textarea-disable,
+.biz-textline textarea.biz-textline-disable {
     background: #f1f1f1;
     color: #b6b6b6
 }

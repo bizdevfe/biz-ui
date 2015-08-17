@@ -3,7 +3,8 @@
  */
 
 .biz-input,
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
     padding: 5px;
@@ -17,7 +18,33 @@
     height: 18px;
     line-height: 18px
 }
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     line-height: 20px;
     resize: none
+}
+.biz-textline textarea {
+    float: left;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0
+}
+.biz-textline div {
+    float: left;
+    width: 15px;
+    padding: 5px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    position: relative;
+    overflow: hidden
+}
+.biz-textline pre {
+    font-family: Helvetica, Arial, sans-serif;
+    position: absolute;
+    margin: 0;
+    width: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px
 }

@@ -9,6 +9,7 @@
                     "Button",
                     "Input",
                     "Textarea",
+                    "Textline",
                     "Radio",
                     "Checkbox",
                     "Select",

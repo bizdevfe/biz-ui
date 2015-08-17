@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.1
+ * @version v1.0.2
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -24,7 +24,8 @@
     cursor: default
 }
 .biz-input,
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
     padding: 5px;
@@ -38,9 +39,35 @@
     height: 18px;
     line-height: 18px
 }
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     line-height: 20px;
     resize: none
+}
+.biz-textline textarea {
+    float: left;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0
+}
+.biz-textline div {
+    float: left;
+    width: 15px;
+    padding: 5px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    position: relative;
+    overflow: hidden
+}
+.biz-textline pre {
+    font-family: Helvetica, Arial, sans-serif;
+    position: absolute;
+    margin: 0;
+    width: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px
 }
 .biz-label {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
@@ -2306,17 +2333,20 @@ table.rc-table-resizing thead > th > a {
     outline: none
 }
 .biz-input,
-.biz-textarea {
+.biz-textarea,
+.biz-textline textarea {
     color: #333;
     border-color: #e2e2e2;
     background-color: #fff
 }
 .biz-input-hover,
-.biz-textarea-hover {
+.biz-textarea-hover,
+.biz-textline textarea.biz-textline-hover {
     border-color: #ccc
 }
 .biz-input-disable,
-.biz-textarea-disable {
+.biz-textarea-disable,
+.biz-textline textarea.biz-textline-disable {
     background: #f1f1f1;
     color: #b6b6b6
 }
@@ -2428,11 +2458,13 @@ table.rc-table-resizing thead > th > a {
 .biz-table-editor.error {
     border-color: #ea6153
 }
-.biz-button {
+.biz-button,
+.biz-textline div {
     background-color: #007aff;
 }
 .biz-input-focus,
 .biz-textarea-focus,
+.biz-textline textarea.biz-textline-focus,
 .selectBox-dropdown:hover,
 .selectBox-dropdown:focus,
 .selectBox-dropdown-menu,
@@ -2522,6 +2554,7 @@ table.rc-table-resizing thead > th > a {
 }
 .biz-button,
 .biz-button-dark,
+.biz-textline pre,
 .light-theme .current,
 .biz-dialog-title,
 .biz-panel-title,
