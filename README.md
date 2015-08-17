@@ -1,21 +1,26 @@
-#BizUI Framework
+BizUI Framework
+===============
 
 [![Code Climate](https://codeclimate.com/github/bizdevfe/biz-ui/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/biz-ui)
 [![Build Status](https://travis-ci.org/bizdevfe/biz-ui.svg?branch=master)](https://travis-ci.org/bizdevfe/biz-ui)
 
-BizUI is a jQuery plugin for business UI components, have a [quick view](http://bizdevfe.github.io/biz-ui/quickview/):
+BizUI is a jQuery plugin for business UI components. Have a [quick view](http://bizdevfe.github.io/biz-ui/quickview/):
 
 <img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />
 
-##Features
-* Include 14 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Tooltip, Tab, Page, Tree, Calendar, Table.
-* IE9+, Firefox, Chrome, Safari and Opera supported.
-* Import other awesome components with the constant API using Adapter Pattern.
+Features
+--------
+- Include 14 types of UI components: Button, Input, Textarea, Radio, Checkbox, Select, Dialog, Panel, Tooltip, Tab, Page, Tree, Calendar, Table.
+- IE9+, Firefox, Chrome, Safari and Opera supported.
+- Import other awesome components with the constant API using Adapter Pattern.
 
 <img src="http://bizdevfe.github.io/biz-ui/img/adapter.png" />
 
-##Usage
-Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https://github.com/bizdevfe/biz-ui/releases).
+Usage
+-----
+Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https://github.com/bizdevfe/biz-ui/releases), or:
+
+    npm install biz-ui
 
 Together with jQuery, include BizUI in your page:
 
@@ -35,24 +40,28 @@ You can also load BizUI as a AMD module:
 To initialize:
 
     // recommended
-	$('button').bizButton();
-	
-	// or create instance by constructor
-	var button = new bizui.Button($('button'));
+    $('button').bizButton();
+    
+    // or create instance by constructor
+    var button = new bizui.Button($('button'));
 
 Customize themes: Theme styles are extracted to [theme-custom.less](https://github.com/bizdevfe/biz-ui/blob/master/src/css/theme-custom.less), to customize themes of your own, just simply mofidy the following colors: @primary-color, @assistant-color and @text-color.
 
-##API documentation and demos
+API documentation and demos
+---------------------------
 See [http://bizdevfe.github.io/biz-ui](http://bizdevfe.github.io/biz-ui).
 
-##Build
+Build
+-----
 Do the code inspection, optimization or API generation here:
 
     $ cd tool
     $ build.sh
 
-##License
+License
+-------
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
-##Feedback
+Feedback
+--------
 For issues or suggestions please see [biz-ui](https://github.com/bizdevfe/biz-ui) on Github. Thanks for your support!
