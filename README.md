@@ -40,6 +40,8 @@ To initialize:
 	// or create instance by constructor
 	var button = new bizui.Button($('button'));
 
+Customize themes: Theme styles are extracted to [theme-custom.less](https://github.com/bizdevfe/biz-ui/blob/master/src/css/theme-custom.less), to customize themes of your own, just simply mofidy the following colors: @primary-color, @assistant-color and @text-color.
+
 ##API documentation and demos
 See [http://bizdevfe.github.io/biz-ui](http://bizdevfe.github.io/biz-ui).
 
