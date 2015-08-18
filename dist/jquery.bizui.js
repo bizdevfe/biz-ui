@@ -627,15 +627,15 @@ define('ui/Input',['require'],function(require) {
                 this.disable();
             }
 
-            if (options.onEnter) {
-                var self = this;
-                this.$main.on('keydown.bizInput', function(e) {
-                    e.preventDefault(); //阻止IE9, 10触发<button>元素的点击事件
-                    if (e.keyCode === 13) {
+            var self = this;
+            this.$main.on('keydown.bizInput', function(e) {
+                if (e.keyCode === 13) {
+                    if (options.onEnter) {
                         options.onEnter.call(self, e);
                     }
-                });
-            }
+                    return false; //阻止IE9, 10触发<button>元素的click事件
+                }
+            });
 
             this.$main.on('mouseover.bizInput', function(e) {
                 $(this).addClass(hoverClass);
