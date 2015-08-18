@@ -1,8 +1,9 @@
 BizUI Framework
 ===============
 
-[![Code Climate](https://codeclimate.com/github/bizdevfe/biz-ui/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/biz-ui)
-[![Build Status](https://travis-ci.org/bizdevfe/biz-ui.svg?branch=master)](https://travis-ci.org/bizdevfe/biz-ui)
+[![NPM version][npm-image]][npm-url]
+[![Code Climate][codeclimate-image]][codeclimate-url]
+[![Build Status][travis-image]][travis-url]
 
 BizUI is a jQuery plugin for business UI components. Have a [quick view](http://bizdevfe.github.io/biz-ui/quickview/):
 
@@ -65,3 +66,10 @@ Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 Feedback
 --------
 For issues or suggestions please see [biz-ui](https://github.com/bizdevfe/biz-ui) on Github. Thanks for your support!
+
+[npm-image]: http://img.shields.io/npm/v/biz-ui.svg
+[npm-url]: https://npmjs.org/package/biz-ui
+[codeclimate-image]: https://codeclimate.com/github/bizdevfe/biz-ui/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/bizdevfe/biz-ui
+[travis-image]: https://travis-ci.org/bizdevfe/biz-ui.svg
+[travis-url]: https://travis-ci.org/bizdevfe/biz-ui
