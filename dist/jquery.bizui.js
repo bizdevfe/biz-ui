@@ -630,6 +630,7 @@ define('ui/Input',['require'],function(require) {
             if (options.onEnter) {
                 var self = this;
                 this.$main.on('keydown.bizInput', function(e) {
+                    e.preventDefault(); //阻止IE9, 10触发<button>元素的点击事件
                     if (e.keyCode === 13) {
                         options.onEnter.call(self, e);
                     }
