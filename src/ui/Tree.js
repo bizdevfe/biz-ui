@@ -7,9 +7,8 @@ define(function(require) {
     /**
      * Tree constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/cysonubv/1/)
-     *
      * More details about options, methods and events, see [jstree API](https://www.jstree.com/api/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/cysonubv/1/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} tree 目标元素
      * @param {Object} [options] 参数

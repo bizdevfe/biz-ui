@@ -7,7 +7,7 @@ define(function(require) {
     /**
      * Page constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/b73bLbqx/)
+     * <iframe width="100%" height="300" src="//jsfiddle.net/bizdevfe/b73bLbqx/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} page 目标元素
      * @param {Object} [options] 参数

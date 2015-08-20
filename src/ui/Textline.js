@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Textline constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/2/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/wus1a8wy/3/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} textline 目标元素
      * @param {Object} [options] 参数

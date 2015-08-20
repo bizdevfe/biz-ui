@@ -7,7 +7,7 @@ define(function(require) {
     /**
      * Calendar constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/oa3s8e8w/)
+     * <iframe width="100%" height="380" src="//jsfiddle.net/bizdevfe/oa3s8e8w/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} calendar 目标元素
      * @param {Object} [options] 参数

@@ -258,7 +258,7 @@ define(function(require) {
     /**
      * Tooltip method
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/x6s36byf/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/x6s36byf/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @param {Object|String} options 参数
      * @param {String} options.color 颜色
      * @param {String} options.direction 位置

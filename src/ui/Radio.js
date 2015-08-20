@@ -5,7 +5,7 @@ define(function(require) {
     /**
      * Radio constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/o74stme1/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/o74stme1/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} radio 目标元素
      */

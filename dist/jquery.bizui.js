@@ -431,7 +431,7 @@ define('ui/Button',['require'],function(require) {
     /**
      * Button constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/yaram3jy/3/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/yaram3jy/3/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} button 目标元素
      * @param {Object} [options] 参数
@@ -575,7 +575,7 @@ define('ui/Input',['require'],function(require) {
     /**
      * Input constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/sx74qw4g/1/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/sx74qw4g/1/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} input 目标元素
      * @param {Object} [options] 参数
@@ -736,7 +736,7 @@ define('ui/Textarea',['require'],function(require) {
     /**
      * Textarea constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/2/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/wus1a8wy/3/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} textarea 目标元素
      * @param {Object} [options] 参数
@@ -893,7 +893,7 @@ define('ui/Textline',['require'],function(require) {
     /**
      * Textline constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/wus1a8wy/2/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/wus1a8wy/3/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} textline 目标元素
      * @param {Object} [options] 参数
@@ -1124,7 +1124,7 @@ define('ui/Radio',['require'],function(require) {
     /**
      * Radio constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/o74stme1/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/o74stme1/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} radio 目标元素
      */
@@ -1346,7 +1346,7 @@ define('ui/Checkbox',['require'],function(require) {
     /**
      * Checkbox constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/Lcp5mpLt/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/Lcp5mpLt/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} checkbox 目标元素
      */
@@ -2729,7 +2729,7 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
     /**
      * Select constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/bsjn9hpw/3/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/bsjn9hpw/3/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} select 目标元素
      * @param {Object} [options] 参数
@@ -2871,7 +2871,7 @@ define('ui/Dialog',['require'],function(require) {
     /**
      * Dialog constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/j5agtk3u/)
+     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/j5agtk3u/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} dialog 目标元素
      * @param {Object} [options] 参数
@@ -3118,7 +3118,7 @@ define('ui/Panel',['require'],function(require) {
     /**
      * Panel constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/4govkm96/)
+     * <iframe width="100%" height="300" src="//jsfiddle.net/bizdevfe/4govkm96/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} panel 目标元素
      * @param {Object} [options] 参数
@@ -3567,7 +3567,7 @@ define('ui/Tooltip',['require'],function(require) {
     /**
      * Tooltip method
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/x6s36byf/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/x6s36byf/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @param {Object|String} options 参数
      * @param {String} options.color 颜色
      * @param {String} options.direction 位置
@@ -3602,7 +3602,7 @@ define('ui/Tab',['require'],function(require) {
     /**
      * Tab constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/9t1nzb07/)
+     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/9t1nzb07/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} tab 目标元素
      * @param {Object} [options] 参数
@@ -4090,7 +4090,7 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
     /**
      * Page constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/b73bLbqx/)
+     * <iframe width="100%" height="300" src="//jsfiddle.net/bizdevfe/b73bLbqx/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} page 目标元素
      * @param {Object} [options] 参数
@@ -10227,9 +10227,8 @@ define('ui/Tree',['require','dep/jquery.jstree'],function(require) {
     /**
      * Tree constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/cysonubv/1/)
-     *
      * More details about options, methods and events, see [jstree API](https://www.jstree.com/api/)
+     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/cysonubv/1/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} tree 目标元素
      * @param {Object} [options] 参数
@@ -12107,7 +12106,7 @@ define('ui/Calendar',['require','dep/jquery.datepicker'],function(require) {
     /**
      * Calendar constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/oa3s8e8w/)
+     * <iframe width="100%" height="380" src="//jsfiddle.net/bizdevfe/oa3s8e8w/embedded/result,js,html,css/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} calendar 目标元素
      * @param {Object} [options] 参数
@@ -13052,7 +13051,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
     /**
      * Table constructor
      *
-     * [See demo on JSFiddle](http://jsfiddle.net/bizdevfe/q4myap58/1/)
+     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/q4myap58/1/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} table 目标元素
      * @param {Object} [options] 参数
