@@ -12,7 +12,7 @@ define(function(require) {
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.2';
+    bizui.version = '1.0.3';
 
     var origin = window.bizui;
 

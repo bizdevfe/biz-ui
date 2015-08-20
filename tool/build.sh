@@ -9,7 +9,7 @@ if [ $? -ne 0 ]
 fi
 
 #update version
-V="1.0.2"
+V="1.0.3"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/loader/start.frag"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/css/main.css"
 
