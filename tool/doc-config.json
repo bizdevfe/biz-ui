@@ -18,7 +18,8 @@
         "../src/ui/Page.js",
         "../src/ui/Tree.js",
         "../src/ui/Calendar.js",
-        "../src/ui/Table.js"
+        "../src/ui/Table.js",
+        "../src/ui/TreeTable.js"
     ],
     "--external": ["HTMLElement", "jQuery"],
     "--welcome": "../README.md"

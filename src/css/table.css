@@ -77,3 +77,24 @@
     border-style: solid;
     outline: none
 }
+.biz-treetable {
+    border-width: 1px;
+    border-style: solid
+}
+.biz-treetable td {
+    text-align: left;
+    cursor: default;
+    border-width: 0
+}
+.biz-treetable span.indenter {
+    display: inline-block;
+    width: 19px
+}
+.biz-treetable span.indenter a {
+    display: inline-block;
+    width: 19px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    outline: none
+}

@@ -20,7 +20,8 @@
                     "Page",
                     "Tree",
                     "Calendar",
-                    "Table"
+                    "Table",
+                    "TreeTable"
                 ]
             }
         ]

@@ -114,7 +114,13 @@ define(function(require) {
          * {@link Table} constructor
          * @method Table
          */
-        Table: require('ui/Table')
+        Table: require('ui/Table'),
+
+        /**
+         * {@link TreeTable} constructor
+         * @method TreeTable
+         */
+        TreeTable: require('ui/TreeTable')
     });
 
     return bizui;
