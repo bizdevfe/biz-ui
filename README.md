@@ -3,8 +3,7 @@ BizUI - A jQuery plugin for business UI components
 
 [![Code Climate][codeclimate-image]][codeclimate-url]
 [![Build Status][travis-image]][travis-url]
-
-[![NPM](https://nodei.co/npm/biz-ui.png?downloads=true)](https://nodei.co/npm/biz-ui/)
+[![NPM version][npm-image]][npm-url]
 
 Features
 --------
@@ -74,3 +73,7 @@ For issues or suggestions please see [biz-ui](https://github.com/bizdevfe/biz-ui
 [codeclimate-url]: https://codeclimate.com/github/bizdevfe/biz-ui
 [travis-image]: https://travis-ci.org/bizdevfe/biz-ui.svg
 [travis-url]: https://travis-ci.org/bizdevfe/biz-ui
+[npm-image]: http://img.shields.io/npm/v/biz-ui.svg
+[npm-url]: https://npmjs.org/package/biz-ui
+[npm-stat-image]: https://nodei.co/npm/biz-ui.png?downloads=true
+[npm-stat-url]: https://nodei.co/npm/biz-ui
