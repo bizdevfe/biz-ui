@@ -216,7 +216,9 @@ define(function(require) {
                 .off('click.bizTableSort')
                 .off('click.bizTableEdit');
 
-            this.$main.resizableColumns('destroy');
+            if (this.options.resizable) {
+                this.$main.resizableColumns('destroy');
+            }
 
             $('.biz-table-editor').off().remove();
         }

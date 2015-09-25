@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.6.1
+ * @version v1.0.7
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -13261,7 +13261,9 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                 .off('click.bizTableSort')
                 .off('click.bizTableEdit');
 
-            this.$main.resizableColumns('destroy');
+            if (this.options.resizable) {
+                this.$main.resizableColumns('destroy');
+            }
 
             $('.biz-table-editor').off().remove();
         }
@@ -14158,7 +14160,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.6';
+    bizui.version = '1.0.7';
 
     var origin = window.bizui;
 
