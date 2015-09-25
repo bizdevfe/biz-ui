@@ -138,7 +138,6 @@ define(function(require) {
             o.pages = methods._getPages(o);
             this.data('pagination', o);
             methods._draw.call(this);
-            methods._selectPage.call(this, 0);
         },
 
         updateItemsOnPage: function(itemsOnPage) {
@@ -146,7 +145,6 @@ define(function(require) {
             o.itemsOnPage = itemsOnPage;
             o.pages = methods._getPages(o);
             this.data('pagination', o);
-            methods._selectPage.call(this, 0);
             return this;
         },
 

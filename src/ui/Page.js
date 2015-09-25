@@ -33,12 +33,12 @@ define(function(require) {
 
     Page.prototype = {
         /**
-         * 设置每页条数, 同时页码置为1
+         * 设置每页条数
          * @param {Number} pageSize 每页条数
-         * @fires onPageClick
          */
         setPageSize: function(pageSize) {
             this.instance.pagination('updateItemsOnPage', pageSize);
+            this.instance.pagination('drawPage', 1);
         },
 
         /**
@@ -51,12 +51,12 @@ define(function(require) {
         },
 
         /**
-         * 设置总条数, 同时页码置为1
+         * 设置总条数
          * @param {Number} totalNumber 总条数
-         * @fires onPageClick
          */
         setTotalNumber: function(totalNumber) {
             this.instance.pagination('updateItems', totalNumber);
+            this.instance.pagination('drawPage', 1);
         },
 
         /**

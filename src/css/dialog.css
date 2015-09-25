@@ -7,7 +7,7 @@
     top: 50%;
     left: 50%;
     box-shadow: 0 0 8px #888;
-    z-index: 1003;
+    z-index: 1001;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif
 }
 .biz-dialog-title {
@@ -51,4 +51,8 @@
     background: #000;
     opacity: 0.2;
     z-index: 1000
+}
+.biz-alert,
+.biz-confirm {
+    z-index: 1003
 }

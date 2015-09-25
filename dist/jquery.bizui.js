@@ -1,16 +1,16 @@
 /**
  * BizUI Framework
- * @version v1.0.4
+ * @version v1.0.5
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define([], factory);
+        define(['jquery'], factory);
     } else {
         root.bizui = factory();
     }
-}(this, function () {var requirejs, require, define;
+}(this, function($) {var requirejs, require, define;
 (function(undef) {
     var main, req, makeMap, handlers,
         defined = {},
@@ -1203,6 +1203,7 @@ define('ui/Radio',['require'],function(require) {
             }).on('click.bizRadio', function(e) {
                 if (!self.main.disabled) {
                     self.$group.bizRadio('uncheck');
+                    self.main.checked = true;
                     $(this).attr('class', defaultClass + ' ' + checked + ' ' + checkedHover);
                 }
             });
@@ -2739,6 +2740,7 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
         options = $.extend({}, options || {});
 
         this.instance = new SelectBox($(select), {
+            mobile: true,
             loopOptions: options.loop
         });
 
@@ -3005,7 +3007,7 @@ define('ui/Dialog',['require'],function(require) {
      * @static
      */
     Dialog.alert = function(options) {
-        var alert = $('<div style="display:none" class="bizui-alert" title="' + options.title + '">' + options.content + '</div>');
+        var alert = $('<div style="display:none" class="biz-alert" title="' + options.title + '">' + options.content + '</div>');
         alert.appendTo('body').bizDialog({
             width: 360,
             height: 200,
@@ -3033,7 +3035,7 @@ define('ui/Dialog',['require'],function(require) {
      * @static
      */
     Dialog.confirm = function(options) {
-        var confirm = $('<div style="display:none" class="bizui-confirm" title="' + options.title + '">' + options.content + '</div>');
+        var confirm = $('<div style="display:none" class="biz-confirm" title="' + options.title + '">' + options.content + '</div>');
         confirm.appendTo('body').bizDialog({
             width: 360,
             height: 200,
@@ -3865,7 +3867,6 @@ define('dep/jquery.simplePagination',['require'],function(require) {
             o.pages = methods._getPages(o);
             this.data('pagination', o);
             methods._draw.call(this);
-            methods._selectPage.call(this, 0);
         },
 
         updateItemsOnPage: function(itemsOnPage) {
@@ -3873,7 +3874,6 @@ define('dep/jquery.simplePagination',['require'],function(require) {
             o.itemsOnPage = itemsOnPage;
             o.pages = methods._getPages(o);
             this.data('pagination', o);
-            methods._selectPage.call(this, 0);
             return this;
         },
 
@@ -4116,12 +4116,12 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
 
     Page.prototype = {
         /**
-         * 设置每页条数, 同时页码置为1
+         * 设置每页条数
          * @param {Number} pageSize 每页条数
-         * @fires onPageClick
          */
         setPageSize: function(pageSize) {
             this.instance.pagination('updateItemsOnPage', pageSize);
+            this.instance.pagination('drawPage', 1);
         },
 
         /**
@@ -4134,12 +4134,12 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
         },
 
         /**
-         * 设置总条数, 同时页码置为1
+         * 设置总条数
          * @param {Number} totalNumber 总条数
-         * @fires onPageClick
          */
         setTotalNumber: function(totalNumber) {
             this.instance.pagination('updateItems', totalNumber);
+            this.instance.pagination('drawPage', 1);
         },
 
         /**
@@ -14156,7 +14156,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.4';
+    bizui.version = '1.0.5';
 
     var origin = window.bizui;
 

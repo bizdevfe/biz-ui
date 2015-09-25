@@ -17,6 +17,7 @@ define(function(require) {
         options = $.extend({}, options || {});
 
         this.instance = new SelectBox($(select), {
+            mobile: true,
             loopOptions: options.loop
         });
 

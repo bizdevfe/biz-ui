@@ -139,7 +139,7 @@ define(function(require) {
      * @static
      */
     Dialog.alert = function(options) {
-        var alert = $('<div style="display:none" class="bizui-alert" title="' + options.title + '">' + options.content + '</div>');
+        var alert = $('<div style="display:none" class="biz-alert" title="' + options.title + '">' + options.content + '</div>');
         alert.appendTo('body').bizDialog({
             width: 360,
             height: 200,
@@ -167,7 +167,7 @@ define(function(require) {
      * @static
      */
     Dialog.confirm = function(options) {
-        var confirm = $('<div style="display:none" class="bizui-confirm" title="' + options.title + '">' + options.content + '</div>');
+        var confirm = $('<div style="display:none" class="biz-confirm" title="' + options.title + '">' + options.content + '</div>');
         confirm.appendTo('body').bizDialog({
             width: 360,
             height: 200,
