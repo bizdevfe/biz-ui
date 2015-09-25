@@ -11,3 +11,5 @@
         root.bizui = factory();
     }
 }(this, function($) {
+    $ = $ || window.$;
+    

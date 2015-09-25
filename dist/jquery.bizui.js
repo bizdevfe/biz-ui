@@ -10,7 +10,9 @@
     } else {
         root.bizui = factory();
     }
-}(this, function($) {var requirejs, require, define;
+}(this, function($) {
+    $ = $ || window.$;
+    var requirejs, require, define;
 (function(undef) {
     var main, req, makeMap, handlers,
         defined = {},
