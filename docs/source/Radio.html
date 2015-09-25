@@ -101,6 +101,7 @@ define(function(require) {
             }).on('click.bizRadio', function(e) {
                 if (!self.main.disabled) {
                     self.$group.bizRadio('uncheck');
+                    self.main.checked = true;
                     $(this).attr('class', defaultClass + ' ' + checked + ' ' + checkedHover);
                 }
             });

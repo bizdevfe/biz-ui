@@ -156,7 +156,7 @@ define(function(require) {
      * @static
      */
     Dialog.alert = function(options) {
-        var alert = $('&lt;div style=&quot;display:none&quot; class=&quot;bizui-alert&quot; title=&quot;' + options.title + '&quot;&gt;' + options.content + '&lt;/div&gt;');
+        var alert = $('&lt;div style=&quot;display:none&quot; class=&quot;biz-alert&quot; title=&quot;' + options.title + '&quot;&gt;' + options.content + '&lt;/div&gt;');
         alert.appendTo('body').bizDialog({
             width: 360,
             height: 200,
@@ -184,7 +184,7 @@ define(function(require) {
      * @static
      */
     Dialog.confirm = function(options) {
-        var confirm = $('&lt;div style=&quot;display:none&quot; class=&quot;bizui-confirm&quot; title=&quot;' + options.title + '&quot;&gt;' + options.content + '&lt;/div&gt;');
+        var confirm = $('&lt;div style=&quot;display:none&quot; class=&quot;biz-confirm&quot; title=&quot;' + options.title + '&quot;&gt;' + options.content + '&lt;/div&gt;');
         confirm.appendTo('body').bizDialog({
             width: 360,
             height: 200,
