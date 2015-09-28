@@ -17,7 +17,7 @@ Features
 
 Usage
 -----
-Download the latest version: [https://github.com/bizdevfe/biz-ui/releases](https://github.com/bizdevfe/biz-ui/releases), or:
+Download the [latest version](https://github.com/bizdevfe/biz-ui/releases), or:
 
     npm install biz-ui
 
@@ -26,15 +26,9 @@ Together with jQuery, include BizUI in your page:
     <script src="jquery.js" type="text/javascript"></script>
     <script src="jquery.bizui.js" type="text/javascript"></script>
 
-jQuery 2.x or later is recommended. Older versions might work as well, but they are not tested.
-
 Include the CSS file:
 
     <link href="jquery.bizui.css" rel="stylesheet" type="text/css" />
-
-You can also load BizUI as a AMD module:
-
-    var bizui = require('jquery.bizui');
 
 To initialize:
 
@@ -44,17 +38,7 @@ To initialize:
     // or create instance by constructor
     var button = new bizui.Button($('button'));
 
-<!--Customize themes: Theme styles are extracted to [theme-custom.less](https://github.com/bizdevfe/biz-ui/blob/master/src/css/theme-custom.less), to customize themes of your own, just simply mofidy the following colors: @primary-color, @assistant-color and @text-color.-->
-
-API documentation
------------------
-See [http://bizdevfe.github.io/biz-ui](http://bizdevfe.github.io/biz-ui).
-
-Demos
------
-See [http://bizdevfe.github.io/biz-ui/quickview](http://bizdevfe.github.io/biz-ui/quickview).
-
-<!--<img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />-->
+See [Demos](http://bizdevfe.github.io/biz-ui/quickview) and [API documentations](http://bizdevfe.github.io/biz-ui).
 
 Build
 -----
