@@ -3,7 +3,9 @@ BizUI - A jQuery plugin for business UI components
 
 [![Code Climate][codeclimate-image]][codeclimate-url]
 [![Build Status][travis-image]][travis-url]
-[![NPM version][npm-image]][npm-url]
+[![NPM Version][npm-image]][npm-url]
+
+[![NPM Stat][npm-stat-image]][npm-stat-url]
 
 Features
 --------
@@ -11,7 +13,7 @@ Features
 - IE9+, Firefox, Chrome, Safari and Opera supported.
 - Import other awesome components with the constant API using Adapter Pattern.
 
-<img src="http://bizdevfe.github.io/biz-ui/img/adapter.png" />
+<!--<img src="http://bizdevfe.github.io/biz-ui/img/adapter.png" />-->
 
 Usage
 -----
@@ -42,7 +44,7 @@ To initialize:
     // or create instance by constructor
     var button = new bizui.Button($('button'));
 
-Customize themes: Theme styles are extracted to [theme-custom.less](https://github.com/bizdevfe/biz-ui/blob/master/src/css/theme-custom.less), to customize themes of your own, just simply mofidy the following colors: @primary-color, @assistant-color and @text-color.
+<!--Customize themes: Theme styles are extracted to [theme-custom.less](https://github.com/bizdevfe/biz-ui/blob/master/src/css/theme-custom.less), to customize themes of your own, just simply mofidy the following colors: @primary-color, @assistant-color and @text-color.-->
 
 API documentation
 -----------------
@@ -52,7 +54,7 @@ Demos
 -----
 See [http://bizdevfe.github.io/biz-ui/quickview](http://bizdevfe.github.io/biz-ui/quickview).
 
-<img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />
+<!--<img src="http://bizdevfe.github.io/biz-ui/img/demo.png" />-->
 
 Build
 -----
