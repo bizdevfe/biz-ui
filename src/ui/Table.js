@@ -86,9 +86,13 @@ define(function(require) {
          * @protected
          */
         createSelect: function() {
+            var that = this;
             this.$main.find('tr').each(function(index, tr) {
                 var id = selectPrefix + (tr.id ? tr.id : index),
                     disabled = $(tr).attr('unselectable') !== undefined ? ' disabled' : '';
+                if(that.$main.find('#' + id).length){
+                    return false;
+                }
                 $(tr).prepend(index === 0 ? '<th width="20"></th>' : '<td style="text-align:center"></td>')
                     .children(':first-child').html('<input type="checkbox" title=" " id="' + id + '"' + disabled + ' />');
             });
