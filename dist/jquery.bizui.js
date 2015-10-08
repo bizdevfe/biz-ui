@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.7
+ * @version v1.0.8
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -4153,10 +4153,10 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
         },
 
         /**
-         * 获取总条数
-         * @return {Number} 总条数
+         * 获取页数
+         * @return {Number} 页数
          */
-        getTotalNumber: function() {
+        getPageCount: function() {
             return this.instance.pagination('getPagesCount');
         },
 
@@ -4204,8 +4204,8 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
                     break;
                 case 'getPageNumber':
                     return this.data(dataKey).getPageNumber();
-                case 'getTotalNumber':
-                    return this.data(dataKey).getTotalNumber();
+                case 'getPageCount':
+                    return this.data(dataKey).getPageCount();
                 case 'destroy':
                     this.each(function() {
                         page = $(this).data(dataKey);
@@ -12102,8 +12102,9 @@ define('dep/jquery.datepicker',['require'],function(require) {
 /**
  * @ignore
  */
-define('ui/Calendar',['require','dep/jquery.datepicker'],function(require) {
-    var Datepicker = require('dep/jquery.datepicker');
+define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(require) {
+    var Datepicker = require('dep/jquery.datepicker'),
+        Input = require('ui/Input');
 
     /**
      * Calendar constructor
@@ -12120,13 +12121,13 @@ define('ui/Calendar',['require','dep/jquery.datepicker'],function(require) {
      */
     function Calendar(calendar, options) {
         if (isInput(calendar)) {
-            this.date = new bizui.Input($(calendar));
+            this.date = new Input($(calendar));
             $(this.date.main).addClass(defaultClass).attr('maxlength', 10);
         } else {
             this.range = $(calendar).find(':text');
-            this.startDate = new bizui.Input(this.range[0]);
+            this.startDate = new Input(this.range[0]);
             $(this.startDate.main).addClass(defaultClass).attr('maxlength', 10);
-            this.endDate = new bizui.Input(this.range[1]);
+            this.endDate = new Input(this.range[1]);
             $(this.endDate.main).addClass(defaultClass).attr('maxlength', 10);
         }
 
@@ -12179,6 +12180,30 @@ define('ui/Calendar',['require','dep/jquery.datepicker'],function(require) {
         },
 
         /**
+         * 激活
+         */
+        enable: function() {
+            if (this.date) {
+                this.date.enable();
+            } else {
+                this.startDate.enable();
+                this.endDate.enable();
+            }
+        },
+
+        /**
+         * 禁用
+         */
+        disable: function() {
+            if (this.date) {
+                this.date.disable();
+            } else {
+                this.startDate.disable();
+                this.endDate.disable();
+            }
+        },
+
+        /**
          * 销毁
          */
         destroy: function() {
@@ -12211,6 +12236,22 @@ define('ui/Calendar',['require','dep/jquery.datepicker'],function(require) {
                         calendar = $(this).data(dataKey);
                         if (calendar) {
                             calendar.setDate(options);
+                        }
+                    });
+                    break;
+                case 'enable':
+                    this.each(function() {
+                        calendar = $(this).data(dataKey);
+                        if (calendar) {
+                            calendar.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        calendar = $(this).data(dataKey);
+                        if (calendar) {
+                            calendar.disable();
                         }
                     });
                     break;
@@ -14160,7 +14201,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.7';
+    bizui.version = '1.0.8';
 
     var origin = window.bizui;
 

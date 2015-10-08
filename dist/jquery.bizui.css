@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.7
+ * @version v1.0.8
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -2372,7 +2372,7 @@ table.rc-table-resizing thead > th > a {
 .biz-input-disable,
 .biz-textarea-disable,
 .biz-textline textarea.biz-textline-disable {
-    background: #f1f1f1;
+    background-color: #f1f1f1;
     color: #b6b6b6
 }
 .biz-label {

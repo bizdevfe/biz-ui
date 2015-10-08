@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.7
+ * @version v1.0.8
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */

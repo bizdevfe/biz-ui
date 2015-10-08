@@ -17,7 +17,7 @@
 .biz-input-disable,
 .biz-textarea-disable,
 .biz-textline textarea.biz-textline-disable {
-    background: #f1f1f1;
+    background-color: #f1f1f1;
     color: #b6b6b6
 }
 /**

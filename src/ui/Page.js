@@ -68,10 +68,10 @@ define(function(require) {
         },
 
         /**
-         * 获取总条数
-         * @return {Number} 总条数
+         * 获取页数
+         * @return {Number} 页数
          */
-        getTotalNumber: function() {
+        getPageCount: function() {
             return this.instance.pagination('getPagesCount');
         },
 
@@ -119,8 +119,8 @@ define(function(require) {
                     break;
                 case 'getPageNumber':
                     return this.data(dataKey).getPageNumber();
-                case 'getTotalNumber':
-                    return this.data(dataKey).getTotalNumber();
+                case 'getPageCount':
+                    return this.data(dataKey).getPageCount();
                 case 'destroy':
                     this.each(function() {
                         page = $(this).data(dataKey);

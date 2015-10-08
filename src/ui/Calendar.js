@@ -2,7 +2,8 @@
  * @ignore
  */
 define(function(require) {
-    var Datepicker = require('dep/jquery.datepicker');
+    var Datepicker = require('dep/jquery.datepicker'),
+        Input = require('ui/Input');
 
     /**
      * Calendar constructor
@@ -19,13 +20,13 @@ define(function(require) {
      */
     function Calendar(calendar, options) {
         if (isInput(calendar)) {
-            this.date = new bizui.Input($(calendar));
+            this.date = new Input($(calendar));
             $(this.date.main).addClass(defaultClass).attr('maxlength', 10);
         } else {
             this.range = $(calendar).find(':text');
-            this.startDate = new bizui.Input(this.range[0]);
+            this.startDate = new Input(this.range[0]);
             $(this.startDate.main).addClass(defaultClass).attr('maxlength', 10);
-            this.endDate = new bizui.Input(this.range[1]);
+            this.endDate = new Input(this.range[1]);
             $(this.endDate.main).addClass(defaultClass).attr('maxlength', 10);
         }
 
@@ -78,6 +79,30 @@ define(function(require) {
         },
 
         /**
+         * 激活
+         */
+        enable: function() {
+            if (this.date) {
+                this.date.enable();
+            } else {
+                this.startDate.enable();
+                this.endDate.enable();
+            }
+        },
+
+        /**
+         * 禁用
+         */
+        disable: function() {
+            if (this.date) {
+                this.date.disable();
+            } else {
+                this.startDate.disable();
+                this.endDate.disable();
+            }
+        },
+
+        /**
          * 销毁
          */
         destroy: function() {
@@ -110,6 +135,22 @@ define(function(require) {
                         calendar = $(this).data(dataKey);
                         if (calendar) {
                             calendar.setDate(options);
+                        }
+                    });
+                    break;
+                case 'enable':
+                    this.each(function() {
+                        calendar = $(this).data(dataKey);
+                        if (calendar) {
+                            calendar.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        calendar = $(this).data(dataKey);
+                        if (calendar) {
+                            calendar.disable();
                         }
                     });
                     break;
