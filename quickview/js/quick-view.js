@@ -113,9 +113,9 @@ $('.page-number').bizInput({
 $('.go').bizButton().click(go);
 function go() {
     var value = parseInt($('.page-number').val(), 10),
-        totalNumber = $('.page').bizPage('getTotalNumber');
+        pageCount = $('.page').bizPage('getPageCount');
     
-    if (/^\d+$/.test(value) && value > 0 && value <= totalNumber) {
+    if (/^\d+$/.test(value) && value > 0 && value <= pageCount) {
         $('.page').bizPage('setPageNumber', value);
         $('.page-number').val('');
     } else {
