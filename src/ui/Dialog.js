@@ -73,7 +73,7 @@ define(function(require) {
                     width: options.width,
                     height: options.height,
                     marginLeft: -Math.floor(options.width / 2),
-                    marginTop: -Math.floor(options.height / 2),
+                    marginTop: -Math.floor(options.height / 2)
                 })
                 .after('<div class="biz-mask" style="display:none"></div>')
                 .on('click', '.biz-dialog-close', function() {
