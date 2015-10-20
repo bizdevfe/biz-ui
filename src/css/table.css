@@ -2,6 +2,14 @@
  * Table
  */
 
+.biz-table-scroll-wrap,
+.biz-table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.biz-table-scroll {
+    height: 1px
+}
 .biz-table {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -33,14 +41,20 @@
     border-width: 1px;
     border-style: solid;
     padding: 5px 8px;
-    text-align: right;
     outline: none
-}
-.biz-table td.l {
-    text-align: left
 }
 .biz-table tr.sum {
     font-weight: bold
+}
+.biz-table tr.sum td {
+    border-left-width: 0;
+    border-right-width: 0
+}
+.biz-table tr.sum td:first-child {
+    border-left-width: 1px
+}
+.biz-table tr.sum td:last-child {
+    border-right-width: 1px
 }
 .biz-table .biz-label {
     margin-right: 0
@@ -65,8 +79,8 @@
 }
 .biz-table td[editable] {
     padding-right: 30px;
-    background-image: url(img/bizui.png);
-    background-position: right -475px;
+    background-image: url(img/edit.png);
+    background-position: right center;
     background-repeat: no-repeat
 }
 .biz-table td[editable]:hover {

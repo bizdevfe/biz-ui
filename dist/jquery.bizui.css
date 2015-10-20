@@ -2261,6 +2261,14 @@ table.rc-table-resizing thead > th,
 table.rc-table-resizing thead > th > a {
     cursor: ew-resize;
 }
+.biz-table-scroll-wrap,
+.biz-table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.biz-table-scroll {
+    height: 1px
+}
 .biz-table {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -2292,14 +2300,20 @@ table.rc-table-resizing thead > th > a {
     border-width: 1px;
     border-style: solid;
     padding: 5px 8px;
-    text-align: right;
     outline: none
-}
-.biz-table td.l {
-    text-align: left
 }
 .biz-table tr.sum {
     font-weight: bold
+}
+.biz-table tr.sum td {
+    border-left-width: 0;
+    border-right-width: 0
+}
+.biz-table tr.sum td:first-child {
+    border-left-width: 1px
+}
+.biz-table tr.sum td:last-child {
+    border-right-width: 1px
 }
 .biz-table .biz-label {
     margin-right: 0
@@ -2324,8 +2338,8 @@ table.rc-table-resizing thead > th > a {
 }
 .biz-table td[editable] {
     padding-right: 30px;
-    background-image: url(img/bizui.png);
-    background-position: right -475px;
+    background-image: url(img/edit.png);
+    background-position: right center;
     background-repeat: no-repeat
 }
 .biz-table td[editable]:hover {
@@ -2618,4 +2632,12 @@ table.rc-table-resizing thead > th > a {
 .selectBox-disabled:hover,
 .selectBox-disabled:focus {
     border-color: #e2e2e2;
+}
+.biz-table.biz-rowspan tr.selected,
+.biz-table.biz-rowspan tr:hover {
+    background-color: #ffffff;
+}
+.biz-table.biz-rowspan tr.sum,
+.biz-table.biz-rowspan tr.sum:hover {
+    background-color: #fffbe5;
 }
