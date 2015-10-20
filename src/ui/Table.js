@@ -8,7 +8,7 @@ define(function(require) {
     /**
      * Table constructor
      *
-     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/q4myap58/1/embedded/result,js,html/" frameborder="0"></iframe>
+     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/q4myap58/34/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} table 目标元素
      * @param {Object}   options 参数
