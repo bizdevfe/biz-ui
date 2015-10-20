@@ -65,7 +65,7 @@
         
         <div class="block"><button id="query">Query</button></div>
         
-        <table class="cost-data"></table>
+        <div class="data"></div>
         
         <div class="block">
             <div class="page-group">
@@ -100,92 +100,6 @@
 </div>
 
 <footer>© 2015 <a href="https://github.com/bizdevfe/">bizdevfe</a></footer>
-
-<script id="tpl-region" type="text/html">
-<thead>
-	<tr>
-		<th>Region</th>
-		<th sortable des field="cost">Cost</th>
-		<th sortable field="costPerCust">Cost Per Cust</th>
-		<th sortable field="click">Click</th>
-		<th sortable field="cpc">CPC</th>
-	</tr>
-</thead>
-<tbody>
-	<tr class="sum" unselectable>
-		<td class="l">Summation</td>
-		<td>1500.00</td>
-		<td>8.90</td>
-		<td>105</td>
-		<td>1.95</td>
-	</tr>
-	<tr id="100">
-		<td class="l">North</td>
-		<td editable>200.00</td>
-		<td>8.50</td>
-		<td>20</td>
-		<td>1.80</td>
-	</tr>
-	<tr id="200">
-		<td class="l">East</td>
-		<td editable>300.00</td>
-		<td>9.30</td>
-		<td>15</td>
-		<td>2.10</td>
-	</tr>
-	<tr id="300">
-		<td class="l">South</td>
-		<td editable>200.00</td>
-		<td>8.50</td>
-		<td>20</td>
-		<td>1.80</td>
-	</tr>
-	<tr id="400">
-		<td class="l">West</td>
-		<td editable>300.00</td>
-		<td>9.30</td>
-		<td>15</td>
-		<td>2.10</td>
-	</tr>
-	<tr id="500">
-		<td class="l">North</td>
-		<td editable>200.00</td>
-		<td>8.50</td>
-		<td>20</td>
-		<td>1.80</td>
-	</tr>
-	<tr id="600">
-		<td class="l">East</td>
-		<td editable>300.00</td>
-		<td>9.30</td>
-		<td>15</td>
-		<td>2.10</td>
-	</tr>
-</tbody>
-</script>
-
-<script id="tpl-client" type="text/html">
-<thead>
-	<tr>
-		<th>ID</th>
-		<th sortable field="name">Name</th>
-		<th sortable asc field="email">Telephone</th>
-	</tr>
-</thead>
-<tbody>
-	<tr id="1">
-		<td class="l">1</td>
-		<td class="l">Ricky</td>
-		<td class="l" editable>01088888888</td>
-	</tr>
-	<tr id="2">
-		<td class="l">2</td>
-		<td class="l">Yuki</td>
-		<td class="l" editable>01088889999</td>
-	</tr>
-</tbody>
-</script>
-
 <script src="js/quick-view.js"></script>
 </body>
 </html>

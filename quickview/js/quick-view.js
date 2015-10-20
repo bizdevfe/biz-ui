@@ -67,7 +67,7 @@ $('input[name="client"]').bizRadio();
  */
 $('#dimension').bizTab({
     onChange: function(data) {
-        $('.cost-data').html(data.index === 0 ? $('#tpl-region').html() : $('#tpl-client').html()).bizTable('refresh');
+        $('.data').bizTable('updateData', data.index === 0 ? data1 : data2);
     }
 });
 
@@ -84,16 +84,130 @@ $('#query').bizButton({
 /**
  * Table 
  */
-$('.cost-data').html($('#tpl-region').html()).bizTable({
+function getAverage(data, field) {
+    var sum = 0;
+    $.each(data, function(index, val) {
+        sum = sum + val[field];
+    });
+    return Math.round(sum / data.length);
+}
+
+var column = [
+    {
+        field: 'no',
+        title: 'No.',
+        width: 70,
+        content: [function(item, index, field) {
+            return index;
+        }],
+        footContent: function(field) {
+            return 'Average';
+        }
+    },
+    {
+        field: 'name',
+        title: '<strong>Name</strong>',
+        escapeTitle: false,
+        content: [function(item, index, field) {
+                return item.name;
+        }]
+    },
+    {
+        field: 'height',
+        title: 'Height(cm)',
+        editable: true,
+        sortable: true,
+        currentSort: 'des',
+        align: 'right',
+        width: 200,
+        content: [function(item, index, field) {
+            return item.height;
+        }],
+        footContent: function(field) {
+            return getAverage(this.getData(), field);
+        }
+    },
+    {
+        field: 'weight',
+        title: 'Weight(kg)',
+        editable: true,
+        sortable: true,
+        align: 'right',
+        width: 200,
+        content: [function(item, index, field) {
+            return item.weight;
+        }],
+        footContent: function(field) {
+            return getAverage(this.getData(), field);
+        }
+    },
+    {
+        field: 'age',
+        title: 'Age',
+        sortable: true,
+        align: 'right',
+        width: 200,
+        content: [function(item, index, field) {
+            return item.age;
+        }],
+        footContent: function(field) {
+            return getAverage(this.getData(), field);
+        }
+    },
+    {
+        field: 'email',
+        title: 'Email',
+        content: [function(item, index, field) {
+            return item.email;
+        }]
+    },
+    {
+        field: 'op',
+        title: 'Operation',
+        escapeContent: false,
+        visible: false,
+        content: [function(item, index, field) {
+            return '<a href="#" id="' + item.id + '">Detail</a>';
+        }]
+    }
+];
+
+var data1 = [
+    {id: 100, name: 'A', height: 182, weight: 60.5, age: 25, email: 'a@sogou.com'},
+    {id: 200, name: 'B', height: 173, weight: 50.2, age: 26, email: 'b@sogou.com'},
+    {id: 300, name: 'C', height: 170, weight: 62.6, age: 27, email: 'c@sogou.com'},
+    {id: 400, name: 'D', height: 165, weight: 70.3, age: 23, email: 'd@sogou.com'}
+];
+
+var data2 = [
+    {id: 500, name: 'E', height: 178, weight: 56.1, age: 30, email: 'e@sogou.com'},
+    {id: 600, name: 'F', height: 171, weight: 52.2, age: 28, email: 'f@sogou.com'},
+    {id: 700, name: 'G', height: 168, weight: 75.8, age: 29, email: 'g@sogou.com'},
+    {id: 800, name: 'H', height: 160, weight: 72.9, age: 27, email: 'h@sogou.com'}
+];
+
+$('.data').bizTable({
+    column: column,
+    data: data1,
+    foot: 'top',
+    skin: 'myTable',
     selectable: true,
     resizable: true,
-    onSort: function(data) {
+    onSort: function(data, e) {
         console.log(data);
     },
-    onChange: function(newValue) {
-        console.log(newValue);
+    onSelect: function(data, e) {
+        console.log(data);
     },
-    changePattern: /^\d*(\.)?\d+$/ //number
+    onValidate: function(data, e) {
+        switch (data.field) {
+            case 'height': return /^\d+$/.test(data.newValue);
+            case 'weight': return /^\d+(\.)?\d+$/.test(data.newValue);
+        }
+    },
+    onEdit: function(data, e) {
+        console.log(data);
+    }
 });
 
 /**
