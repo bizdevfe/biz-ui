@@ -13010,7 +13010,7 @@ define('dep/jquery.editabletable',['require'],function(require) {
                     var text = $.trim(editor.val()),
                         evt = $.Event('change'),
                         originalContent;
-                    if (active.text() === text || editor.hasClass('error')) {
+                    if (!active || active.text() === text || editor.hasClass('error')) {
                         return true;
                     }
                     originalContent = active.html();
@@ -13204,7 +13204,11 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
 
             //调整列宽
             if (options.resizable) {
-                this.$main.find('table').resizableColumns();
+                this.$main.find('table').resizableColumns({
+                    start: function() {
+                        $('.biz-table-editor').blur();
+                    }
+                });
             }
 
             //排序

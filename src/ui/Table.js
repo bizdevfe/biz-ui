@@ -118,7 +118,11 @@ define(function(require) {
 
             //调整列宽
             if (options.resizable) {
-                this.$main.find('table').resizableColumns();
+                this.$main.find('table').resizableColumns({
+                    start: function() {
+                        $('.biz-table-editor').blur();
+                    }
+                });
             }
 
             //排序

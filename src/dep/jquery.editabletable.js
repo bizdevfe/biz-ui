@@ -33,7 +33,7 @@ define(function(require) {
                     var text = $.trim(editor.val()),
                         evt = $.Event('change'),
                         originalContent;
-                    if (active.text() === text || editor.hasClass('error')) {
+                    if (!active || active.text() === text || editor.hasClass('error')) {
                         return true;
                     }
                     originalContent = active.html();
