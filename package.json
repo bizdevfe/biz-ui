@@ -1,6 +1,6 @@
 {
   "name": "biz-ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A jQuery plugin for business UI components",
   "keywords": ["jQuery plugin", "Button", "Input", "Textarea", "Radio", "Checkbox", "Select", "Dialog", "Panel", "Tooltip", "Tab", "Page", "Tree", "Calendar", "Table"],
   "homepage": "http://bizdevfe.github.io/biz-ui",

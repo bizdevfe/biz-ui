@@ -20,6 +20,7 @@ Usage
 Download the [latest version](https://github.com/bizdevfe/biz-ui/releases), or:
 
     npm install biz-ui
+    bower install biz-ui
 
 Together with jQuery, include BizUI in your page:
 

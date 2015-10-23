@@ -1,0 +1,46 @@
+{
+  "name": "biz-ui",
+  "description": "A jQuery plugin for business UI components",
+  "main": "./src/bizui.js",
+  "authors": [
+    "Ricky <hyenasa@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "jQuery",
+    "plugin",
+    "Button",
+    "Input",
+    "Textarea",
+    "Radio",
+    "Checkbox",
+    "Select",
+    "Dialog",
+    "Panel",
+    "Tooltip",
+    "Tab",
+    "Page",
+    "Tree",
+    "Calendar",
+    "Table"
+  ],
+  "homepage": "https://github.com/bizdevfe/biz-ui",
+  "moduleType": ["amd"],
+  "dependencies": {
+    "jquery": "2.1.x"
+  },
+  "devDependencies": {
+    "jshint": "2.8.x",
+    "js-beautify": "1.5.x",
+    "less": "2.5.x",
+    "almond": "0.2.x",
+    "requirejs": "2.1.x"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
