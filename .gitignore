@@ -16,9 +16,17 @@ local.properties
 .settings/
 .loadpath
 
-# Demos and Docs
+#################
+## Demos and Docs
+#################
 demo/
 doc/
+
+#################
+## npm and bower
+#################
+node_modules/
+bower_components/
 
 # External tool builders
 .externalToolBuilders/

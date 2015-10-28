@@ -3,6 +3,4 @@ languages:
 exclude_paths:
   - "dist/*.js"
   - "src/dep/*.js"
-  - "src/loader/*.js"
-  - "src/ui/Tooltip.js"
   - "tool/*.js"

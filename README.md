@@ -17,34 +17,33 @@ Features
 
 Usage
 -----
-Download the [latest version](https://github.com/bizdevfe/biz-ui/releases), or:
+Download the [latest version](https://github.com/bizdevfe/biz-ui/releases) or:
 
     npm install biz-ui
     bower install biz-ui
 
-Together with jQuery, include BizUI in your page:
+Include the css file and the js file together width [jquery](http://jquery.com/download/)(1.9.0 or later) in your page:
 
-    <script src="jquery.js" type="text/javascript"></script>
-    <script src="jquery.bizui.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.bizui.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.bizui.js"></script>
 
-Include the CSS file:
+or require `biz-ui` in an AMD environment: 
 
-    <link href="jquery.bizui.css" rel="stylesheet" type="text/css" />
+    var bizui = require('biz-ui');
 
 To initialize:
 
     // recommended
     $('button').bizButton();
     
-    // or create instance by constructor
+    // OOP way
     var button = new bizui.Button($('button'));
 
 See [Demos](http://bizdevfe.github.io/biz-ui/quickview) and [API documentations](http://bizdevfe.github.io/biz-ui).
 
 Build
 -----
-Do the code inspection, optimization or API generation here:
-
     $ cd tool
     $ build.sh
 

@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.0.9
+ * @version v1.1.0
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -12,8 +12,13 @@
     }
 }(this, function($) {
     $ = $ || window.$;
-    var requirejs, require, define;
-(function(undef) {
+    //Going sloppy to avoid 'use strict' string cost, but strict practices should
+//be followed.
+/*jslint sloppy: true */
+/*global setTimeout: false */
+
+var requirejs, require, define;
+(function (undef) {
     var main, req, makeMap, handlers,
         defined = {},
         waiting = {},
@@ -48,12 +53,6 @@
             //otherwise, assume it is a top-level require that will
             //be relative to baseUrl in the end.
             if (baseName) {
-                //Convert baseName to array, and lop off the last part,
-                //so that . matches that "directory" and not name of the baseName's
-                //module. For instance, baseName of "one/two/three", maps to
-                //"one/two/three.js", but we want the directory, "one/two" for
-                //this normalization.
-                baseParts = baseParts.slice(0, baseParts.length - 1);
                 name = name.split('/');
                 lastIndex = name.length - 1;
 
@@ -62,7 +61,11 @@
                     name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
                 }
 
-                name = baseParts.concat(name);
+                //Lop off the last part of baseParts, so that . matches the
+                //"directory" and not name of the baseName's module. For instance,
+                //baseName of "one/two/three", maps to "one/two/three.js", but we
+                //want the directory, "one/two" for this normalization.
+                name = baseParts.slice(0, baseParts.length - 1).concat(name);
 
                 //start trimDots
                 for (i = 0; i < name.length; i += 1) {
@@ -150,22 +153,30 @@
     }
 
     function makeRequire(relName, forceSync) {
-        return function() {
+        return function () {
             //A version of a require function that passes a moduleName
             //value for items that may need to
             //look up paths relative to the moduleName
-            return req.apply(undef, aps.call(arguments, 0).concat([relName, forceSync]));
+            var args = aps.call(arguments, 0);
+
+            //If first arg is not require('string'), and there is only
+            //one arg, it is the array form without a callback. Insert
+            //a null so that the following concat is correct.
+            if (typeof args[0] !== 'string' && args.length === 1) {
+                args.push(null);
+            }
+            return req.apply(undef, args.concat([relName, forceSync]));
         };
     }
 
     function makeNormalize(relName) {
-        return function(name) {
+        return function (name) {
             return normalize(name, relName);
         };
     }
 
     function makeLoad(depName) {
-        return function(value) {
+        return function (value) {
             defined[depName] = value;
         };
     }
@@ -202,7 +213,7 @@
      * for normalization if necessary. Grabs a ref to plugin
      * too, as an optimization.
      */
-    makeMap = function(name, relName) {
+    makeMap = function (name, relName) {
         var plugin,
             parts = splitPrefix(name),
             prefix = parts[0];
@@ -241,16 +252,16 @@
     };
 
     function makeConfig(name) {
-        return function() {
+        return function () {
             return (config && config.config && config.config[name]) || {};
         };
     }
 
     handlers = {
-        require: function(name) {
+        require: function (name) {
             return makeRequire(name);
         },
-        exports: function(name) {
+        exports: function (name) {
             var e = defined[name];
             if (typeof e !== 'undefined') {
                 return e;
@@ -258,7 +269,7 @@
                 return (defined[name] = {});
             }
         },
-        module: function(name) {
+        module: function (name) {
             return {
                 id: name,
                 uri: '',
@@ -268,7 +279,7 @@
         }
     };
 
-    main = function(name, deps, callback, relName) {
+    main = function (name, deps, callback, relName) {
         var cjsModule, depName, ret, map, i,
             args = [],
             callbackType = typeof callback,
@@ -298,8 +309,8 @@
                     //CommonJS module spec 1.1
                     cjsModule = args[i] = handlers.module(name);
                 } else if (hasProp(defined, depName) ||
-                    hasProp(waiting, depName) ||
-                    hasProp(defining, depName)) {
+                           hasProp(waiting, depName) ||
+                           hasProp(defining, depName)) {
                     args[i] = callDep(depName);
                 } else if (map.p) {
                     map.p.load(map.n, makeRequire(relName, true), makeLoad(depName), {});
@@ -316,7 +327,7 @@
                 //favor that over return value and exports. After that,
                 //favor a non-undefined return value over exports use.
                 if (cjsModule && cjsModule.exports !== undef &&
-                    cjsModule.exports !== defined[name]) {
+                        cjsModule.exports !== defined[name]) {
                     defined[name] = cjsModule.exports;
                 } else if (ret !== undef || !usingExports) {
                     //Use the return value from the function.
@@ -330,7 +341,7 @@
         }
     };
 
-    requirejs = require = req = function(deps, callback, relName, forceSync, alt) {
+    requirejs = require = req = function (deps, callback, relName, forceSync, alt) {
         if (typeof deps === "string") {
             if (handlers[deps]) {
                 //callback in this case is really relName
@@ -363,7 +374,7 @@
         }
 
         //Support require(['a'])
-        callback = callback || function() {};
+        callback = callback || function () {};
 
         //If relName is a function, it is an errback handler,
         //so remove it.
@@ -382,7 +393,7 @@
             //If want a value immediately, use require('id') instead -- something
             //that works in almond on the global level, but not guaranteed and
             //unlikely to work in other AMD implementations.
-            setTimeout(function() {
+            setTimeout(function () {
                 main(undef, deps, callback, relName);
             }, 4);
         }
@@ -394,7 +405,7 @@
      * Just drops the config on the floor, but returns req in case
      * the config return value is used.
      */
-    req.config = function(cfg) {
+    req.config = function (cfg) {
         return req(cfg);
     };
 
@@ -403,7 +414,10 @@
      */
     requirejs._defined = defined;
 
-    define = function(name, deps, callback) {
+    define = function (name, deps, callback) {
+        if (typeof name !== 'string') {
+            throw new Error('See almond README: incorrect module build, no module name');
+        }
 
         //This module may not have dependencies
         if (!deps.splice) {
@@ -424,7 +438,7 @@
     };
 }());
 
-define("loader/almond", function(){});
+define("../node_modules/almond/almond", function(){});
 
 /**
  * @ignore
@@ -12310,7 +12324,7 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
     1: [
 
         function(require, module, exports) {
-            
+            'use strict';
 
             function _interopRequireDefault(obj) {
                 return obj && obj.__esModule ? obj : {
@@ -12352,7 +12366,7 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
     2: [
 
         function(require, module, exports) {
-            
+            'use strict';
 
             Object.defineProperty(exports, '__esModule', {
                 value: true
@@ -12901,7 +12915,7 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
     3: [
 
         function(require, module, exports) {
-            
+            'use strict';
 
             Object.defineProperty(exports, '__esModule', {
                 value: true
@@ -12943,7 +12957,7 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
     4: [
 
         function(require, module, exports) {
-            
+            'use strict';
 
             Object.defineProperty(exports, '__esModule', {
                 value: true
@@ -12980,7 +12994,7 @@ define("dep/jquery.resizableColumns", function(){});
  */
 define('dep/jquery.editabletable',['require'],function(require) {
     $.fn.editableTableWidget = function(options) {
-        
+        'use strict';
         return $(this).each(function() {
             var buildDefaultOptions = function() {
                     var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
@@ -14633,7 +14647,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.0.9';
+    bizui.version = '1.1.0';
 
     var origin = window.bizui;
 
