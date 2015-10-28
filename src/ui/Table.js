@@ -96,11 +96,13 @@ define(function(require) {
             }
 
             //总计行
-            if (options.foot === 'top') {
-                this.$main.find('tbody').prepend(this.createFoot(options));
-            }
-            if (options.foot === 'bottom') {
-                this.$main.find('tbody').append(this.createFoot(options));
+            if(this.getData() && this.getData().length){//如果没有数据，那么不显示合计
+                if (options.foot === 'top') {
+                    this.$main.find('tbody').prepend(this.createFoot(options));
+                }
+                if (options.foot === 'bottom') {
+                    this.$main.find('tbody').append(this.createFoot(options));
+                }
             }
 
             //模拟滚条
@@ -563,11 +565,13 @@ define(function(require) {
                 this.createSelect();
             }
             //重绘总计行
-            if (this.options.foot === 'top') {
-                this.$main.find('tbody').prepend(this.createFoot(this.options));
-            }
-            if (this.options.foot === 'bottom') {
-                this.$main.find('tbody').append(this.createFoot(this.options));
+            if(this.getData() && this.getData().length){//如果没有数据，那么不显示合计
+                if (this.options.foot === 'top') {
+                    this.$main.find('tbody').prepend(this.createFoot(this.options));
+                }
+                if (this.options.foot === 'bottom') {
+                    this.$main.find('tbody').append(this.createFoot(this.options));
+                }
             }
             //刷新滚条
             var scrollWrap = this.$main.find('.biz-table-scroll-wrap'),
