@@ -18,7 +18,7 @@ define(function(require) {
      * @param {String} [options.skin] 自定义样式
      * @param {String} [options.title] 弹窗标题
      * @param {Number} [options.zIndex] 弹窗显示登记
-     * 
+     *
      */
     function Dialog(dialog, options) {
         if (dialog instanceof jQuery) {
@@ -79,7 +79,7 @@ define(function(require) {
             this.$container.find('.biz-dialog-content').append(this.$main);
 
             var bottom = this.$container.find('.biz-dialog-bottom');
-            if(options.buttons.length){
+            if (options.buttons.length) {
                 $.each(options.buttons, function(index, button) {
                     $('<button>' + button.text + '</button>')
                         .bizButton({
@@ -98,15 +98,15 @@ define(function(require) {
             //加入mask
             this.$container.appendTo('body')
                 .after($('<div class="biz-mask" style="display:none;"></div>').show());
-            if(options.height){
+            if (options.height) {
                 this.$container.css({
                     height: options.height,
                     marginTop: -Math.floor(Math.min(parseInt(options.height, 10), $(window).height()) / 2)
-                })
+                });
             } else {
                 this.$container.css({
-                    marginTop: -Math.floor(Math.min(parseInt(this.$container.height(), 10), $(window).height()) / 2)   
-                })
+                    marginTop: -Math.floor(Math.min(parseInt(this.$container.height(), 10), $(window).height()) / 2)
+                });
             }
         },
 
@@ -129,18 +129,18 @@ define(function(require) {
          */
         close: function() {
             var rs = true;
-            if(this.options.beforeClose && typeof(this.options.beforeClose) == 'function'){
+            if (this.options.beforeClose && typeof(this.options.beforeClose) == 'function') {
                 rs = this.options.beforeClose();
-                if(rs === false){ // cancel close dialog
+                if (rs === false) { // cancel close dialog
                     return;
                 }
             }
             this.$container.hide();
             this.$container.next().fadeOut();
-            if(typeof this.options.zIndex == 'undefined'){
+            if (typeof this.options.zIndex == 'undefined') {
                 currentIndex--;
             }
-            if(this.options.destroyOnClose){
+            if (this.options.destroyOnClose) {
                 this.destroy();
             }
         },

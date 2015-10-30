@@ -2886,6 +2886,8 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
  * @ignore
  */
 define('ui/Dialog',['require'],function(require) {
+    var defaultClass = 'biz-dialog',
+        currentIndex = 1000;
     /**
      * Dialog constructor
      *
@@ -2893,9 +2895,14 @@ define('ui/Dialog',['require'],function(require) {
      * @constructor
      * @param {HTMLElement|jQuery} dialog 目标元素
      * @param {Object} [options] 参数
-     * @param {Number} [options.width] 宽度
-     * @param {Number} [options.height] 高度
+     * @param {Number|String} [options.width] 宽度
+     * @param {Number|String} [options.height] 高度
      * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
+     * @param {Boolean} [options.destroyOnClose] 关闭时是否销毁
+     * @param {String} [options.skin] 自定义样式
+     * @param {String} [options.title] 弹窗标题
+     * @param {Number} [options.zIndex] 弹窗显示登记
+     *
      */
     function Dialog(dialog, options) {
         if (dialog instanceof jQuery) {
@@ -2904,10 +2911,6 @@ define('ui/Dialog',['require'],function(require) {
             } else {
                 return;
             }
-        }
-
-        if (!isDialog(dialog)) {
-            return;
         }
 
         /**
@@ -2922,14 +2925,14 @@ define('ui/Dialog',['require'],function(require) {
 
         var defaultOption = {
             width: 480,
-            height: 240,
-            buttons: []
+            buttons: [],
+            destroyOnClose: false,
+            skin: '',
+            title: ''
         };
         this.options = $.extend(defaultOption, options || {});
         this.init(this.options);
     }
-
-    var defaultClass = 'biz-dialog';
 
     Dialog.prototype = {
         /**
@@ -2938,79 +2941,102 @@ define('ui/Dialog',['require'],function(require) {
          * @protected
          */
         init: function(options) {
-            var title = this.$main.attr('title'),
+            var title = options.title || this.$main.attr('title'),
                 content = this.$main.html(),
                 self = this;
-            this.orginContent = content;
-
-            this.$main.hide()
-                .addClass(defaultClass)
-                .removeAttr('title')
+            this.$container = $('<div style="display:none;"></div>');
+            this.$container.addClass(defaultClass + ' ' + options.skin)
                 .html([
                     '<h1 class="biz-dialog-title">',
                     '<span>', title, '</span>',
                     '<span class="biz-dialog-close"></span></h1>',
-                    '<div class="biz-dialog-content">', content, '</div>',
+                    '<div class="biz-dialog-content"></div>',
                     '<div class="biz-dialog-bottom"></div>'
                 ].join(''))
                 .css({
                     width: options.width,
-                    height: options.height,
-                    marginLeft: -Math.floor(options.width / 2),
-                    marginTop: -Math.floor(options.height / 2)
+                    marginLeft: -Math.floor(parseInt(options.width, 10) / 2),
                 })
-                .after('<div class="biz-mask" style="display:none"></div>')
                 .on('click', '.biz-dialog-close', function() {
                     self.close();
                 });
+            this.$container.find('.biz-dialog-content').append(this.$main);
 
-            this.$main.find('.biz-dialog-content').css({
-                height: options.height - 150
-            });
+            var bottom = this.$container.find('.biz-dialog-bottom');
+            if (options.buttons.length) {
+                $.each(options.buttons, function(index, button) {
+                    $('<button>' + button.text + '</button>')
+                        .bizButton({
+                            theme: button.theme
+                        })
+                        .click(function(e) {
+                            button.click.call(self, e);
+                        })
+                        .appendTo(bottom);
+                });
+            } else {
+                bottom.remove();
+            }
 
-            var bottom = this.$main.find('.biz-dialog-bottom');
-            $.each(options.buttons, function(index, button) {
-                $('<button>' + button.text + '</button>')
-                    .bizButton({
-                        theme: button.theme
-                    })
-                    .click(function(e) {
-                        button.click.call(self, e);
-                    })
-                    .appendTo(bottom);
-            });
+            //把dialog加入到body中，并且设置top和left
+            //加入mask
+            this.$container.appendTo('body')
+                .after($('<div class="biz-mask" style="display:none;"></div>').show());
+            if (options.height) {
+                this.$container.css({
+                    height: options.height,
+                    marginTop: -Math.floor(Math.min(parseInt(options.height, 10), $(window).height()) / 2)
+                });
+            } else {
+                this.$container.css({
+                    marginTop: -Math.floor(Math.min(parseInt(this.$container.height(), 10), $(window).height()) / 2)
+                });
+            }
         },
 
         /**
          * 打开
          */
         open: function() {
-            this.$main.next().show();
-            this.$main.fadeIn();
+            var index = this.options.zIndex || currentIndex++;
+            this.$container.next().css({
+                zIndex: index - 1
+            }).show();
+            this.$main.show();
+            this.$container.css({
+                zIndex: index
+            }).fadeIn();
         },
 
         /**
          * 关闭
          */
         close: function() {
-            this.$main.hide();
-            this.$main.next().fadeOut();
+            var rs = true;
+            if (this.options.beforeClose && typeof(this.options.beforeClose) == 'function') {
+                rs = this.options.beforeClose();
+                if (rs === false) { // cancel close dialog
+                    return;
+                }
+            }
+            this.$container.hide();
+            this.$container.next().fadeOut();
+            if (typeof this.options.zIndex == 'undefined') {
+                currentIndex--;
+            }
+            if (this.options.destroyOnClose) {
+                this.destroy();
+            }
         },
 
         /**
          * 销毁
          */
         destroy: function() {
-            this.$main.removeClass(defaultClass)
-                .attr('title', this.$main.find('.biz-dialog-title').text())
-                .removeAttr('style')
-                .hide()
-                .off('click');
-            this.$main.find('.biz-dialog-bottom button').bizButton('destroy');
-            this.$main.html(this.orginContent)
-                .next()
-                .remove();
-            this.orginContent = null;
+            this.$container.find('.biz-dialog-bottom button').bizButton('destroy');
+            this.$container.next().remove();
+            this.$main.remove();
+            this.$container.remove();
         }
     };
 
@@ -3023,20 +3049,18 @@ define('ui/Dialog',['require'],function(require) {
      * @static
      */
     Dialog.alert = function(options) {
-        var alert = $('<div style="display:none" class="biz-alert" title="' + options.title + '">' + options.content + '</div>');
+        var alert = $('<div style="display:none;height:50px;" class="biz-alert" title="' + options.title + '">' + options.content + '</div>');
         alert.appendTo('body').bizDialog({
             width: 360,
             height: 200,
+            destroyOnClose: true,
             buttons: [{
                 text: options.ok,
                 click: function() {
-                    alert.bizDialog('destroy').remove();
+                    alert.bizDialog('close');
                 }
             }]
-        }).next().css({
-            zIndex: 1002
         });
-        alert.find('.biz-dialog-close').remove();
         alert.bizDialog('open');
     };
 
@@ -3051,14 +3075,15 @@ define('ui/Dialog',['require'],function(require) {
      * @static
      */
     Dialog.confirm = function(options) {
-        var confirm = $('<div style="display:none" class="biz-confirm" title="' + options.title + '">' + options.content + '</div>');
+        var confirm = $('<div style="display:none;height:50px;" class="biz-confirm" title="' + options.title + '">' + options.content + '</div>');
         confirm.appendTo('body').bizDialog({
             width: 360,
             height: 200,
+            destroyOnClose: true,
             buttons: [{
                 text: options.ok,
                 click: function() {
-                    confirm.bizDialog('destroy').remove();
+                    confirm.bizDialog('close');
                     if (options.onOK) {
                         options.onOK();
                     }
@@ -3066,22 +3091,13 @@ define('ui/Dialog',['require'],function(require) {
             }, {
                 text: options.cancel,
                 click: function() {
-                    confirm.bizDialog('destroy').remove();
+                    confirm.bizDialog('close');
                 },
                 theme: 'dark'
             }]
-        }).next().css({
-            zIndex: 1002
         });
-        confirm.find('.biz-dialog-close').remove();
         confirm.bizDialog('open');
     };
-
-    function isDialog(elem) {
-        return elem.nodeType === 1 &&
-            elem.tagName.toLowerCase() === 'div' &&
-            elem.hasAttribute('title');
-    }
 
     var dataKey = 'bizDialog';
 
@@ -3116,7 +3132,7 @@ define('ui/Dialog',['require'],function(require) {
                     break;
                 default:
                     this.each(function() {
-                        if (!$(this).data(dataKey) && isDialog(this)) {
+                        if (!$(this).data(dataKey)) {
                             $(this).data(dataKey, new Dialog(this, method));
                         }
                     });
