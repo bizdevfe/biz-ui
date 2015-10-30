@@ -12293,6 +12293,39 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
     return Calendar;
 });
 
+/**
+ * @ignore
+ */
+define('ui/util',['require'],function(require) {
+    var util = {};
+
+    /**
+     * 判断数组
+     * @param {Mixed} a
+     * @return {Boolean}
+     * @protected
+     */
+    util.isArray = function(a) {
+        return toString.call(a) === '[object Array]';
+    };
+
+    /**
+     * 转义HTML
+     * @param {String} str
+     * @return {String}
+     * @protected
+     */
+    util.escapeHTML = function(str) {
+        return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    };
+
+    return util;
+});
+
 (function e(t, n, r) {
     function s(o, u) {
         if (!n[o]) {
@@ -13101,39 +13134,41 @@ define('dep/jquery.editabletable',['require'],function(require) {
 /**
  * @ignore
  */
-define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editabletable'],function(require) {
+define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery.editabletable'],function(require) {
+    var util = require('ui/util');
     require('dep/jquery.resizableColumns');
     require('dep/jquery.editabletable');
 
     /**
      * Table constructor
      *
-     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/q4myap58/34/embedded/result,js,html/" frameborder="0"></iframe>
+     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/q4myap58/35/embedded/result,js,html/" frameborder="0"></iframe>
      * @constructor
      * @param {HTMLElement|jQuery} table 目标元素
-     * @param {Object}   options 参数
-     * @param {String}   [options.skin] 皮肤类名
-     * @param {Array}    options.column 列配置
-     * @param {String}   options.column.field 表头字段名
-     * @param {String}   options.column.title 表头文字
-     * @param {Array}    options.column.content 单元格内容(拆分单元格内容: hover失效, editable失效)
-     * @param {Function} [options.column.footContent] 总计行内容
-     * @param {Boolean}  [options.column.escapeTitle] 转义表头文字, 默认true
-     * @param {Boolean}  [options.column.escapeContent] 转义单元格内容, 默认true
-     * @param {Boolean}  [options.column.sortable] 是否排序, 默认false
-     * @param {String}   [options.column.currentSort] des-降序, asc-升序, sortable为true时生效
-     * @param {Boolean}  [options.column.editable] 是否编辑, 默认false
-     * @param {Number}   [options.column.width] 宽度
-     * @param {Number}   [options.column.align] left-居左, right-居中, center-居右
-     * @param {Boolean}  [options.column.visible] 是否显示, 默认true
-     * @param {Array}    options.data 数据
-     * @param {String}   [options.foot] 总计行, top-顶部, bottom-底部
-     * @param {Boolean}  [options.selectable] 是否含勾选列
-     * @param {Boolean}  [options.resizable] 是否可调整列宽
-     * @param {Function} [options.onSort] 排序回调, onSort(data, event)
-     * @param {Function} [options.onSelect] 勾选回调, onSelect(data, event)
-     * @param {Function} [options.onEdit] 编辑单元格回调, onEdit(data, event)
-     * @param {Function} [options.onValidate] 验证回调, onValidate(data, event)
+     * @param {Object}         options 参数
+     * @param {String}         [options.skin] 皮肤类名
+     * @param {Array}          options.column 列配置
+     * @param {String}         options.column.field 表头字段名
+     * @param {String}         options.column.title 表头文字
+     * @param {Function|Array} options.column.content 单元格内容(拆分单元格内容: hover失效, editable失效)
+     * @param {Function}       [options.column.footContent] 总计行内容
+     * @param {Boolean}        [options.column.escapeTitle] 转义表头文字, 默认true
+     * @param {Boolean}        [options.column.escapeContent] 转义单元格内容, 默认true
+     * @param {Boolean}        [options.column.sortable] 是否排序, 默认false
+     * @param {String}         [options.column.currentSort] des-降序, asc-升序, sortable为true时生效
+     * @param {Boolean}        [options.column.editable] 是否编辑, 默认false
+     * @param {Number}         [options.column.width] 宽度
+     * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
+     * @param {Boolean}        [options.column.visible] 是否显示, 默认true
+     * @param {Array}          options.data 数据
+     * @param {String}         [options.noDataContent] 无数据时显示的内容, 不转义
+     * @param {String}         [options.foot] 总计行, top-顶部, bottom-底部
+     * @param {Boolean}        [options.selectable] 是否含勾选列
+     * @param {Boolean}        [options.resizable] 是否可调整列宽
+     * @param {Function}       [options.onSort] 排序回调, onSort(data, event)
+     * @param {Function}       [options.onSelect] 勾选回调, onSelect(data, event)
+     * @param {Function}       [options.onEdit] 编辑单元格回调, onEdit(data, event)
+     * @param {Function}       [options.onValidate] 验证回调, onValidate(data, event)
      */
     function Table(table, options) {
         if (table instanceof jQuery) {
@@ -13160,9 +13195,11 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
 
         var defaultOption = {
             selectable: false,
-            resizable: false
+            resizable: false,
+            topOffset: 0
         };
         this.options = $.extend(defaultOption, options || {});
+        this.options.data = this.options.data ? this.options.data : [];
         this.init(this.options);
     }
 
@@ -13177,17 +13214,26 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          */
         init: function(options) {
             this.$main.html(
-                '<div class="biz-table-scroll-wrap"><div class="biz-table-scroll"></div></div>' +
-                '<div class="biz-table-wrap"><table></table></div>'
+                '<div class="biz-table-head-wrap"><table class="biz-table-head"></table></div>' +
+                '<div class="biz-table-placeholder"></div>' +
+                '<div class="biz-table-body-wrap"><table class="biz-table-body"></table></div>'
             );
 
-            var scrollWrap = this.$main.find('.biz-table-scroll-wrap'),
-                tableWrap = this.$main.find('.biz-table-wrap');
+            this.$headWrap = this.$main.find('.biz-table-head-wrap');
+            this.$bodyWrap = this.$main.find('.biz-table-body-wrap');
+            this.$placeholder = this.$main.find('.biz-table-placeholder');
+            this.$tableHead = this.$main.find('.biz-table-head');
+            this.$tableBody = this.$main.find('.biz-table-body');
+
+            var skin = options.skin ? (' ' + options.skin) : '';
+
+            //创建表头
+            this.$tableHead.html(this.createTableHead(options))
+                .addClass(defaultClass + skin);
 
             //创建表格
-            tableWrap.find('table')
-                .html(this.createTable(options))
-                .addClass(defaultClass + (options.skin ? (' ' + options.skin) : '') + (this.rowSpan > 1 ? ' biz-rowspan' : ''));
+            this.$tableBody.html(this.createTableBody(options))
+                .addClass(defaultClass + skin + (this.rowSpan > 1 ? ' biz-rowspan' : ''));
 
             //勾选列
             if (options.selectable) {
@@ -13195,30 +13241,63 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                 this.bindSelect();
             }
 
-            //总计行
-            if (options.foot === 'top') {
-                this.$main.find('tbody').prepend(this.createFoot(options));
-            }
-            if (options.foot === 'bottom') {
-                this.$main.find('tbody').append(this.createFoot(options));
+            if (options.data.length) { //总计行
+                if (options.foot === 'top') {
+                    this.$tableBody.find('tbody').prepend(this.createFoot(options));
+                }
+                if (options.foot === 'bottom') {
+                    this.$tableBody.find('tbody').append(this.createFoot(options));
+                }
+            } else if (options.noDataContent) { //无数据提示行
+                this.createNoDataContent();
             }
 
-            //模拟滚条
-            var self = this;
-            this.updateScroll();
+            //同步宽度
+            this.syncWidth();
             $(window).on('resize.bizTable', function() {
-                self.updateScroll();
+                self.syncWidth();
             });
-            this.$main.find('.biz-table-scroll-wrap').on('scroll', function() {
-                tableWrap[0].scrollLeft = this.scrollLeft;
+
+            //绑定横向滚动
+            var self = this;
+            this.$headWrap.on('scroll', function() {
+                self.$bodyWrap[0].scrollLeft = this.scrollLeft;
             });
-            this.$main.find('.biz-table-wrap').on('scroll', function() {
-                scrollWrap[0].scrollLeft = this.scrollLeft;
+            this.$bodyWrap.on('scroll', function() {
+                self.$headWrap[0].scrollLeft = this.scrollLeft;
+            });
+
+            //表格位置
+            this.originOffsetTop = this.$main.offset().top - options.topOffset;
+
+            var headHeight = this.$headWrap.height();
+
+            //表头跟随
+            $(window).on('scroll.bizTable', function() {
+                if ($(window).scrollTop() > self.originOffsetTop) {
+                    self.$headWrap.css({
+                        position: 'fixed',
+                        top: self.options.topOffset,
+                        width: self.$main.width()
+                    });
+                    self.$placeholder.css({
+                        height: headHeight
+                    });
+                } else {
+                    self.$headWrap.css({
+                        position: 'static',
+                        top: 'auto',
+                        width: 'auto'
+                    });
+                    self.$placeholder.css({
+                        height: 0
+                    });
+                }
             });
 
             //调整列宽
             if (options.resizable) {
-                this.$main.find('table').resizableColumns({
+                this.$tableBody.resizableColumns({
                     start: function() {
                         $('.biz-table-editor').blur();
                     }
@@ -13231,37 +13310,64 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
             }
 
             //编辑单元格
-            this.$main.find('table').editableTableWidget();
+            this.$tableBody.editableTableWidget();
             if (options.onEdit) {
                 this.bindEdit();
             }
             if (options.onValidate) {
                 this.bindValidate();
             }
+
+            //this.startSyncHeadWidth();
         },
 
         /**
-         * 刷新滚条
+         * 同步宽度
          * @protected
          */
-        updateScroll: function() {
-            this.$main.find('.biz-table-scroll').css({
-                width: this.$main.find('table').width()
+        syncWidth: function() {
+            this.$headWrap.css({
+                width: this.$main.width()
             });
         },
 
         /**
-         * 转义HTML
-         * @param {String} str
+         * 创建表头
+         * @param {Object} options
          * @return {String}
          * @protected
          */
-        escapeHTML: function(str) {
-            return str.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#39;");
+        createTableHead: function(options) {
+            var table = ['<thead><tr>'],
+                column = options.column,
+                columnCount = column.length;
+
+            this.rowSpan = 1;
+
+            //表头
+            for (var i = 0; i < columnCount; i++) {
+                var col = column[i];
+                if (typeof col.visible !== 'undefined' && !col.visible) {
+                    continue;
+                }
+
+                if (!util.isArray(col.content)) {
+                    col.content = [col.content];
+                }
+                if (col.content.length > this.rowSpan) {
+                    this.rowSpan = col.content.length;
+                }
+
+                var sortable = (typeof col.sortable === 'undefined' || !col.sortable) ? '' : ' sortable',
+                    sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '',
+                    width = col.width ? ' width="' + col.width + '"' : '',
+                    title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title;
+                table.push('<th nowrap field="' + col.field + '"' + sortable + sort + width + '>' + title + '</th>');
+            }
+
+            table.push('</tr></thead><tbody></tbody>');
+
+            return table.join('');
         },
 
         /**
@@ -13270,34 +13376,12 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * @return {String}
          * @protected
          */
-        createTable: function(options) {
-            var table = ['<thead><tr>'],
+        createTableBody: function(options) {
+            var table = ['<tbody>'],
                 column = options.column,
                 columnCount = column.length,
                 data = options.data,
                 rowCount = data.length;
-
-            this.rowSpan = 1;
-
-            //表头
-            for (var i = 0; i < columnCount; i++) {
-                var item = column[i];
-                if (typeof item.visible !== 'undefined' && !item.visible) {
-                    continue;
-                }
-
-                if (item.content.length > this.rowSpan) {
-                    this.rowSpan = item.content.length;
-                }
-
-                var sortable = (typeof item.sortable === 'undefined' || !item.sortable) ? '' : ' sortable',
-                    sort = (item.sortable && typeof item.currentSort !== 'undefined') ? (' ' + item.currentSort) : '',
-                    width = item.width ? ' width="' + item.width + '"' : '',
-                    title = (typeof item.escapeTitle === 'undefined' || item.escapeTitle) ? this.escapeHTML(item.title) : item.title;
-                table.push('<th nowrap field="' + item.field + '"' + sortable + sort + width + '>' + title + '</th>');
-            }
-
-            table.push('</tr></thead><tbody>');
 
             //数据
             for (var j = 0; j < rowCount; j++) {
@@ -13310,10 +13394,11 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                     }
                     var editable = (col.content.length > 1 || typeof col.editable === 'undefined' || !col.editable) ? '' : ' editable',
                         align = col.align ? ' align="' + col.align + '"' : '',
+                        width = col.width ? ' width="' + (editable !== '' ? col.width - 22 : col.width) + '"' : '',
                         rowSpan = (this.rowSpan > 1 && col.content.length === 1) ? (' rowspan="' + this.rowSpan + '"') : '',
                         content = col.content[0].apply(this, [data[j], j + 1, col.field]) + '',
-                        escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? this.escapeHTML(content) : content;
-                    table.push('<td' + rowSpan + editable + align + '>' + escapeContent + '</td>');
+                        escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
+                    table.push('<td' + rowSpan + editable + align + width + '>' + escapeContent + '</td>');
                 }
 
                 table.push('</tr>');
@@ -13329,7 +13414,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                             }
                             var _align = _col.align ? ' align="' + _col.align + '"' : '',
                                 _content = _col.content[m].apply(this, [data[j], j + 1, _col.field]) + '',
-                                _escapeContent = (typeof _col.escapeContent === 'undefined' || _col.escapeContent) ? this.escapeHTML(_content) : _content;
+                                _escapeContent = (typeof _col.escapeContent === 'undefined' || _col.escapeContent) ? util.escapeHTML(_content) : _content;
                             table.push('<td' + _align + '>' + _escapeContent + '</td>');
                         }
                         table.push('</tr>');
@@ -13354,7 +13439,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                 columnCount = column.length;
 
             if (options.selectable) {
-                sum.push('<td></td>');
+                sum.push('<td class="biz-select-col"></td>');
             }
             for (var i = 0; i < columnCount; i++) {
                 var col = column[i];
@@ -13362,9 +13447,10 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                     continue;
                 }
                 var align = col.align ? ' align="' + col.align + '"' : '',
+                    width = col.width ? ' width="' + col.width + '"' : '',
                     content = col.footContent ? col.footContent.call(this, col.field) + '' : '',
-                    escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? this.escapeHTML(content) : content;
-                sum.push('<td' + align + '>' + escapeContent + '</td>');
+                    escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
+                sum.push('<td' + align + width + '>' + escapeContent + '</td>');
             }
 
             sum.push('</tr>');
@@ -13373,24 +13459,41 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
         },
 
         /**
+         * 创建无数据提示行
+         * @protected
+         */
+        createNoDataContent: function() {
+            var colspan = this.options.column.length;
+            $.each(this.options.column, function(index, val) {
+                if (typeof val.visible !== 'undefined' && !val.visible) {
+                    colspan = colspan - 1;
+                }
+            });
+            if (this.options.selectable) {
+                colspan = colspan + 1;
+            }
+            this.$tableBody.find('tbody').append('<tr class="no-data"><td colspan="' + colspan + '">' + this.options.noDataContent + '</td></tr>');
+        },
+
+        /**
          * 创建Checkbox控件
          * @protected
          */
         createSelect: function() {
-            this.$main.find('tr:first').prepend('<th width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
+            if (this.options.data.length) {
+                this.$tableHead.find('tr').prepend('<th class="biz-select-col"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
+            }
 
             if (this.rowSpan === 1) {
-                this.$main.find('tr').each(function(index, tr) {
-                    if (index !== 0) {
-                        $(tr).prepend('<td align="center"><input type="checkbox" title=" " id="' + (selectPrefix + index) + '" /></td>');
-                    }
+                this.$tableBody.find('tr').each(function(index, tr) {
+                    $(tr).prepend('<td class="biz-select-col" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
                 });
             } else {
                 var self = this,
                     rowIndex = 1;
-                this.$main.find('tr').each(function(index, tr) {
-                    if ((index + (self.rowSpan - 1)) % self.rowSpan === 0) {
-                        $(tr).prepend('<td rowspan="' + self.rowSpan + '" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
+                this.$tableBody.find('tr').each(function(index, tr) {
+                    if ((index + self.rowSpan) % self.rowSpan === 0) {
+                        $(tr).prepend('<td class="biz-select-col" rowspan="' + self.rowSpan + '" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
                         rowIndex = rowIndex + 1;
                     }
                 });
@@ -13405,10 +13508,10 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          */
         bindSelect: function() {
             var self = this;
-            this.$main.on('click.bizTableSelectAll', 'th .biz-label', function(e) {
+            this.$main.on('click.bizTableSelectAll', '.biz-table-head th .biz-label', function(e) {
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
-                    checkbox = self.$main.find('td :checkbox'),
-                    tr = self.$main.find('tr[class!="sum"]');
+                    checkbox = self.$tableBody.find(':checkbox'),
+                    tr = self.$tableBody.find('tr[class!="sum"]');
                 if (selected) {
                     checkbox.bizCheckbox('check');
                     tr.addClass('selected');
@@ -13422,10 +13525,10 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                         self.options.onSelect.call(self, [], e);
                     }
                 }
-            }).on('click.bizTableSelectOne', 'td .biz-label', function(e) {
+            }).on('click.bizTableSelectOne', '.biz-table-body td .biz-label', function(e) {
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
-                    selectedCount = self.$main.find('td .biz-checkbox-checked').length,
-                    selectAll = self.$main.find('th :checkbox'),
+                    selectedCount = self.$tableBody.find('.biz-checkbox-checked').length,
+                    selectAll = self.$tableHead.find(':checkbox'),
                     tr = $(e.target).parent().parent(),
                     rowCount = self.options.data.length;
                 if (selectedCount === rowCount) {
@@ -13452,7 +13555,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * @protected
          */
         getSelectedIndex: function() {
-            return $.map(this.$main.find('td .biz-checkbox-checked'), function(label, index) {
+            return $.map(this.$tableBody.find('.biz-checkbox-checked'), function(label, index) {
                 return parseInt($(label).attr('for').replace(selectPrefix, ''), 10) - 1;
             });
         },
@@ -13463,8 +13566,9 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          */
         bindSort: function() {
             var self = this;
-            this.$main.on('click.bizTableSort', 'th[sortable]', function(e) {
-                var head = $(e.currentTarget);
+            this.$main.on('click.bizTableSort', '.biz-table-head th[sortable]', function(e) {
+                var head = $(e.currentTarget),
+                    field = head.attr('field');
                 if (head.attr('des') !== undefined) {
                     head.removeAttr('des').attr('asc', '');
                 } else if (head.attr('asc') !== undefined) {
@@ -13473,6 +13577,13 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                     head.parent().children('th').removeAttr('des').removeAttr('asc');
                     head.attr('des', '');
                 }
+                $.each(self.options.column, function(index, val) {
+                    if (val.field === field) {
+                        val.currentSort = head.attr('des') !== undefined ? 'des' : 'asc';
+                    } else if (val.currentSort) {
+                        delete val.currentSort;
+                    }
+                });
                 self.options.onSort.call(self, {
                     field: head.attr('field'),
                     des: head.attr('des') !== undefined,
@@ -13538,7 +13649,9 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * @param {Array} data
          */
         updateData: function(data) {
-            this.options.data = data;
+            this.options = $.extend(true, this.options, {
+                data: data
+            });
             this.refresh();
         },
 
@@ -13548,7 +13661,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * @param {Object} data 行数据
          */
         updateRow: function(rowIndex, data) {
-            this.options.data[rowIndex - 1] = data;
+            this.options.data[rowIndex - 1] = $.extend({}, data);
             this.refresh();
         },
 
@@ -13586,7 +13699,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                     return index + 1;
                 });
             }
-            if (toString.call(rowIndex) !== '[object Array]') {
+            if (!util.isArray(rowIndex)) {
                 rowIndex = [rowIndex];
             }
 
@@ -13602,8 +13715,8 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
                 }
             });
 
-            var checkAll = this.$main.find('th :checkbox');
-            if (this.$main.find('td .biz-checkbox-checked').length === this.options.data.length) {
+            var checkAll = this.$tableHead.find(':checkbox');
+            if (this.$tableBody.find('.biz-checkbox-checked').length === this.options.data.length) {
                 checkAll.bizCheckbox('check');
             } else {
                 checkAll.bizCheckbox('uncheck');
@@ -13633,7 +13746,7 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * @protected
          */
         setColumnVisible: function(field, visible) {
-            if (toString.call(field) !== '[object Array]') {
+            if (!util.isArray(field)) {
                 field = [field];
             }
             var self = this;
@@ -13647,39 +13760,70 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
             this.refresh();
         },
 
+        /*startSyncHeadWidth: function() {
+            var self = this;
+            this.timer = setInterval(function() {
+                if (self.options.data.length === 0) {
+                    return;
+                }
+                var th = self.$tableHead.find('th'),
+                    td = self.$tableBody.find('tr:first td');
+                if (th.length === td.length) {
+                    for (var i = 0, l = th.length; i < l; i++) {
+                        td[i].style.width = th[i].style.width;
+                    }
+                }
+            }, 50);
+        },
+
+        stopSyncHeadWidth: function() {
+            clearInterval(this.timer);
+        },*/
+
         /**
-         * 刷新表格
-         * @protected
+         * 根据当前参数重绘表格
          */
         refresh: function() {
             //销毁
             this.$main.find(':checkbox').bizCheckbox('destroy');
-            this.$main.find('td[editable]').off();
+            this.$tableBody.find('td[editable]').off();
 
             //重绘表格
-            this.$main.find('.biz-table-wrap table').html(this.createTable(this.options));
+            this.$tableHead.html(this.createTableHead(this.options));
+            this.$tableBody.html(this.createTableBody(this.options));
+
             //重建checkbox
             if (this.options.selectable) {
                 this.createSelect();
             }
-            //重绘总计行
-            if (this.options.foot === 'top') {
-                this.$main.find('tbody').prepend(this.createFoot(this.options));
-            }
-            if (this.options.foot === 'bottom') {
-                this.$main.find('tbody').append(this.createFoot(this.options));
-            }
-            //刷新滚条
-            var scrollWrap = this.$main.find('.biz-table-scroll-wrap'),
-                tableWrap = this.$main.find('.biz-table-wrap');
-            tableWrap[0].scrollLeft = scrollWrap[0].scrollLeft = 0;
-            this.updateScroll();
 
+            if (this.options.data.length) { //重绘总计行
+                if (this.options.foot === 'top') {
+                    this.$tableBody.find('tbody').prepend(this.createFoot(this.options));
+                }
+                if (this.options.foot === 'bottom') {
+                    this.$tableBody.find('tbody').append(this.createFoot(this.options));
+                }
+            } else if (this.options.noDataContent) { //重绘无数据提示行
+                this.createNoDataContent();
+            }
+
+            //同步宽度
+            this.syncWidth();
+
+            //重置滚条位置
+            this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
+
+            //重置表格位置
+            this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
+
+            //重置列宽
             if (this.options.resizable) {
-                this.$main.find('table').resizableColumns('destroy').resizableColumns();
+                this.$tableBody.resizableColumns('destroy').resizableColumns();
             }
 
-            this.$main.find('td').prop('tabindex', 1);
+            //重置编辑
+            this.$tableBody.find('td').prop('tabindex', 1);
             if (this.options.onEdit) {
                 this.bindEdit();
             }
@@ -13692,24 +13836,26 @@ define('ui/Table',['require','dep/jquery.resizableColumns','dep/jquery.editablet
          * 销毁
          */
         destroy: function() {
+            //this.stopSyncHeadWidth();
+
             this.$main.find(':checkbox').bizCheckbox('destroy');
-            this.$main.find('td[editable]').off();
+            this.$tableBody.find('td[editable]').off();
+            $('.biz-table-editor').off().remove();
 
             this.$main.off('click.bizTableSelectAll')
                 .off('click.bizTableSelectOne')
                 .off('click.bizTableSort');
 
             if (this.options.resizable) {
-                this.$main.resizableColumns('destroy');
+                this.$tableBody.resizableColumns('destroy');
             }
 
-            $(window).off('resize.bizTable');
-            this.$main.find('.biz-table-scroll-wrap').off();
-            this.$main.find('.biz-table-wrap').off();
+            $(window).off('scroll.bizTable');
+
+            this.$headWrap.off();
+            this.$bodyWrap.off();
 
             this.$main.empty();
-
-            $('.biz-table-editor').off().remove();
         }
     };
 

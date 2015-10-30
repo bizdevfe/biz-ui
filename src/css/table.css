@@ -2,20 +2,21 @@
  * Table
  */
 
-.biz-table-scroll-wrap,
-.biz-table-wrap {
+.biz-table-head-wrap,
+.biz-table-body-wrap {
     overflow-x: auto;
     overflow-y: hidden;
 }
-.biz-table-scroll {
-    height: 1px
+.biz-table-placeholder {
+    height: 0px
 }
 .biz-table {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
     width: 100%;
     border: 0;
-    border-collapse: collapse
+    border-collapse: collapse;
+    table-layout: fixed
 }
 .biz-table th {
     padding: 5px 8px;
@@ -25,7 +26,6 @@
     font-weight: normal
 }
 .biz-table th[sortable] {
-    padding-right: 30px;
     background-image: url(img/bizui.png);
     background-position: right -385px;
     background-repeat: no-repeat;
@@ -41,20 +41,17 @@
     border-width: 1px;
     border-style: solid;
     padding: 5px 8px;
-    outline: none
+    outline: none;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden
 }
 .biz-table tr.sum {
     font-weight: bold
 }
-.biz-table tr.sum td {
-    border-left-width: 0;
-    border-right-width: 0
-}
-.biz-table tr.sum td:first-child {
-    border-left-width: 1px
-}
-.biz-table tr.sum td:last-child {
-    border-right-width: 1px
+.biz-table tr.no-data td {
+    text-align: center
 }
 .biz-table .biz-label {
     margin-right: 0
@@ -76,6 +73,10 @@
 }
 .biz-table .biz-checkbox-checked-disabled {
     background-position: 2px -100px
+}
+.biz-table th.biz-select-col,
+.biz-table td.biz-select-col {
+    width: 20px
 }
 .biz-table td[editable] {
     padding-right: 30px;

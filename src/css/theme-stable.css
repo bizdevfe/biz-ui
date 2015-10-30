@@ -154,6 +154,16 @@
 .biz-table tr.sum:hover {
     background-color: #fffbe5
 }
+.biz-table tr.sum td {
+    border-left-color: #fffbe5;
+    border-right-color: #fffbe5
+}
+.biz-table tr.sum td:first-child {
+    border-left-color: #e2e2e2;
+}
+.biz-table tr.sum td:last-child {
+    border-right-color: #e2e2e2;
+}
 .biz-table-editor {
     background-color: #fff
 }

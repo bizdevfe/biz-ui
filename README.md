@@ -1,7 +1,6 @@
 BizUI - A jQuery plugin for business UI components
 ===============
 
-[![Code Climate][codeclimate-image]][codeclimate-url]
 [![Build Status][travis-image]][travis-url]
 [![NPM Version][npm-image]][npm-url]
 
