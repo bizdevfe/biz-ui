@@ -13210,12 +13210,12 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
         this.$main = $(this.main);
 
         var defaultOption = {
+            data: [],
             selectable: false,
             resizable: false,
             topOffset: 0
         };
-        this.options = $.extend(defaultOption, options || {});
-        this.options.data = this.options.data ? this.options.data : [];
+        this.options = $.extend(true, defaultOption, options || {});
         this.init(this.options);
     }
 
@@ -13677,7 +13677,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * @param {Object} data 行数据
          */
         updateRow: function(rowIndex, data) {
-            this.options.data[rowIndex - 1] = $.extend({}, data);
+            this.options.data[rowIndex - 1] = $.extend(true, {}, data);
             this.refresh();
         },
 
