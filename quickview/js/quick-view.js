@@ -87,7 +87,7 @@ $('#query').bizButton({
 function getAverage(data, field) {
     var sum = 0;
     $.each(data, function(index, val) {
-        sum = sum + val[field];
+        sum = sum + (val[field] - 0);
     });
     return Math.round(sum / data.length);
 }
@@ -97,20 +97,28 @@ var column = [
         field: 'no',
         title: 'No.',
         width: 70,
-        content: [function(item, index, field) {
+        content: function(item, index, field) {
             return index;
-        }],
+        },
         footContent: function(field) {
             return 'Average';
         }
     },
     {
         field: 'name',
-        title: '<strong>Name</strong>',
-        escapeTitle: false,
-        content: [function(item, index, field) {
+        title: 'Name',
+        width: 100,
+        content: [
+            function(item, index, field) {
                 return item.name;
-        }]
+            },
+            function(item, index, field) {
+                return item.id;
+            },
+            function(item, index, field) {
+                return field;
+            }
+        ]
     },
     {
         field: 'height',
@@ -119,10 +127,10 @@ var column = [
         sortable: true,
         currentSort: 'des',
         align: 'right',
-        width: 200,
-        content: [function(item, index, field) {
+        width: 120,
+        content: function(item, index, field) {
             return item.height;
-        }],
+        },
         footContent: function(field) {
             return getAverage(this.getData(), field);
         }
@@ -133,10 +141,10 @@ var column = [
         editable: true,
         sortable: true,
         align: 'right',
-        width: 200,
-        content: [function(item, index, field) {
+        width: 120,
+        content: function(item, index, field) {
             return item.weight;
-        }],
+        },
         footContent: function(field) {
             return getAverage(this.getData(), field);
         }
@@ -146,10 +154,10 @@ var column = [
         title: 'Age',
         sortable: true,
         align: 'right',
-        width: 200,
-        content: [function(item, index, field) {
+        width: 120,
+        content: function(item, index, field) {
             return item.age;
-        }],
+        },
         footContent: function(field) {
             return getAverage(this.getData(), field);
         }
@@ -157,18 +165,21 @@ var column = [
     {
         field: 'email',
         title: 'Email',
-        content: [function(item, index, field) {
+        editable: true,
+        width: 200,
+        content: function(item, index, field) {
             return item.email;
-        }]
+        }
     },
     {
         field: 'op',
         title: 'Operation',
         escapeContent: false,
-        visible: false,
-        content: [function(item, index, field) {
+        width: 100,
+        content: function(item, index, field) {
             return '<a href="#" id="' + item.id + '">Detail</a>';
-        }]
+        },
+        visible: false
     }
 ];
 
@@ -189,10 +200,11 @@ var data2 = [
 $('.data').bizTable({
     column: column,
     data: data1,
+    noDataContent: '<p>No data</p>',
     foot: 'top',
     skin: 'myTable',
     selectable: true,
-    resizable: true,
+    //resizable: true,
     onSort: function(data, e) {
         console.log(data);
     },
