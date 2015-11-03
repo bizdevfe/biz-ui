@@ -5,7 +5,7 @@
 .biz-table-head-wrap,
 .biz-table-body-wrap {
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: hidden
 }
 .biz-table-placeholder {
     height: 0px
@@ -73,10 +73,6 @@
 }
 .biz-table .biz-checkbox-checked-disabled {
     background-position: 2px -100px
-}
-.biz-table th.biz-select-col,
-.biz-table td.biz-select-col {
-    width: 20px
 }
 .biz-table td[editable] {
     padding-right: 30px;

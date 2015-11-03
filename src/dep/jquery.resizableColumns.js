@@ -127,6 +127,9 @@
                     this.$ownerDocument = $($table[0].ownerDocument);
                     this.$table = $table;
 
+                    this.$content = $table.parent().parent().find('.biz-table-body tr[class!="no-data"]:first td');
+                    this.hasContent = this.$content.length !== 0;
+
                     this.refreshHeaders();
                     this.restoreColumnWidths();
                     this.syncHandleWidths();
@@ -209,8 +212,12 @@
                         var _this2 = this;
 
                         this.$tableHeaders.each(function(_, el) {
-                            var $el = $(el);
-                            _this2.setWidth($el[0], $el.outerWidth() / _this2.$table.width() * 100);
+                            var $el = $(el),
+                                percent = $el.outerWidth() / _this2.$table.width() * 100;
+                            _this2.setWidth($el[0], percent);
+                            if (_this2.hasContent) {
+                                _this2.setWidth(_this2.$content[_], percent);
+                            }
                         });
                     }
                 }, {
@@ -331,6 +338,11 @@
                             }
                         };
 
+                        if (this.hasContent) {
+                            this.operation.$leftContent = this.$content.eq(gripIndex);
+                            this.operation.$rightContent = this.$content.eq(gripIndex + 1);
+                        }
+
                         this.bindEvents(this.$ownerDocument, ['mousemove', 'touchmove'], this.onPointerMove.bind(this));
                         this.bindEvents(this.$ownerDocument, ['mouseup', 'touchend'], this.onPointerUp.bind(this));
 
@@ -364,22 +376,37 @@
 
                         var leftColumn = op.$leftColumn[0];
                         var rightColumn = op.$rightColumn[0];
+                        if (this.hasContent) {
+                            var leftContent = op.$leftContent[0];
+                            var rightContent = op.$rightContent[0];
+                        }
                         var widthLeft = undefined,
                             widthRight = undefined;
 
+                        var minLeft = (op.$leftColumn.data('width') + 17) / this.$table.width() * 100,
+                            minRight = (op.$rightColumn.data('width') + 17) / this.$table.width() * 100;
+
                         if (difference > 0) {
                             widthLeft = this.constrainWidth(op.widths.left + (op.widths.right - op.newWidths.right));
-                            widthRight = this.constrainWidth(op.widths.right - difference);
+                            //widthRight = this.constrainWidth(op.widths.right - difference);
+                            widthRight = Math.max(minRight, op.widths.right - difference);
                         } else if (difference < 0) {
-                            widthLeft = this.constrainWidth(op.widths.left + difference);
+                            //widthLeft = this.constrainWidth(op.widths.left + difference);
+                            widthLeft = Math.max(minLeft, op.widths.left + difference);
                             widthRight = this.constrainWidth(op.widths.right + (op.widths.left - op.newWidths.left));
                         }
 
                         if (leftColumn) {
                             this.setWidth(leftColumn, widthLeft);
+                            if (this.hasContent) {
+                                this.setWidth(leftContent, widthLeft);
+                            }
                         }
                         if (rightColumn) {
                             this.setWidth(rightColumn, widthRight);
+                            if (this.hasContent) {
+                                this.setWidth(rightContent, widthRight);
+                            }
                         }
 
                         op.newWidths.left = widthLeft;

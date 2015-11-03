@@ -2243,28 +2243,10 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .datepicker-dropdown:after {
     display: none
 }
-.rc-handle-container {
-    position: relative;
-}
-.rc-handle {
-    position: absolute;
-    width: 15px;
-    cursor: ew-resize;
-    margin-left: -7px;
-    z-index: 2;
-}
-table.rc-table-resizing {
-    cursor: ew-resize;
-}
-table.rc-table-resizing thead,
-table.rc-table-resizing thead > th,
-table.rc-table-resizing thead > th > a {
-    cursor: ew-resize;
-}
 .biz-table-head-wrap,
 .biz-table-body-wrap {
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: hidden
 }
 .biz-table-placeholder {
     height: 0px
@@ -2333,10 +2315,6 @@ table.rc-table-resizing thead > th > a {
 .biz-table .biz-checkbox-checked-disabled {
     background-position: 2px -100px
 }
-.biz-table th.biz-select-col,
-.biz-table td.biz-select-col {
-    width: 20px
-}
 .biz-table td[editable] {
     padding-right: 30px;
     background-image: url(img/edit.png);
@@ -2371,6 +2349,26 @@ table.rc-table-resizing thead > th > a {
     background-repeat: no-repeat;
     text-decoration: none;
     outline: none
+}
+.rc-handle-container {
+    position: relative;
+}
+.rc-handle {
+    position: absolute;
+    width: 16px;
+    cursor: ew-resize;
+    margin-left: -8px;
+    z-index: 2
+}
+.biz-table.rc-table-resizing {
+    cursor: ew-resize;
+}
+table.rc-table-resizing thead,
+table.rc-table-resizing thead > th,
+table.rc-table-resizing thead > th > a,
+table.rc-table-resizing th[sortable],
+table.rc-table-resizing .biz-label {
+    cursor: ew-resize;
 }
 .biz-input,
 .biz-textarea,

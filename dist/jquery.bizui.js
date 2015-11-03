@@ -12143,8 +12143,8 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
      * @constructor
      * @param {HTMLElement|jQuery} calendar 目标元素
      * @param {Object} [options] 参数
-     * @param {Boolean|String} [options.todayHighlight] 今日是否高亮, 若为'linked', 则选中并关闭
-     * @param {Boolean} [options.todayBtn] 是否显示今日按钮
+     * @param {Boolean} [options.todayHighlight] 今日是否高亮
+     * @param {Boolean|String} [options.todayBtn] 是否显示今日按钮, 若为'linked', 则选中并关闭
      * @param {Date|String} [options.startDate] 最早开始日期
      * @param {Date|String} [options.endDate] 最晚结束日期
      * @param {Function} [options.onChange] 日期变更回调(event)
@@ -12471,6 +12471,9 @@ define('ui/util',['require'],function(require) {
                     this.$ownerDocument = $($table[0].ownerDocument);
                     this.$table = $table;
 
+                    this.$content = $table.parent().parent().find('.biz-table-body tr[class!="no-data"]:first td');
+                    this.hasContent = this.$content.length !== 0;
+
                     this.refreshHeaders();
                     this.restoreColumnWidths();
                     this.syncHandleWidths();
@@ -12553,8 +12556,12 @@ define('ui/util',['require'],function(require) {
                         var _this2 = this;
 
                         this.$tableHeaders.each(function(_, el) {
-                            var $el = $(el);
-                            _this2.setWidth($el[0], $el.outerWidth() / _this2.$table.width() * 100);
+                            var $el = $(el),
+                                percent = $el.outerWidth() / _this2.$table.width() * 100;
+                            _this2.setWidth($el[0], percent);
+                            if (_this2.hasContent) {
+                                _this2.setWidth(_this2.$content[_], percent);
+                            }
                         });
                     }
                 }, {
@@ -12675,6 +12682,11 @@ define('ui/util',['require'],function(require) {
                             }
                         };
 
+                        if (this.hasContent) {
+                            this.operation.$leftContent = this.$content.eq(gripIndex);
+                            this.operation.$rightContent = this.$content.eq(gripIndex + 1);
+                        }
+
                         this.bindEvents(this.$ownerDocument, ['mousemove', 'touchmove'], this.onPointerMove.bind(this));
                         this.bindEvents(this.$ownerDocument, ['mouseup', 'touchend'], this.onPointerUp.bind(this));
 
@@ -12708,22 +12720,37 @@ define('ui/util',['require'],function(require) {
 
                         var leftColumn = op.$leftColumn[0];
                         var rightColumn = op.$rightColumn[0];
+                        if (this.hasContent) {
+                            var leftContent = op.$leftContent[0];
+                            var rightContent = op.$rightContent[0];
+                        }
                         var widthLeft = undefined,
                             widthRight = undefined;
 
+                        var minLeft = (op.$leftColumn.data('width') + 17) / this.$table.width() * 100,
+                            minRight = (op.$rightColumn.data('width') + 17) / this.$table.width() * 100;
+
                         if (difference > 0) {
                             widthLeft = this.constrainWidth(op.widths.left + (op.widths.right - op.newWidths.right));
-                            widthRight = this.constrainWidth(op.widths.right - difference);
+                            //widthRight = this.constrainWidth(op.widths.right - difference);
+                            widthRight = Math.max(minRight, op.widths.right - difference);
                         } else if (difference < 0) {
-                            widthLeft = this.constrainWidth(op.widths.left + difference);
+                            //widthLeft = this.constrainWidth(op.widths.left + difference);
+                            widthLeft = Math.max(minLeft, op.widths.left + difference);
                             widthRight = this.constrainWidth(op.widths.right + (op.widths.left - op.newWidths.left));
                         }
 
                         if (leftColumn) {
                             this.setWidth(leftColumn, widthLeft);
+                            if (this.hasContent) {
+                                this.setWidth(leftContent, widthLeft);
+                            }
                         }
                         if (rightColumn) {
                             this.setWidth(rightColumn, widthRight);
+                            if (this.hasContent) {
+                                this.setWidth(rightContent, widthRight);
+                            }
                         }
 
                         op.newWidths.left = widthLeft;
@@ -13173,7 +13200,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
      * @param {Boolean}        [options.column.sortable] 是否排序, 默认false
      * @param {String}         [options.column.currentSort] des-降序, asc-升序, sortable为true时生效
      * @param {Boolean}        [options.column.editable] 是否编辑, 默认false
-     * @param {Number}         [options.column.width] 宽度
+     * @param {Number}         options.column.width 最小宽度
      * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
      * @param {Boolean}        [options.column.visible] 是否显示, 默认true
      * @param {Array}          options.data 数据
@@ -13313,7 +13340,8 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //调整列宽
             if (options.resizable) {
-                this.$tableBody.resizableColumns({
+                this.setMinWidth();
+                this.$tableHead.resizableColumns({
                     start: function() {
                         $('.biz-table-editor').blur();
                     }
@@ -13333,8 +13361,6 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             if (options.onValidate) {
                 this.bindValidate();
             }
-
-            //this.startSyncHeadWidth();
         },
 
         /**
@@ -13345,6 +13371,29 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             this.$headWrap.css({
                 width: this.$main.width()
             });
+            this.$tableHead.css({
+                width: this.$tableBody.width()
+            });
+        },
+
+        /**
+         * 设置表格最小宽度
+         * @protected
+         */
+        setMinWidth: function() {
+            var width = $.map(this.options.column, function(col, index) {
+                if (typeof col.visible !== 'undefined' && !col.visible) {
+                    return 0;
+                }
+                return col.width + 17;
+            });
+            var minWidth = this.options.selectable ? 37 : 0;
+            $.each(width, function(index, val) {
+                minWidth = minWidth + val;
+            });
+            this.$tableHead.css('min-width', minWidth);
+            this.$tableBody.css('min-width', minWidth);
+            this.syncWidth();
         },
 
         /**
@@ -13378,7 +13427,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                     sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '',
                     width = col.width ? ' width="' + col.width + '"' : '',
                     title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title;
-                table.push('<th nowrap field="' + col.field + '"' + sortable + sort + width + '>' + title + '</th>');
+                table.push('<th nowrap data-width="' + col.width + '"' + width + sortable + sort + ' field="' + col.field + '">' + title + '</th>');
             }
 
             table.push('</tr></thead><tbody></tbody>');
@@ -13414,7 +13463,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                         rowSpan = (this.rowSpan > 1 && col.content.length === 1) ? (' rowspan="' + this.rowSpan + '"') : '',
                         content = col.content[0].apply(this, [data[j], j + 1, col.field]) + '',
                         escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
-                    table.push('<td' + rowSpan + editable + align + width + '>' + escapeContent + '</td>');
+                    table.push('<td' + width + rowSpan + editable + align + '>' + escapeContent + '</td>');
                 }
 
                 table.push('</tr>');
@@ -13455,7 +13504,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                 columnCount = column.length;
 
             if (options.selectable) {
-                sum.push('<td class="biz-select-col"></td>');
+                sum.push('<td width="20"></td>');
             }
             for (var i = 0; i < columnCount; i++) {
                 var col = column[i];
@@ -13466,7 +13515,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                     width = col.width ? ' width="' + col.width + '"' : '',
                     content = col.footContent ? col.footContent.call(this, col.field) + '' : '',
                     escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
-                sum.push('<td' + align + width + '>' + escapeContent + '</td>');
+                sum.push('<td' + width + align + '>' + escapeContent + '</td>');
             }
 
             sum.push('</tr>');
@@ -13497,19 +13546,19 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          */
         createSelect: function() {
             if (this.options.data.length) {
-                this.$tableHead.find('tr').prepend('<th class="biz-select-col"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
+                this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
             }
 
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
-                    $(tr).prepend('<td class="biz-select-col" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
+                    $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
                 });
             } else {
                 var self = this,
                     rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
-                        $(tr).prepend('<td class="biz-select-col" rowspan="' + self.rowSpan + '" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
+                        $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
                         rowIndex = rowIndex + 1;
                     }
                 });
@@ -13665,8 +13714,8 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * @param {Array} data
          */
         updateData: function(data) {
-            this.options = $.extend(true, this.options, {
-                data: data
+            this.options.data = $.map(data || [], function(val, index) {
+                return val;
             });
             this.refresh();
         },
@@ -13776,26 +13825,6 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             this.refresh();
         },
 
-        /*startSyncHeadWidth: function() {
-            var self = this;
-            this.timer = setInterval(function() {
-                if (self.options.data.length === 0) {
-                    return;
-                }
-                var th = self.$tableHead.find('th'),
-                    td = self.$tableBody.find('tr:first td');
-                if (th.length === td.length) {
-                    for (var i = 0, l = th.length; i < l; i++) {
-                        td[i].style.width = th[i].style.width;
-                    }
-                }
-            }, 50);
-        },
-
-        stopSyncHeadWidth: function() {
-            clearInterval(this.timer);
-        },*/
-
         /**
          * 根据当前参数重绘表格
          */
@@ -13835,7 +13864,12 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //重置列宽
             if (this.options.resizable) {
-                this.$tableBody.resizableColumns('destroy').resizableColumns();
+                this.setMinWidth();
+                this.$tableHead.resizableColumns('destroy').resizableColumns({
+                    start: function() {
+                        $('.biz-table-editor').blur();
+                    }
+                });
             }
 
             //重置编辑
@@ -13852,8 +13886,6 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * 销毁
          */
         destroy: function() {
-            //this.stopSyncHeadWidth();
-
             this.$main.find(':checkbox').bizCheckbox('destroy');
             this.$tableBody.find('td[editable]').off();
             $('.biz-table-editor').off().remove();
@@ -13863,7 +13895,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                 .off('click.bizTableSort');
 
             if (this.options.resizable) {
-                this.$tableBody.resizableColumns('destroy');
+                this.$tableHead.resizableColumns('destroy');
             }
 
             $(window).off('scroll.bizTable');

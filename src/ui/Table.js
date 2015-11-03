@@ -24,7 +24,7 @@ define(function(require) {
      * @param {Boolean}        [options.column.sortable] 是否排序, 默认false
      * @param {String}         [options.column.currentSort] des-降序, asc-升序, sortable为true时生效
      * @param {Boolean}        [options.column.editable] 是否编辑, 默认false
-     * @param {Number}         [options.column.width] 宽度
+     * @param {Number}         options.column.width 最小宽度
      * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
      * @param {Boolean}        [options.column.visible] 是否显示, 默认true
      * @param {Array}          options.data 数据
@@ -164,7 +164,8 @@ define(function(require) {
 
             //调整列宽
             if (options.resizable) {
-                this.$tableBody.resizableColumns({
+                this.setMinWidth();
+                this.$tableHead.resizableColumns({
                     start: function() {
                         $('.biz-table-editor').blur();
                     }
@@ -184,8 +185,6 @@ define(function(require) {
             if (options.onValidate) {
                 this.bindValidate();
             }
-
-            //this.startSyncHeadWidth();
         },
 
         /**
@@ -196,6 +195,29 @@ define(function(require) {
             this.$headWrap.css({
                 width: this.$main.width()
             });
+            this.$tableHead.css({
+                width: this.$tableBody.width()
+            });
+        },
+
+        /**
+         * 设置表格最小宽度
+         * @protected
+         */
+        setMinWidth: function() {
+            var width = $.map(this.options.column, function(col, index) {
+                if (typeof col.visible !== 'undefined' && !col.visible) {
+                    return 0;
+                }
+                return col.width + 17;
+            });
+            var minWidth = this.options.selectable ? 37 : 0;
+            $.each(width, function(index, val) {
+                minWidth = minWidth + val;
+            });
+            this.$tableHead.css('min-width', minWidth);
+            this.$tableBody.css('min-width', minWidth);
+            this.syncWidth();
         },
 
         /**
@@ -229,7 +251,7 @@ define(function(require) {
                     sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '',
                     width = col.width ? ' width="' + col.width + '"' : '',
                     title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title;
-                table.push('<th nowrap field="' + col.field + '"' + sortable + sort + width + '>' + title + '</th>');
+                table.push('<th nowrap data-width="' + col.width + '"' + width + sortable + sort + ' field="' + col.field + '">' + title + '</th>');
             }
 
             table.push('</tr></thead><tbody></tbody>');
@@ -265,7 +287,7 @@ define(function(require) {
                         rowSpan = (this.rowSpan > 1 && col.content.length === 1) ? (' rowspan="' + this.rowSpan + '"') : '',
                         content = col.content[0].apply(this, [data[j], j + 1, col.field]) + '',
                         escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
-                    table.push('<td' + rowSpan + editable + align + width + '>' + escapeContent + '</td>');
+                    table.push('<td' + width + rowSpan + editable + align + '>' + escapeContent + '</td>');
                 }
 
                 table.push('</tr>');
@@ -306,7 +328,7 @@ define(function(require) {
                 columnCount = column.length;
 
             if (options.selectable) {
-                sum.push('<td class="biz-select-col"></td>');
+                sum.push('<td width="20"></td>');
             }
             for (var i = 0; i < columnCount; i++) {
                 var col = column[i];
@@ -317,7 +339,7 @@ define(function(require) {
                     width = col.width ? ' width="' + col.width + '"' : '',
                     content = col.footContent ? col.footContent.call(this, col.field) + '' : '',
                     escapeContent = (typeof col.escapeContent === 'undefined' || col.escapeContent) ? util.escapeHTML(content) : content;
-                sum.push('<td' + align + width + '>' + escapeContent + '</td>');
+                sum.push('<td' + width + align + '>' + escapeContent + '</td>');
             }
 
             sum.push('</tr>');
@@ -348,19 +370,19 @@ define(function(require) {
          */
         createSelect: function() {
             if (this.options.data.length) {
-                this.$tableHead.find('tr').prepend('<th class="biz-select-col"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
+                this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
             }
 
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
-                    $(tr).prepend('<td class="biz-select-col" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
+                    $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
                 });
             } else {
                 var self = this,
                     rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
-                        $(tr).prepend('<td class="biz-select-col" rowspan="' + self.rowSpan + '" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
+                        $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
                         rowIndex = rowIndex + 1;
                     }
                 });
@@ -516,8 +538,8 @@ define(function(require) {
          * @param {Array} data
          */
         updateData: function(data) {
-            this.options = $.extend(true, this.options, {
-                data: data
+            this.options.data = $.map(data || [], function(val, index) {
+                return val;
             });
             this.refresh();
         },
@@ -627,26 +649,6 @@ define(function(require) {
             this.refresh();
         },
 
-        /*startSyncHeadWidth: function() {
-            var self = this;
-            this.timer = setInterval(function() {
-                if (self.options.data.length === 0) {
-                    return;
-                }
-                var th = self.$tableHead.find('th'),
-                    td = self.$tableBody.find('tr:first td');
-                if (th.length === td.length) {
-                    for (var i = 0, l = th.length; i < l; i++) {
-                        td[i].style.width = th[i].style.width;
-                    }
-                }
-            }, 50);
-        },
-
-        stopSyncHeadWidth: function() {
-            clearInterval(this.timer);
-        },*/
-
         /**
          * 根据当前参数重绘表格
          */
@@ -686,7 +688,12 @@ define(function(require) {
 
             //重置列宽
             if (this.options.resizable) {
-                this.$tableBody.resizableColumns('destroy').resizableColumns();
+                this.setMinWidth();
+                this.$tableHead.resizableColumns('destroy').resizableColumns({
+                    start: function() {
+                        $('.biz-table-editor').blur();
+                    }
+                });
             }
 
             //重置编辑
@@ -703,8 +710,6 @@ define(function(require) {
          * 销毁
          */
         destroy: function() {
-            //this.stopSyncHeadWidth();
-
             this.$main.find(':checkbox').bizCheckbox('destroy');
             this.$tableBody.find('td[editable]').off();
             $('.biz-table-editor').off().remove();
@@ -714,7 +719,7 @@ define(function(require) {
                 .off('click.bizTableSort');
 
             if (this.options.resizable) {
-                this.$tableBody.resizableColumns('destroy');
+                this.$tableHead.resizableColumns('destroy');
             }
 
             $(window).off('scroll.bizTable');
