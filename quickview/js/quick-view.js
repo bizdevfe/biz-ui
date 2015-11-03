@@ -204,7 +204,7 @@ $('.data').bizTable({
     foot: 'top',
     skin: 'myTable',
     selectable: true,
-    //resizable: true,
+    resizable: true,
     onSort: function(data, e) {
         console.log(data);
     },
