@@ -205,6 +205,7 @@ $('.data').bizTable({
     skin: 'myTable',
     selectable: true,
     resizable: true,
+    lockHead: true,
     onSort: function(data, e) {
         console.log(data);
     },
