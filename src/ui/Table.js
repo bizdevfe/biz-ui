@@ -37,7 +37,7 @@ define(function(require) {
      * @param {Function}       [options.onEdit] 编辑单元格回调, onEdit(data, event)
      * @param {Function}       [options.onValidate] 验证回调, onValidate(data, event)
      * @param {Boolean}        [options.lockHead] 是否开启表头锁定
-     * @param {Number}         [options.topOffset] 表头锁定时，表头上方预留高度
+     * @param {Number}         [options.topOffset] 表头锁定时, 表头上方预留高度
      */
     function Table(table, options) {
         if (table instanceof jQuery) {
@@ -137,7 +137,7 @@ define(function(require) {
                 self.$headWrap[0].scrollLeft = this.scrollLeft;
             });
 
-            if(options.lockHead) {
+            if (options.lockHead) {
                 //表格位置
                 this.originOffsetTop = this.$main.offset().top - options.topOffset;
 
@@ -687,7 +687,8 @@ define(function(require) {
 
             //重置滚条位置
             this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
-            if(this.options.lockHead) {
+
+            if (this.options.lockHead) {
                 //重置表格位置
                 this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
             }
