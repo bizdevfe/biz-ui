@@ -36,6 +36,8 @@ define(function(require) {
      * @param {Function}       [options.onSelect] 勾选回调, onSelect(data, event)
      * @param {Function}       [options.onEdit] 编辑单元格回调, onEdit(data, event)
      * @param {Function}       [options.onValidate] 验证回调, onValidate(data, event)
+     * @param {Boolean}        [options.lockHead] 是否开启表头锁定
+     * @param {Number}         [options.topOffset] 表头锁定时，表头上方预留高度
      */
     function Table(table, options) {
         if (table instanceof jQuery) {
@@ -64,7 +66,8 @@ define(function(require) {
             data: [],
             selectable: false,
             resizable: false,
-            topOffset: 0
+            topOffset: 0,
+            lockHead: false
         };
         this.options = $.extend(true, defaultOption, options || {});
         this.init(this.options);
@@ -134,33 +137,35 @@ define(function(require) {
                 self.$headWrap[0].scrollLeft = this.scrollLeft;
             });
 
-            //表格位置
-            this.originOffsetTop = this.$main.offset().top - options.topOffset;
+            if(options.lockHead) {
+                //表格位置
+                this.originOffsetTop = this.$main.offset().top - options.topOffset;
 
-            var headHeight = this.$headWrap.height();
+                var headHeight = this.$headWrap.height();
 
-            //表头跟随
-            $(window).on('scroll.bizTable', function() {
-                if ($(window).scrollTop() > self.originOffsetTop) {
-                    self.$headWrap.css({
-                        position: 'fixed',
-                        top: self.options.topOffset,
-                        width: self.$main.width()
-                    });
-                    self.$placeholder.css({
-                        height: headHeight
-                    });
-                } else {
-                    self.$headWrap.css({
-                        position: 'static',
-                        top: 'auto',
-                        width: 'auto'
-                    });
-                    self.$placeholder.css({
-                        height: 0
-                    });
-                }
-            });
+                //表头跟随
+                $(window).on('scroll.bizTable', function() {
+                    if ($(window).scrollTop() > self.originOffsetTop) {
+                        self.$headWrap.css({
+                            position: 'fixed',
+                            top: self.options.topOffset,
+                            width: self.$main.width()
+                        });
+                        self.$placeholder.css({
+                            height: headHeight
+                        });
+                    } else {
+                        self.$headWrap.css({
+                            position: 'static',
+                            top: 'auto',
+                            width: 'auto'
+                        });
+                        self.$placeholder.css({
+                            height: 0
+                        });
+                    }
+                });
+            }
 
             //调整列宽
             if (options.resizable) {
@@ -682,9 +687,10 @@ define(function(require) {
 
             //重置滚条位置
             this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
-
-            //重置表格位置
-            this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
+            if(this.options.lockHead) {
+                //重置表格位置
+                this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
+            }
 
             //重置列宽
             if (this.options.resizable) {
