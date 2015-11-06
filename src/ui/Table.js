@@ -138,31 +138,36 @@ define(function(require) {
             });
 
             if(options.lockHead) {
-                //表格位置
-                this.originOffsetTop = this.$main.offset().top - options.topOffset;
-
                 var headHeight = this.$headWrap.height();
 
                 //表头跟随
                 $(window).on('scroll.bizTable', function() {
-                    if ($(window).scrollTop() > self.originOffsetTop) {
-                        self.$headWrap.css({
-                            position: 'fixed',
-                            top: self.options.topOffset,
-                            width: self.$main.width()
-                        });
-                        self.$placeholder.css({
-                            height: headHeight
-                        });
+                    //此处要实时计算表头位置，防止表头位置动态发生变化
+                    var currentOffsetTop = self.$main.offset().top - options.topOffset;
+                    if ($(window).scrollTop() > currentOffsetTop) {
+                        if(!self.hasLocked) {
+                            self.$headWrap.css({
+                                position: 'fixed',
+                                top: self.options.topOffset,
+                                width: self.$main.width()
+                            });
+                            self.$placeholder.css({
+                                height: headHeight
+                            });
+                            self.hasLocked = true;
+                        }
                     } else {
-                        self.$headWrap.css({
-                            position: 'static',
-                            top: 'auto',
-                            width: 'auto'
-                        });
-                        self.$placeholder.css({
-                            height: 0
-                        });
+                        if(self.hasLocked) {
+                            self.$headWrap.css({
+                                position: 'static',
+                                top: 'auto',
+                                width: 'auto'
+                            });
+                            self.$placeholder.css({
+                                height: 0
+                            });
+                            self.hasLocked = false;
+                        }
                     }
                 });
             }
@@ -687,10 +692,6 @@ define(function(require) {
 
             //重置滚条位置
             this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
-            if(this.options.lockHead) {
-                //重置表格位置
-                this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
-            }
 
             //重置列宽
             if (this.options.resizable) {
