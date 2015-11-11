@@ -30,6 +30,12 @@
       "email": "hyenasa@gmail.com"
     }
   ],
+  "contributors": [
+    {
+      "name": "Yan Yu",
+      "email": "yanyu0517@126.com"
+    }
+  ],
   "main": "./dist/jquery.bizui.js",
   "repository": {
     "type": "git",
