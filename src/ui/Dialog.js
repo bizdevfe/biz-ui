@@ -121,7 +121,7 @@ define(function(require) {
             this.$main.show();
             this.$container.css({
                 zIndex: index
-            }).fadeIn();
+            }).show();
         },
 
         /**
@@ -136,7 +136,7 @@ define(function(require) {
                 }
             }
             this.$container.hide();
-            this.$container.next().fadeOut();
+            this.$container.next().hide();
             if (typeof this.options.zIndex == 'undefined') {
                 currentIndex--;
             }

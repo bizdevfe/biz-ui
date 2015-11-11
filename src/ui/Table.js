@@ -152,7 +152,7 @@ define(function(require) {
                                 width: self.$main.width()
                             });
                             self.$placeholder.css({
-                                height: headHeight
+                                height: headHeight + self.options.topOffset
                             });
                             self.hasLocked = true;
                         }
