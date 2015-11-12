@@ -24,7 +24,7 @@ jsduck --config doc-config.json
 if [ $? -ne 0 ]
   then
     echo -e "\033[0;31mPlease solve jsduck errors before committing! \033[0m"
-    #exit 1
+    exit 1
 fi
 echo -e "\033[0;32mAPI generating done! \033[0m"
 
