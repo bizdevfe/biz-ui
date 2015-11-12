@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.1.2
+ * @version v1.1.3
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -12,7 +12,12 @@
     }
 }(this, function($) {
     $ = $ || window.$;
-    //Going sloppy to avoid 'use strict' string cost, but strict practices should
+    /**
+ * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/almond for details
+ */
+//Going sloppy to avoid 'use strict' string cost, but strict practices should
 //be followed.
 /*jslint sloppy: true */
 /*global setTimeout: false */
@@ -583,7 +588,6 @@ define('ui/Button',['require'],function(require) {
 
     return Button;
 });
-
 /**
  * @ignore
  */
@@ -744,7 +748,6 @@ define('ui/Input',['require'],function(require) {
 
     return Input;
 });
-
 /**
  * @ignore
  */
@@ -901,7 +904,6 @@ define('ui/Textarea',['require'],function(require) {
 
     return Textarea;
 });
-
 /**
  * @ignore
  */
@@ -1132,7 +1134,6 @@ define('ui/Textline',['require'],function(require) {
 
     return Textline;
 });
-
 /**
  * @ignore
  */
@@ -1355,7 +1356,6 @@ define('ui/Radio',['require'],function(require) {
 
     return Radio;
 });
-
 /**
  * @ignore
  */
@@ -1587,7 +1587,6 @@ define('ui/Checkbox',['require'],function(require) {
 
     return Checkbox;
 });
-
 /**
  * @ignore
  */
@@ -2080,8 +2079,8 @@ define('dep/jquery.selectBox',['require'],function(require) {
                 top: top,
                 left: control.offset().left
             })
-        // Add Top and Bottom class based on position
-        .addClass('selectBox-options selectBox-options-' + (posTop ? 'top' : 'bottom'));
+            // Add Top and Bottom class based on position
+            .addClass('selectBox-options selectBox-options-' + (posTop ? 'top' : 'bottom'));
 
 
         if (select.triggerHandler('beforeopen')) {
@@ -2736,7 +2735,6 @@ define('dep/jquery.selectBox',['require'],function(require) {
 
     return SelectBox;
 });
-
 /**
  * @ignore
  */
@@ -2881,7 +2879,6 @@ define('ui/Select',['require','dep/jquery.selectBox'],function(require) {
 
     return Select;
 });
-
 /**
  * @ignore
  */
@@ -3005,7 +3002,7 @@ define('ui/Dialog',['require'],function(require) {
             this.$main.show();
             this.$container.css({
                 zIndex: index
-            }).fadeIn();
+            }).show();
         },
 
         /**
@@ -3020,7 +3017,7 @@ define('ui/Dialog',['require'],function(require) {
                 }
             }
             this.$container.hide();
-            this.$container.next().fadeOut();
+            this.$container.next().hide();
             if (typeof this.options.zIndex == 'undefined') {
                 currentIndex--;
             }
@@ -3144,7 +3141,6 @@ define('ui/Dialog',['require'],function(require) {
 
     return Dialog;
 });
-
 /**
  * @ignore
  */
@@ -3340,7 +3336,6 @@ define('ui/Panel',['require'],function(require) {
 
     return Panel;
 });
-
 /**
  * @ignore
  */
@@ -3628,7 +3623,6 @@ define('ui/Tooltip',['require'],function(require) {
 
     return Tooltip;
 });
-
 /**
  * @ignore
  */
@@ -3758,7 +3752,6 @@ define('ui/Tab',['require'],function(require) {
 
     return Tab;
 });
-
 /**
  * @ignore
  */
@@ -4112,7 +4105,6 @@ define('dep/jquery.simplePagination',['require'],function(require) {
 
     return methods;
 });
-
 /**
  * @ignore
  */
@@ -4259,7 +4251,6 @@ define('ui/Page',['require','dep/jquery.simplePagination'],function(require) {
 
     return Page;
 });
-
 /**
  * @ignore
  */
@@ -5014,85 +5005,85 @@ define('dep/jquery.jstree',['require'],function(require) {
                         }
                     }
                 }, this))
-            // quick searching when the tree is focused
-            .on('keypress.jstree', $.proxy(function(e) {
-                if (e.target.tagName === "INPUT") {
-                    return true;
-                }
-                if (tout) {
-                    clearTimeout(tout);
-                }
-                tout = setTimeout(function() {
-                    word = '';
-                }, 500);
-
-                var chr = String.fromCharCode(e.which).toLowerCase(),
-                    col = this.element.find('.jstree-anchor').filter(':visible'),
-                    ind = col.index(document.activeElement) || 0,
-                    end = false;
-                word += chr;
-
-                // match for whole word from current node down (including the current node)
-                if (word.length > 1) {
-                    col.slice(ind).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().indexOf(word) === 0) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
+                // quick searching when the tree is focused
+                .on('keypress.jstree', $.proxy(function(e) {
+                    if (e.target.tagName === "INPUT") {
+                        return true;
                     }
+                    if (tout) {
+                        clearTimeout(tout);
+                    }
+                    tout = setTimeout(function() {
+                        word = '';
+                    }, 500);
 
-                    // match for whole word from the beginning of the tree
-                    col.slice(0, ind).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().indexOf(word) === 0) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
-                    }
-                }
-                // list nodes that start with that letter (only if word consists of a single char)
-                if (new RegExp('^' + chr + '+$').test(word)) {
-                    // search for the next node starting with that letter
-                    col.slice(ind + 1).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().charAt(0) === chr) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
-                    }
+                    var chr = String.fromCharCode(e.which).toLowerCase(),
+                        col = this.element.find('.jstree-anchor').filter(':visible'),
+                        ind = col.index(document.activeElement) || 0,
+                        end = false;
+                    word += chr;
 
-                    // search from the beginning
-                    col.slice(0, ind + 1).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().charAt(0) === chr) {
-                            $(v).focus();
-                            end = true;
-                            return false;
+                    // match for whole word from current node down (including the current node)
+                    if (word.length > 1) {
+                        col.slice(ind).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().indexOf(word) === 0) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
                         }
-                    }, this));
-                    if (end) {
-                        return;
+
+                        // match for whole word from the beginning of the tree
+                        col.slice(0, ind).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().indexOf(word) === 0) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
                     }
-                }
-            }, this))
-            // THEME RELATED
-            .on("init.jstree", $.proxy(function() {
-                var s = this.settings.core.themes;
-                this._data.core.themes.dots = s.dots;
-                this._data.core.themes.stripes = s.stripes;
-                this._data.core.themes.icons = s.icons;
-                this.set_theme(s.name || "default", s.url);
-                this.set_theme_variant(s.variant);
-            }, this))
+                    // list nodes that start with that letter (only if word consists of a single char)
+                    if (new RegExp('^' + chr + '+$').test(word)) {
+                        // search for the next node starting with that letter
+                        col.slice(ind + 1).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().charAt(0) === chr) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
+
+                        // search from the beginning
+                        col.slice(0, ind + 1).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().charAt(0) === chr) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
+                    }
+                }, this))
+                // THEME RELATED
+                .on("init.jstree", $.proxy(function() {
+                    var s = this.settings.core.themes;
+                    this._data.core.themes.dots = s.dots;
+                    this._data.core.themes.stripes = s.stripes;
+                    this._data.core.themes.icons = s.icons;
+                    this.set_theme(s.name || "default", s.url);
+                    this.set_theme_variant(s.variant);
+                }, this))
                 .on("loading.jstree", $.proxy(function() {
                     this[this._data.core.themes.dots ? "show_dots" : "hide_dots"]();
                     this[this._data.core.themes.icons ? "show_icons" : "hide_icons"]();
@@ -7967,7 +7958,7 @@ define('dep/jquery.jstree',['require'],function(require) {
                     'a_attr': $.extend(true, {}, obj.a_attr),
                     'state': {},
                     'data': options && options.no_data ? false : $.extend(true, {}, obj.data)
-                    //( this.get_node(obj, true).length ? this.get_node(obj, true).data() : obj.data ),
+                        //( this.get_node(obj, true).length ? this.get_node(obj, true).data() : obj.data ),
                 },
                 i, j;
             if (options && options.flat) {
@@ -8424,11 +8415,11 @@ define('dep/jquery.jstree',['require'],function(require) {
                 pos = new_par.children.length;
             }
             if (!this.check("move_node", obj, new_par, pos, {
-                'core': true,
-                'origin': origin,
-                'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
-                'is_foreign': (!old_ins || !old_ins._id)
-            })) {
+                    'core': true,
+                    'origin': origin,
+                    'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
+                    'is_foreign': (!old_ins || !old_ins._id)
+                })) {
                 this.settings.core.error.call(this, this._data.core.last_error);
                 return false;
             }
@@ -8619,11 +8610,11 @@ define('dep/jquery.jstree',['require'],function(require) {
                 pos = new_par.children.length;
             }
             if (!this.check("copy_node", obj, new_par, pos, {
-                'core': true,
-                'origin': origin,
-                'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
-                'is_foreign': (!old_ins || !old_ins._id)
-            })) {
+                    'core': true,
+                    'origin': origin,
+                    'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
+                    'is_foreign': (!old_ins || !old_ins._id)
+                })) {
                 this.settings.core.error.call(this, this._data.core.last_error);
                 return false;
             }
@@ -10151,7 +10142,7 @@ define('dep/jquery.jstree',['require'],function(require) {
                     });
                     $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp);
                 }, this))
-            /*
+                /*
 				.on("mousedown.jstree touchstart.jstree", ".jstree-wholerow", function (e) {
 						if(e.target === e.currentTarget) {
 							var a = $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor");
@@ -10160,16 +10151,16 @@ define('dep/jquery.jstree',['require'],function(require) {
 						}
 					})
 				*/
-            .on("click.jstree", ".jstree-wholerow", function(e) {
-                e.stopImmediatePropagation();
-                var tmp = $.Event('click', {
-                    metaKey: e.metaKey,
-                    ctrlKey: e.ctrlKey,
-                    altKey: e.altKey,
-                    shiftKey: e.shiftKey
-                });
-                $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp).focus();
-            })
+                .on("click.jstree", ".jstree-wholerow", function(e) {
+                    e.stopImmediatePropagation();
+                    var tmp = $.Event('click', {
+                        metaKey: e.metaKey,
+                        ctrlKey: e.ctrlKey,
+                        altKey: e.altKey,
+                        shiftKey: e.shiftKey
+                    });
+                    $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp).focus();
+                })
                 .on("click.jstree", ".jstree-leaf > .jstree-ocl", $.proxy(function(e) {
                     e.stopImmediatePropagation();
                     var tmp = $.Event('click', {
@@ -10249,7 +10240,6 @@ define('dep/jquery.jstree',['require'],function(require) {
 
     return $.jstree;
 });
-
 /**
  * @ignore
  */
@@ -10321,7 +10311,6 @@ define('ui/Tree',['require','dep/jquery.jstree'],function(require) {
 
     return Tree;
 });
-
 /**
  * @ignore
  */
@@ -10680,11 +10669,11 @@ define('dep/jquery.datepicker',['require'],function(require) {
                     'mousedown touchstart': $.proxy(function(e) {
                         // Clicked outside the datepicker, hide it
                         if (!(
-                            this.element.is(e.target) ||
-                            this.element.find(e.target).length ||
-                            this.picker.is(e.target) ||
-                            this.picker.find(e.target).length
-                        )) {
+                                this.element.is(e.target) ||
+                                this.element.find(e.target).length ||
+                                this.picker.is(e.target) ||
+                                this.picker.find(e.target).length
+                            )) {
                             this.hide();
                         }
                     }, this)
@@ -11487,16 +11476,16 @@ define('dep/jquery.datepicker',['require'],function(require) {
             dir = dir > 0 ? 1 : -1;
             if (mag === 1) {
                 test = dir === -1
-                // If going back one month, make sure month is not current month
-                // (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
-                ? function() {
-                    return new_date.getUTCMonth() === month;
-                }
-                // If going forward one month, make sure month is as expected
-                // (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
-                : function() {
-                    return new_date.getUTCMonth() !== new_month;
-                };
+                    // If going back one month, make sure month is not current month
+                    // (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
+                    ? function() {
+                        return new_date.getUTCMonth() === month;
+                    }
+                    // If going forward one month, make sure month is as expected
+                    // (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
+                    : function() {
+                        return new_date.getUTCMonth() !== new_month;
+                    };
                 new_month = month + dir;
                 new_date.setUTCMonth(new_month);
                 // Dec -> Jan (12) or Jan -> Dec (-1) -- limit expected date to 0-11
@@ -12128,7 +12117,6 @@ define('dep/jquery.datepicker',['require'],function(require) {
 
     return datepickerPlugin;
 });
-
 /**
  * @ignore
  */
@@ -12308,7 +12296,6 @@ define('ui/Calendar',['require','dep/jquery.datepicker','ui/Input'],function(req
 
     return Calendar;
 });
-
 /**
  * @ignore
  */
@@ -12341,7 +12328,6 @@ define('ui/util',['require'],function(require) {
 
     return util;
 });
-
 (function e(t, n, r) {
     function s(o, u) {
         if (!n[o]) {
@@ -13062,7 +13048,6 @@ define('ui/util',['require'],function(require) {
         }
     ]
 }, {}, [4]);
-
 define("dep/jquery.resizableColumns", function(){});
 
 /**
@@ -13173,7 +13158,6 @@ define('dep/jquery.editabletable',['require'],function(require) {
         editor: $('<input class="biz-table-editor">')
     };
 });
-
 /**
  * @ignore
  */
@@ -13213,7 +13197,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
      * @param {Function}       [options.onEdit] 编辑单元格回调, onEdit(data, event)
      * @param {Function}       [options.onValidate] 验证回调, onValidate(data, event)
      * @param {Boolean}        [options.lockHead] 是否开启表头锁定
-     * @param {Number}         [options.topOffset] 表头锁定时, 表头上方预留高度
+     * @param {Number}         [options.topOffset] 表头锁定时，表头上方预留高度
      */
     function Table(table, options) {
         if (table instanceof jQuery) {
@@ -13314,31 +13298,36 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             });
 
             if (options.lockHead) {
-                //表格位置
-                this.originOffsetTop = this.$main.offset().top - options.topOffset;
-
                 var headHeight = this.$headWrap.height();
 
                 //表头跟随
                 $(window).on('scroll.bizTable', function() {
-                    if ($(window).scrollTop() > self.originOffsetTop) {
-                        self.$headWrap.css({
-                            position: 'fixed',
-                            top: self.options.topOffset,
-                            width: self.$main.width()
-                        });
-                        self.$placeholder.css({
-                            height: headHeight
-                        });
+                    //此处要实时计算表头位置，防止表头位置动态发生变化
+                    var currentOffsetTop = self.$main.offset().top - options.topOffset;
+                    if ($(window).scrollTop() > currentOffsetTop) {
+                        if (!self.hasLocked) {
+                            self.$headWrap.css({
+                                position: 'fixed',
+                                top: self.options.topOffset,
+                                width: self.$main.width()
+                            });
+                            self.$placeholder.css({
+                                height: headHeight + self.options.topOffset
+                            });
+                            self.hasLocked = true;
+                        }
                     } else {
-                        self.$headWrap.css({
-                            position: 'static',
-                            top: 'auto',
-                            width: 'auto'
-                        });
-                        self.$placeholder.css({
-                            height: 0
-                        });
+                        if (self.hasLocked) {
+                            self.$headWrap.css({
+                                position: 'static',
+                                top: 'auto',
+                                width: 'auto'
+                            });
+                            self.$placeholder.css({
+                                height: 0
+                            });
+                            self.hasLocked = false;
+                        }
                     }
                 });
             }
@@ -13864,11 +13853,6 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             //重置滚条位置
             this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
 
-            if (this.options.lockHead) {
-                //重置表格位置
-                this.originOffsetTop = this.$main.offset().top - this.options.topOffset;
-            }
-
             //重置列宽
             if (this.options.resizable) {
                 this.setMinWidth();
@@ -14000,7 +13984,6 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
     return Table;
 });
-
 /**
  * @ignore
  */
@@ -14623,7 +14606,6 @@ define('dep/jquery.treetable',['require'],function(require) {
         }
     };
 });
-
 /**
  * @ignore
  */
@@ -14833,7 +14815,6 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
 
     return TreeTable;
 });
-
 /**
  * @ignore
  */
@@ -14848,7 +14829,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.1.2';
+    bizui.version = '1.1.3';
 
     var origin = window.bizui;
 
@@ -14961,6 +14942,5 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
 
     return bizui;
 });
-
 return require('bizui');
 }));

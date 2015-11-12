@@ -490,8 +490,8 @@ define(function(require) {
                 top: top,
                 left: control.offset().left
             })
-        // Add Top and Bottom class based on position
-        .addClass('selectBox-options selectBox-options-' + (posTop ? 'top' : 'bottom'));
+            // Add Top and Bottom class based on position
+            .addClass('selectBox-options selectBox-options-' + (posTop ? 'top' : 'bottom'));
 
 
         if (select.triggerHandler('beforeopen')) {

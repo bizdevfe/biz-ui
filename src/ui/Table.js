@@ -137,7 +137,7 @@ define(function(require) {
                 self.$headWrap[0].scrollLeft = this.scrollLeft;
             });
 
-            if(options.lockHead) {
+            if (options.lockHead) {
                 var headHeight = this.$headWrap.height();
 
                 //表头跟随
@@ -145,7 +145,7 @@ define(function(require) {
                     //此处要实时计算表头位置，防止表头位置动态发生变化
                     var currentOffsetTop = self.$main.offset().top - options.topOffset;
                     if ($(window).scrollTop() > currentOffsetTop) {
-                        if(!self.hasLocked) {
+                        if (!self.hasLocked) {
                             self.$headWrap.css({
                                 position: 'fixed',
                                 top: self.options.topOffset,
@@ -157,7 +157,7 @@ define(function(require) {
                             self.hasLocked = true;
                         }
                     } else {
-                        if(self.hasLocked) {
+                        if (self.hasLocked) {
                             self.$headWrap.css({
                                 position: 'static',
                                 top: 'auto',

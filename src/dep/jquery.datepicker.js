@@ -356,11 +356,11 @@ define(function(require) {
                     'mousedown touchstart': $.proxy(function(e) {
                         // Clicked outside the datepicker, hide it
                         if (!(
-                            this.element.is(e.target) ||
-                            this.element.find(e.target).length ||
-                            this.picker.is(e.target) ||
-                            this.picker.find(e.target).length
-                        )) {
+                                this.element.is(e.target) ||
+                                this.element.find(e.target).length ||
+                                this.picker.is(e.target) ||
+                                this.picker.find(e.target).length
+                            )) {
                             this.hide();
                         }
                     }, this)
@@ -1163,16 +1163,16 @@ define(function(require) {
             dir = dir > 0 ? 1 : -1;
             if (mag === 1) {
                 test = dir === -1
-                // If going back one month, make sure month is not current month
-                // (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
-                ? function() {
-                    return new_date.getUTCMonth() === month;
-                }
-                // If going forward one month, make sure month is as expected
-                // (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
-                : function() {
-                    return new_date.getUTCMonth() !== new_month;
-                };
+                    // If going back one month, make sure month is not current month
+                    // (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
+                    ? function() {
+                        return new_date.getUTCMonth() === month;
+                    }
+                    // If going forward one month, make sure month is as expected
+                    // (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
+                    : function() {
+                        return new_date.getUTCMonth() !== new_month;
+                    };
                 new_month = month + dir;
                 new_date.setUTCMonth(new_month);
                 // Dec -> Jan (12) or Jan -> Dec (-1) -- limit expected date to 0-11

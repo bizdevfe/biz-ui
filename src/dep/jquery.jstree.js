@@ -752,85 +752,85 @@ define(function(require) {
                         }
                     }
                 }, this))
-            // quick searching when the tree is focused
-            .on('keypress.jstree', $.proxy(function(e) {
-                if (e.target.tagName === "INPUT") {
-                    return true;
-                }
-                if (tout) {
-                    clearTimeout(tout);
-                }
-                tout = setTimeout(function() {
-                    word = '';
-                }, 500);
-
-                var chr = String.fromCharCode(e.which).toLowerCase(),
-                    col = this.element.find('.jstree-anchor').filter(':visible'),
-                    ind = col.index(document.activeElement) || 0,
-                    end = false;
-                word += chr;
-
-                // match for whole word from current node down (including the current node)
-                if (word.length > 1) {
-                    col.slice(ind).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().indexOf(word) === 0) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
+                // quick searching when the tree is focused
+                .on('keypress.jstree', $.proxy(function(e) {
+                    if (e.target.tagName === "INPUT") {
+                        return true;
                     }
+                    if (tout) {
+                        clearTimeout(tout);
+                    }
+                    tout = setTimeout(function() {
+                        word = '';
+                    }, 500);
 
-                    // match for whole word from the beginning of the tree
-                    col.slice(0, ind).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().indexOf(word) === 0) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
-                    }
-                }
-                // list nodes that start with that letter (only if word consists of a single char)
-                if (new RegExp('^' + chr + '+$').test(word)) {
-                    // search for the next node starting with that letter
-                    col.slice(ind + 1).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().charAt(0) === chr) {
-                            $(v).focus();
-                            end = true;
-                            return false;
-                        }
-                    }, this));
-                    if (end) {
-                        return;
-                    }
+                    var chr = String.fromCharCode(e.which).toLowerCase(),
+                        col = this.element.find('.jstree-anchor').filter(':visible'),
+                        ind = col.index(document.activeElement) || 0,
+                        end = false;
+                    word += chr;
 
-                    // search from the beginning
-                    col.slice(0, ind + 1).each($.proxy(function(i, v) {
-                        if ($(v).text().toLowerCase().charAt(0) === chr) {
-                            $(v).focus();
-                            end = true;
-                            return false;
+                    // match for whole word from current node down (including the current node)
+                    if (word.length > 1) {
+                        col.slice(ind).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().indexOf(word) === 0) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
                         }
-                    }, this));
-                    if (end) {
-                        return;
+
+                        // match for whole word from the beginning of the tree
+                        col.slice(0, ind).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().indexOf(word) === 0) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
                     }
-                }
-            }, this))
-            // THEME RELATED
-            .on("init.jstree", $.proxy(function() {
-                var s = this.settings.core.themes;
-                this._data.core.themes.dots = s.dots;
-                this._data.core.themes.stripes = s.stripes;
-                this._data.core.themes.icons = s.icons;
-                this.set_theme(s.name || "default", s.url);
-                this.set_theme_variant(s.variant);
-            }, this))
+                    // list nodes that start with that letter (only if word consists of a single char)
+                    if (new RegExp('^' + chr + '+$').test(word)) {
+                        // search for the next node starting with that letter
+                        col.slice(ind + 1).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().charAt(0) === chr) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
+
+                        // search from the beginning
+                        col.slice(0, ind + 1).each($.proxy(function(i, v) {
+                            if ($(v).text().toLowerCase().charAt(0) === chr) {
+                                $(v).focus();
+                                end = true;
+                                return false;
+                            }
+                        }, this));
+                        if (end) {
+                            return;
+                        }
+                    }
+                }, this))
+                // THEME RELATED
+                .on("init.jstree", $.proxy(function() {
+                    var s = this.settings.core.themes;
+                    this._data.core.themes.dots = s.dots;
+                    this._data.core.themes.stripes = s.stripes;
+                    this._data.core.themes.icons = s.icons;
+                    this.set_theme(s.name || "default", s.url);
+                    this.set_theme_variant(s.variant);
+                }, this))
                 .on("loading.jstree", $.proxy(function() {
                     this[this._data.core.themes.dots ? "show_dots" : "hide_dots"]();
                     this[this._data.core.themes.icons ? "show_icons" : "hide_icons"]();
@@ -3705,7 +3705,7 @@ define(function(require) {
                     'a_attr': $.extend(true, {}, obj.a_attr),
                     'state': {},
                     'data': options && options.no_data ? false : $.extend(true, {}, obj.data)
-                    //( this.get_node(obj, true).length ? this.get_node(obj, true).data() : obj.data ),
+                        //( this.get_node(obj, true).length ? this.get_node(obj, true).data() : obj.data ),
                 },
                 i, j;
             if (options && options.flat) {
@@ -4162,11 +4162,11 @@ define(function(require) {
                 pos = new_par.children.length;
             }
             if (!this.check("move_node", obj, new_par, pos, {
-                'core': true,
-                'origin': origin,
-                'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
-                'is_foreign': (!old_ins || !old_ins._id)
-            })) {
+                    'core': true,
+                    'origin': origin,
+                    'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
+                    'is_foreign': (!old_ins || !old_ins._id)
+                })) {
                 this.settings.core.error.call(this, this._data.core.last_error);
                 return false;
             }
@@ -4357,11 +4357,11 @@ define(function(require) {
                 pos = new_par.children.length;
             }
             if (!this.check("copy_node", obj, new_par, pos, {
-                'core': true,
-                'origin': origin,
-                'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
-                'is_foreign': (!old_ins || !old_ins._id)
-            })) {
+                    'core': true,
+                    'origin': origin,
+                    'is_multi': (old_ins && old_ins._id && old_ins._id !== this._id),
+                    'is_foreign': (!old_ins || !old_ins._id)
+                })) {
                 this.settings.core.error.call(this, this._data.core.last_error);
                 return false;
             }
@@ -5889,7 +5889,7 @@ define(function(require) {
                     });
                     $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp);
                 }, this))
-            /*
+                /*
 				.on("mousedown.jstree touchstart.jstree", ".jstree-wholerow", function (e) {
 						if(e.target === e.currentTarget) {
 							var a = $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor");
@@ -5898,16 +5898,16 @@ define(function(require) {
 						}
 					})
 				*/
-            .on("click.jstree", ".jstree-wholerow", function(e) {
-                e.stopImmediatePropagation();
-                var tmp = $.Event('click', {
-                    metaKey: e.metaKey,
-                    ctrlKey: e.ctrlKey,
-                    altKey: e.altKey,
-                    shiftKey: e.shiftKey
-                });
-                $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp).focus();
-            })
+                .on("click.jstree", ".jstree-wholerow", function(e) {
+                    e.stopImmediatePropagation();
+                    var tmp = $.Event('click', {
+                        metaKey: e.metaKey,
+                        ctrlKey: e.ctrlKey,
+                        altKey: e.altKey,
+                        shiftKey: e.shiftKey
+                    });
+                    $(e.currentTarget).closest(".jstree-node").children(".jstree-anchor").first().trigger(tmp).focus();
+                })
                 .on("click.jstree", ".jstree-leaf > .jstree-ocl", $.proxy(function(e) {
                     e.stopImmediatePropagation();
                     var tmp = $.Event('click', {
