@@ -6,10 +6,12 @@
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
 }
+
 .simple-pagination .disabled .current {
     border-width: 1px;
     border-style: solid
 }
+
 .light-theme span,
 .light-theme a {
     border-radius: 2px;
@@ -17,16 +19,19 @@
     height: 28px;
     line-height: 28px;
 }
+
 .light-theme .current {
     border-width: 1px;
     border-style: solid;
     box-shadow: none
 }
+
 .light-theme a {
     border-width: 1px;
     border-style: solid;
     text-decoration: none
 }
+
 .light-theme a:hover {
     border-width: 1px;
     border-style: solid

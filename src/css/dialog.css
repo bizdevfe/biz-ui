@@ -10,6 +10,7 @@
     z-index: 1001;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif
 }
+
 .biz-dialog-title {
     margin: 0;
     padding: 0 20px;
@@ -19,6 +20,7 @@
     font-weight: normal;
     position: relative
 }
+
 .biz-dialog-close {
     position: absolute;
     top: 15px;
@@ -29,19 +31,23 @@
     cursor: pointer;
     -webkit-transition: -webkit-transform .5s ease-in-out
 }
+
 .biz-dialog-close:hover {
     -webkit-transform: rotate(90deg)
 }
+
 .biz-dialog-content {
     padding: 20px;
     font-size: 14px;
     overflow: auto
 }
+
 .biz-dialog-bottom {
     padding: 20px 0;
     height: 30px;
     text-align: center
 }
+
 .biz-mask {
     position: fixed;
     top: 0;
@@ -52,6 +58,7 @@
     opacity: 0.2;
     z-index: 1000
 }
+
 .biz-alert,
 .biz-confirm {
     z-index: 1003

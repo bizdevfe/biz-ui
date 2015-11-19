@@ -14,21 +14,25 @@
     outline: none;
     vertical-align: middle
 }
+
 .biz-input {
     height: 18px;
     line-height: 18px
 }
+
 .biz-textarea,
 .biz-textline textarea {
     line-height: 20px;
     resize: none
 }
+
 .biz-textline textarea {
     float: left;
     border-left: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0
 }
+
 .biz-textline div {
     float: left;
     width: 15px;
@@ -38,6 +42,7 @@
     position: relative;
     overflow: hidden
 }
+
 .biz-textline pre {
     font-family: Helvetica, Arial, sans-serif;
     position: absolute;

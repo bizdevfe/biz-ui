@@ -6,6 +6,7 @@
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
+
 .biz-tab > ul {
     margin: 0;
     padding: 0;
@@ -13,6 +14,7 @@
     height: 36px;
     line-height: 36px
 }
+
 .biz-tab > ul li {
     float: left;
     padding: 0 40px;
@@ -21,12 +23,15 @@
     text-align: center;
     cursor: pointer
 }
+
 .biz-tab > ul li:first-child {
     border-left: 0
 }
+
 .biz-tab > ul li.active {
     cursor: default
 }
+
 .biz-tab > div {
     padding: 10px
 }

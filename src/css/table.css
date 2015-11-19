@@ -7,9 +7,11 @@
     overflow-x: auto;
     overflow-y: hidden
 }
+
 .biz-table-placeholder {
     height: 0px
 }
+
 .biz-table {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -18,6 +20,7 @@
     border-collapse: collapse;
     table-layout: fixed
 }
+
 .biz-table th {
     padding: 5px 8px;
     border-width: 1px;
@@ -25,18 +28,22 @@
     white-space: nowrap;
     font-weight: normal
 }
+
 .biz-table th[sortable] {
     background-image: url(img/bizui.png);
     background-position: right -385px;
     background-repeat: no-repeat;
     cursor: pointer
 }
+
 .biz-table th[asc] {
     background-position: right -415px
 }
+
 .biz-table th[des] {
     background-position: right -445px
 }
+
 .biz-table td {
     border-width: 1px;
     border-style: solid;
@@ -47,60 +54,76 @@
     white-space: normal;
     overflow: hidden
 }
+
 .biz-table tr.sum {
     font-weight: bold
 }
+
 .biz-table tr.no-data td {
     text-align: center
 }
+
 .biz-table .biz-label {
     margin-right: 0
 }
+
 .biz-table .biz-checkbox-unchecked {
     background-position: 2px 0
 }
+
 .biz-table .biz-checkbox-unchecked-hover {
     background-position: 2px -20px
 }
+
 .biz-table .biz-checkbox-checked {
     background-position: 2px -40px
 }
+
 .biz-table .biz-checkbox-checked-hover {
     background-position: 2px -60px
 }
+
 .biz-table .biz-checkbox-unchecked-disabled {
     background-position: 2px -80px
 }
+
 .biz-table .biz-checkbox-checked-disabled {
     background-position: 2px -100px
 }
+
 .biz-table td[editable] {
     padding-right: 30px;
     background-image: url(img/edit.png);
     background-position: right center;
     background-repeat: no-repeat
 }
+
 .biz-table td[editable]:hover {
     cursor: pointer
 }
+
 .biz-table-editor {
     border-width: 1px;
     border-style: solid;
     outline: none
 }
+
 .biz-treetable {
     border-width: 1px;
     border-style: solid
 }
+
 .biz-treetable td {
     text-align: left;
     cursor: default;
     border-width: 0
 }
+
 .biz-treetable span.indenter {
     display: inline-block;
     width: 19px
 }
+
 .biz-treetable span.indenter a {
     display: inline-block;
     width: 19px;

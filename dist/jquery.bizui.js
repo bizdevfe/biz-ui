@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.1.3
+ * @version v1.1.4
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -2896,6 +2896,7 @@ define('ui/Dialog',['require'],function(require) {
      * @param {Number|String} [options.height] 高度
      * @param {Array} [options.buttons] 按钮组 {text: '', click: function(event){}, theme: ''}
      * @param {Boolean} [options.destroyOnClose] 关闭时是否销毁
+     * @param {Function} [options.onBeforeClose] 关闭时的回调函数，返回false（===严格判断是否等于false），则不执行关闭
      * @param {String} [options.skin] 自定义样式
      * @param {String} [options.title] 弹窗标题
      * @param {Number} [options.zIndex] 弹窗显示登记
@@ -2978,7 +2979,7 @@ define('ui/Dialog',['require'],function(require) {
             //把dialog加入到body中，并且设置top和left
             //加入mask
             this.$container.appendTo('body')
-                .after($('<div class="biz-mask" style="display:none;"></div>').show());
+                .after($('<div class="biz-mask" style="display:none;"></div>'));
             if (options.height) {
                 this.$container.css({
                     height: options.height,
@@ -3010,8 +3011,8 @@ define('ui/Dialog',['require'],function(require) {
          */
         close: function() {
             var rs = true;
-            if (this.options.beforeClose && typeof(this.options.beforeClose) == 'function') {
-                rs = this.options.beforeClose();
+            if (this.options.onBeforeClose && typeof(this.options.onBeforeClose) == 'function') {
+                rs = this.options.onBeforeClose();
                 if (rs === false) { // cancel close dialog
                     return;
                 }
@@ -14829,7 +14830,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.1.3';
+    bizui.version = '1.1.4';
 
     var origin = window.bizui;
 

@@ -2,6 +2,7 @@
 .biz-textline div {
     background-color: #007aff;
 }
+
 .biz-input-focus,
 .biz-textarea-focus,
 .biz-textline textarea.biz-textline-focus,
@@ -11,6 +12,7 @@
 .biz-table-editor {
     border-color: #007aff;
 }
+
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active:hover:hover,
 .datepicker table tr td.active.disabled:hover,
@@ -55,6 +57,8 @@
     background-color: #007aff;
     border-color: #007aff;
 }
+
+
 /**
  * primary hover color
  */
@@ -62,14 +66,18 @@
 .biz-button:hover {
     background-color: #3395ff;
 }
+
 .biz-button:active {
     background-color: #006ee6;
 }
+
 .selectBox-options li.selectBox-hover a,
 .biz-table tr.selected,
 .biz-table tr:hover {
     background-color: #e5f2ff;
 }
+
+
 /**
  * assistant color
  */
@@ -83,6 +91,8 @@
 .datepicker table {
     background-color: #707070;
 }
+
+
 /**
  * assistant hover color
  */
@@ -94,12 +104,16 @@
 .datepicker-years thead tr:first-child th:hover {
     background-color: #8a8a8a;
 }
+
 .biz-table th[sortable]:hover {
     background-color: #7d7d7d;
 }
+
 .biz-button-dark:active {
     background-color: #636363;
 }
+
+
 /**
  * high priority color
  */
@@ -109,6 +123,8 @@
 .selectBox-options li.selectBox-selected a {
     background: #007aff;
 }
+
+
 /**
  * text color
  */
@@ -127,6 +143,8 @@
 .biz-treetable tr.tree-selected {
     color: #ffffff;
 }
+
+
 /**
  * high priority color
  */
@@ -136,14 +154,17 @@
     background-color: #dedede;
     color: #b6b6b6;
 }
+
 .selectBox-disabled:hover,
 .selectBox-disabled:focus {
     border-color: #e2e2e2;
 }
+
 .biz-table.biz-rowspan tr.selected,
 .biz-table.biz-rowspan tr:hover {
-    background-color: #ffffff;
+    background-color: #fff;
 }
+
 .biz-table.biz-rowspan tr.sum,
 .biz-table.biz-rowspan tr.sum:hover {
     background-color: #fffbe5;

@@ -1,6 +1,7 @@
 .rc-handle-container {
     position: relative;
 }
+
 .rc-handle {
     position: absolute;
     width: 16px;
@@ -8,9 +9,11 @@
     margin-left: -8px;
     z-index: 2
 }
+
 .biz-table.rc-table-resizing {
     cursor: ew-resize;
 }
+
 table.rc-table-resizing thead,
 table.rc-table-resizing thead > th,
 table.rc-table-resizing thead > th > a,

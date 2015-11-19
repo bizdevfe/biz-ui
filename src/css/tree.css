@@ -6,21 +6,26 @@
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
 }
+
 .jstree-default .jstree-node,
 .jstree-default .jstree-wholerow,
 .jstree-default .jstree-anchor {
     line-height: 30px
 }
+
 .jstree-default .jstree-wholerow {
     height: auto
 }
+
 .jstree-default .jstree-icon:empty {
     margin-top: 3px
 }
+
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-hovered ~ .jstree-ocl,
 .jstree-default > .jstree-no-dots .jstree-closed > .jstree-wholerow-clicked ~ .jstree-ocl {
     background-position: -4px -36px
 }
+
 .jstree-default > .jstree-no-dots .jstree-open > .jstree-wholerow-hovered ~ .jstree-ocl,
 .jstree-default > .jstree-no-dots .jstree-open > .jstree-wholerow-clicked ~ .jstree-ocl {
     background-position: -36px -36px
