@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.1.5
+ * @version v1.1.6
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -14827,7 +14827,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.1.5';
+    bizui.version = '1.1.6';
 
     var origin = window.bizui;
 
