@@ -1,23 +1,20 @@
 /**
  * BizUI Framework
- * @version v1.1.4
+ * @version v1.1.6
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
+(function(root, factory) {
+    if (typeof exports === 'object' && typeof module === 'object') {
+        var $ = require('jquery');
+        module.exports = factory($);
+    } else if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else {
-        root.bizui = factory();
+        root['bizui'] = factory(root.$);
     }
 }(this, function($) {
-    $ = $ || window.$;
-    /**
- * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
- * Available via the MIT or new BSD license.
- * see: http://github.com/jrburke/almond for details
- */
-//Going sloppy to avoid 'use strict' string cost, but strict practices should
+    //Going sloppy to avoid 'use strict' string cost, but strict practices should
 //be followed.
 /*jslint sloppy: true */
 /*global setTimeout: false */
@@ -14830,7 +14827,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.1.4';
+    bizui.version = '1.1.6';
 
     var origin = window.bizui;
 
