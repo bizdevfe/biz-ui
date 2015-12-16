@@ -11,7 +11,7 @@ define(function(require) {
      * @protected
      */
     util.isArray = function(a) {
-        return toString.call(a) === '[object Array]';
+        return Object.prototype.toString.call(a) === '[object Array]';
     };
 
     /**
