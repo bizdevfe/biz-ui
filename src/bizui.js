@@ -120,7 +120,12 @@ define(function(require) {
          * {@link TreeTable} constructor
          * @method TreeTable
          */
-        TreeTable: require('ui/TreeTable')
+        TreeTable: require('ui/TreeTable'),
+        /**
+         * {@link DropDownContext} constructor
+         * @method DropdownContext
+         */
+        DropdownContext: require('ui/DropdownContext')
     });
 
     return bizui;
