@@ -3,5 +3,11 @@
   "globals": {
     "define": true
   },
-  "curly": true
+  "strict": false,
+  "curly": true,
+  "globals": {
+    "jQuery": false,
+    "$": false,
+    "define": false
+  }
 }
