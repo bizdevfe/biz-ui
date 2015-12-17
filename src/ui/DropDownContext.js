@@ -70,7 +70,7 @@ define(function() {
      * toggle
      */
     DropDownContext.prototype.toggle = function() {
-        (this.hasShow ? this.close : this.open)();
+        (this.hasShow ? this.close : this.open).call(this);
     };
 
     /**
