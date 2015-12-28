@@ -88,7 +88,7 @@ define(function(require) {
                     } else {
                         $(this).attr('class', defaultClass + ' ' + checked + ' ' + checkedHover);
                     }
-                    if(id === ''){//当如果没有id属性的时候，需要在label中对原始的input的checked属性做手动设置
+                    if (id === '') { //当如果没有id属性的时候，需要在label中对原始的input的checked属性做手动设置
                         self.$main.prop('checked', !self.$main.prop('checked'));
                     }
                 }

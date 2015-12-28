@@ -1414,9 +1414,9 @@ define('ui/Checkbox',['require'],function(require) {
          * @param {Object} [options] 参数
          * @protected
          */
-        init: function(options) {
+        init: function() {
             var title = this.$main.attr('title'),
-                id = this.$main.attr('id');
+                id = this.$main.attr('id') || '';
             this.$main.after('<label for="' + id + '">' + title + '</label>').hide();
 
             /**
@@ -1426,27 +1426,30 @@ define('ui/Checkbox',['require'],function(require) {
             this.$label.addClass(defaultClass);
 
             //初始状态
-            if (this.main.checked) {
-                this.$label.addClass(this.main.disabled ? checkedDisabled : checked);
+            if (this.$main.prop('checked')) {
+                this.$label.addClass(this.$main.prop('disabled') ? checkedDisabled : checked);
             } else {
-                this.$label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
+                this.$label.addClass(this.$main.prop('disabled') ? uncheckedDisabled : unchecked);
             }
 
             var self = this;
-            this.$label.on('mouseover.bizCheckbox', function(e) {
-                if (!self.main.disabled) {
-                    $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
+            this.$label.on('mouseover.bizCheckbox', function() {
+                if (!self.$main.prop('disabled')) {
+                    $(this).addClass(self.$main.prop('checked') ? checkedHover : uncheckedHover);
                 }
-            }).on('mouseout.bizCheckbox', function(e) {
-                if (!self.main.disabled) {
-                    $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
+            }).on('mouseout.bizCheckbox', function() {
+                if (!self.$main.prop('disabled')) {
+                    $(this).removeClass(self.$main.prop('checked') ? checkedHover : uncheckedHover);
                 }
-            }).on('click.bizCheckbox', function(e) {
-                if (!self.main.disabled) {
-                    if (self.main.checked) { //label的点击先于input的点击
+            }).on('click.bizCheckbox', function() {
+                if (!self.$main.prop('disabled')) {
+                    if (self.$main.prop('checked')) { //label的点击先于input的点击
                         $(this).attr('class', defaultClass + ' ' + unchecked + ' ' + uncheckedHover);
                     } else {
                         $(this).attr('class', defaultClass + ' ' + checked + ' ' + checkedHover);
+                    }
+                    if (id === '') { //当如果没有id属性的时候，需要在label中对原始的input的checked属性做手动设置
+                        self.$main.prop('checked', !self.$main.prop('checked'));
                     }
                 }
             });
@@ -1456,32 +1459,32 @@ define('ui/Checkbox',['require'],function(require) {
          * 勾选
          */
         check: function() {
-            this.main.checked = true;
-            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
+            this.$main.prop('checked', true);
+            this.$label.attr('class', defaultClass + ' ' + (this.$main.prop('disabled') ? checkedDisabled : checked));
         },
 
         /**
          * 取消勾选
          */
         uncheck: function() {
-            this.main.checked = false;
-            this.$label.attr('class', defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
+            this.$main.prop('checked', false);
+            this.$label.attr('class', defaultClass + ' ' + (this.$main.prop('disabled') ? uncheckedDisabled : unchecked));
         },
 
         /**
          * 激活
          */
         enable: function() {
-            this.main.disabled = false;
-            this.$label.attr('class', defaultClass + ' ' + (this.main.checked ? checked : unchecked));
+            this.$main.prop('disabled', false);
+            this.$label.attr('class', defaultClass + ' ' + (this.$main.prop('checked') ? checked : unchecked));
         },
 
         /**
          * 禁用
          */
         disable: function() {
-            this.main.disabled = true;
-            this.$label.attr('class', defaultClass + ' ' + (this.main.checked ? checkedDisabled : uncheckedDisabled));
+            this.$main.prop('disabled', true);
+            this.$label.attr('class', defaultClass + ' ' + (this.$main.prop('checked') ? checkedDisabled : uncheckedDisabled));
         },
 
         /**
