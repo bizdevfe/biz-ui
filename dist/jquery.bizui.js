@@ -3667,7 +3667,8 @@ define('ui/Tab',['require'],function(require) {
         this.$main = $(this.main);
 
         var defaultOption = {
-            event: 'click'
+            event: 'click',
+            selectedIndex: 0
         };
         this.options = $.extend(defaultOption, options || {});
         this.init(this.options);
@@ -3685,17 +3686,12 @@ define('ui/Tab',['require'],function(require) {
             this.$main.addClass(defaultClass);
             this.tabs = this.$main.find('ul li');
             this.contents = this.$main.children('div').children('div').hide();
-            $(this.tabs[0]).addClass('active');
-            $(this.contents[0]).show();
+            this.select(options.selectedIndex);
 
             var self = this;
             this.$main.on(options.event + '.bizTab', 'ul li', function(e) {
                 var curTab = $(e.target);
-
                 if (!curTab.hasClass('active')) {
-                    self.tabs.removeClass('active');
-                    curTab.addClass('active');
-
                     var index;
                     $.each(self.tabs, function(i, tab) {
                         if (tab === e.target) {
@@ -3703,8 +3699,7 @@ define('ui/Tab',['require'],function(require) {
                         }
                     });
 
-                    self.contents.hide();
-                    $(self.contents[index]).show();
+                    self.select(index);
 
                     if (options.onChange) {
                         options.onChange.call(self, {
@@ -3714,6 +3709,23 @@ define('ui/Tab',['require'],function(require) {
                     }
                 }
             });
+        },
+
+        /**
+         * 选中tab，或者得到当前被选中的tab
+         * @param  {Number} [selectedIndex] tab索引号
+         * @return {Number} [selectedIndex] 当前tab索引号
+         */
+        select: function(selectedIndex) {
+            if (typeof selectedIndex != 'undefined') {
+                this.tabs.removeClass('active');
+                this.contents.hide();
+                this.options.selectedIndex = selectedIndex;
+                $(this.tabs[selectedIndex]).addClass('active');
+                $(this.contents[selectedIndex]).show();
+            } else {
+                return this.options.selectedIndex;
+            }
         },
 
         /**
@@ -3744,6 +3756,15 @@ define('ui/Tab',['require'],function(require) {
                         }
                     });
                     break;
+                case 'select':
+                    var selectedIndex;
+                    this.each(function() {
+                        tab = $(this).data(dataKey);
+                        if (tab) {
+                            selectedIndex = tab.select(options);
+                        }
+                    });
+                    return selectedIndex;
                 default:
                     this.each(function() {
                         if (!$(this).data(dataKey) && isTab(this)) {
