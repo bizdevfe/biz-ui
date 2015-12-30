@@ -3548,6 +3548,8 @@ define('ui/Tooltip',['require'],function(require) {
     $.extend($.fn, {
         bizTooltip: function(options) {
             options = options || {};
+            options.el = this;
+            Tooltip(options);
             this.each(function() {
                 var el = $(this);
                 var title = el.attr('title');
@@ -3561,7 +3563,7 @@ define('ui/Tooltip',['require'],function(require) {
                     var delay = getDefault('delay', options, el, 300);
                     clearTimeout(timer);
                     timer = setTimeout(function() {
-                        var margin = getDefault('margin', options, el, 20);
+                        var margin = getDefault('margin', options, el, 12);
                         var slide = getDefault('slide', options, el, 10);
                         var direction = getDefault('direction', options, el, 'top');
                         var t = el.attr('title');
@@ -3607,6 +3609,7 @@ define('ui/Tooltip',['require'],function(require) {
      * @param {String} options.color 颜色
      * @param {String} options.direction 位置
      * @param {Number} options.margin 边距
+     * @param {HTMLElement|jQuery} el 
      */
     function Tooltip(options) {
         if (options !== 'destroy') {
@@ -3617,13 +3620,24 @@ define('ui/Tooltip',['require'],function(require) {
                 win = $(window);
                 arrowWidth = arrow.width();
                 arrowHeight = arrow.height();
-                $('[title]').bizTooltip(options);
+                if (options && options.el) {
+                    options.el.bizTooltip(options);
+                } else {
+                    $('[title]').bizTooltip(options);
+                }
             }
         } else {
             $('#biz-tooltip').remove();
-            $('[title]').each(function() {
-                $(this).unbind('mouseenter').unbind('mouseleave');
-            });
+            if (options && options.el) {
+                options.el.each(function() {
+                    $(this).unbind('mouseenter').unbind('mouseleave');
+                });
+            } else {
+                $('[title]').each(function() {
+                    $(this).unbind('mouseenter').unbind('mouseleave');
+                });
+            }
+
         }
     }
 
@@ -13257,6 +13271,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             lockHead: false
         };
         this.options = $.extend(true, defaultOption, options || {});
+        selectPrefix += Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.init(this.options);
     }
 
@@ -13566,9 +13581,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * @protected
          */
         createSelect: function() {
-            if (this.options.data.length) {
-                this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
-            }
+            this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
 
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
