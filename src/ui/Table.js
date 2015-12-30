@@ -70,6 +70,7 @@ define(function(require) {
             lockHead: false
         };
         this.options = $.extend(true, defaultOption, options || {});
+        selectPrefix += Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.init(this.options);
     }
 
@@ -379,9 +380,7 @@ define(function(require) {
          * @protected
          */
         createSelect: function() {
-            if (this.options.data.length) {
-                this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
-            }
+            this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
 
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {

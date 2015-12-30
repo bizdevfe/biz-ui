@@ -204,6 +204,8 @@ define(function(require) {
     $.extend($.fn, {
         bizTooltip: function(options) {
             options = options || {};
+            options.el = this;
+            Tooltip(options);
             this.each(function() {
                 var el = $(this);
                 var title = el.attr('title');
@@ -217,7 +219,7 @@ define(function(require) {
                     var delay = getDefault('delay', options, el, 300);
                     clearTimeout(timer);
                     timer = setTimeout(function() {
-                        var margin = getDefault('margin', options, el, 20);
+                        var margin = getDefault('margin', options, el, 12);
                         var slide = getDefault('slide', options, el, 10);
                         var direction = getDefault('direction', options, el, 'top');
                         var t = el.attr('title');
@@ -263,6 +265,7 @@ define(function(require) {
      * @param {String} options.color 颜色
      * @param {String} options.direction 位置
      * @param {Number} options.margin 边距
+     * @param {HTMLElement|jQuery} el 
      */
     function Tooltip(options) {
         if (options !== 'destroy') {
@@ -273,13 +276,24 @@ define(function(require) {
                 win = $(window);
                 arrowWidth = arrow.width();
                 arrowHeight = arrow.height();
-                $('[title]').bizTooltip(options);
+                if (options && options.el) {
+                    options.el.bizTooltip(options);
+                } else {
+                    $('[title]').bizTooltip(options);
+                }
             }
         } else {
             $('#biz-tooltip').remove();
-            $('[title]').each(function() {
-                $(this).unbind('mouseenter').unbind('mouseleave');
-            });
+            if (options && options.el) {
+                options.el.each(function() {
+                    $(this).unbind('mouseenter').unbind('mouseleave');
+                });
+            } else {
+                $('[title]').each(function() {
+                    $(this).unbind('mouseenter').unbind('mouseleave');
+                });
+            }
+
         }
     }
 
