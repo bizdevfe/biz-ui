@@ -36,34 +36,38 @@
 
 .biz-table th[sortable]:before {
     content: '';
-    width:0;
-    height:0;
+    width: 0;
+    height: 0;
     position: absolute;
     top: 8px;
     right: 12px;
-    border-width:0 5px 5px;
-    border-style:solid;
-    border-color:transparent transparent #fff;/*透明 透明  白*/
+    border-width: 0 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+    /*透明 透明  白*/
 }
 
 .biz-table th[sortable]:after {
     content: '';
-    width:0;
-    height:0;
+    width: 0;
+    height: 0;
     position: absolute;
     bottom: 8px;
     right: 12px;
-    border-width:5px 5px 0;
-    border-style:solid;
-    border-color:#fff transparent transparent;/*灰 透明 透明 */
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+    /*灰 透明 透明 */
 }
 
 .biz-table th[asc]:before {
-    border-color:transparent transparent #13BD31;/*透明 透明 绿色选中效果 */
+    border-color: transparent transparent #13BD31;
+    /*透明 透明 绿色选中效果 */
 }
 
 .biz-table th[des]:after {
-    border-color:#13BD31 transparent transparent;/*绿色选中效果 透明  透明*/
+    border-color: #13BD31 transparent transparent;
+    /*绿色选中效果 透明  透明*/
 }
 
 .biz-table td {

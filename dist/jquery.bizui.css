@@ -2268,16 +2268,40 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     font-weight: normal
 }
 .biz-table th[sortable] {
-    background-image: url(img/bizui.png);
-    background-position: right -385px;
-    background-repeat: no-repeat;
-    cursor: pointer
+    cursor: pointer;
+    position: relative;
 }
-.biz-table th[asc] {
-    background-position: right -415px
+.biz-table th[sortable]:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    border-width: 0 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+    
 }
-.biz-table th[des] {
-    background-position: right -445px
+.biz-table th[sortable]:after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+    
+}
+.biz-table th[asc]:before {
+    border-color: transparent transparent #13BD31;
+    
+}
+.biz-table th[des]:after {
+    border-color: #13BD31 transparent transparent;
+    
 }
 .biz-table td {
     border-width: 1px;
