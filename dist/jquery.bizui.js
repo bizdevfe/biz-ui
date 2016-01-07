@@ -13299,6 +13299,19 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             var skin = options.skin ? (' ' + options.skin) : '';
 
+            //保存下初始化时候的排序
+            //如果有多个排序列，那么默认排序取最后一个
+            this.defaultSort = [];
+            for (var i = options.column.length - 1; i >= 0; i--) {
+                var col = options.column[i];
+                if (col.currentSort) {
+                    this.defaultSort[this.defaultSort.length] = {
+                        field: col.field,
+                        currentSort: col.currentSort
+                    };
+                }
+            }
+
             //创建表头
             this.$tableHead.html(this.createTableHead(options))
                 .addClass(defaultClass + skin);
@@ -13692,6 +13705,36 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
         },
 
         /**
+         * 恢复列表初始化时候默认排序的样式
+         * 注意：只更新数据状态，不会重绘，需要手动触发refresh()重新渲染
+         */
+        resetSort: function() {
+            var i, col;
+            if (this.defaultSort.length) {
+                for (i = 0; i < this.options.column.length; i++) {
+                    col = this.options.column[i];
+                    //首先删除掉currentSort
+                    //之后如果在之前纪录的默认排序中有，则重新谁currentSort
+                    delete col.currentSort;
+                    for (var j = 0; j < this.defaultSort.length; j++) {
+                        if (col.field == this.defaultSort[j].field) {
+                            col.currentSort = this.defaultSort[j].currentSort;
+                        }
+                    }
+                }
+            } else {
+                //如果没有默认排序，说明在初始化的时候所有的列没有传currentSort参数
+                //那么则删除列表中所有列的currentSort
+                for (i = 0; i < this.options.column.length; i++) {
+                    col = this.options.column[i];
+                    if (col.currentSort) {
+                        delete col.currentSort;
+                    }
+                }
+            }
+        },
+
+        /**
          * 绑定验证事件
          * @protected
          */
@@ -13998,6 +14041,14 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                         table = $(this).data(dataKey);
                         if (table) {
                             table.hideColumn(options);
+                        }
+                    });
+                    break;
+                case 'resetSort':
+                    this.each(function() {
+                        table = $(this).data(dataKey);
+                        if (table) {
+                            table.resetSort(options);
                         }
                     });
                     break;
