@@ -52,7 +52,9 @@ define(function(require) {
          * @protected
          */
         init: function(options) {
-            this.$main.addClass(defaultClass);
+            var skin = options.skin ? (' ' + options.skin) : '';
+
+            this.$main.addClass(defaultClass + skin);
             this.tabs = this.$main.find('ul li');
             this.contents = this.$main.children('div').children('div').hide();
             this.select(options.selectedIndex);
