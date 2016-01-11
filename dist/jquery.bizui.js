@@ -918,6 +918,7 @@ define('ui/Textline',['require'],function(require) {
      * @param {HTMLElement|jQuery} textline 目标元素
      * @param {Object} [options] 参数
      * @param {Boolean} [options.disabled] 是否禁用
+     * @param {Boolean} [options.skin] 皮肤
      */
     function Textline(textline, options) {
         if (textline instanceof jQuery) {
@@ -958,7 +959,9 @@ define('ui/Textline',['require'],function(require) {
          * @protected
          */
         init: function(options) {
-            this.$main.addClass(defaultClass).html('<div><pre></pre></div><textarea></textarea>');
+            this.skin = options.skin ? (' ' + options.skin) : '';
+
+            this.$main.addClass(defaultClass + this.skin).html('<div><pre></pre></div><textarea></textarea>');
 
             var w = Math.max(this.$main.width(), 200),
                 h = Math.max(this.$main.height(), 52);
@@ -1044,7 +1047,7 @@ define('ui/Textline',['require'],function(require) {
                 .off('blur.bizTextline')
                 .off('keyup.bizTextline')
                 .off('scroll.bizTextline');
-            this.$main.removeClass(defaultClass).empty();
+            this.$main.removeClass(defaultClass + this.skin).empty();
         },
 
         /**
@@ -3656,6 +3659,7 @@ define('ui/Tab',['require'],function(require) {
      * @param {Object} [options] 参数
      * @param {String} [options.event] 切换tab事件
      * @param {Function} [options.onChange] 切换回调(data, event)
+     * @param {Function} [options.skin] 皮肤
      */
     function Tab(tab, options) {
         if (tab instanceof jQuery) {
@@ -3697,9 +3701,9 @@ define('ui/Tab',['require'],function(require) {
          * @protected
          */
         init: function(options) {
-            var skin = options.skin ? (' ' + options.skin) : '';
+            this.skin = options.skin ? (' ' + options.skin) : '';
 
-            this.$main.addClass(defaultClass + skin);
+            this.$main.addClass(defaultClass + this.skin);
             this.tabs = this.$main.find('ul li');
             this.contents = this.$main.children('div').children('div').hide();
             this.select(options.selectedIndex);
@@ -3748,7 +3752,7 @@ define('ui/Tab',['require'],function(require) {
          * 销毁
          */
         destroy: function() {
-            this.$main.removeClass(defaultClass);
+            this.$main.removeClass(defaultClass + this.skin);
             this.$main.off(this.options.event + '.bizTab');
         }
     };

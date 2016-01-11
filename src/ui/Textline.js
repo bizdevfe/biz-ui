@@ -10,6 +10,7 @@ define(function(require) {
      * @param {HTMLElement|jQuery} textline 目标元素
      * @param {Object} [options] 参数
      * @param {Boolean} [options.disabled] 是否禁用
+     * @param {Boolean} [options.skin] 皮肤
      */
     function Textline(textline, options) {
         if (textline instanceof jQuery) {
@@ -50,7 +51,9 @@ define(function(require) {
          * @protected
          */
         init: function(options) {
-            this.$main.addClass(defaultClass).html('<div><pre></pre></div><textarea></textarea>');
+            this.skin = options.skin ? (' ' + options.skin) : '';
+
+            this.$main.addClass(defaultClass + this.skin).html('<div><pre></pre></div><textarea></textarea>');
 
             var w = Math.max(this.$main.width(), 200),
                 h = Math.max(this.$main.height(), 52);
@@ -136,7 +139,7 @@ define(function(require) {
                 .off('blur.bizTextline')
                 .off('keyup.bizTextline')
                 .off('scroll.bizTextline');
-            this.$main.removeClass(defaultClass).empty();
+            this.$main.removeClass(defaultClass + this.skin).empty();
         },
 
         /**

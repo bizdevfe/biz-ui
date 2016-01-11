@@ -11,6 +11,7 @@ define(function(require) {
      * @param {Object} [options] 参数
      * @param {String} [options.event] 切换tab事件
      * @param {Function} [options.onChange] 切换回调(data, event)
+     * @param {Function} [options.skin] 皮肤
      */
     function Tab(tab, options) {
         if (tab instanceof jQuery) {
@@ -52,9 +53,9 @@ define(function(require) {
          * @protected
          */
         init: function(options) {
-            var skin = options.skin ? (' ' + options.skin) : '';
+            this.skin = options.skin ? (' ' + options.skin) : '';
 
-            this.$main.addClass(defaultClass + skin);
+            this.$main.addClass(defaultClass + this.skin);
             this.tabs = this.$main.find('ul li');
             this.contents = this.$main.children('div').children('div').hide();
             this.select(options.selectedIndex);
@@ -103,7 +104,7 @@ define(function(require) {
          * 销毁
          */
         destroy: function() {
-            this.$main.removeClass(defaultClass);
+            this.$main.removeClass(defaultClass + this.skin);
             this.$main.off(this.options.event + '.bizTab');
         }
     };
