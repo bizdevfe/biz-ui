@@ -13276,13 +13276,11 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             topOffset: 0,
             lockHead: false
         };
+        this.defaultClass = 'biz-table';
+        this.selectPrefix = 'biz-table-select-row-' + Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.options = $.extend(true, defaultOption, options || {});
-        selectPrefix += Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.init(this.options);
     }
-
-    var defaultClass = 'biz-table',
-        selectPrefix = 'biz-table-select-row-';
 
     Table.prototype = {
         /**
@@ -13320,11 +13318,11 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //创建表头
             this.$tableHead.html(this.createTableHead(options))
-                .addClass(defaultClass + skin);
+                .addClass(this.defaultClass + skin);
 
             //创建表格
             this.$tableBody.html(this.createTableBody(options))
-                .addClass(defaultClass + skin + (this.rowSpan > 1 ? ' biz-rowspan' : ''));
+                .addClass(this.defaultClass + skin + (this.rowSpan > 1 ? ' biz-rowspan' : ''));
 
             //勾选列
             if (options.selectable) {
@@ -13600,18 +13598,17 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * @protected
          */
         createSelect: function() {
-            this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (selectPrefix + 0) + '" /></th>');
-
+            this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (this.selectPrefix + 0) + '" /></th>');
+            var self = this;
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
-                    $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (selectPrefix + (index + 1)) + '" /></td>');
+                    $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (self.selectPrefix + (index + 1)) + '" /></td>');
                 });
             } else {
-                var self = this,
-                    rowIndex = 1;
+                var rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
-                        $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (selectPrefix + rowIndex) + '" /></td>');
+                        $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (self.selectPrefix + rowIndex) + '" /></td>');
                         rowIndex = rowIndex + 1;
                     }
                 });
@@ -13673,8 +13670,9 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * @protected
          */
         getSelectedIndex: function() {
+            var self = this;
             return $.map(this.$tableBody.find('.biz-checkbox-checked'), function(label, index) {
-                return parseInt($(label).attr('for').replace(selectPrefix, ''), 10) - 1;
+                return parseInt($(label).attr('for').replace(self.selectPrefix, ''), 10) - 1;
             });
         },
 
@@ -13765,7 +13763,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
         bindEdit: function() {
             var self = this;
             this.$main.find('td[editable]').on('change', function(e, newValue) {
-                var rowIndex = parseInt($(this).parent().find(':checkbox').attr('id').replace(selectPrefix, ''), 10),
+                var rowIndex = parseInt($(this).parent().find(':checkbox').attr('id').replace(self.selectPrefix, ''), 10),
                     columIndex = $(this).parent().find('td').index($(this));
                 if (self.options.selectable) {
                     columIndex = columIndex - 1;
@@ -13852,7 +13850,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             }
 
             $.each(rowIndex, function(index, val) {
-                var checkbox = self.$main.find('#' + selectPrefix + val),
+                var checkbox = self.$main.find('#' + self.selectPrefix + val),
                     tr = checkbox.parent().parent();
                 if (selected) {
                     checkbox.bizCheckbox('check');
