@@ -2,6 +2,8 @@
  * @ignore
  */
 define(function(require) {
+    require('dep/jquery.placeholder.js');
+
     /**
      * Input constructor
      *
@@ -75,6 +77,10 @@ define(function(require) {
                 $(this).addClass(focusClass);
             }).on('blur.bizInput', function(e) {
                 $(this).removeClass(focusClass);
+            });
+
+            this.$main.placeholder({
+                customClass: 'placeholder'
             });
         },
 
