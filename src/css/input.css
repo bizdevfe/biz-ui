@@ -20,6 +20,10 @@
     line-height: 18px
 }
 
+.biz-input.placeholder {
+    color: #aaa;
+}
+
 .biz-textarea,
 .biz-textline textarea {
     line-height: 20px;
