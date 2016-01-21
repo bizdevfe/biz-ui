@@ -5,7 +5,8 @@ jshint ../src
 if [ $? -ne 0 ]
   then
     echo -e "\033[0;31mPlease solve jshint errors before committing! \033[0m"
-    exit 1
+    read -p "Press any key to exit."
+    exit  1
 fi
 echo -e "\033[0;32mCode inspection pass! \033[0m"
 
@@ -24,7 +25,7 @@ jsduck --config doc-config.json
 if [ $? -ne 0 ]
   then
     echo -e "\033[0;31mPlease solve jsduck errors before committing! \033[0m"
-   
+    read -p "Press any key to continue."
 fi
 echo -e "\033[0;32mAPI generating done! \033[0m"
 
@@ -45,3 +46,6 @@ node ../node_modules/requirejs/bin/r.js -o r-config.js out=../dist/jquery.bizui.
 echo -e "\033[0;32mJS Optimizing done! \033[0m"
 
 echo -e "\033[0;32mCongratulations, build done! \033[0m"
+
+read -p "Press any key to exit."
+exit  1
