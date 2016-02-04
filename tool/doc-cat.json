@@ -21,7 +21,8 @@
                     "Tree",
                     "Calendar",
                     "Table",
-                    "TreeTable"
+                    "TreeTable",
+                    "DropDownContext"
                 ]
             }
         ]
