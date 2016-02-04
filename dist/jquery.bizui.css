@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.1.6
+ * @version v1.2.0
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -2678,7 +2678,7 @@ table.rc-table-resizing .biz-label {
 }
 .biz-table.biz-rowspan tr.selected,
 .biz-table.biz-rowspan tr:hover {
-    background-color: #fff;
+    background-color: #ffffff;
 }
 .biz-table.biz-rowspan tr.sum,
 .biz-table.biz-rowspan tr.sum:hover {
