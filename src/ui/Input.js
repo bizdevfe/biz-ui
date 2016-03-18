@@ -116,7 +116,7 @@ define(function(require) {
     function isInput(elem) {
         return elem.nodeType === 1 &&
             elem.tagName.toLowerCase() === 'input' &&
-            elem.getAttribute('type').toLowerCase() === 'text';
+            (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
     }
 
     var dataKey = 'bizInput';
