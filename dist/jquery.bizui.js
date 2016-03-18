@@ -14,7 +14,13 @@
         root['bizui'] = factory(root.$);
     }
 }(this, function($) {
-    //Going sloppy to avoid 'use strict' string cost, but strict practices should
+    
+/**
+ * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/almond for details
+ */
+//Going sloppy to avoid 'use strict' string cost, but strict practices should
 //be followed.
 /*jslint sloppy: true */
 /*global setTimeout: false */
@@ -984,7 +990,7 @@ define('ui/Input',['require','dep/jquery.placeholder.js'],function(require) {
     function isInput(elem) {
         return elem.nodeType === 1 &&
             elem.tagName.toLowerCase() === 'input' &&
-            elem.getAttribute('type').toLowerCase() === 'text';
+            (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
     }
 
     var dataKey = 'bizInput';

@@ -2678,7 +2678,7 @@ table.rc-table-resizing .biz-label {
 }
 .biz-table.biz-rowspan tr.selected,
 .biz-table.biz-rowspan tr:hover {
-    background-color: #ffffff;
+    background-color: #fff;
 }
 .biz-table.biz-rowspan tr.sum,
 .biz-table.biz-rowspan tr.sum:hover {
