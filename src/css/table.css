@@ -29,12 +29,12 @@
     font-weight: normal
 }
 
-.biz-table th[sortable] {
+.biz-table div.sortable {
     cursor: pointer;
     position: relative;
 }
 
-.biz-table th[sortable]:before {
+.biz-table div.sortable:before {
     content: '';
     width: 0;
     height: 0;
@@ -47,7 +47,7 @@
     /*透明 透明  白*/
 }
 
-.biz-table th[sortable]:after {
+.biz-table div.sortable:after {
     content: '';
     width: 0;
     height: 0;
