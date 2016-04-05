@@ -269,11 +269,16 @@ define(function(require) {
                     this.rowSpan = col.content.length;
                 }
 
-                var sortable = (typeof col.sortable === 'undefined' || !col.sortable) ? '' : ' sortable',
-                    sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '',
-                    width = col.width ? ' width="' + col.width + '"' : '',
-                    title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title;
-                table.push('<th nowrap data-width="' + col.width + '"' + width + sortable + sort + ' field="' + col.field + '">' + title + '</th>');
+                var title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title,
+                    sortTable = false;
+                if(typeof col.sortable !== 'undefined' && col.sortable) {
+                    var sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '';
+                    title = '<div class="sortable"' + sort + '>' + title + '</div>';
+                    sortTable = true;
+                }
+
+                var width = col.width ? ' width="' + col.width + '"' : '';
+                table.push('<th nowrap data-width="' + col.width + '"' + width + (sortTable ? ' sortable' : '') + ' field="' + col.field + '">' + title + '</th>');
             }
 
             table.push('</tr></thead><tbody></tbody>');
@@ -475,15 +480,15 @@ define(function(require) {
          */
         bindSort: function() {
             var self = this;
-            this.$main.on('click.bizTableSort', '.biz-table-head th[sortable]', function(e) {
+            this.$main.on('click.bizTableSort', '.biz-table-head div.sortable', function(e) {
                 var head = $(e.currentTarget),
-                    field = head.attr('field');
+                    field = head.parent().attr('field');
                 if (head.attr('des') !== undefined) {
                     head.removeAttr('des').attr('asc', '');
                 } else if (head.attr('asc') !== undefined) {
                     head.removeAttr('asc').attr('des', '');
                 } else {
-                    head.parent().children('th').removeAttr('des').removeAttr('asc');
+                    head.parents().filter('tr:first').find('div.sortable').removeAttr('des').removeAttr('asc');
                     head.attr('des', '');
                 }
                 $.each(self.options.column, function(index, val) {
@@ -494,7 +499,7 @@ define(function(require) {
                     }
                 });
                 self.options.onSort.call(self, {
-                    field: head.attr('field'),
+                    field: head.parent().attr('field'),
                     des: head.attr('des') !== undefined,
                     asc: head.attr('asc') !== undefined
                 }, e);
