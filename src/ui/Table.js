@@ -70,6 +70,7 @@ define(function(require) {
             lockHead: false
         };
         this.defaultClass = 'biz-table';
+        this.rowIdPrefix = 'biz-table-row-' + Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.selectPrefix = 'biz-table-select-row-' + Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.options = $.extend(true, defaultOption, options || {});
         this.init(this.options);
@@ -301,7 +302,7 @@ define(function(require) {
 
             //数据
             for (var j = 0; j < rowCount; j++) {
-                table.push('<tr>');
+                table.push('<tr id="' + this.rowIdPrefix + (j + 1) + '">');
 
                 for (var k = 0; k < columnCount; k++) {
                     var col = column[k];
@@ -322,7 +323,7 @@ define(function(require) {
                 //附加行
                 if (this.rowSpan > 1) {
                     for (var m = 1; m < this.rowSpan; m++) {
-                        table.push('<tr>');
+                        table.push('<tr id="' + this.rowIdPrefix + (j + 1) + '">');
                         for (var n = 1; n < columnCount; n++) {
                             var _col = column[n];
                             if ((typeof _col.visible !== 'undefined' && !_col.visible) || _col.content.length === 1) {
@@ -561,7 +562,7 @@ define(function(require) {
         bindEdit: function() {
             var self = this;
             this.$main.find('td[editable]').on('change', function(e, newValue) {
-                var rowIndex = parseInt($(this).parent().find(':checkbox').attr('id').replace(self.selectPrefix, ''), 10),
+                var rowIndex = parseInt($(this).parent().attr('id').replace(self.rowIdPrefix, ''), 10),
                     columIndex = $(this).parent().find('td').index($(this));
                 if (self.options.selectable) {
                     columIndex = columIndex - 1;
