@@ -2270,11 +2270,11 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     white-space: nowrap;
     font-weight: normal
 }
-.biz-table th[sortable] {
+.biz-table div.sortable {
     cursor: pointer;
     position: relative;
 }
-.biz-table th[sortable]:before {
+.biz-table div.sortable:before {
     content: '';
     width: 0;
     height: 0;
@@ -2286,7 +2286,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     border-color: transparent transparent #fff;
     
 }
-.biz-table th[sortable]:after {
+.biz-table div.sortable:after {
     content: '';
     width: 0;
     height: 0;

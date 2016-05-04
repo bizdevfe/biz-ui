@@ -272,7 +272,7 @@ define(function(require) {
 
                 var title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title,
                     sortTable = false;
-                if(typeof col.sortable !== 'undefined' && col.sortable) {
+                if (typeof col.sortable !== 'undefined' && col.sortable) {
                     var sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '';
                     title = '<div class="sortable"' + sort + '>' + title + '</div>';
                     sortTable = true;
