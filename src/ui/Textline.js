@@ -116,6 +116,29 @@ define(function(require) {
             return this.$textarea[0].value.replace(/\r?\n/g, '').length;
         },
 
+		/**
+         * 获取/设置文本行数
+		 * @param {Number} [value] 行数
+         * @return {Number} 文本行数
+         */
+        lines: function(value) {
+			if (undefined === value) { //get
+                return this.$textarea.val().split('\n');
+            }
+            var self = this;
+			this.$textarea.keyup(function (event) {
+				var key = event.which;
+				var values = self.$textarea.val().split('\n');
+				if (key == 13) {
+					var length = values.length;
+					if(length > value){
+						self.val(temp);
+					}
+				}
+            temp = self.$textarea.val();
+			});
+        },
+
         /**
          * 获取/设置值
          * @param {String} [value] 参数
@@ -192,6 +215,17 @@ define(function(require) {
                         textline = $(this).data(dataKey);
                         if (textline) {
                             textline.disable();
+                        }
+                    });
+                    break;
+				case 'lines':
+                    if (undefined === options) { //get
+                        return $(this).data(dataKey).val().split("\n").length;
+                    }
+                    this.each(function() { //set
+                        textline = $(this).data(dataKey);
+                        if (textline) {
+                            textline.lines(options);
                         }
                     });
                     break;
