@@ -14,8 +14,7 @@
         root['bizui'] = factory(root.$);
     }
 }(this, function($) {
-    
-/**
+    /**
  * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/almond for details
@@ -13565,6 +13564,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             lockHead: false
         };
         this.defaultClass = 'biz-table';
+        this.rowIdPrefix = 'biz-table-row-' + Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.selectPrefix = 'biz-table-select-row-' + Math.floor((Math.random() * (10000 - 0 + 1) + 0)) + '-';
         this.options = $.extend(true, defaultOption, options || {});
         this.init(this.options);
@@ -13764,11 +13764,16 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                     this.rowSpan = col.content.length;
                 }
 
-                var sortable = (typeof col.sortable === 'undefined' || !col.sortable) ? '' : ' sortable',
-                    sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '',
-                    width = col.width ? ' width="' + col.width + '"' : '',
-                    title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title;
-                table.push('<th nowrap data-width="' + col.width + '"' + width + sortable + sort + ' field="' + col.field + '">' + title + '</th>');
+                var title = (typeof col.escapeTitle === 'undefined' || col.escapeTitle) ? util.escapeHTML(col.title) : col.title,
+                    sortTable = false;
+                if (typeof col.sortable !== 'undefined' && col.sortable) {
+                    var sort = (col.sortable && typeof col.currentSort !== 'undefined') ? (' ' + col.currentSort) : '';
+                    title = '<div class="sortable"' + sort + '>' + title + '</div>';
+                    sortTable = true;
+                }
+
+                var width = col.width ? ' width="' + col.width + '"' : '';
+                table.push('<th nowrap data-width="' + col.width + '"' + width + (sortTable ? ' sortable' : '') + ' field="' + col.field + '">' + title + '</th>');
             }
 
             table.push('</tr></thead><tbody></tbody>');
@@ -13791,7 +13796,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //数据
             for (var j = 0; j < rowCount; j++) {
-                table.push('<tr>');
+                table.push('<tr id="' + this.rowIdPrefix + (j + 1) + '">');
 
                 for (var k = 0; k < columnCount; k++) {
                     var col = column[k];
@@ -13812,7 +13817,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                 //附加行
                 if (this.rowSpan > 1) {
                     for (var m = 1; m < this.rowSpan; m++) {
-                        table.push('<tr>');
+                        table.push('<tr id="' + this.rowIdPrefix + (j + 1) + '">');
                         for (var n = 1; n < columnCount; n++) {
                             var _col = column[n];
                             if ((typeof _col.visible !== 'undefined' && !_col.visible) || _col.content.length === 1) {
@@ -13970,15 +13975,15 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          */
         bindSort: function() {
             var self = this;
-            this.$main.on('click.bizTableSort', '.biz-table-head th[sortable]', function(e) {
+            this.$main.on('click.bizTableSort', '.biz-table-head div.sortable', function(e) {
                 var head = $(e.currentTarget),
-                    field = head.attr('field');
+                    field = head.parent().attr('field');
                 if (head.attr('des') !== undefined) {
                     head.removeAttr('des').attr('asc', '');
                 } else if (head.attr('asc') !== undefined) {
                     head.removeAttr('asc').attr('des', '');
                 } else {
-                    head.parent().children('th').removeAttr('des').removeAttr('asc');
+                    head.parents().filter('tr:first').find('div.sortable').removeAttr('des').removeAttr('asc');
                     head.attr('des', '');
                 }
                 $.each(self.options.column, function(index, val) {
@@ -13989,7 +13994,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                     }
                 });
                 self.options.onSort.call(self, {
-                    field: head.attr('field'),
+                    field: head.parent().attr('field'),
                     des: head.attr('des') !== undefined,
                     asc: head.attr('asc') !== undefined
                 }, e);
@@ -14051,7 +14056,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
         bindEdit: function() {
             var self = this;
             this.$main.find('td[editable]').on('change', function(e, newValue) {
-                var rowIndex = parseInt($(this).parent().find(':checkbox').attr('id').replace(self.selectPrefix, ''), 10),
+                var rowIndex = parseInt($(this).parent().attr('id').replace(self.rowIdPrefix, ''), 10),
                     columIndex = $(this).parent().find('td').index($(this));
                 if (self.options.selectable) {
                     columIndex = columIndex - 1;
