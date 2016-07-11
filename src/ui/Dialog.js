@@ -110,7 +110,9 @@ define(function(require) {
                 });
             }
         },
-
+        preventMousewheel: function(){
+            return false;
+        },
         /**
          * 打开
          */
@@ -123,6 +125,7 @@ define(function(require) {
             this.$container.css({
                 zIndex: index
             }).show();
+            $('body').on('mousewheel', this.preventMousewheel);
         },
 
         /**
@@ -144,6 +147,7 @@ define(function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
+            $('body').off('mousewheel',this.preventMousewheel);
         },
 
         /**
@@ -154,6 +158,7 @@ define(function(require) {
             this.$container.next().remove();
             this.$main.remove();
             this.$container.remove();
+            $('body').off('mousewheel',this.preventMousewheel);
         }
     };
 
