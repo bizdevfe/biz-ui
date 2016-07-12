@@ -5,6 +5,7 @@
  * @link https://github.com/bizdevfe/biz-ui
  */
 @charset "UTF-8";
+
 .biz-button {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -23,6 +24,7 @@
 .biz-button-disable {
     cursor: default
 }
+
 .biz-input,
 .biz-textarea,
 .biz-textline textarea {
@@ -72,6 +74,7 @@
     text-align: center;
     line-height: 20px
 }
+
 .biz-label {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -105,6 +108,7 @@
     background-position: 0 -220px;
     cursor: default
 }
+
 .biz-checkbox-unchecked {
     background-position: 0 0
 }
@@ -125,6 +129,7 @@
     background-position: 0 -100px;
     cursor: default
 }
+
 .selectBox-dropdown {
     min-width: 150px;
     position: relative;
@@ -276,6 +281,7 @@
 .selectBox-inline.selectBox-disabled .selectBox-options a {
     background-color: transparent !important
 }
+
 .selectBox-dropdown {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -316,6 +322,7 @@
     border-left: 0;
     background: url(img/bizui.png) 6px -240px;
 }
+
 .biz-dialog {
     position: fixed;
     top: 50%;
@@ -370,6 +377,7 @@
 .biz-confirm {
     z-index: 1003
 }
+
 .biz-panel {
     position: absolute;
     top: 0;
@@ -403,6 +411,7 @@
     padding: 0 0 60px 60px;
     height: 30px
 }
+
 #biz-tooltip {
     padding: 10px;
     border-radius: 4px;
@@ -453,6 +462,7 @@
 #biz-tooltip.white.left .arrow {
     background-position: -11px -343px
 }
+
 .biz-tab {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
@@ -481,6 +491,7 @@
 .biz-tab > div {
     padding: 10px
 }
+
 ul.simple-pagination {
     list-style: none;
 }
@@ -549,6 +560,7 @@ ul.simple-pagination {
     font-weight: bold;
     cursor: default;
 }
+
 .simple-pagination {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -578,6 +590,7 @@ ul.simple-pagination {
     border-width: 1px;
     border-style: solid
 }
+
 .jstree-node,
 .jstree-children,
 .jstree-container-ul {
@@ -1435,6 +1448,7 @@ ul.simple-pagination {
 .jstree-default-large.jstree-rtl .jstree-last {
     background: transparent;
 }
+
 .jstree {
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
     font-size: 14px
@@ -2210,6 +2224,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     margin-left: -5px;
     margin-right: -5px;
 }
+
 .biz-calendar {
     background: url(img/bizui.png) right -355px no-repeat
 }
@@ -2247,6 +2262,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .datepicker-dropdown:after {
     display: none
 }
+
 .biz-table-head-wrap,
 .biz-table-body-wrap {
     overflow-x: auto;
@@ -2398,12 +2414,14 @@ table.rc-table-resizing th[sortable],
 table.rc-table-resizing .biz-label {
     cursor: ew-resize;
 }
+
 .biz-dropdown-context {
     position: absolute;
     box-shadow: 0 0 8px #888;
     background-color: #fff;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif
 }
+
 .biz-input,
 .biz-textarea,
 .biz-textline textarea {
