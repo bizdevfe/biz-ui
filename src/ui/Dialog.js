@@ -117,6 +117,7 @@ define(function(require) {
          * 打开
          */
         open: function() {
+            $('body').css('overflow','hidden');
             var index = this.options.zIndex || currentIndex++;
             this.$container.next().css({
                 zIndex: index - 1
@@ -125,7 +126,6 @@ define(function(require) {
             this.$container.css({
                 zIndex: index
             }).show();
-            $('body').on('mousewheel', this.preventMousewheel);
         },
 
         /**
@@ -147,7 +147,7 @@ define(function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
-            $('body').off('mousewheel',this.preventMousewheel);
+            $('body').css('overflow','auto');
         },
 
         /**
