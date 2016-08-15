@@ -16,6 +16,7 @@ define(function(require) {
      * @param {Boolean} [options.expanded] 是否展开
      * @param {Function} [options.onLoad] 初始化回调, this 为 Tree 对象
      * @param {Function} [options.onSelect] 选中回调, this 为 Node 对象
+     * @param {Function} [options.onCancelSelect] 取消选中回调, this 为 Node 对象
      */
     function TreeTable(table, options) {
         if (table instanceof jQuery) {
@@ -71,9 +72,15 @@ define(function(require) {
             }).on('click.bizTreeTable', 'tbody tr', function(e) {
                 $('.tree-selected').not(this).removeClass('tree-selected');
                 $(this).toggleClass('tree-selected');
-                if ($(this).hasClass('tree-selected') && options.onSelect) {
-                    var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
-                    options.onSelect.call(node);
+                var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
+                if ($(this).hasClass('tree-selected')) {
+                    if(options.onSelect){
+                        options.onSelect.call(node);
+                    }
+                } else {
+                    if(options.onCancelSelect){
+                        options.onCancelSelect.call(node);
+                    }
                 }
             });
 
