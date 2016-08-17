@@ -116,7 +116,9 @@
 .biz-table .biz-checkbox-checked-disabled {
     background-position: 2px -100px
 }
-
+.biz-table .biz-table-select-disabled .biz-checkbox-unchecked-disabled {
+    opacity: 0.4;
+}
 .biz-table td[editable] {
     padding-right: 30px;
     background-image: url(img/edit.png);
