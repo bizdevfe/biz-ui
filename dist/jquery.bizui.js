@@ -15072,6 +15072,7 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
      * @param {Function} [options.onLoad] 初始化回调, this 为 Tree 对象
      * @param {Function} [options.onSelect] 选中回调, this 为 Node 对象
      * @param {Function} [options.onCancelSelect] 取消选中回调, this 为 Node 对象
+     * 如tr标签中含有class: tree-selected-disabled 不可选中
      */
     function TreeTable(table, options) {
         if (table instanceof jQuery) {
@@ -15125,6 +15126,12 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
                 onNodeCollapse: options.onCollapse,
                 onNodeExpand: options.onExpand
             }).on('click.bizTreeTable', 'tbody tr', function(e) {
+                if($(e.target).parent().hasClass('indenter')) {
+                    return;
+                }
+                if($(this).hasClass('tree-selected-disabled')) {
+                    return;
+                }
                 $('.tree-selected').not(this).removeClass('tree-selected');
                 $(this).toggleClass('tree-selected');
                 var node = self.$main.treetable('node', $(this).attr('data-tt-id'));

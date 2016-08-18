@@ -2362,6 +2362,10 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .biz-table .biz-table-select-disabled .biz-checkbox-unchecked-disabled {
     opacity: 0.4;
 }
+.biz-table .tree-selected-disabled,
+.biz-table .tree-selected-disabled:hover {
+    opacity: 0.5;
+}
 .biz-table td[editable] {
     padding-right: 30px;
     background-image: url(img/edit.png);
