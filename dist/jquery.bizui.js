@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.2.5
+ * @version v1.2.7
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -3325,7 +3325,7 @@ define('ui/Dialog',['require'],function(require) {
          */
         open: function() {
             $('body').css('overflow','hidden');
-            var index = this.options.zIndex || currentIndex++;
+            var index = this.options.zIndex || ++currentIndex;
             this.$container.next().css({
                 zIndex: index - 1
             }).show();
@@ -3354,7 +3354,7 @@ define('ui/Dialog',['require'],function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
-            $('body').css('overflow','auto');
+            $('body').css('overflow','visible');
         },
 
         /**
@@ -3365,7 +3365,7 @@ define('ui/Dialog',['require'],function(require) {
             this.$container.next().remove();
             this.$main.remove();
             this.$container.remove();
-            $('body').off('mousewheel',this.preventMousewheel);
+            $('body').css('overflow','visible');
         }
     };
 
@@ -15492,7 +15492,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.2.5';
+    bizui.version = '1.2.7';
 
     var origin = window.bizui;
 
