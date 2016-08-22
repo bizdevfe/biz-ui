@@ -27,7 +27,7 @@ define(function(require) {
      * @param {Number}         options.column.width 最小宽度
      * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
      * @param {Boolean}        [options.column.visible] 是否显示, 默认true
-     * @param {Array}          options.data 数据
+     * @param {Array}          options.data 数据 data[i].disabledSelect = true时单行不可选中
      * @param {String}         [options.noDataContent] 无数据时显示的内容, 不转义
      * @param {String}         [options.foot] 总计行, top-顶部, bottom-底部
      * @param {Boolean}        [options.selectable] 是否含勾选列
@@ -403,21 +403,26 @@ define(function(require) {
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
                     $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (self.selectPrefix + (index + 1)) + '" /></td>');
-                    if(data[index].disabledSelect){
-                        $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
-                    } else {
-                        headInputEnabled = true;
+                    if(data[index]){
+                        if(data[index].disabledSelect){
+                            $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                        } else {
+                            headInputEnabled = true;
+                        }
                     }
+
                 });
             } else {
                 var rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
                         $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (self.selectPrefix + rowIndex) + '" /></td>');
-                        if(data[index].disabledSelect){
-                            $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
-                        } else {
-                            headInputEnabled = true;
+                        if(data[index]){
+                            if(data[index].disabledSelect){
+                                $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                            } else {
+                                headInputEnabled = true;
+                            }
                         }
                         rowIndex = rowIndex + 1;
                     }
