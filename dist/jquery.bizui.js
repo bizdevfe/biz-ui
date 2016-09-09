@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.2.8
+ * @version v1.2.9
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -15137,7 +15137,7 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
                 if($(this).hasClass('tree-selected-disabled')) {
                     return;
                 }
-                $('.tree-selected').not(this).removeClass('tree-selected');
+                self.$main.find('.tree-selected').not(this).removeClass('tree-selected');
                 $(this).toggleClass('tree-selected');
                 var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
                 if ($(this).hasClass('tree-selected')) {
@@ -15497,7 +15497,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.2.8';
+    bizui.version = '1.2.9';
 
     var origin = window.bizui;
 
