@@ -77,7 +77,7 @@ define(function(require) {
                 if($(this).hasClass('tree-selected-disabled')) {
                     return;
                 }
-                $('.tree-selected').not(this).removeClass('tree-selected');
+                self.$main.find('.tree-selected').not(this).removeClass('tree-selected');
                 $(this).toggleClass('tree-selected');
                 var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
                 if ($(this).hasClass('tree-selected')) {
