@@ -27,7 +27,7 @@ define(function(require) {
      * @param {Number}         options.column.width 最小宽度
      * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
      * @param {Boolean}        [options.column.visible] 是否显示, 默认true
-     * @param {Array}          options.data 数据
+     * @param {Array}          options.data 数据 data[i].disabledSelect = true时单行不可选中
      * @param {String}         [options.noDataContent] 无数据时显示的内容, 不转义
      * @param {String}         [options.foot] 总计行, top-顶部, bottom-底部
      * @param {Boolean}        [options.selectable] 是否含勾选列
@@ -120,7 +120,7 @@ define(function(require) {
 
             //勾选列
             if (options.selectable) {
-                this.createSelect();
+                this.createSelect(options.data);
                 this.bindSelect();
             }
 
@@ -396,23 +396,42 @@ define(function(require) {
          * 创建Checkbox控件
          * @protected
          */
-        createSelect: function() {
+        createSelect: function(data) {
             this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (this.selectPrefix + 0) + '" /></th>');
             var self = this;
+            var headInputEnabled = false;
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
                     $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (self.selectPrefix + (index + 1)) + '" /></td>');
+                    if(data[index]){
+                        if(data[index].disabledSelect){
+                            $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                        } else {
+                            headInputEnabled = true;
+                        }
+                    }
+
                 });
             } else {
                 var rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
                         $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (self.selectPrefix + rowIndex) + '" /></td>');
+                        if(data[index]){
+                            if(data[index].disabledSelect){
+                                $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                            } else {
+                                headInputEnabled = true;
+                            }
+                        }
                         rowIndex = rowIndex + 1;
                     }
                 });
             }
 
+            if(!headInputEnabled) {
+                this.$tableHead.find('tr').addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+            }
             this.$main.find(':checkbox').bizCheckbox();
         },
 
@@ -424,13 +443,18 @@ define(function(require) {
             var self = this;
             this.$main.on('click.bizTableSelectAll', '.biz-table-head th .biz-label', function(e) {
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
-                    checkbox = self.$tableBody.find(':checkbox'),
-                    tr = self.$tableBody.find('tr[class!="sum"]');
+                    checkbox = self.$tableBody.find(':checkbox').filter(':not(:disabled)'),
+                    tr = self.$tableBody.find('tr[class!="sum"]').filter('[class!=biz-table-select-disabled]');
+                if($(e.target).parent().parent().hasClass('biz-table-select-disabled')){
+                    return;
+                }
                 if (selected) {
                     checkbox.bizCheckbox('check');
                     tr.addClass('selected');
                     if (self.options.onSelect) {
-                        self.options.onSelect.call(self, self.options.data, e);
+                        self.options.onSelect.call(self, $.map(self.getSelectedIndex(), function(item, index) {
+                            return self.options.data[item];
+                        }), e);
                     }
                 } else {
                     checkbox.bizCheckbox('uncheck');
@@ -443,9 +467,13 @@ define(function(require) {
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
                     selectedCount = self.$tableBody.find('.biz-checkbox-checked').length,
                     selectAll = self.$tableHead.find(':checkbox'),
+                    checkbox = self.$tableBody.find(':checkbox').filter(':not(:disabled)'),
                     tr = $(e.target).parent().parent(),
                     rowCount = self.options.data.length;
-                if (selectedCount === rowCount) {
+                if(tr.hasClass('biz-table-select-disabled')){
+                    return;
+                }
+                if (selectedCount === checkbox.length) {
                     selectAll.bizCheckbox('check');
                 } else {
                     selectAll.bizCheckbox('uncheck');
@@ -719,7 +747,7 @@ define(function(require) {
 
             //重建checkbox
             if (this.options.selectable) {
-                this.createSelect();
+                this.createSelect(this.options.data);
             }
 
             if (this.options.data.length) { //重绘总计行

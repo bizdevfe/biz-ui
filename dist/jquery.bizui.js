@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.2.0
+ * @version v1.2.8
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -14,14 +14,13 @@
         root['bizui'] = factory(root.$);
     }
 }(this, function($) {
-    /**
- * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
- * Available via the MIT or new BSD license.
- * see: http://github.com/jrburke/almond for details
+    
+/**
+ * @license almond 0.3.2 Copyright jQuery Foundation and other contributors.
+ * Released under MIT license, http://github.com/requirejs/almond/LICENSE
  */
 //Going sloppy to avoid 'use strict' string cost, but strict practices should
 //be followed.
-/*jslint sloppy: true */
 /*global setTimeout: false */
 
 var requirejs, require, define;
@@ -49,60 +48,58 @@ var requirejs, require, define;
      */
     function normalize(name, baseName) {
         var nameParts, nameSegment, mapValue, foundMap, lastIndex,
-            foundI, foundStarMap, starI, i, j, part,
+            foundI, foundStarMap, starI, i, j, part, normalizedBaseParts,
             baseParts = baseName && baseName.split("/"),
             map = config.map,
             starMap = (map && map['*']) || {};
 
         //Adjust any relative paths.
-        if (name && name.charAt(0) === ".") {
-            //If have a base name, try to normalize against it,
-            //otherwise, assume it is a top-level require that will
-            //be relative to baseUrl in the end.
-            if (baseName) {
-                name = name.split('/');
-                lastIndex = name.length - 1;
+        if (name) {
+            name = name.split('/');
+            lastIndex = name.length - 1;
 
-                // Node .js allowance:
-                if (config.nodeIdCompat && jsSuffixRegExp.test(name[lastIndex])) {
-                    name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
-                }
+            // If wanting node ID compatibility, strip .js from end
+            // of IDs. Have to do this here, and not in nameToUrl
+            // because node allows either .js or non .js to map
+            // to same file.
+            if (config.nodeIdCompat && jsSuffixRegExp.test(name[lastIndex])) {
+                name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
+            }
 
-                //Lop off the last part of baseParts, so that . matches the
-                //"directory" and not name of the baseName's module. For instance,
-                //baseName of "one/two/three", maps to "one/two/three.js", but we
-                //want the directory, "one/two" for this normalization.
-                name = baseParts.slice(0, baseParts.length - 1).concat(name);
+            // Starts with a '.' so need the baseName
+            if (name[0].charAt(0) === '.' && baseParts) {
+                //Convert baseName to array, and lop off the last part,
+                //so that . matches that 'directory' and not name of the baseName's
+                //module. For instance, baseName of 'one/two/three', maps to
+                //'one/two/three.js', but we want the directory, 'one/two' for
+                //this normalization.
+                normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
+                name = normalizedBaseParts.concat(name);
+            }
 
-                //start trimDots
-                for (i = 0; i < name.length; i += 1) {
-                    part = name[i];
-                    if (part === ".") {
-                        name.splice(i, 1);
-                        i -= 1;
-                    } else if (part === "..") {
-                        if (i === 1 && (name[2] === '..' || name[0] === '..')) {
-                            //End of the line. Keep at least one non-dot
-                            //path segment at the front so it can be mapped
-                            //correctly to disk. Otherwise, there is likely
-                            //no path mapping for a path starting with '..'.
-                            //This can still fail, but catches the most reasonable
-                            //uses of ..
-                            break;
-                        } else if (i > 0) {
-                            name.splice(i - 1, 2);
-                            i -= 2;
-                        }
+            //start trimDots
+            for (i = 0; i < name.length; i++) {
+                part = name[i];
+                if (part === '.') {
+                    name.splice(i, 1);
+                    i -= 1;
+                } else if (part === '..') {
+                    // If at the start, or previous value is still ..,
+                    // keep them so that when converted to a path it may
+                    // still work when converted to a path, even though
+                    // as an ID it is less than ideal. In larger point
+                    // releases, may be better to just kick out an error.
+                    if (i === 0 || (i === 1 && name[2] === '..') || name[i - 1] === '..') {
+                        continue;
+                    } else if (i > 0) {
+                        name.splice(i - 1, 2);
+                        i -= 2;
                     }
                 }
-                //end trimDots
-
-                name = name.join("/");
-            } else if (name.indexOf('./') === 0) {
-                // No baseName, so this is ID is resolved relative
-                // to baseUrl, pull off the leading dot.
-                name = name.substring(2);
             }
+            //end trimDots
+
+            name = name.join('/');
         }
 
         //Apply map config if available.
@@ -3320,12 +3317,15 @@ define('ui/Dialog',['require'],function(require) {
                 });
             }
         },
-
+        preventMousewheel: function(){
+            return false;
+        },
         /**
          * 打开
          */
         open: function() {
-            var index = this.options.zIndex || currentIndex++;
+            $('body').css('overflow','hidden');
+            var index = this.options.zIndex || ++currentIndex;
             this.$container.next().css({
                 zIndex: index - 1
             }).show();
@@ -3354,6 +3354,7 @@ define('ui/Dialog',['require'],function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
+            $('body').css('overflow','visible');
         },
 
         /**
@@ -3364,6 +3365,7 @@ define('ui/Dialog',['require'],function(require) {
             this.$container.next().remove();
             this.$main.remove();
             this.$container.remove();
+            $('body').css('overflow','visible');
         }
     };
 
@@ -13555,7 +13557,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
      * @param {Number}         options.column.width 最小宽度
      * @param {Number}         [options.column.align] left-居左, right-居中, center-居右
      * @param {Boolean}        [options.column.visible] 是否显示, 默认true
-     * @param {Array}          options.data 数据
+     * @param {Array}          options.data 数据 data[i].disabledSelect = true时单行不可选中
      * @param {String}         [options.noDataContent] 无数据时显示的内容, 不转义
      * @param {String}         [options.foot] 总计行, top-顶部, bottom-底部
      * @param {Boolean}        [options.selectable] 是否含勾选列
@@ -13648,7 +13650,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //勾选列
             if (options.selectable) {
-                this.createSelect();
+                this.createSelect(options.data);
                 this.bindSelect();
             }
 
@@ -13924,23 +13926,42 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
          * 创建Checkbox控件
          * @protected
          */
-        createSelect: function() {
+        createSelect: function(data) {
             this.$tableHead.find('tr').prepend('<th nowrap data-width="20" width="20"><input type="checkbox" title=" " id="' + (this.selectPrefix + 0) + '" /></th>');
             var self = this;
+            var headInputEnabled = false;
             if (this.rowSpan === 1) {
                 this.$tableBody.find('tr').each(function(index, tr) {
                     $(tr).prepend('<td width="20" align="center"><input type="checkbox" title=" " id="' + (self.selectPrefix + (index + 1)) + '" /></td>');
+                    if(data[index]){
+                        if(data[index].disabledSelect){
+                            $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                        } else {
+                            headInputEnabled = true;
+                        }
+                    }
+
                 });
             } else {
                 var rowIndex = 1;
                 this.$tableBody.find('tr').each(function(index, tr) {
                     if ((index + self.rowSpan) % self.rowSpan === 0) {
                         $(tr).prepend('<td width="20" align="center" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" " id="' + (self.selectPrefix + rowIndex) + '" /></td>');
+                        if(data[index]){
+                            if(data[index].disabledSelect){
+                                $(tr).addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+                            } else {
+                                headInputEnabled = true;
+                            }
+                        }
                         rowIndex = rowIndex + 1;
                     }
                 });
             }
 
+            if(!headInputEnabled) {
+                this.$tableHead.find('tr').addClass('biz-table-select-disabled').find('input').attr('disabled', 'disabled');
+            }
             this.$main.find(':checkbox').bizCheckbox();
         },
 
@@ -13952,13 +13973,18 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
             var self = this;
             this.$main.on('click.bizTableSelectAll', '.biz-table-head th .biz-label', function(e) {
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
-                    checkbox = self.$tableBody.find(':checkbox'),
-                    tr = self.$tableBody.find('tr[class!="sum"]');
+                    checkbox = self.$tableBody.find(':checkbox').filter(':not(:disabled)'),
+                    tr = self.$tableBody.find('tr[class!="sum"]').filter('[class!=biz-table-select-disabled]');
+                if($(e.target).parent().parent().hasClass('biz-table-select-disabled')){
+                    return;
+                }
                 if (selected) {
                     checkbox.bizCheckbox('check');
                     tr.addClass('selected');
                     if (self.options.onSelect) {
-                        self.options.onSelect.call(self, self.options.data, e);
+                        self.options.onSelect.call(self, $.map(self.getSelectedIndex(), function(item, index) {
+                            return self.options.data[item];
+                        }), e);
                     }
                 } else {
                     checkbox.bizCheckbox('uncheck');
@@ -13971,9 +13997,13 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
                 var selected = $(e.target).hasClass('biz-checkbox-checked'),
                     selectedCount = self.$tableBody.find('.biz-checkbox-checked').length,
                     selectAll = self.$tableHead.find(':checkbox'),
+                    checkbox = self.$tableBody.find(':checkbox').filter(':not(:disabled)'),
                     tr = $(e.target).parent().parent(),
                     rowCount = self.options.data.length;
-                if (selectedCount === rowCount) {
+                if(tr.hasClass('biz-table-select-disabled')){
+                    return;
+                }
+                if (selectedCount === checkbox.length) {
                     selectAll.bizCheckbox('check');
                 } else {
                     selectAll.bizCheckbox('uncheck');
@@ -14247,7 +14277,7 @@ define('ui/Table',['require','ui/util','dep/jquery.resizableColumns','dep/jquery
 
             //重建checkbox
             if (this.options.selectable) {
-                this.createSelect();
+                this.createSelect(this.options.data);
             }
 
             if (this.options.data.length) { //重绘总计行
@@ -15046,6 +15076,8 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
      * @param {Boolean} [options.expanded] 是否展开
      * @param {Function} [options.onLoad] 初始化回调, this 为 Tree 对象
      * @param {Function} [options.onSelect] 选中回调, this 为 Node 对象
+     * @param {Function} [options.onCancelSelect] 取消选中回调, this 为 Node 对象
+     * 如tr标签中含有class: tree-selected-disabled 不可选中
      */
     function TreeTable(table, options) {
         if (table instanceof jQuery) {
@@ -15099,11 +15131,23 @@ define('ui/TreeTable',['require','dep/jquery.resizableColumns','dep/jquery.treet
                 onNodeCollapse: options.onCollapse,
                 onNodeExpand: options.onExpand
             }).on('click.bizTreeTable', 'tbody tr', function(e) {
+                if($(e.target).parent().hasClass('indenter')) {
+                    return;
+                }
+                if($(this).hasClass('tree-selected-disabled')) {
+                    return;
+                }
                 $('.tree-selected').not(this).removeClass('tree-selected');
                 $(this).toggleClass('tree-selected');
-                if ($(this).hasClass('tree-selected') && options.onSelect) {
-                    var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
-                    options.onSelect.call(node);
+                var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
+                if ($(this).hasClass('tree-selected')) {
+                    if(options.onSelect){
+                        options.onSelect.call(node);
+                    }
+                } else {
+                    if(options.onCancelSelect){
+                        options.onCancelSelect.call(node);
+                    }
                 }
             });
 
@@ -15453,7 +15497,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.2.0';
+    bizui.version = '1.2.8';
 
     var origin = window.bizui;
 

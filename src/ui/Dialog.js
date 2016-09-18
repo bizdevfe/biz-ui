@@ -110,12 +110,15 @@ define(function(require) {
                 });
             }
         },
-
+        preventMousewheel: function(){
+            return false;
+        },
         /**
          * 打开
          */
         open: function() {
-            var index = this.options.zIndex || currentIndex++;
+            $('body').css('overflow','hidden');
+            var index = this.options.zIndex || ++currentIndex;
             this.$container.next().css({
                 zIndex: index - 1
             }).show();
@@ -144,6 +147,7 @@ define(function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
+            $('body').css('overflow','visible');
         },
 
         /**
@@ -154,6 +158,7 @@ define(function(require) {
             this.$container.next().remove();
             this.$main.remove();
             this.$container.remove();
+            $('body').css('overflow','visible');
         }
     };
 
