@@ -1203,6 +1203,8 @@ define('ui/Textline',['require'],function(require) {
      * @param {Object} [options] 参数
      * @param {Boolean} [options.disabled] 是否禁用
      * @param {Boolean} [options.skin] 皮肤
+     * @param {Number} [options.width] 宽度
+     * @param {Number} [options.height] 高度
      */
     function Textline(textline, options) {
         if (textline instanceof jQuery) {
@@ -1246,13 +1248,12 @@ define('ui/Textline',['require'],function(require) {
             this.skin = options.skin ? (' ' + options.skin) : '';
 
             this.$main.addClass(defaultClass + this.skin).html('<div><pre></pre></div><textarea></textarea>');
+            var w = options.width || this.$main.width(),
+                h = options.height || this.$main.height();
 
-            var w = Math.max(this.$main.width(), 200),
-                h = Math.max(this.$main.height(), 52);
-            this.$main.css({
-                width: w,
-                height: h
-            });
+            w = Math.max(w, 200);
+            h = Math.max(h, 52);
+            
             this.$line = this.$main.children('div').css({
                 height: h - 10
             });
@@ -1260,6 +1261,10 @@ define('ui/Textline',['require'],function(require) {
             this.$textarea = this.$main.children('textarea').css({
                 width: w - 36,
                 height: h - 12
+            });
+            this.$main.css({
+                width: 'auto',
+                height: 'auto'
             });
 
             if (options.disabled) {
