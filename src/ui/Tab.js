@@ -56,12 +56,12 @@ define(function(require) {
             this.skin = options.skin ? (' ' + options.skin) : '';
 
             this.$main.addClass(defaultClass + this.skin);
-            this.tabs = this.$main.find('ul li');
+            this.tabs = this.$main.children('ul').children('li');
             this.contents = this.$main.children('div').children('div').hide();
             this.select(options.selectedIndex);
 
             var self = this;
-            this.$main.on(options.event + '.bizTab', 'ul li', function(e) {
+            this.tabs.on(options.event + '.bizTab', function(e) {
                 var curTab = $(e.target);
                 if (!curTab.hasClass('active')) {
                     var index;
