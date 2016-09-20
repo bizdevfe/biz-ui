@@ -1,6 +1,6 @@
 /**
  * BizUI Framework
- * @version v1.3.0
+ * @version v1.3.1
  * @copyright 2015 Sogou, Inc.
  * @link https://github.com/bizdevfe/biz-ui
  */
@@ -3231,6 +3231,7 @@ define('ui/Dialog',['require'],function(require) {
      * @param {String} [options.skin] 自定义样式
      * @param {String} [options.title] 弹窗标题
      * @param {Number} [options.zIndex] 弹窗显示登记
+     * @param {Boolean} [options.useMousewheel] 弹窗时是否禁用滚轮 默认禁用
      *
      */
     function Dialog(dialog, options) {
@@ -3309,8 +3310,14 @@ define('ui/Dialog',['require'],function(require) {
 
             //把dialog加入到body中，并且设置top和left
             //加入mask
+            this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
             this.$container.appendTo('body')
-                .after($('<div class="biz-mask" style="display:none;"></div>'));
+                .after(this.$mask);
+            if(!options.useMousewheel){
+                this.$container.add(this.$mask).on('mousewheel', function(){
+                    return false;
+                });
+            }
             if (options.height) {
                 this.$container.css({
                     height: options.height,
@@ -3329,7 +3336,7 @@ define('ui/Dialog',['require'],function(require) {
          * 打开
          */
         open: function() {
-            $('body').css('overflow','hidden');
+            //$('body').css('overflow','hidden');
             var index = this.options.zIndex || ++currentIndex;
             this.$container.next().css({
                 zIndex: index - 1
@@ -3338,6 +3345,7 @@ define('ui/Dialog',['require'],function(require) {
             this.$container.css({
                 zIndex: index
             }).show();
+            //$('body').on('mousewheel', this.preventMousewheel);
         },
 
         /**
@@ -3359,18 +3367,19 @@ define('ui/Dialog',['require'],function(require) {
             if (this.options.destroyOnClose) {
                 this.destroy();
             }
-            $('body').css('overflow','visible');
+            //$('body').off('mousewheel',this.preventMousewheel);
         },
 
         /**
          * 销毁
          */
         destroy: function() {
+            this.$container.add(this.$mask).off('mousewheel');
             this.$container.find('.biz-dialog-bottom button').bizButton('destroy');
             this.$container.next().remove();
             this.$main.remove();
             this.$container.remove();
-            $('body').css('overflow','visible');
+            //$('body').off('mousewheel',this.preventMousewheel);
         }
     };
 
@@ -15502,7 +15511,7 @@ define('bizui',['require','ui/Button','ui/Input','ui/Textarea','ui/Textline','ui
     /**
      * @property {String} version 版本号
      */
-    bizui.version = '1.3.0';
+    bizui.version = '1.3.1';
 
     var origin = window.bizui;
 

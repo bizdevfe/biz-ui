@@ -30,7 +30,7 @@ fi
 echo -e "\033[0;32mAPI generating done! \033[0m"
 
 #Version updating
-V="1.3.0"
+V="1.3.1"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/wrapper/start.frag"
 sed -i "s/v[0-9].[0-9].[0-9]/v$V/" "../src/css/main.css"
 sed -i "s/bizui.version\s=\s'[0-9].[0-9].[0-9]'/bizui.version = '$V'/" "../src/bizui.js"
