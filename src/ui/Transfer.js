@@ -412,7 +412,7 @@ define(function(require) {
 
     var dataKey = 'bizTransfer';
     $.extend($.fn, {
-        bizTransfer(method, options) {
+        bizTransfer: function(method, options) {
             var bizTransfer;
             switch (method) {
                 case 'addItems':
@@ -420,18 +420,21 @@ define(function(require) {
                     if (bizTransfer) {
                         bizTransfer.addItems(options);
                     }
+                    break;
 
                 case 'getValue':
                     bizTransfer = $(this).data(dataKey);
                     if (bizTransfer) {
                         return bizTransfer.getValue();
                     }
+                    break;
 
                 case 'select':
                     bizTransfer = $(this).data(dataKey);
                     if (bizTransfer) {
                         return bizTransfer.select(options);
                     }
+                    break;
 
                 default:
                     if (!$(this).data(dataKey)) {
