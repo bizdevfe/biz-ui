@@ -1,12 +1,11 @@
 /**
- * @ignore
- */
+* @ignore
+*/
 
 define(function(require) {
-
-    function Transfer (transfer, options) {
+    function Transfer(transfer, options) {
         this.options = $.extend({}, options || {});
-        this.keyMap = this.options.keyMap || {id: 'id', title: 'title', chosen: 'chosen'};
+        this.keyMap = this.options.keyMap || { id: 'id', title: 'title', chosen: 'chosen' };
         this.dataSource = this.formatInput(this.options.dataSource);
         this.noContent = this.options.noContent || '请新增选项';
 
@@ -75,31 +74,31 @@ define(function(require) {
             var leftStyle = styles[0] ? 　'width:' + styles[0].width + ';height:' + styles[0].height : '',
                 rightStyle = styles[1] ? 　'width:' + styles[1].width + ';height:' + styles[1].height : '',
                 html = '<div class="biz-transfer">\
-                    <div class="biz-transfer-list js-left-list" style= ' + leftStyle + '>\
-                        <div class="biz-transfer-list-header js-left-header">\
-                            <input type="checkbox" title=" " id="leftSelectAll" class="js-leftSelectAll"/>\
-                            <span>' + titles[0] + '</span>\
-                        </div>\
-                        <div class="biz-transfer-list-body">\
-                            <ul class="biz-transfer-list-content">\
-                            </ul>\
-                        </div>\
-                    </div>\
-                    <div class="biz-transfer-operation">\
-                        <button class="js-add biz-transfer-button"><span class="icon-right"></span></button>\
-                        <button class="js-remove biz-transfer-button"><span class="icon-left"></span></button>\
-                    </div>\
-                    <div class="biz-transfer-list js-right-list" style=' + rightStyle + '>\
-                        <div class="biz-transfer-list-header js-right-header">\
-                            <input type="checkbox" title=" " id="rightSelectAll" class="js-rightSelectAll"/>\
-                            <span>' + titles[1] + '</span>\
-                        </div>\
-                        <div class="biz-transfer-list-body">\
-                            <ul class="biz-transfer-list-content">\
-                            </ul>\
-                        </div>\
-                    </div>\
-                </div>';
+            <div class="biz-transfer-list js-left-list" style= ' + leftStyle + '>\
+                <div class="biz-transfer-list-header js-left-header">\
+                    <input type="checkbox" title=" " id="leftSelectAll" class="js-leftSelectAll"/>\
+                    <span>' + titles[0] + '</span>\
+                </div>\
+                <div class="biz-transfer-list-body">\
+                    <ul class="biz-transfer-list-content">\
+                    </ul>\
+                </div>\
+            </div>\
+            <div class="biz-transfer-operation">\
+                <button class="js-add biz-transfer-button"><span class="icon-right"></span></button>\
+                <button class="js-remove biz-transfer-button"><span class="icon-left"></span></button>\
+            </div>\
+            <div class="biz-transfer-list js-right-list" style=' + rightStyle + '>\
+                <div class="biz-transfer-list-header js-right-header">\
+                    <input type="checkbox" title=" " id="rightSelectAll" class="js-rightSelectAll"/>\
+                    <span>' + titles[1] + '</span>\
+                </div>\
+                <div class="biz-transfer-list-body">\
+                    <ul class="biz-transfer-list-content">\
+                    </ul>\
+                </div>\
+            </div>\
+        </div>';
 
             return html;
         },
@@ -107,7 +106,7 @@ define(function(require) {
         /**
          * 初始化
          */
-        init: function () {
+        init: function() {
             this.render();
             this.initEvents();
             this.$el.find('button').bizButton();
@@ -116,7 +115,7 @@ define(function(require) {
         /**
          * 绑定事件
          */
-        initEvents: function () {
+        initEvents: function() {
             this.bindSelect();
             this.bindButton();
         },
@@ -129,26 +128,24 @@ define(function(require) {
             if (this.dataSource.length) {
                 this.$leftListBody.html('');
                 $.each(this.dataSource, function(index, value) {
-                    console.log(value);
                     me.$leftListBody.append(
                         '<li class="biz-transfer-list-content-item" key="' + value.id + '" chosen=' + value.chosen + '>\
-                            <span>' + value.title + '</span>\
-                        </li>'
+                    <span>' + value.title + '</span>\
+                </li>'
                     );
                 });
             } else {
                 this.$leftListBody.html('<li class="biz-transfer-list-content-item" style="text-align:center">\
-                    <span>' + this.noContent + '</span>\
-                </li>');
+            <span>' + this.noContent + '</span>\
+        </li>');
             }
             if (this.getTargets().length) {
                 this.$rightListBody.html('');
                 $.each(this.getTargets(), function(index, value) {
-                    console.log(value);
                     me.$rightListBody.append(
                         '<li class="biz-transfer-list-content-item" key="' + value.id + '" chosen=' + value.chosen + '>\
-                            <span>' + value.title + '</span>\
-                        </li>'
+                    <span>' + value.title + '</span>\
+                </li>'
                     );
                 });
             }
@@ -158,10 +155,10 @@ define(function(require) {
         /**
          * 新增左侧框选项
          */
-        addItems: function (items) {
+        addItems: function(items) {
             var me = this;
-            if(items.length) {
-                items = items.filter(function (item) {
+            if (items.length) {
+                items = items.filter(function(item) {
                     var flag = true;
                     $.each(me.dataSource, function(index, value) {
                         if (value.id == item.id) {
@@ -188,11 +185,11 @@ define(function(require) {
         /**
          * 获取右侧框选项的id值
          */
-        getTargetKeys: function () {
+        getTargetKeys: function() {
             var $li = this.$rightListBody.find('li'),
                 targetKeys = [];
 
-            $.each(this.getSelectedIndex('right'), function (index, value) {
+            $.each(this.getSelectedIndex('right'), function(index, value) {
                 targetKeys.push($($li[value]).attr('key'));
             });
 
@@ -348,9 +345,9 @@ define(function(require) {
                 $.each(dataList, function(index, value) {
                     var $li = $(
                         '<li class="biz-transfer-list-content-item" key="' + value.id + '"  chosen=' + value.chosen + '>\
-                    <input type="checkbox" title="" />\
-                    <span>' + value.title + '</span>\
-                </li>'
+            <input type="checkbox" title="" />\
+            <span>' + value.title + '</span>\
+        </li>'
                     );
                     $liList.push($li[0])
                 });
@@ -415,14 +412,14 @@ define(function(require) {
         bizTransfer: function(method, options) {
             var bizTransfer;
             switch (method) {
-                case 'addItems':
+                case 'add':
                     bizTransfer = $(this).data(dataKey);
                     if (bizTransfer) {
                         bizTransfer.addItems(options);
                     }
                     break;
 
-                case 'getValue':
+                case 'value':
                     bizTransfer = $(this).data(dataKey);
                     if (bizTransfer) {
                         return bizTransfer.getValue();
@@ -438,12 +435,13 @@ define(function(require) {
 
                 default:
                     if (!$(this).data(dataKey)) {
-                        $(this).data(dataKey, new BizTransfer(this, method));
+                        $(this).data(dataKey, new Transfer(this, method));
                     }
             }
             return this;
         }
     });
+
 
     return Transfer;
 }
