@@ -1,0 +1,115 @@
+<h3>Tab</h3>
+
+<div class="example">
+<div class="tabs">
+    <ul>
+        <li>Tab1</li>
+        <li>Tab2</li>
+        <li>Tab3</li>
+    </ul>
+    <div>
+        <div>Content1</div>
+        <div>Content2</div>
+        <div>Content3</div>
+    </div>
+</div><br>
+<button id="b1">select Tab1</button>
+<button id="b2">select Tab2</button>
+<button id="b3">select Tab3</button>
+<button id="b4">get selected</button>
+<div class="log"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="tabs"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Tab1&lt;/li&gt;
+            &lt;li&gt;Tab2&lt;/li&gt;
+            &lt;li&gt;Tab3&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div&gt;
+            &lt;div&gt;Content1&lt;/div&gt;
+            &lt;div&gt;Content2&lt;/div&gt;
+            &lt;div&gt;Content3&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button id="b1"&gt;select Tab1&lt;/button&gt;
+    &lt;button id="b2"&gt;select Tab2&lt;/button&gt;
+    &lt;button id="b3"&gt;select Tab3&lt;/button&gt;
+    &lt;button id="b4"&gt;get selected&lt;/button&gt;
+    &lt;div class="log"&gt;&lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    var tabs = $('.tabs');
+    tabs.bizTab().on('change', function(e, data) {
+        $('.log').html('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
+    });
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('#b1').click(function() {
+        tabs.bizTab('index', 0);
+    });
+    $('#b2').click(function() {
+        tabs.bizTab('index', 1);
+    });
+    $('#b3').click(function() {
+        tabs.bizTab('index', 2);
+    });
+    $('#b4').click(function() {
+        var data = tabs.bizTab('index');
+        bizui.alert('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[action]</td>
+        <td>String</td>
+        <td>切换方式（click | hover），默认 'click'</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[selectedIndex]</td>
+        <td>Number</td>
+        <td>选中 tab 序号，默认 0</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>index([Number selectedIndex][, Boolean fire])</h4>
+<p class="des">获取/设置当前被选中的 tab</p>
+</div>
+
+<br>
+<h4>Events</h4>
+<div class="methods">
+<h4>change(e, data)</h4>
+<p class="des">切换 tab</p>
+</div>

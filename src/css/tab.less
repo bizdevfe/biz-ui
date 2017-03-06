@@ -1,0 +1,69 @@
+/**
+ * tab
+ */
+
+.biz-tab {
+    font-family: @font-family;
+    font-size: @font-size;
+}
+
+.biz-tab>ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 36px;
+    line-height: 36px;
+}
+
+.biz-tab>ul>li {
+    float: left;
+    padding: 0 20px;
+    margin-right: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px 2px 0 0;
+    color: @light-text;
+}
+
+.biz-tab>ul>li:first-child {
+    border-left: 0;
+}
+
+.biz-tab>ul>li.active {
+    cursor: default;
+    color: @dark-text;
+    background-color: @background !important;
+    border: 1px solid @border;
+    border-bottom: 0;
+    height: 35px;
+    line-height: 36px;
+}
+
+.biz-tab>div {
+    padding: 10px;
+    background-color: @background;
+    border: 1px solid @border;
+    margin-top: -1px;
+    border-radius: 0 0 2px 2px;
+}
+
+
+/**
+ * tab themes
+ */
+
+.generate-tab-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-tab-@{name}>ul>li {
+        background-color: @@name;
+    }
+    .biz-tab-@{name}>ul>li:hover {
+        background-color: lighten(@@name, 10%);
+    }
+    .generate-tab-themes(@i - 1);
+}
+
+.generate-tab-themes();
+.biz-tab-yellow>ul>li {
+    color: @yellow-text;
+}

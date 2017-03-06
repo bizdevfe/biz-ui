@@ -1,51 +1,38 @@
 {
   "name": "biz-ui",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "A jQuery plugin for business UI components",
-  "keywords": [
-    "jQuery plugin",
-    "Button",
-    "Input",
-    "Textarea",
-    "Radio",
-    "Checkbox",
-    "Select",
-    "Dialog",
-    "Panel",
-    "Tooltip",
-    "Tab",
-    "Page",
-    "Tree",
-    "Calendar",
-    "Table"
-  ],
-  "homepage": "http://bizdevfe.github.io/biz-ui",
-  "bugs": {
-    "url": "https://github.com/bizdevfe/biz-ui/issues"
-  },
-  "license": "MIT",
-  "maintainers": [
-    {
-      "name": "Ricky",
-      "email": "hyenasa@gmail.com"
-    }
-  ],
-  "contributors": [
-    {
-      "name": "Yan Yu",
-      "email": "yanyu0517@126.com"
-    }
-  ],
-  "main": "./dist/jquery.bizui.js",
+  "author": "BizFE",
+  "main": "dist/jquery.bizui.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bizdevfe/biz-ui.git"
   },
+  "scripts": {
+    "start": "gulp build & gulp doc"
+  },
   "devDependencies": {
-    "jshint": "^2.8.0",
-    "less": "^2.5.3",
-    "js-beautify": "^1.5.10",
-    "almond": "^0.3.1",
-    "requirejs": "^2.1.20"
-  }
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.0",
+    "gulp-jsbeautifier": "^2.0.4",
+    "gulp-jsdoc3": "^1.0.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-pure-cjs": "^0.1.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^2.0.1",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1"
+  },
+  "dependencies": {
+    "bootstrap-datepicker": "^1.6.4",
+    "draggable": "^4.1.2",
+    "jquery": "^1.11.0",
+    "jquery-placeholder": "^2.3.1",
+    "jstree": "^3.3.3",
+    "selectric": "^1.11.1",
+    "tips.js": "^1.2.0"
+  },
+  "license": "MIT"
 }

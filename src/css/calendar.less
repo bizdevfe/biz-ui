@@ -1,0 +1,95 @@
+/**
+ * calendar
+ */
+
+.input-daterange input {
+    text-align: left;
+}
+
+.input-daterange input:first-child {
+    border-radius: 2px 0 0 2px;
+}
+
+.input-daterange input:last-child {
+    border-radius: 0 2px 2px 0;
+}
+
+
+/**
+ * calendar themes
+ */
+
+.generate-calendar-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-calendar-@{name} table tr td.active,
+    .biz-calendar-@{name} table tr td.active.disabled,
+    .biz-calendar-@{name} table tr td.active.disabled:hover,
+    .biz-calendar-@{name} table tr td.active:hover {
+        background-color: @@name;
+        background-image: none;
+    }
+    .biz-calendar-@{name} table tr td.active.active,
+    .biz-calendar-@{name} table tr td.active.disabled,
+    .biz-calendar-@{name} table tr td.active.disabled.active,
+    .biz-calendar-@{name} table tr td.active.disabled.disabled,
+    .biz-calendar-@{name} table tr td.active.disabled:active,
+    .biz-calendar-@{name} table tr td.active.disabled:hover,
+    .biz-calendar-@{name} table tr td.active.disabled:hover.active,
+    .biz-calendar-@{name} table tr td.active.disabled:hover.disabled,
+    .biz-calendar-@{name} table tr td.active.disabled:hover:active,
+    .biz-calendar-@{name} table tr td.active.disabled:hover:hover,
+    .biz-calendar-@{name} table tr td.active.disabled:hover[disabled],
+    .biz-calendar-@{name} table tr td.active.disabled[disabled],
+    .biz-calendar-@{name} table tr td.active:active,
+    .biz-calendar-@{name} table tr td.active:hover,
+    .biz-calendar-@{name} table tr td.active:hover.active,
+    .biz-calendar-@{name} table tr td.active:hover.disabled,
+    .biz-calendar-@{name} table tr td.active:hover:active,
+    .biz-calendar-@{name} table tr td.active:hover:hover,
+    .biz-calendar-@{name} table tr td.active:hover[disabled],
+    .biz-calendar-@{name} table tr td.active[disabled] {
+        background-color: @@name;
+    }
+    .biz-calendar-@{name} table tr td span.active,
+    .biz-calendar-@{name} table tr td span.active.disabled,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover,
+    .biz-calendar-@{name} table tr td span.active:hover {
+        background-color: @@name;
+        background-image: none;
+    }
+    .biz-calendar-@{name} table tr td span.active.active,
+    .biz-calendar-@{name} table tr td span.active.disabled,
+    .biz-calendar-@{name} table tr td span.active.disabled.active,
+    .biz-calendar-@{name} table tr td span.active.disabled.disabled,
+    .biz-calendar-@{name} table tr td span.active.disabled:active,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover.active,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover.disabled,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover:active,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover:hover,
+    .biz-calendar-@{name} table tr td span.active.disabled:hover[disabled],
+    .biz-calendar-@{name} table tr td span.active.disabled[disabled],
+    .biz-calendar-@{name} table tr td span.active:active,
+    .biz-calendar-@{name} table tr td span.active:hover,
+    .biz-calendar-@{name} table tr td span.active:hover.active,
+    .biz-calendar-@{name} table tr td span.active:hover.disabled,
+    .biz-calendar-@{name} table tr td span.active:hover:active,
+    .biz-calendar-@{name} table tr td span.active:hover:hover,
+    .biz-calendar-@{name} table tr td span.active:hover[disabled],
+    .biz-calendar-@{name} table tr td span.active[disabled] {
+        background-color: @@name;
+    }
+    .biz-calendar-@{name} table tr td.highlighted {
+        background: lighten(@@name, 40%);
+    }
+    .generate-calendar-themes(@i - 1);
+}
+
+.generate-calendar-themes();
+.biz-calendar-gray table tr td.highlighted {
+    background: lighten(@gray, 30%);
+}
+
+.biz-calendar-yellow table tr td.highlighted {
+    background: lighten(@yellow, 15%);
+}

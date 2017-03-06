@@ -1,166 +1,129 @@
+require('jquery-placeholder');
+
 /**
- * @ignore
+ * Input
+ * @class
+ * @param {HTMLElement} input                 目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 class
+ * @param {Boolean}     [options.disabled]    禁用，默认 false
+ * @param {String}      [options.theme]       主题
  */
-define(function(require) {
-    require('dep/jquery.placeholder.js');
+function Input(input, options) {
+    this.main = input;
+    this.$main = $(this.main);
+
+    var defaultOption = {
+        theme: bizui.theme,
+        customClass: ''
+    };
+    this.options = $.extend(defaultOption, options || {});
+    this.init(this.options);
+}
+
+var defaultClass = 'biz-input',
+    disableClass = 'biz-input-disable',
+    hoverClass = 'biz-input-hover',
+    focusClass = 'biz-input-focus-',
+    dataKey = 'bizInput';
+
+Input.prototype = {
+    /**
+     * 初始化
+     * @param {Object} options 参数
+     * @private
+     */
+    init: function(options) {
+        this.$main.addClass(defaultClass + ' ' + options.customClass);
+
+        this.$main.placeholder();
+
+        if (options.disabled) {
+            this.disable();
+        }
+
+        this.$main.on('mouseover.bizInput', function() {
+            $(this).addClass(hoverClass);
+        }).on('mouseout.bizInput', function() {
+            $(this).removeClass(hoverClass);
+        }).on('focus.bizInput', function() {
+            $(this).addClass(focusClass + options.theme);
+        }).on('blur.bizInput', function() {
+            $(this).removeClass(focusClass + options.theme);
+        }).on('keydown.bizInput', function(e) {
+            /**
+             * 回车
+             * @event Input#enter
+             * @param {Object} e     事件对象
+             * @param {String} value 输入值
+             */
+            if (e.keyCode === 13) {
+                $(this).trigger('enter', $(this).val());
+                return false; // IE10-会自动寻找第一个<button>标签并触发它的click事件
+            }
+        });
+    },
 
     /**
-     * Input constructor
-     *
-     * <iframe width="100%" height="200" src="//jsfiddle.net/bizdevfe/sx74qw4g/1/embedded/result,js,html/" frameborder="0"></iframe>
-     * @constructor
-     * @param {HTMLElement|jQuery} input 目标元素
-     * @param {Object} [options] 参数
-     * @param {Boolean} [options.disabled] 是否禁用
-     * @param {Function} [options.onEnter] 按回车回调(event)
+     * 激活
      */
-    function Input(input, options) {
-        if (input instanceof jQuery) {
-            if (input.length > 0) {
-                input = input[0]; //只取第一个元素
-            } else {
-                return;
-            }
-        }
+    enable: function() {
+        this.main.disabled = false;
+        this.$main.removeClass(disableClass);
+    },
 
-        if (!isInput(input)) {
-            return;
-        }
+    /**
+     * 禁用
+     */
+    disable: function() {
+        this.main.disabled = true;
+        this.$main.addClass(disableClass);
+    },
 
-        /**
-         * @property {HTMLElement} main `input`元素
-         */
-        this.main = input;
-
-        /**
-         * @property {jQuery} $main `input`元素的$包装
-         */
-        this.$main = $(this.main);
-
-        this.options = $.extend({}, options || {});
-        this.init(this.options);
+    /**
+     * 销毁
+     */
+    destroy: function() {
+        this.$main.removeClass([defaultClass, this.options.customClass, disableClass].join(' '));
+        this.$main.off('keydown.bizInput')
+            .off('mouseover.bizInput')
+            .off('mouseout.bizInput')
+            .off('focus.bizInput')
+            .off('blur.bizInput');
+        this.$main.data(dataKey, null);
     }
+};
 
-    var defaultClass = 'biz-input',
-        disableClass = 'biz-input-disable',
-        hoverClass = 'biz-input-hover',
-        focusClass = 'biz-input-focus';
+function isInput(elem) {
+    var type = elem.getAttribute('type');
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && (!type || type.toLowerCase() === 'text' || type.toLowerCase() === 'password');
+}
 
-    Input.prototype = {
-        /**
-         * 初始化
-         * @param {Object} [options] 参数
-         * @protected
-         */
-        init: function(options) {
-            this.$main.addClass(defaultClass);
-
-            if (options.disabled) {
-                this.disable();
-            }
-
-            var self = this;
-            this.$main.on('keydown.bizInput', function(e) {
-                if (e.keyCode === 13) {
-                    if (options.onEnter) {
-                        options.onEnter.call(self, e);
+$.extend($.fn, {
+    bizInput: function(method) {
+        var internal_return, args = arguments;
+        this.each(function() {
+            var instance = $(this).data(dataKey);
+            if (instance) {
+                if (typeof method === 'string' && typeof instance[method] === 'function') {
+                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                    if (internal_return !== undefined) {
+                        return false; // break loop
                     }
-                    return false; //阻止IE9, 10触发<button>元素的click事件
                 }
-            });
-
-            this.$main.on('mouseover.bizInput', function(e) {
-                $(this).addClass(hoverClass);
-            }).on('mouseout.bizInput', function(e) {
-                $(this).removeClass(hoverClass);
-            }).on('focus.bizInput', function(e) {
-                $(this).addClass(focusClass);
-            }).on('blur.bizInput', function(e) {
-                $(this).removeClass(focusClass);
-            });
-
-            this.$main.placeholder({
-                customClass: 'placeholder'
-            });
-        },
-
-        /**
-         * 激活
-         */
-        enable: function() {
-            this.main.disabled = false;
-            this.$main.removeClass(disableClass);
-        },
-
-        /**
-         * 禁用
-         */
-        disable: function() {
-            this.main.disabled = true;
-            this.$main.addClass(disableClass);
-        },
-
-        /**
-         * 销毁
-         */
-        destroy: function() {
-            this.$main.removeClass(defaultClass + ' ' + disableClass);
-            this.$main.off('keydown.bizInput')
-                .off('mouseover.bizInput')
-                .off('mouseout.bizInput')
-                .off('focus.bizInput')
-                .off('blur.bizInput');
-        }
-    };
-
-    function isInput(elem) {
-        return elem.nodeType === 1 &&
-            elem.tagName.toLowerCase() === 'input' &&
-            (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
-    }
-
-    var dataKey = 'bizInput';
-
-    $.extend($.fn, {
-        bizInput: function(method, options) {
-            var input;
-            switch (method) {
-                case 'enable':
-                    this.each(function() {
-                        input = $(this).data(dataKey);
-                        if (input) {
-                            input.enable();
-                        }
-                    });
-                    break;
-                case 'disable':
-                    this.each(function() {
-                        input = $(this).data(dataKey);
-                        if (input) {
-                            input.disable();
-                        }
-                    });
-                    break;
-                case 'destroy':
-                    this.each(function() {
-                        input = $(this).data(dataKey);
-                        if (input) {
-                            input.destroy();
-                            $(this).data(dataKey, null);
-                        }
-                    });
-                    break;
-                default:
-                    this.each(function() {
-                        if (!$(this).data(dataKey) && isInput(this)) {
-                            $(this).data(dataKey, new Input(this, method));
-                        }
-                    });
+            } else {
+                if (isInput(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                    $(this).data(dataKey, new Input(this, method));
+                }
             }
+        });
 
+        if (internal_return !== undefined) {
+            return internal_return;
+        } else {
             return this;
         }
-    });
-
-    return Input;
+    }
 });
+
+module.exports = Input;

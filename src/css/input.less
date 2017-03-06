@@ -1,0 +1,44 @@
+/**
+ * input
+ */
+
+.biz-input {
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+    vertical-align: middle;
+    height: 18px;
+    line-height: 18px;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+    border-color: @border;
+    background-color: @background;
+    -webkit-appearance: none;
+}
+
+.biz-input-hover {
+    border-color: @border-hover;
+}
+
+.biz-input-disable {
+    background-color: @input-disable-background;
+    color: @disable-text;
+}
+
+
+/**
+ * input themes
+ */
+
+.generate-input-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-input-focus-@{name} {
+        border-color: @@name !important;
+    }
+    .generate-input-themes(@i - 1);
+}
+
+.generate-input-themes();

@@ -1,272 +1,248 @@
 /**
- * @ignore
+ * Textline
+ * @class
+ * @param {HTMLElement} textline              目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 class
+ * @param {Boolean}     [options.disabled]    禁用，默认 false
+ * @param {Number}      [options.height]      高度，默认取目标对象高度，最小 52px
+ * @param {Number}      [options.maxLine]     最大行数，大于等于 1
+ * @param {String}      [options.theme]       主题
+ * @param {String}      [options.val]         初始值，字符串形式
+ * @param {Array}       [options.valArray]    初始值，数组形式
+ * @param {Number}      [options.width]       宽度，默认取目标对象宽度，最小 200px
  */
-define(function(require) {
+function Textline(textline, options) {
+    this.main = textline;
+    this.$main = $(this.main);
+
+    var defaultOption = {
+        theme: bizui.theme,
+        customClass: ''
+    };
+    this.options = $.extend(defaultOption, options || {});
+    this.init(this.options);
+}
+
+var defaultClass = 'biz-textline',
+    disableClass = 'biz-textline-disable',
+    hoverClass = 'biz-textline-hover',
+    focusClass = 'biz-textline-focus-',
+    prefix = 'biz-textline-',
+    dataKey = 'bizTextline';
+
+Textline.prototype = {
     /**
-     * Textline constructor
-     *
-     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/wus1a8wy/3/embedded/result,js,html,css/" frameborder="0"></iframe>
-     * @constructor
-     * @param {HTMLElement|jQuery} textline 目标元素
-     * @param {Object} [options] 参数
-     * @param {Boolean} [options.disabled] 是否禁用
-     * @param {Boolean} [options.skin] 皮肤
-     * @param {Number} [options.width] 宽度
-     * @param {Number} [options.height] 高度
+     * 初始化
+     * @param {Object} options 参数
+     * @private
      */
-    function Textline(textline, options) {
-        if (textline instanceof jQuery) {
-            if (textline.length > 0) {
-                textline = textline[0]; //只取第一个元素
-            } else {
-                return;
-            }
+    init: function(options) {
+        this.$main.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '))
+            .html('<div><pre></pre></div><textarea></textarea>');
+
+        var w = options.width || this.$main.width(),
+            h = options.height || this.$main.height();
+
+        w = Math.max(w, 200);
+        h = Math.max(h, 52);
+
+        this.$main.css({
+            width: w,
+            height: h
+        });
+
+        this.$line = this.$main.children('div').css({
+            height: h - 10
+        });
+        this.$lineNumber = this.$main.find('pre');
+        this.$textarea = this.$main.children('textarea').css({
+            width: w - 36,
+            height: h - 12
+        });
+
+        if (options.disabled) {
+            this.disable();
         }
 
-        if (!isTextline(textline)) {
-            return;
-        }
+        var self = this;
+        this.$textarea.on('mouseover.bizTextline', function() {
+            $(this).addClass(hoverClass);
+        }).on('mouseout.bizTextline', function() {
+            $(this).removeClass(hoverClass);
+        }).on('focus.bizTextline', function() {
+            $(this).addClass(focusClass + options.theme);
+        }).on('blur.bizTextline', function() {
+            $(this).removeClass(focusClass + options.theme);
+        }).on('keyup.bizTextline.render', function(e) {
+            self.renderLineNumber(e.target.scrollTop);
+        }).on('scroll.bizTextline', function(e) {
+            self.scrollLineNumber(e.target.scrollTop);
+        });
 
-        /**
-         * @property {HTMLElement} main `textline`元素
-         */
-        this.main = textline;
-
-        /**
-         * @property {jQuery} $main `textline`元素的$包装
-         */
-        this.$main = $(this.main);
-
-        this.options = $.extend({}, options || {});
-        this.init(this.options);
-    }
-
-    var defaultClass = 'biz-textline',
-        disableClass = 'biz-textline-disable',
-        hoverClass = 'biz-textline-hover',
-        focusClass = 'biz-textline-focus';
-
-    Textline.prototype = {
-        /**
-         * 初始化
-         * @param {Object} [options] 参数
-         * @protected
-         */
-        init: function(options) {
-            this.skin = options.skin ? (' ' + options.skin) : '';
-
-            this.$main.addClass(defaultClass + this.skin).html('<div><pre></pre></div><textarea></textarea>');
-            var w = options.width || this.$main.width(),
-                h = options.height || this.$main.height();
-
-            w = Math.max(w, 200);
-            h = Math.max(h, 52);
-            
-            this.$line = this.$main.children('div').css({
-                height: h - 10
-            });
-            this.$lineNumber = this.$main.find('pre');
-            this.$textarea = this.$main.children('textarea').css({
-                width: w - 36,
-                height: h - 12
-            });
-            this.$main.css({
-                width: 'auto',
-                height: 'auto'
-            });
-
-            if (options.disabled) {
-                this.disable();
-            }
-
-            var self = this;
-            this.$textarea.on('mouseover.bizTextline', function(e) {
-                $(this).addClass(hoverClass);
-            }).on('mouseout.bizTextline', function(e) {
-                $(this).removeClass(hoverClass);
-            }).on('focus.bizTextline', function(e) {
-                $(this).addClass(focusClass);
-            }).on('blur.bizTextline', function(e) {
-                $(this).removeClass(focusClass);
-            }).on('keyup.bizTextline', function(e) {
-                self.renderLineNumber(e.target.scrollTop);
-            }).on('scroll.bizTextline', function(e) {
-                self.scrollLineNumber(e.target.scrollTop);
-            });
-
-            this.renderLineNumber(0);
-        },
-
-        /**
-         * 激活
-         */
-        enable: function() {
-            this.$textarea[0].disabled = false;
-            this.$textarea.removeClass(disableClass);
-        },
-
-        /**
-         * 禁用
-         */
-        disable: function() {
-            this.$textarea[0].disabled = true;
-            this.$textarea.addClass(disableClass);
-        },
-
-        /**
-         * 获取文本长度（去除回车）
-         * @return {Number} 文本长度
-         */
-        length: function() {
-            return this.$textarea[0].value.replace(/\r?\n/g, '').length;
-        },
-
-        /**
-         * 获取/设置文本行数
-         * @param {Number} [value] 行数
-         * @return {Number} 文本行数
-         */
-        lines: function(value) {
-            if (undefined === value) { //get
-                return this.$textarea.val().split('\n');
-            }
-            var self = this;
-            this.$textarea.keyup(function(event) {
-                var key = event.which;
-                var values = self.$textarea.val().split('\n');
-                if (key == 13) {
-                    var length = values.length;
-                    if (length > value) {
-                        self.val(temp);
+        if (parseInt(options.maxLine, 10) >= 1) {
+            this.$textarea.on('keyup.bizTextline.maxLine', function(e) {
+                if (e.keyCode === 13) {
+                    var valArray = self.valArray(),
+                        length = valArray.length;
+                    if (length > options.maxLine) {
+                        valArray.splice(options.maxLine, length - options.maxLine);
+                        self.valArray(valArray);
                     }
                 }
-                temp = self.$textarea.val();
-            });
-        },
-
-        /**
-         * 获取/设置值
-         * @param {String} [value] 参数
-         * @return {String}
-         */
-        val: function(value) {
-            if (undefined === value) { //get
-                return this.$textarea.val();
-            }
-            this.$textarea[0].value = value; //set
-            this.renderLineNumber(0);
-        },
-
-        /**
-         * 销毁
-         */
-        destroy: function() {
-            this.$textarea.off('mouseover.bizTextline')
-                .off('mouseout.bizTextline')
-                .off('focus.bizTextline')
-                .off('blur.bizTextline')
-                .off('keyup.bizTextline')
-                .off('scroll.bizTextline');
-            this.$main.removeClass(defaultClass + this.skin).empty();
-        },
-
-        /**
-         * 绘制行号
-         * @param {Number} scrollTop 滚动高度
-         * @protected
-         */
-        renderLineNumber: function(scrollTop) {
-            var lineCount = this.$textarea.val().split('\n').length,
-                numbers = '1';
-            for (var i = 2; i <= lineCount; i++) {
-                numbers += '\n' + i;
-            }
-            this.$lineNumber.html(numbers);
-            this.scrollLineNumber(scrollTop);
-        },
-
-        /**
-         * 滚动行号
-         * @param {Number} scrollTop 滚动高度
-         * @protected
-         */
-        scrollLineNumber: function(scrollTop) {
-            this.$lineNumber.css({
-                top: 5 - scrollTop
             });
         }
-    };
 
-    function isTextline(elem) {
-        return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
-    }
+        this.renderLineNumber(0);
 
-    var dataKey = 'bizTextline';
+        if (typeof options.val === 'string') {
+            this.val(options.val);
+        }
 
-    $.extend($.fn, {
-        bizTextline: function(method, options) {
-            var textline;
-            switch (method) {
-                case 'enable':
-                    this.each(function() {
-                        textline = $(this).data(dataKey);
-                        if (textline) {
-                            textline.enable();
-                        }
-                    });
-                    break;
-                case 'disable':
-                    this.each(function() {
-                        textline = $(this).data(dataKey);
-                        if (textline) {
-                            textline.disable();
-                        }
-                    });
-                    break;
-                case 'lines':
-                    if (undefined === options) { //get
-                        return $(this).data(dataKey).val().split("\n").length;
-                    }
-                    this.each(function() { //set
-                        textline = $(this).data(dataKey);
-                        if (textline) {
-                            textline.lines(options);
-                        }
-                    });
-                    break;
-                case 'val':
-                    if (undefined === options) { //get
-                        return $(this).data(dataKey).val();
-                    }
-                    this.each(function() { //set
-                        textline = $(this).data(dataKey);
-                        if (textline) {
-                            textline.val(options);
-                        }
-                    });
-                    break;
-                case 'destroy':
-                    this.each(function() {
-                        textline = $(this).data(dataKey);
-                        if (textline) {
-                            textline.destroy();
-                            $(this).data(dataKey, null);
-                        }
-                    });
-                    break;
-                case 'length':
-                    return this.length !== 0 ? this.data(dataKey).length() : null;
-                default:
-                    this.each(function() {
-                        if (!$(this).data(dataKey) && isTextline(this)) {
-                            $(this).data(dataKey, new Textline(this, method));
-                        }
-                    });
+        if (jQuery.isArray(options.valArray)) {
+            this.valArray(options.valArray);
+        }
+    },
+
+    /**
+     * 激活
+     */
+    enable: function() {
+        this.$textarea[0].disabled = false;
+        this.$textarea.removeClass(disableClass);
+    },
+
+    /**
+     * 禁用
+     */
+    disable: function() {
+        this.$textarea[0].disabled = true;
+        this.$textarea.addClass(disableClass);
+    },
+
+    /**
+     * 获取文本长度（不计回车）
+     * @return {Number}
+     */
+    length: function() {
+        return this.$textarea.val().replace(/\r?\n/g, '').length;
+    },
+
+    /**
+     * 以字符串形式获取/设置内容，超过 maxLine 会被截断
+     * @param {String} [value] 内容
+     * @return {String}
+     */
+    val: function(value) {
+        if (undefined === value) {
+            return this.$textarea.val();
+        }
+
+        if (parseInt(this.options.maxLine, 10) >= 1) {
+            var valArray = value.split('\n'),
+                length = valArray.length;
+            if (length > this.options.maxLine) {
+                valArray.splice(this.options.maxLine, length - this.options.maxLine);
+                value = valArray.join('\n');
             }
+        }
 
+        this.$textarea.val(value);
+        this.renderLineNumber(0);
+    },
+
+    /**
+     * 以数组形式获取/设置内容，超过 maxLine 会被截断
+     * @param {Array} [value] 内容
+     * @return {Array}
+     */
+    valArray: function(value) {
+        if (undefined === value) {
+            return this.val().split('\n');
+        }
+
+        if (parseInt(this.options.maxLine, 10) >= 1) {
+            var length = value.length;
+            if (length > this.options.maxLine) {
+                value.splice(this.options.maxLine, length - this.options.maxLine);
+            }
+        }
+
+        this.$textarea.val(value.join('\n'));
+        this.renderLineNumber(0);
+    },
+
+    /**
+     * 销毁
+     */
+    destroy: function() {
+        this.$textarea.off('mouseover.bizTextline')
+            .off('mouseout.bizTextline')
+            .off('focus.bizTextline')
+            .off('blur.bizTextline')
+            .off('keyup.bizTextline')
+            .off('scroll.bizTextline');
+        this.$main.removeClass([defaultClass, this.options.customClass, (prefix + this.options.theme)].join(' '))
+            .empty();
+        this.$main.data(dataKey, null);
+    },
+
+    /**
+     * 绘制行号
+     * @param {Number} scrollTop 滚动高度
+     * @private
+     */
+    renderLineNumber: function(scrollTop) {
+        var lineCount = this.$textarea.val().split('\n').length,
+            numbers = '1';
+        for (var i = 2; i <= lineCount; i++) {
+            numbers += '\n' + i;
+        }
+        this.$lineNumber.html(numbers);
+        this.scrollLineNumber(scrollTop);
+    },
+
+    /**
+     * 滚动行号
+     * @param {Number} scrollTop 滚动高度
+     * @private
+     */
+    scrollLineNumber: function(scrollTop) {
+        this.$lineNumber.css({
+            top: 5 - scrollTop
+        });
+    }
+};
+
+function isTextline(elem) {
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
+}
+
+$.extend($.fn, {
+    bizTextline: function(method) {
+        var internal_return, args = arguments;
+        this.each(function() {
+            var instance = $(this).data(dataKey);
+            if (instance) {
+                if (typeof method === 'string' && typeof instance[method] === 'function') {
+                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                    if (internal_return !== undefined) {
+                        return false; // break loop
+                    }
+                }
+            } else {
+                if (isTextline(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                    $(this).data(dataKey, new Textline(this, method));
+                }
+            }
+        });
+
+        if (internal_return !== undefined) {
+            return internal_return;
+        } else {
             return this;
         }
-    });
-
-    return Textline;
+    }
 });
+
+module.exports = Textline;

@@ -1,0 +1,44 @@
+/**
+ * textarea
+ */
+
+.biz-textarea {
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+    line-height: 20px;
+    resize: none;
+    vertical-align: middle;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+    border-color: @border;
+    background-color: @background;
+    -webkit-appearance: none;
+}
+
+.biz-textarea-hover {
+    border-color: @border-hover;
+}
+
+.biz-textarea-disable {
+    background-color: @input-disable-background;
+    color: @disable-text;
+}
+
+
+/**
+ * textarea themes
+ */
+
+.generate-textarea-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-textarea-focus-@{name} {
+        border-color: @@name !important;
+    }
+    .generate-textarea-themes(@i - 1);
+}
+
+.generate-textarea-themes();

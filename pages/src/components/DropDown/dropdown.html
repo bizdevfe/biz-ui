@@ -1,0 +1,110 @@
+<h3>DropDown</h3>
+
+<div class="example">
+<button id="b1">show DropDown</button>
+<div class="dropdown-container">
+    <input type="text" placeholder="Username"><br><br>
+    <input type="text" placeholder="Email"><br><br>
+    <input type="text" placeholder="Phone"><br><br>
+    <button id="b2">Sign up</button>
+</div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;button id="b1"&gt;show DropDown&lt;/button&gt;
+    &lt;div class="dropdown-container"&gt;
+        &lt;input type="text" placeholder="Username"&gt;
+        &lt;input type="text" placeholder="Email"&gt;
+        &lt;input type="text" placeholder="Phone"&gt;
+        &lt;button id="b2"&gt;Sign up&lt;/button&gt;
+    &lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('input').bizInput();
+    $('#b1').bizButton({
+        theme: 'blue-gray'
+    });
+    $('#b2').bizButton();
+    $('.dropdown-container').bizDropDown({
+        trigger: '#b1',
+        customClass: 'register'
+    });
+    $('#b2').click(function() {
+        $('.dropdown-container').bizDropDown('close');
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[alignX]</td>
+        <td>String</td>
+        <td>水平方对齐方式（left|right），默认 "left"</td>
+    </tr>
+    <tr>
+        <td>[alignY]</td>
+        <td>String</td>
+        <td>垂直方对齐方式（top|bottom），默认 "bottom"</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[onBeforeClose]</td>
+        <td>Function</td>
+        <td>关闭时的回调，返回 false 则不执行关闭</td>
+    </tr>
+    <tr>
+        <td>[onBeforeOpen]</td>
+        <td>Function</td>
+        <td>打开时的回调，返回 false 则不执行打开</td>
+    </tr>
+    <tr>
+        <td>[offsetX]</td>
+        <td>Number</td>
+        <td>水平偏移，默认 0</td>
+    </tr>
+    <tr>
+        <td>[offsetY]</td>
+        <td>Number</td>
+        <td>垂直偏移，默认 0</td>
+    </tr>
+    <tr>
+        <td>trigger</td>
+        <td>String</td>
+        <td>触发下拉浮层的元素选择器</td>
+    </tr>
+    <tr>
+        <td>[zIndex]</td>
+        <td>Number</td>
+        <td>下拉浮层 z-index，默认使用 trigger 的 z-index</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>close()</h4>
+<p class="des">关闭下拉浮层</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>open()</h4>
+<p class="des">打开下拉浮层</p>
+</div>

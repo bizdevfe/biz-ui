@@ -1,0 +1,122 @@
+<h3>Panel</h3>
+
+<div class="example">
+<div class="panel-content" data-title="Title">Content</div>
+<button>open panel</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="panel-content" data-title="Title"&gt;Content&lt;/div&gt;
+    &lt;button id="b5"&gt;open panel&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('button').bizButton({
+        theme: 'blue-gray'
+    }).click(function() {
+        $('.panel-content').bizPanel('open');
+    });
+    $('.panel-content').bizPanel({
+        buttons: [
+            {
+                text: 'OK',
+                icon: 'done',
+                onClick: function() {
+                    this.close();
+                }
+            },
+            {
+                text: 'Cancel',
+                icon: 'close',
+                theme: 'gray',
+                onClick: function() {
+                    this.close();
+                }
+            }
+        ]
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[buttons]</td>
+        <td>Array</td>
+        <td>底部按钮的 option 数组（多一个 onClick 属性），默认 [ ]</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[destroyOnClose]</td>
+        <td>Boolean</td>
+        <td>关闭时销毁对话框，默认 false</td>
+    </tr>
+    <tr>
+        <td>[marginLeft]</td>
+        <td>Number</td>
+        <td>左边距（px），默认 200</td>
+    </tr>
+    <tr>
+        <td>[speed]</td>
+        <td>Number</td>
+        <td>动画速度（ms），默认 300</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[title]</td>
+        <td>String</td>
+        <td>对话框标题，默认取目标元素的 data-title 属性</td>
+    </tr>
+    <tr>
+        <td>[onBeforeClose]</td>
+        <td>Function</td>
+        <td>关闭前回调，返回 false 则不关闭</td>
+    </tr>
+    <tr>
+        <td>[zIndex]</td>
+        <td>Number</td>
+        <td>对话框 z-index</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>close()</h4>
+<p class="des">关闭对话框</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>open()</h4>
+<p class="des">打开对话框</p>
+</div>
+
+<div class="methods">
+<h4>title([String title])</h4>
+<p class="des">获取/设置标题</p>
+</div>
+
+<div class="methods">
+<h4>updateButtons(Object buttonOption)</h4>
+<p class="des">更新按钮</p>
+</div>

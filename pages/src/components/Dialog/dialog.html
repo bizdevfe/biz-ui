@@ -1,0 +1,255 @@
+<h3>Dialog</h3>
+
+<div class="example">
+<div class="dialog-content d1" data-title="Fixed">I'm fixed.</div>
+<div class="dialog-content d2" data-title="Absolute">I'm absolute.</div>
+<div class="dialog-content d3" data-title="Draggable">I'm draggable.</div>
+<button id="b1">Fixed dialog</button>
+<button id="b2">Absolute dialog</button>
+<button id="b3">Draggable dialog</button>
+<button id="b4">Alert dialog</button>
+<button id="b5">Confirm dialog</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="dialog-content d1" data-title="Fixed"&gt;I'm fixed.&lt;/div&gt;
+    &lt;div class="dialog-content d2" data-title="Absolute"&gt;I'm absolute.&lt;/div&gt;
+    &lt;div class="dialog-content d3" data-title="Draggable"&gt;I'm draggable.&lt;/div&gt;
+    &lt;button id="b1"&gt;Fixed dialog&lt;/button&gt;
+    &lt;button id="b2"&gt;Absolute dialog&lt;/button&gt;
+    &lt;button id="b3"&gt;Draggable dialog&lt;/button&gt;
+    &lt;button id="b4"&gt;Alert dialog&lt;/button&gt;
+    &lt;button id="b5"&gt;Confirm dialog&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('.d1').bizDialog({
+        buttons: [
+            {
+                text: 'OK',
+                icon: 'done',
+                onClick: function() {
+                    this.close();
+                }
+            }
+        ]
+    });
+    $('.b1').click(function() {
+        $('.d1').bizDialog('open');
+    });
+    $('.d2').bizDialog({
+        buttons: [
+            {
+                text: 'OK',
+                icon: 'done',
+                onClick: function() {
+                    this.close();
+                }
+            }
+        ],
+        position: 'absolute'
+    });
+    $('.b2').click(function() {
+        $('.d2').bizDialog('open');
+    });
+    $('.d3').bizDialog({
+        buttons: [
+            {
+                text: 'OK',
+                icon: 'done',
+                onClick: function() {
+                    this.close();
+                }
+            }
+        ],
+        draggable: true
+    });
+    $('.b3').click(function() {
+        $('.d3').bizDialog('open');
+    });
+    $('.b4').click(function() {
+        bizui.alert({
+            title: 'Alert',
+            content: 'Content',
+            theme: 'red'
+        });
+    });
+    $('.b5').click(function() {
+        bizui.confirm({
+            title: 'Confirm',
+            content: 'Content',
+            theme: 'green'
+        });
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[buttons]</td>
+        <td>Array</td>
+        <td>底部按钮的 option 数组（多一个 onClick 属性），默认 [ ]</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[destroyOnClose]</td>
+        <td>Boolean</td>
+        <td>关闭时销毁对话框，默认 false</td>
+    </tr>
+    <tr>
+        <td>[draggable]</td>
+        <td>Boolean</td>
+        <td>可拖拽，默认 false</td>
+    </tr>
+    <tr>
+        <td>[height]</td>
+        <td>Number</td>
+        <td>对话框高度，默认取填充内容后的高度，最小 150px</td>
+    </tr>
+    <tr>
+        <td>[position]</td>
+        <td>String</td>
+        <td>定位方式（fixed | absolute），默认 'fixed'</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[title]</td>
+        <td>String</td>
+        <td>对话框标题，默认取目标元素的 data-title 属性</td>
+    </tr>
+    <tr>
+        <td>[width]</td>
+        <td>Number</td>
+        <td>对话框宽度，最小 320px</td>
+    </tr>
+    <tr>
+        <td>[onBeforeClose]</td>
+        <td>Function</td>
+        <td>关闭前回调，返回 false 则不关闭</td>
+    </tr>
+    <tr>
+        <td>[zIndex]</td>
+        <td>Number</td>
+        <td>对话框 z-index</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>close()</h4>
+<p class="des">关闭对话框</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>open()</h4>
+<p class="des">打开对话框</p>
+</div>
+
+<div class="methods">
+<h4>title([String title])</h4>
+<p class="des">获取/设置标题</p>
+</div>
+
+<div class="methods">
+<h4>updateButtons(Object buttonOption)</h4>
+<p class="des">更新按钮</p>
+</div>
+
+<div class="methods">
+<h4>bizui.alert([Object|String options])</h4>
+<p class="des">提示对话框</p>
+</div>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[content]</td>
+        <td>String</td>
+        <td>内容，默认 ''</td>
+    </tr>
+    <tr>
+        <td>[okText]</td>
+        <td>String</td>
+        <td>确认文字，默认 '确定'</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[title]</td>
+        <td>String</td>
+        <td>标题</td>
+    </tr>
+</table>
+
+<div class="methods">
+<h4>bizui.confirm([Object options])</h4>
+<p class="des">确认对话框</p>
+</div>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[content]</td>
+        <td>String</td>
+        <td>内容，默认 ''</td>
+    </tr>
+    <tr>
+        <td>[cancelText]</td>
+        <td>String</td>
+        <td>取消文字，默认 '取消'</td>
+    </tr>
+    <tr>
+        <td>[okText]</td>
+        <td>String</td>
+        <td>确认文字，默认 '确定'</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[title]</td>
+        <td>String</td>
+        <td>标题</td>
+    </tr>
+    <tr>
+        <td>[onOK]</td>
+        <td>Function</td>
+        <td>确认回调，返回 false 则不关闭</td>
+    </tr>
+</table>

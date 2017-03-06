@@ -1,0 +1,96 @@
+/**
+ * select
+ */
+
+.selectric-wrapper {
+    font-family: @font-family;
+}
+
+.selectric {
+    background: @background;
+    border-color: @border;
+    border-radius: 2px;
+}
+
+.selectric .label,
+.selectric-items ul,
+.selectric-items li {
+    font-size: @font-size;
+    color: @dark-text;
+}
+
+.selectric .label {
+    height: 28px;
+    line-height: 28px;
+}
+
+.selectric .button {
+    width: 28px;
+    height: 28px;
+}
+
+.selectric-open .selectric {
+    border-radius: 2px 2px 0 0;
+}
+
+.selectric-items {
+    outline: none;
+    border-radius: 0 0 2px 2px;
+    border-top: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    background: @background;
+}
+
+.selectric-items li {
+    padding: 5px 10px;
+}
+
+.selectric-items li.selected,
+.selectric-items li.highlighted,
+.selectric-items li:hover {
+    color: @light-text;
+}
+
+.selectric-items .disabled {
+    color: @disable-text;
+}
+
+
+/**
+ * select themes
+ */
+
+.generate-select-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-select-@{name}.selectric-open .selectric,
+    .biz-select-@{name}.selectric-focus .selectric,
+    .biz-select-@{name}.selectric-hover .selectric,
+    .biz-select-@{name} .selectric-items {
+        border-color: @@name;
+    }
+    .biz-select-@{name}.selectric-open .selectric .button,
+    .biz-select-@{name}.selectric-focus .selectric .button,
+    .biz-select-@{name}.selectric-hover .selectric .button {
+        color: @@name;
+    }
+    .biz-select-@{name}.selectric-open .selectric .button:after,
+    .biz-select-@{name}.selectric-focus .selectric .button:after,
+    .biz-select-@{name}.selectric-hover .selectric .button:after {
+        border-top-color: @@name;
+    }
+    .biz-select-@{name} .selectric-items li.selected,
+    .biz-select-@{name} .selectric-items li.highlighted {
+        background: @@name;
+    }
+    .biz-select-@{name} .selectric-items li:hover {
+        background: lighten(@@name, 10%);
+    }
+    .generate-select-themes(@i - 1);
+}
+
+.generate-select-themes();
+.biz-select-yellow .selectric-items li.selected,
+.biz-select-yellow .selectric-items li.highlighted,
+.biz-select-yellow .selectric-items li:hover {
+    color: @yellow-text;
+}

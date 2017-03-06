@@ -1,132 +1,69 @@
+require('./ui/Button');
+require('./ui/Calendar');
+require('./ui/Checkbox');
+var dialog = require('./ui/Dialog');
+require('./ui/DropDown');
+require('./ui/Input');
+require('./ui/Page');
+require('./ui/Panel');
+require('./ui/Radio');
+require('./ui/Select');
+require('./ui/Tab');
+require('./ui/Table');
+require('./ui/Textarea');
+require('./ui/Textline');
+require('./ui/Transfer');
+require('./ui/Tree');
+require('./ui/TreeTable');
+
 /**
- * @ignore
+ * @namespace
  */
-define(function(require) {
+var bizui = {
     /**
-     * 命名空间
-     * @class bizui
-     * @singleton
+     * @property {String} theme 主题，默认 'blue'
      */
-    var bizui = {};
-
+    theme: 'blue',
     /**
-     * @property {String} version 版本号
+     * @property {Object} codepoints Iconfont codepoints
      */
-    bizui.version = '1.3.1';
-
-    var origin = window.bizui;
-
+    codepoints: require('./codepoints.js'),
     /**
-     * 获取无冲突bizui
-     * @return {Object} bizui
+     * 提示对话框
+     * @param {Object|String} [options]         参数或提示内容
+     * @param {String}        [options.content] 内容
+     * @param {String}        [options.okText]  确认文字，默认 '确定'
+     * @param {String}        [options.theme]   主题
+     * @param {String}        [options.title]   标题
+     * @function
      */
-    bizui.noConflict = function() {
-        window.bizui = origin;
-        return this;
-    };
+    alert: dialog.alert,
+    /**
+     * 确认对话框
+     * @param {Object}   [options]            参数
+     * @param {String}   [options.content]    内容
+     * @param {String}   [options.cancelText] 取消文字，默认 '取消'
+     * @param {String}   [options.okText]     确认文字，默认 '确定'
+     * @param {String}   [options.theme]      主题
+     * @param {String}   [options.title]      标题
+     * @param {Function} [options.onOK]       确认回调，返回 false 则不关闭
+     * @function
+     */
+    confirm: dialog.confirm,
+    /**
+     * Tooltip
+     * @function
+     * @param {Object}  [options]                参数
+     * @param {String}  [options.action]         触发方式（focus | click | hover），默认 focus
+     * @param {String}  [options.element]        目标对象选择器，默认 '.error'
+     * @param {Boolean} [options.preventDefault] 阻止默认事件，默认 false
+     * @param {Boolean} [options.removeAll]      移除所有绑定，默认 false
+     * @param {Boolean} [options.removeSpecific] 移除指定绑定，需同时指定 action 和 element，默认 false
+     * @param {Boolean} [options.theme]          主题，默认黑色
+     */
+    Tooltip: require('./ui/Tooltip')
+};
 
-    $.extend(bizui, {
-        /**
-         * {@link Button} constructor
-         * @method Button
-         */
-        Button: require('ui/Button'),
+window.bizui = bizui;
 
-        /**
-         * {@link Input} constructor
-         * @method Input
-         */
-        Input: require('ui/Input'),
-
-        /**
-         * {@link Textarea} constructor
-         * @method Textarea
-         */
-        Textarea: require('ui/Textarea'),
-
-        /**
-         * {@link Textline} constructor
-         * @method Textline
-         */
-        Textline: require('ui/Textline'),
-
-        /**
-         * {@link Radio} constructor
-         * @method Radio
-         */
-        Radio: require('ui/Radio'),
-
-        /**
-         * {@link Checkbox} constructor
-         * @method Checkbox
-         */
-        Checkbox: require('ui/Checkbox'),
-
-        /**
-         * {@link Select} constructor
-         * @method Select
-         */
-        Select: require('ui/Select'),
-
-        /**
-         * {@link Dialog} constructor
-         * @method Dialog
-         */
-        Dialog: require('ui/Dialog'),
-
-        /**
-         * {@link Panel} constructor
-         * @method Panel
-         */
-        Panel: require('ui/Panel'),
-
-        /**
-         * {@link Tooltip} method
-         * @method Tooltip
-         */
-        Tooltip: require('ui/Tooltip'),
-
-        /**
-         * {@link Tab} constructor
-         * @method Tab
-         */
-        Tab: require('ui/Tab'),
-
-        /**
-         * {@link Page} constructor
-         * @method Page
-         */
-        Page: require('ui/Page'),
-
-        /**
-         * {@link Tree} constructor
-         * @method Tree
-         */
-        Tree: require('ui/Tree'),
-
-        /**
-         * {@link Calendar} constructor
-         * @method Calendar
-         */
-        Calendar: require('ui/Calendar'),
-
-        /**
-         * {@link Table} constructor
-         * @method Table
-         */
-        Table: require('ui/Table'),
-
-        /**
-         * {@link TreeTable} constructor
-         * @method TreeTable
-         */
-        TreeTable: require('ui/TreeTable'),
-        /**
-         * {@link DropDownContext} constructor
-         * @method DropdownContext
-         */
-        DropdownContext: require('ui/DropdownContext')
-    });
-
-    return bizui;
-});
+module.exports = bizui;

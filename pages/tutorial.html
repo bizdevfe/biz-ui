@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0" user-scalable="no">
+    <title>BizUI - 起步</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/main.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/highlight.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/atom-one-dark.css">
+    <link href="favicon.ico" rel="shortcut icon">
+</head>
+<body>
+<nav class="main-nav">
+    <a href="../index.html">BizUI</a>
+    <a href="#" class="active">起步</a>
+    <a href="components.html">组件</a>
+    <a class="github" href="https://github.com/bizdevfe/biz-ui/releases" target="_blank">GitHub&nbsp;&nbsp;v1.4.0</a>
+</nav>
+
+<div class="container">
+	<div class="tutorial">
+        <h1>快速起步</h1>
+        <h3>依赖</h3>
+        <p>jQuery 1.11.0+</p>
+        <h3>使用方法</h3>
+        <p>通过 npm 或 bower 安装 BizUI 的最新版本：</p>
+        <pre><code class="bash">
+    npm install biz-ui --save
+    bower install biz-ui --save
+        </code></pre>
+        <p>建议把 BizUI 作为一个 vendor 模块与其他常用类库构建为一个 chunk，以 webpack 为例，你应该做如下配置：</p>
+        <pre><code class="js">
+    entry: {
+        // stuff
+        vendor: ['jquery', 'biz-ui']
+    }
+        </code></pre>
+        <p>如果你没有使用构建系统，那么直接在页面中引入 jQuery、BizUI 的 CSS 和 JS 文件：
+		<pre><code class="html">
+    &lt;link rel="stylesheet" type="text/css" href="jquery.bizui.css"&gt;
+    &lt;script src="jquery.js"&gt;&lt;/script&gt;
+    &lt;script src="jquery.bizui.js"&gt;&lt;/script&gt;
+        </code></pre>
+        <p>然后在任意模块或全局环境中使用即可：
+        <pre><code class="js">
+    $('button').bizButton();
+    $('input').bizCalendar();
+        </code></pre>
+        <p>每个组件的具体使用方法请参见 <a href="components.html">示例代码</a>。</p>
+        <h3>主题</h3>
+        <img src="asset/img/theme.png"/>
+        <p>BizUI 提供了 19 种不同的主题风格，可通过组件的 theme 参数设置：</p>
+        <pre><code class="js">
+    $('button').bizButton({
+        theme: 'light-blue'
+    });
+        </code></pre>
+        <p>或通过 bizui.theme 全局设置：</p>
+        <pre><code class="js">
+    bizui.theme = 'light-blue';
+        </code></pre>
+        <p>还可在 src/css/theme.less 中增加主题颜色，自行构建：</p>
+        <pre><code class="bash">
+    $ gulp build-css
+        </code></pre>
+        <h3>图标</h3>
+        <div class="icon-font"></div>
+        <p>BizUI 提供了 900 余种 Iconfont，详见 <a href="https://material.io/icons/" target="_blank">Google Material Design Icons</a>。对于 IE 浏览器，请使用 codepoints（src/codepoints.js）代替图标名称。<br>可直接在 HTML 中使用：</p>
+        <pre><code class="html">
+    &lt;i class="biz-icon"&gt;add&lt;/i&gt;
+    &lt;i class="biz-icon"&gt;&amp;#xe145;&lt;/i&gt; &lt;!-- for IE --&gt;
+        </code></pre>
+        <p>也可在 CSS 中使用：</p>
+        <pre><code class="css">
+    a.add:before {
+        font-family: "BizIcon" !important;
+        content: '\e145';
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+        color: #ccc;
+    }
+        </code></pre>
+        <h3>浏览器支持</h3>
+        <p>BizUI 支持 IE9+、Chrome、Firefox、Safari 等主流浏览器。</p>
+        <h3>构建</h3>
+        <p>如果对源代码进行了修改，运行如下命令，目标代码将生成在 dist 目录。</p>
+        <pre><code class="bash">
+    $ npm install
+    $ gulp build
+        </code></pre>
+        <h3>生成文档</h3>
+        <p>运行如下命令，生成详尽的 API 文档，见 docs 目录。</p>
+        <pre><code class="bash">
+    $ gulp doc
+        </code></pre>
+    </div>
+</div>
+
+<footer>
+    <div class="mol logo">
+        <span></span>
+        <p>Powered by Sogou BizFE ©2014-2017.</p>
+    </div>
+    <div class="mol">
+        <h3>帮助</h3>
+        <ul>
+            <li><a href="tutorial.html">快速起步</a></li>
+            <li><a href="components.html">示例代码</a></li>
+            <li><a href="mailto:bizdev_fe@sogou-inc.com">技术支持</a></li>
+            <li><a href="https://github.com/bizdevfe/biz-ui/issues" target="_blank">使用反馈</a></li>
+        </ul>
+    </div>
+    <div class="mol">
+        <h3>BizFE 产品</h3>
+        <ul>
+            <li><a href="http://fe.sogou/" target="_blank">主页</a></li>
+            <li><a href="http://fe.sogou-inc.com/" target="_blank">博客</a></li>
+            <li><a href="http://bizdp.fe.sogou/" target="_blank">BizDP</a></li>
+            <li><a href="http://bizui2.fe.sogou/" target="_blank">BizUI<sup>2</sup></a></li>
+            <li><a href="http://bizmobile.sogou/h5frame.html#/start/" target="_blank">BizMobileUI</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="src/libs/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

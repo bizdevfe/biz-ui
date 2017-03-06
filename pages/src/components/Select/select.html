@@ -1,0 +1,109 @@
+<h3>Select</h3>
+
+<div class="example">
+    <select id="fruit" style="width:300px" >
+        <option value="strawberries">Strawberries</option>
+        <option value="mango">Mango</option>
+        <option value="bananas">Bananas</option>
+        <option value="watermelon">Watermelon</option>
+        <option value="apples">Apples</option>
+        <option value="grapes">Grapes</option>
+        <option value="oranges" disabled>Oranges</option>
+        <option value="pineapple">Pineapple</option>
+        <option value="peaches">Peaches</option>
+        <option value="cherries">Cherries</option>
+    </select><br>
+    <button id="b1">select Apples</button>
+    <button id="b2">select Bananas</button>
+    <button id="b3">select Cherries and trigger</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;select id="fruit" style="width:300px"&gt;
+        &lt;option value="strawberries"&gt;Strawberries&lt;/option&gt;
+        &lt;option value="mango"&gt;Mango&lt;/option&gt;
+        &lt;option value="bananas"&gt;Bananas&lt;/option&gt;
+        &lt;option value="watermelon"&gt;Watermelon&lt;/option&gt;
+        &lt;option value="apples"&gt;Apples&lt;/option&gt;
+        &lt;option value="grapes"&gt;Grapes&lt;/option&gt;
+        &lt;option value="oranges" disabled&gt;Oranges&lt;/option&gt;
+        &lt;option value="pineapple"&gt;Pineapple&lt;/option&gt;
+        &lt;option value="peaches"&gt;Peaches&lt;/option&gt;
+        &lt;option value="cherries"&gt;Cherries&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;button id="b1"&gt;select Apples&lt;/button&gt;
+    &lt;button id="b2"&gt;select Bananas&lt;/button&gt;
+    &lt;button id="b3"&gt;select Cherries and trigger&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('#fruit').bizSelect({
+        inheritOriginalWidth: true
+    }).on('change', function(e) {
+        bizui.alert($(this).val());
+    });
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('#b1').click(function() {
+        $('#fruit').val('apples').bizSelect('refresh');
+        // $('#fruit').prop('selectedIndex', 4).bizSelect('refresh');
+    });
+    $('#b2').click(function() {
+        $('#fruit').val('bananas').bizSelect('refresh');
+        // $('#fruit').prop('selectedIndex', 2).bizSelect('refresh');
+    });
+    $('#b3').click(function() {
+        $('#fruit').val('cherries').bizSelect('refresh').trigger('change');
+        // $('#fruit').prop('selectedIndex', 9).bizSelect('refresh');
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[maxHeight]</td>
+        <td>Number</td>
+        <td>选项浮层最大高度，默认 240</td>
+    </tr>
+    <tr>
+        <td>[inheritOriginalWidth]</td>
+        <td>Boolean</td>
+        <td>继承 select 元素的样式，默认 false</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>refresh()</h4>
+<p class="des">刷新</p>
+</div>
+
+<div class="methods">
+<h4>open()</h4>
+<p class="des">打开选项浮层</p>
+</div>
+
+<div class="methods">
+<h4>close()</h4>
+<p class="des">关闭选项浮层</p>
+</div>

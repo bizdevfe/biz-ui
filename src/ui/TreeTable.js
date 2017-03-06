@@ -1,223 +1,83 @@
+require('../deps/jquery.treetable');
+
 /**
- * @ignore
+ * TreeTable
+ * @class
+ * @param {HTMLElement} treetable                    目标元素
+ * @param {Object}      [options]                    参数
+ * @param {Number}      [options.column]             控制开关所在的列号，默认 0，即第一列
+ * @param {String}      [options.customClass]        自定义 class
+ * @param {Boolean}     [options.initialState]       初始化状态（collapsed | expanded），默认 'collapsed'
+ * @param {Boolean}     [options.clickableNodeNames] 节点名称可点击，默认 false
  */
-define(function(require) {
-    require('dep/jquery.resizableColumns');
-    require('dep/jquery.treetable');
+function TreeTable(treetable, options) {}
 
+TreeTable.prototype = {
     /**
-     * TreeTable constructor
-     *
-     * <iframe width="100%" height="350" src="//jsfiddle.net/bizdevfe/xxbdkfwy/embedded/result,js,html/" frameborder="0"></iframe>
-     * @constructor
-     * @param {HTMLElement|jQuery} table 目标元素
-     * @param {Object} [options] 参数
-     * @param {Boolean} [options.resizable] 是否可调整列宽
-     * @param {Boolean} [options.expanded] 是否展开
-     * @param {Function} [options.onLoad] 初始化回调, this 为 Tree 对象
-     * @param {Function} [options.onSelect] 选中回调, this 为 Node 对象
-     * @param {Function} [options.onCancelSelect] 取消选中回调, this 为 Node 对象
-     * 如tr标签中含有class: tree-selected-disabled 不可选中
+     * 销毁
      */
-    function TreeTable(table, options) {
-        if (table instanceof jQuery) {
-            if (table.length > 0) {
-                table = table[0]; //只取第一个元素
-            } else {
-                return;
-            }
-        }
+    destroy: function() {},
+    /**
+     * 关闭所有节点
+     */
+    collapseAll: function() {},
+    /**
+     * 关闭节点
+     * @param {String} nodeId 节点 id
+     */
+    collapseNode: function(id) {},
+    /**
+     * 打开所有节点
+     */
+    expandAll: function() {},
+    /**
+     * 打开节点
+     * @param {String} nodeId 节点 id
+     */
+    expandNode: function(nodeId) {},
+    /**
+     * 插入节点
+     * @param {Object} parentNode 父节点对象
+     * @param {String} rows       节点 tr 的 html
+     */
+    loadBranch: function(parentId, rows) {},
+    /**
+     * 移动节点
+     * @param {String} nodeId      节点 id
+     * @param {String} newParentId 新的父节点 id
+     */
+    move: function(nodeId, newParentId) {},
+    /**
+     * 获取节点对象
+     * @param {String} nodeId 节点 id
+     * @return 节点对象
+     */
+    node: function(nodeId) {},
+    /**
+     * 显示并展开节点
+     * @param {String} nodeId 节点 id
+     */
+    reveal: function(nodeId) {},
+    /**
+     * 删除节点
+     * @param {String} nodeId 节点 id
+     */
+    removeNode: function(nodeId) {},
+    /**
+     * 删除子节点
+     * @param {Object} parentNode 父节点对象
+     */
+    unloadBranch: function(parentNode) {},
+    /**
+     * 排序
+     * @param {Object}          parentNode   父节点对象
+     * @param {Number|Function} sortFunction 排序列或排序函数，默认按第一列字母序排序，排序函数的两个参数为节点对象
+     */
+    sortBranch: function(parentNode, sortFunction) {}
+};
 
-        if (!isTable(table)) {
-            return;
-        }
-
-        /**
-         * @property {HTMLElement} main `table`元素
-         */
-        this.main = table;
-
-        /**
-         * @property {jQuery} $main `table`元素的$包装
-         */
-        this.$main = $(this.main);
-
-        var defaultOption = {
-            resizable: true,
-            expanded: true
-        };
-        this.options = $.extend(defaultOption, options || {});
-        this.init(this.options);
-    }
-
-    var defaultClass = 'biz-table biz-treetable';
-
-    TreeTable.prototype = {
-        /**
-         * 初始化
-         * @param {Object} [options] 参数
-         * @protected
-         */
-        init: function(options) {
-            this.$main.addClass(defaultClass);
-
-            var self = this;
-            this.$main.treetable({
-                expandable: true,
-                stringCollapse: '',
-                stringExpand: '',
-                initialState: options.expanded ? 'expanded' : 'collapsed',
-                onInitialized: options.onLoad,
-                onNodeCollapse: options.onCollapse,
-                onNodeExpand: options.onExpand
-            }).on('click.bizTreeTable', 'tbody tr', function(e) {
-                if($(e.target).parent().hasClass('indenter')) {
-                    return;
-                }
-                if($(this).hasClass('tree-selected-disabled')) {
-                    return;
-                }
-                self.$main.find('.tree-selected').not(this).removeClass('tree-selected');
-                $(this).toggleClass('tree-selected');
-                var node = self.$main.treetable('node', $(this).attr('data-tt-id'));
-                if ($(this).hasClass('tree-selected')) {
-                    if(options.onSelect){
-                        options.onSelect.call(node);
-                    }
-                } else {
-                    if(options.onCancelSelect){
-                        options.onCancelSelect.call(node);
-                    }
-                }
-            });
-
-            if (options.resizable) {
-                this.$main.resizableColumns();
-            }
-        },
-
-        /**
-         * 收起所有节点
-         */
-        collapseAll: function() {
-            this.$main.treetable('collapseAll');
-        },
-
-        /**
-         * 收起指定节点
-         * @param {String} [id] 节点id
-         */
-        collapseNode: function(id) {
-            this.$main.treetable('collapseNode', id);
-        },
-
-        /**
-         * 展开所有节点
-         */
-        expandAll: function() {
-            this.$main.treetable('expandAll');
-        },
-
-        /**
-         * 展开指定节点
-         * @param {String} [id] 节点id
-         */
-        expandNode: function(id) {
-            this.$main.treetable('expandNode', id);
-        },
-
-        /**
-         * 选中指定节点
-         * @param {String} [id] 节点id
-         */
-        selectNode: function(id) {
-            this.$main.treetable('reveal', id);
-            this.$main.find('tr[data-tt-id="' + id + '"]').click();
-        },
-
-        /**
-         * 销毁
-         */
-        destroy: function() {
-            this.$main.removeClass(defaultClass)
-                .treetable('destroy')
-                .off('click.bizTreeTable');
-            this.$main.find('span.indenter a').off();
-            this.$main.find('span.indenter').remove();
-            this.$main.resizableColumns('destroy');
-        }
-    };
-
-    function isTable(elem) {
-        return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'table';
-    }
-
-    var dataKey = 'bizTreeTable';
-
-    $.extend($.fn, {
-        bizTreeTable: function(method, options) {
-            var table;
-            switch (method) {
-                case 'destroy':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.destroy();
-                            $(this).data(dataKey, null);
-                        }
-                    });
-                    break;
-                case 'collapseAll':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.collapseAll();
-                        }
-                    });
-                    break;
-                case 'collapseNode':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.collapseNode(options);
-                        }
-                    });
-                    break;
-                case 'expandAll':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.expandAll();
-                        }
-                    });
-                    break;
-                case 'expandNode':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.expandNode(options);
-                        }
-                    });
-                    break;
-                case 'selectNode':
-                    this.each(function() {
-                        table = $(this).data(dataKey);
-                        if (table) {
-                            table.selectNode(options);
-                        }
-                    });
-                    break;
-                default:
-                    this.each(function() {
-                        if (!$(this).data(dataKey) && isTable(this)) {
-                            $(this).data(dataKey, new TreeTable(this, method));
-                        }
-                    });
-            }
-
-            return this;
-        }
-    });
-
-    return TreeTable;
+$.extend($.fn, {
+    bizTreeTable: $.fn.treetable
 });
+
+module.exports = TreeTable;

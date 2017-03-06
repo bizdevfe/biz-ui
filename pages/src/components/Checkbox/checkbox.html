@@ -1,0 +1,107 @@
+<h3>Checkbox</h3>
+
+<div class="example">
+<input type="checkbox" name="fruit" value="1" id="apple" title="Apple" checked>
+<input type="checkbox" name="fruit" value="2" id="banana" title="Banana">
+<input type="checkbox" name="fruit" value="3" id="cherry" title="Cherry"><br><br>
+<button id="b1">check Apple</button>
+<button id="b2">check Banana</button>
+<button id="b3">check Cherry</button>
+<button id="b4">uncheck</button>
+<button id="b5">disable</button>
+<button id="b6">enable</button>
+<button id="b7">get value</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;input type="checkbox" name="fruit" value="1" id="apple" title="Apple" checked&gt;
+    &lt;input type="checkbox" name="fruit" value="2" id="banana" title="Banana"&gt;
+    &lt;input type="checkbox" name="fruit" value="3" id="cherry" title="Cherry"&gt;
+    &lt;button id="b1"&gt;check Apple&lt;/button&gt;
+    &lt;button id="b2"&gt;check Banana&lt;/button&gt;
+    &lt;button id="b3"&gt;check Cherry&lt;/button&gt;
+    &lt;button id="b4"&gt;uncheck&lt;/button&gt;
+    &lt;button id="b5"&gt;disable&lt;/button&gt;
+    &lt;button id="b6"&gt;enable&lt;/button&gt;
+    &lt;button id="b7"&gt;get value&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    var checkboxGroup = $(':checkbox');
+    checkboxGroup.bizCheckbox({
+        theme: 'green'
+    });
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('#b1').click(function() {
+        $('#apple').bizCheckbox('check');
+    });
+    $('#b2').click(function() {
+        $('#banana').bizCheckbox('check');
+    });
+    $('#b3').click(function() {
+        $('#cherry').bizCheckbox('check');
+    });
+    $('#b4').click(function() {
+        checkboxGroup.bizCheckbox('uncheck');
+    });
+    $('#b5').click(function() {
+        checkboxGroup.bizCheckbox('disable');
+    });
+    $('#b6').click(function() {
+        checkboxGroup.bizCheckbox('enable');
+    });
+    $('#b7').click(function() {
+        bizui.alert(checkboxGroup.bizCheckbox('val'));
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>check()</h4>
+<p class="des">勾选</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>
+
+<div class="methods">
+<h4>uncheck()</h4>
+<p class="des">取消勾选</p>
+</div>
+
+<div class="methods">
+<h4>val()</h4>
+<p class="des">获取选中的 value 值</p>
+</div>

@@ -1,0 +1,108 @@
+<h3>Textline</h3>
+
+<div class="example" style="overflow:hidden">
+<div class="textline line1" style="width:300px;height: 150px"></div>
+<div class="textline line2"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="textline line1" style="width:300px;height:150px"&gt;&lt;/div&gt;
+    &lt;div class="textline line2"&gt;&lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('.line1').bizTextline({
+        val: 'a\nb\nc'
+    });
+    $('.line2').bizTextline({
+        theme: 'blue-gray',
+        width: 300,
+        height: 150,
+        maxLine: 3,
+        valArray: ['d', 'e', 'f', 'g', 'h']
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[disabled]</td>
+        <td>Boolean</td>
+        <td>禁用，默认 false</td>
+    </tr>
+    <tr>
+        <td>[height]</td>
+        <td>Number</td>
+        <td>高度，默认取目标对象高度，最小 52px</td>
+    </tr>
+    <tr>
+        <td>[maxLine]</td>
+        <td>Number</td>
+        <td>最大行数，大于等于 1</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[val]</td>
+        <td>String</td>
+        <td>初始值，字符串形式</td>
+    </tr>
+    <tr>
+        <td>[valArray]</td>
+        <td>Array</td>
+        <td>初始值，数组形式</td>
+    </tr>
+    <tr>
+        <td>[width]</td>
+        <td>Number</td>
+        <td>宽度，默认取目标对象宽度，最小 200px</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>
+
+<div class="methods">
+<h4>length()</h4>
+<p class="des">获取文本长度（不计回车）</p>
+</div>
+
+<div class="methods">
+<h4>val([String value])</h4>
+<p class="des">以字符串形式获取/设置内容，超过 maxLine 会被截断</p>
+</div>
+
+<div class="methods">
+<h4>valArray([Array value])</h4>
+<p class="des">以数组形式获取/设置内容，超过 maxLine 会被截断</p>
+</div>

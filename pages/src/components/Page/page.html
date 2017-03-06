@@ -1,0 +1,173 @@
+<h3>Page</h3>
+
+<div class="example">
+<div class="page-nav"></div><br>
+<button id="b1">prevPage</button>
+<button id="b2">nextPage</button>
+<button id="b3">disable</button>
+<button id="b4">enable</button><br><br>
+<input type="text" class="pageNumber" style="width:60px"> <button id="b5" style="margin-bottom:0">setPageNumber</button><br><br>
+<input type="text" class="pageSize" style="width:60px"> <button id="b6" style="margin-bottom:0">setPageSize</button><br><br>
+<input type="text" class="totalNumber" style="width:60px"> <input type="checkbox" title="redaw" class="redaw"> <button id="b7" style="margin-bottom:0">setTotalNumber</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="page-nav"&gt;&lt;/div&gt;
+    &lt;button id="b1"&gt;prevPage&lt;/button&gt;
+    &lt;button id="b2"&gt;nextPage&lt;/button&gt;
+    &lt;button id="b3"&gt;disable&lt;/button&gt;
+    &lt;button id="b4"&gt;enable&lt;/button&gt;
+    &lt;input type="text" class="pageNumber"&gt;
+    &lt;button id="b5"&gt;setPageNumber&lt;/button&gt;
+    &lt;input type="text" class="pageSize"&gt;
+    &lt;button id="b6"&gt;setPageSize&lt;/button&gt;
+    &lt;input type="text" class="totalNumber"&gt;
+    &lt;input type="checkbox" title="redaw" class="redaw"&gt;
+    &lt;button id="b7"&gt;setTotalNumber&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    var page = $('.page-nav');
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('input:text').bizInput();
+    $('input:checkbox').bizCheckbox();
+    page.bizPage({
+        pageSize: 50,
+        pageNumber: 1,
+        totalNumber: 300
+    });
+    $('#b1').click(function() {
+        page.bizPage('prevPage');
+    });
+    $('#b2').click(function() {
+        page.bizPage('nextPage');
+    });
+    $('#b3').click(function() {
+        page.bizPage('disable');
+    });
+    $('#b4').click(function() {
+        page.bizPage('enable');
+    });
+    $('#b5').click(function() {
+        page.bizPage('setPageNumber', $('.pageNumber').val());
+    });
+    $('#b6').click(function() {
+        page.bizPage('setPageSize', $('.pageSize').val());
+    });
+    $('#b7').click(function() {
+        page.bizPage('setTotalNumber', $('.totalNumber').val(), $('.redaw').prop('checked'));
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[nextText]</td>
+        <td>String</td>
+        <td>后一页标识</td>
+    </tr>
+    <tr>
+        <td>[pageNumber]</td>
+        <td>Number</td>
+        <td>当前页码，默认1</td>
+    </tr>
+    <tr>
+        <td>[pageSize]</td>
+        <td>Number</td>
+        <td>每页条数，默认1</td>
+    </tr>
+    <tr>
+        <td>[prevText]</td>
+        <td>String</td>
+        <td>前一页标识</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[totalNumber]</td>
+        <td>Number</td>
+        <td>总条数，默认1</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>
+
+<div class="methods">
+<h4>getPageCount()</h4>
+<p class="des">获取页数</p>
+</div>
+
+<div class="methods">
+<h4>getPageNumber()</h4>
+<p class="des">获取当前页码</p>
+</div>
+
+<div class="methods">
+<h4>getPageSize()</h4>
+<p class="des">获取每页条数</p>
+</div>
+
+<div class="methods">
+<h4>nextPage()</h4>
+<p class="des">向后翻一页</p>
+</div>
+
+<div class="methods">
+<h4>prevPage()</h4>
+<p class="des">向前翻一页</p>
+</div>
+
+<div class="methods">
+<h4>setPageNumber(Number pageNumber)</h4>
+<p class="des">设置当前页码</p>
+</div>
+
+<div class="methods">
+<h4>setPageSize(Number pageSize)</h4>
+<p class="des">设置每页条数，设置后会定位至第一页</p>
+</div>
+
+<div class="methods">
+<h4>setTotalNumber(Number totalNumber[, Boolean redraw])</h4>
+<p class="des">设置总条数</p>
+</div>
+
+<br>
+<h4>Events</h4>
+<div class="methods">
+<h4>change(e, pageNumber)</h4>
+<p class="des">页码变更</p>
+</div>

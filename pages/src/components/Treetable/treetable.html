@@ -1,0 +1,254 @@
+<h3>Treetable</h3>
+
+<div class="example">
+<table class="dom-tree">
+    <thead>
+        <tr>
+            <th>Tag Name</th>
+            <th>Level</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-tt-id="1">
+            <td>html</td>
+            <td>1</td>
+        </tr>
+        <tr data-tt-id="1.1" data-tt-parent-id="1">
+            <td>head</td>
+            <td>1.1</td>
+        </tr>
+        <tr data-tt-id="1.1.1" data-tt-parent-id="1.1">
+            <td>title</td>
+            <td>1.1.1</td>
+        </tr>
+        <tr data-tt-id="1.2" data-tt-parent-id="1">
+            <td>body</td>
+            <td>1.2</td>
+        </tr>
+        <tr data-tt-id="1.2.1" data-tt-parent-id="1.2">
+            <td>header</td>
+            <td>1.2.1</td>
+        </tr>
+        <tr data-tt-id="1.2.2" data-tt-parent-id="1.2">
+            <td>span</td>
+            <td>1.2.2</td>
+        </tr>
+        <tr data-tt-id="1.2.3" data-tt-parent-id="1.2">
+            <td>p</td>
+            <td>1.2.3</td>
+        </tr>
+        <tr data-tt-id="1.2.4" data-tt-parent-id="1.2">
+            <td>footer</td>
+            <td>1.2.4</td>
+        </tr>
+    </tbody>
+</table><br>
+<button id="b1">collapseAll</button>
+<button id="b2">collapse head</button>
+<button id="b3">expandAll</button>
+<button id="b4">expand head</button>
+<button id="b5">reveal head</button><br><br>
+<button id="b6">insert link to head</button>
+<button id="b7">move span to header</button>
+<button id="b8">remove p</button>
+<button id="b9">clear head</button>
+<button id="b10">sort body</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;table class="dom-tree"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Tag Name&lt;/th&gt;
+                &lt;th&gt;Level&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr data-tt-id="1"&gt;
+                &lt;td&gt;html&lt;/td&gt;
+                &lt;td&gt;1&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.1" data-tt-parent-id="1"&gt;
+                &lt;td&gt;head&lt;/td&gt;
+                &lt;td&gt;1.1&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.1.1" data-tt-parent-id="1.1"&gt;
+                &lt;td&gt;title&lt;/td&gt;
+                &lt;td&gt;1.1.1&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.2" data-tt-parent-id="1"&gt;
+                &lt;td&gt;body&lt;/td&gt;
+                &lt;td&gt;1.2&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.2.1" data-tt-parent-id="1.2"&gt;
+                &lt;td&gt;header&lt;/td&gt;
+                &lt;td&gt;1.2.1&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.2.2" data-tt-parent-id="1.2"&gt;
+                &lt;td&gt;span&lt;/td&gt;
+                &lt;td&gt;1.2.2&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.2.3" data-tt-parent-id="1.2"&gt;
+                &lt;td&gt;p&lt;/td&gt;
+                &lt;td&gt;1.2.3&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-tt-id="1.2.4" data-tt-parent-id="1.2"&gt;
+                &lt;td&gt;footer&lt;/td&gt;
+                &lt;td&gt;1.2.4&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;button id="b1"&gt;collapseAll&lt;/button&gt;
+    &lt;button id="b2"&gt;collapse head&lt;/button&gt;
+    &lt;button id="b3"&gt;expandAll&lt;/button&gt;
+    &lt;button id="b4"&gt;expand head&lt;/button&gt;
+    &lt;button id="b5"&gt;reveal head&lt;/button&gt;
+    &lt;button id="b6"&gt;insert link to head&lt;/button&gt;
+    &lt;button id="b7"&gt;move span to header&lt;/button&gt;
+    &lt;button id="b8"&gt;remove p&lt;/button&gt;
+    &lt;button id="b9"&gt;clear head&lt;/button&gt;
+    &lt;button id="b10"&gt;sort body&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $(".dom-tree").bizTreeTable({
+        initialState: 'expanded'
+    });
+    $('button').bizButton({
+        theme: 'blue-gray'
+    });
+    $('#b1').click(function() {
+        $(".dom-tree").bizTreeTable('collapseAll');
+    });
+    $('#b2').click(function() {
+        $(".dom-tree").bizTreeTable('collapseNode', '1.1');
+    });
+    $('#b3').click(function() {
+        $(".dom-tree").bizTreeTable('expandAll');
+    });
+    $('#b4').click(function() {
+        $(".dom-tree").bizTreeTable('expandNode', '1.1');
+    });
+    $('#b5').click(function() {
+        $(".dom-tree").bizTreeTable('reveal', '1.1');
+    });
+    $('#b6').click(function() {
+        var parentNode = $(".dom-tree").bizTreeTable('node', '1.1');
+        $(".dom-tree").bizTreeTable('loadBranch', parentNode, '<tr data-tt-id="1.1.2" data-tt-parent-id="1.1"><td>link</td><td>1.1.2</td></tr>');
+    });
+    $('#b7').click(function() {
+        $(".dom-tree").bizTreeTable('move', '1.2.2', '1.2.1');
+    });
+    $('#b8').click(function() {
+        $(".dom-tree").bizTreeTable('removeNode', '1.2.3');
+    });
+    $('#b9').click(function() {
+        var parentNode = $(".dom-tree").bizTreeTable('node', '1.1');
+        $(".dom-tree").bizTreeTable('unloadBranch', parentNode);
+    });
+    var sortAlphabeticallyDescending = function(a, b) {
+        var valA = $.trim(a.row.find("td:eq(0)").text()).toUpperCase(),
+            valB = $.trim(b.row.find("td:eq(0)").text()).toUpperCase();
+        if (valA > valB) return -1;
+        if (valA < valB) return 1;
+        return 0;
+    };
+    $('#b10').click(function() {
+        var parentNode = $(".dom-tree").bizTreeTable('node', '1.2');
+        $(".dom-tree").bizTreeTable('sortBranch', parentNode, sortAlphabeticallyDescending);
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[column]</td>
+        <td>Number</td>
+        <td>控制开关所在的列号，默认 0，即第一列</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 CSS class</td>
+    </tr>
+    <tr>
+        <td>[initialState]</td>
+        <td>Boolean</td>
+        <td>初始化状态（collapsed | expanded），默认 'collapsed'</td>
+    </tr>
+    <tr>
+        <td>[clickableNodeNames]</td>
+        <td>Boolean</td>
+        <td>节点名称可点击，默认 false</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>collapseAll()</h4>
+<p class="des">关闭所有节点</p>
+</div>
+
+<div class="methods">
+<h4>collapseNode(nodeId)</h4>
+<p class="des">关闭节点</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>expandAll()</h4>
+<p class="des">打开所有节点</p>
+</div>
+
+<div class="methods">
+<h4>expandNode(nodeId)</h4>
+<p class="des">打开节点</p>
+</div>
+
+<div class="methods">
+<h4>loadBranch(parentNode, rows)</h4>
+<p class="des">插入节点</p>
+</div>
+
+<div class="methods">
+<h4>move(nodeId, newParentId)</h4>
+<p class="des">移动节点</p>
+</div>
+
+<div class="methods">
+<h4>node(nodeId)</h4>
+<p class="des">获取节点对象</p>
+</div>
+
+<div class="methods">
+<h4>removeNode(nodeId)</h4>
+<p class="des">删除节点</p>
+</div>
+
+<div class="methods">
+<h4>reveal(nodeId)</h4>
+<p class="des">显示并展开节点</p>
+</div>
+
+<div class="methods">
+<h4>sortBranch(parentNode, sortFunction)</h4>
+<p class="des">排序</p>
+</div>
+
+<div class="methods">
+<h4>unloadBranch(parentNode)</h4>
+<p class="des">删除子节点</p>
+</div>

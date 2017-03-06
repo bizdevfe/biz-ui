@@ -1,0 +1,53 @@
+/**
+ * tooltip
+ */
+
+aside.tooltip,
+div.tooltip {
+    font-family: @font-family;
+    font-size: @font-size;
+}
+
+
+/**
+ * tooltip themes
+ */
+
+.generate-tooltip-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    aside.tooltip.biz-tooltip-@{name},
+    div.tooltip.biz-tooltip-@{name} {
+        background: @@name;
+    }
+    aside.tooltip.biz-tooltip-@{name}:after,
+    div.tooltip.biz-tooltip-@{name}:after {
+        border-right-color: @@name
+    }
+    aside.tooltip.biz-tooltip-@{name}.left:after,
+    div.tooltip.biz-tooltip-@{name}.left:after {
+        border-right-color: transparent;
+        border-left-color: @@name
+    }
+    aside.tooltip.biz-tooltip-@{name}.right:after,
+    div.tooltip.biz-tooltip-@{name}.right:after {
+        border-right-color: transparent;
+        border-right-color: @@name
+    }
+    aside.tooltip.biz-tooltip-@{name}.bottom:after,
+    div.tooltip.biz-tooltip-@{name}.bottom:after {
+        border-right-color: transparent;
+        border-bottom-color: @@name
+    }
+    aside.tooltip.biz-tooltip-@{name}.top:after,
+    div.tooltip.biz-tooltip-@{name}.top:after {
+        border-right-color: transparent;
+        border-top-color: @@name
+    }
+    .generate-tooltip-themes(@i - 1);
+}
+
+.generate-tooltip-themes();
+aside.tooltip.biz-tooltip-yellow,
+div.tooltip.biz-tooltip-yellow {
+    color: @yellow-text;
+}

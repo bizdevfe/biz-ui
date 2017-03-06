@@ -1,0 +1,82 @@
+/**
+ * page
+ */
+
+.biz-page ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.biz-page li {
+    float: left;
+}
+
+.biz-page a,
+.biz-page span {
+    display: block;
+    margin-right: 5px;
+    min-width: 14px;
+    padding: 0 7px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 2px;
+    text-align: center;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+    border: 1px solid @border;
+    background: @background;
+}
+
+.biz-page a {
+    text-decoration: none;
+}
+
+.biz-page a:hover {
+    background: darken(@background, 5%);
+}
+
+.biz-page .current {
+    color: @light-text;
+    cursor: default;
+}
+
+.biz-page .prev,
+.biz-page .next {
+    padding: 0 2px;
+}
+
+.biz-page .ellipse {
+    cursor: default;
+    font-weight: bold;
+    border: none !important;
+    background: transparent !important;
+    color: @dark-text !important;
+}
+
+.biz-page li.disabled span {
+    border: 1px solid @border;
+    background: @input-disable-background;
+    color: @disable-text;
+}
+
+
+/**
+* page themes
+*/
+
+.generate-page-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-page-@{name} .current {
+        background: @@name;
+        border-color: @@name;
+    }
+    .generate-page-themes(@i - 1);
+}
+
+.generate-page-themes();
+.biz-page-yellow .current {
+    color: @yellow-text;
+}

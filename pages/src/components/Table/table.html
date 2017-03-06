@@ -1,0 +1,348 @@
+<h3>Table</h3>
+
+<div class="example" style="padding-left:0;padding-right:0">
+<div class="list"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="list"&gt;&lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    function getAverage(data, field) {
+        var sum = 0;
+        $.each(data, function(index, val) {
+            sum = sum + (val[field] - 0);
+        });
+        return Math.round(sum / data.length);
+    }
+
+    var data = [
+        {id: 100, name: 'Alice', height: 182, weight: 60.5, age: 25, email: 'alice@sogou.com'},
+        {id: 200, name: 'Betty', height: 173, weight: 50.2, age: 26, email: 'betty@sogou.com'},
+        {id: 300, name: 'Christina', height: 170, weight: 62.6, age: 27, email: 'christina@sogou.com', disabledSelect: true},
+        {id: 400, name: 'Daphne', height: 165, weight: 70.3, age: 23, email: 'daphne@sogou.com'}
+    ];
+
+    var column = [
+        {
+            width: 70,
+            field: 'no',
+            title: 'No.',
+            align: 'center',
+            content: function(item, index, field) {
+                return index;
+            },
+            footContent: function(field) {
+                return 'Average';
+            }
+        },
+        {
+            width: 120,
+            field: 'name',
+            title: 'Name',
+            content: [
+                function(item, index, field) {
+                    return item.id;
+                },
+                function(item, index, field) {
+                    return item.name;
+                }
+            ]
+        },
+        {
+            width: 120,
+            field: 'height',
+            title: 'Height &lt;i&gt;(cm)&lt;/i&gt;',
+            escapeTitle: false,
+            sortable: true,
+            currentSort: 'des',
+            editable: true,
+            align: 'right',
+            content: function(item, index, field) {
+                return item.height;
+            },
+            footContent: function(field) {
+                return getAverage(this.getData(), field);
+            }
+        },
+        {
+            width: 120,
+            field: 'weight',
+            title: 'Weight &lt;i&gt;(kg)&lt;/i&gt;',
+            escapeTitle: false,
+            sortable: true,
+            editable: true,
+            align: 'right',
+            content: function(item, index, field) {
+                return item.weight;
+            },
+            footContent: function(field) {
+                return getAverage(this.getData(), field);
+            }
+        },
+        {
+            width: 120,
+            field: 'age',
+            title: 'Age',
+            sortable: true,
+            align: 'right',
+            content: function(item, index, field) {
+                return item.age;
+            },
+            footContent: function(field) {
+                return getAverage(this.getData(), field);
+            }
+        },
+        {
+            width: 180,
+            field: 'email',
+            title: 'Email',
+            editable: true,
+            content: [
+                function(item, index, field) {
+                    return item.id;
+                },
+                function(item, index, field) {
+                    return item.email;
+                }
+            ]
+        },
+        {
+            width: 120,
+            field: 'op',
+            title: 'Operation',
+            escapeContent: false,
+            content: function(item, index, field) {
+                return '&lt;a href="javascript:void(0)" id="' + item.id + '"&gt;Detail&lt;/a&gt;';
+            }
+        }
+    ];
+
+    $('.list').bizTable({
+        column: column,
+        data: data,
+        foot: 'top',
+        selectable: true,
+        onSelect: function(data) {
+            console.log(data);
+        },
+        onSort: function(data) {
+            console.log(data);
+        },
+        lockHead: true,
+        topOffset: 51,
+        onValidate: function(data) {
+            console.log(data);
+            switch (data.field) {
+                case 'height': return /^\d+$/.test(data.newValue);
+                case 'weight': return /^\d+(\.)?\d+$/.test(data.newValue);
+            }
+        },
+        onEdit: function(data) {
+            console.log('Success', data);
+            this.refresh();
+        },
+        onFailEdit: function(data) {
+            console.log('Fail', data);
+        }
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>column</td>
+        <td>Array</td>
+        <td>列配置</td>
+    </tr>
+    <tr>
+        <td>column.content</td>
+        <td>Function|Array</td>
+        <td>单元格内容</td>
+    </tr>
+    <tr>
+        <td>column.field</td>
+        <td>String</td>
+        <td>表头字段名</td>
+    </tr>
+    <tr>
+        <td>column.title</td>
+        <td>String</td>
+        <td>表头文字</td>
+    </tr>
+    <tr>
+        <td>column.width</td>
+        <td>Number</td>
+        <td>此列最小宽度，建议每列都设置</td>
+    </tr>
+    <tr>
+        <td>[column.align]</td>
+        <td>Number</td>
+        <td>单元格对齐方式（left | center | right）</td>
+    </tr>
+    <tr>
+        <td>[column.footContent]</td>
+        <td>Function</td>
+        <td>总计行内容</td>
+    </tr>
+    <tr>
+        <td>[column.editable]</td>
+        <td>Boolean</td>
+        <td>单元格可编辑, 默认 false</td>
+    </tr>
+    <tr>
+        <td>[column.escapeContent]</td>
+        <td>Boolean</td>
+        <td>转义单元格, 默认 true</td>
+    </tr>
+    <tr>
+        <td>[column.escapeTitle]</td>
+        <td>Boolean</td>
+        <td>转义表头, 默认 true</td>
+    </tr>
+    <tr>
+        <td>[column.sortable]</td>
+        <td>Boolean</td>
+        <td>此列排序, 默认 false</td>
+    </tr>
+    <tr>
+        <td>[column.currentSort]</td>
+        <td>String</td>
+        <td>排序方式（des-降序 | asc-升序），仅 sortable 为 true 时生效</td>
+    </tr>
+    <tr>
+        <td>[column.visible]<td>Boolean</td>
+        <td>此列可见，默认 true</td>
+    </tr>
+    <tr>
+        <td>data</td>
+        <td>Array</td>
+        <td>数据，data[i].disabledSelect = true 时此行不可选中，默认 false</td>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[foot]</td>
+        <td>String</td>
+        <td>总计行位置（top | bottom），默认无总计行</td>
+    </tr>
+    <tr>
+        <td>[noDataContent]</td>
+        <td>String</td>
+        <td>无数据提示，不转义</td>
+    </tr>
+    <tr>
+        <td>[selectable]</td>
+        <td>Boolean</td>
+        <td>可勾选，默认 false</td>
+    </tr>
+    <tr>
+        <td>[onSelect]</td>
+        <td>Function</td>
+        <td>勾选回调，onSelect(Object data, Event e)</td>
+    </tr>
+    <tr>
+        <td>[onSort]</td>
+        <td>Function</td>
+        <td>排序回调，onSort(Object data, Event e)</td>
+    </tr>
+    <tr>
+        <td>[defaultSort]</td>
+        <td>String</td>
+        <td>点击排序时的排序方式（des-降序 | asc-升序），默认 'des'</td>
+    </tr>
+    <tr>
+        <td>[lockHead]</td>
+        <td>Boolean</td>
+        <td>表头锁定，默认 false</td>
+    </tr>
+    <tr>
+        <td>[topOffset]</td>
+        <td>Number</td>
+        <td>表头锁定时，表头上方预留高度（如表格上方工具栏同时锁定），默认 0</td>
+    </tr>
+    <tr>
+        <td>[onValidate]</td>
+        <td>Function</td>
+        <td>编辑单元格时的回调，返回 true 时，按下回车才能进入 onEdit 方法，否则进入 onFailEdit 方法，onValidate(Object data, Event e)</td>
+    </tr>
+    <tr>
+        <td>[onFailEdit]</td>
+        <td>Function</td>
+        <td>编辑单元格失败后的回调，onFailEdit(Object data, Event e)</td>
+    </tr>
+    <tr>
+        <td>[onEdit]</td>
+        <td>Function</td>
+        <td>编辑单元格成功后的回调，返回 false，取消编辑，onEdit(Object data, Event e)</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>getColumn()</h4>
+<p class="des">获取列配置</p>
+</div>
+
+<div class="methods">
+<h4>getData()</h4>
+<p class="des">获取列表数据</p>
+</div>
+
+<div class="methods">
+<h4>getSelected()</h4>
+<p class="des">获取选中行数据</p>
+</div>
+
+<div class="methods">
+<h4>hideColumn(String|Array field)</h4>
+<p class="des">隐藏列</p>
+</div>
+
+<div class="methods">
+<h4>refresh()</h4>
+<p class="des">重绘表格</p>
+</div>
+
+<div class="methods">
+<h4>setSelected(Number|Array rowIndex, Boolean selected [,Boolean fire])</h4>
+<p class="des">设置选中状态</p>
+</div>
+
+<div class="methods">
+<h4>showColumn(String|Array field)</h4>
+<p class="des">显示列</p>
+</div>
+
+<div class="methods">
+<h4>updateCell(Number rowIndex, String field, Mixed data)</h4>
+<p class="des">更新单元格数据</p>
+</div>
+
+<div class="methods">
+<h4>updateData(Array data)</h4>
+<p class="des">更新列表数据</p>
+</div>
+
+<div class="methods">
+<h4>updateRow(Number rowIndex, Object data)</h4>
+<p class="des">更新行数据</p>
+</div>

@@ -1,0 +1,76 @@
+<h3>Textarea</h3>
+
+<div class="example">
+<textarea class="content1" placeholder="default content"></textarea>
+<button>get content length</button>
+<br><br>
+<textarea class="content2">disabled</textarea>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;textarea class="content1" placeholder="default content"&gt;&lt;/textarea&gt;
+    &lt;button&gt;get content length&lt;/button&gt;
+    &lt;textarea class="content2"&gt;disabled&lt;/textarea&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('textarea').bizTextarea();
+    $('.content2').bizTextarea('disable');
+    $('button').bizButton({
+        theme: 'blue-gray'
+    }).click(function() {
+        bizui.alert($('.content1').bizTextarea('length'));
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[disabled]</td>
+        <td>Boolean</td>
+        <td>禁用，默认 false</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>
+
+<div class="methods">
+<h4>length()</h4>
+<p class="des">获取文本长度（不计回车）</p>
+</div>
+
+<h3><i class="biz-icon">&#xe88e;</i> Tips</h3>
+<ul class="issues"><li>已加入 IE 对 placeholder 属性的支持。</li></ul>

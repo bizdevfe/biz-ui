@@ -1,0 +1,85 @@
+<h3>Tooltip</h3>
+
+<div class="example">
+<input type="text" placeholder="Username" data-tooltip="Please enter a username"><br><br>
+<input type="text" placeholder="Email" data-tooltip="Please enter a email"><br><br>
+<input type="text" placeholder="Phone" data-tooltip="Please enter a phone number"><br><br>
+<button data-tooltip="Please read user protocol" data-tooltip-direction="top">Sign up</button>&nbsp;&nbsp;
+<a class="protocol" data-tooltip="^Header^*bold*|~italic~{`item1 `item2 `item3}" href="#">User protocol</a>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;input type="text" placeholder="Username" data-tooltip="Please enter a username"&gt;
+    &lt;input type="text" placeholder="Email" data-tooltip="Please enter a email"&gt;
+    &lt;input type="text" placeholder="Phone" data-tooltip="Please enter a phone number"&gt;
+    &lt;button data-tooltip="Please read user protocol" data-tooltip-direction="top"&gt;Sign up&lt;/button&gt;
+    &lt;a class="protocol" data-tooltip="^Header^*bold*|~italic~{`item1 `item2 `item3}" href="#"&gt;User protocol&lt;/a&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('input').bizInput();
+    $('button').bizButton();
+    bizui.Tooltip({
+        element: 'input',
+        theme: 'orange'
+    });
+    bizui.Tooltip({
+        element: 'button',
+        action: 'hover'
+    });
+    bizui.Tooltip({
+        element: '.protocol',
+        preventDefault: true,
+        action: 'click'
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[action]</td>
+        <td>String</td>
+        <td>触发方式（focus | click | hover），默认 focus</td>
+    </tr>
+    <tr>
+        <td>[element]</td>
+        <td>String</td>
+        <td>目标对象选择器，默认 '.error'</td>
+    </tr>
+    <tr>
+        <td>[preventDefault]</td>
+        <td>Boolean</td>
+        <td>阻止默认事件，默认 false</td>
+    </tr>
+    <tr>
+        <td>[removeAll]</td>
+        <td>Boolean</td>
+        <td>移除所有绑定，默认 false</td>
+    </tr>
+    <tr>
+        <td>[removeSpecific]</td>
+        <td>Boolean</td>
+        <td>移除指定绑定，需同时指定 action 和 element，默认 false</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>Boolean</td>
+        <td>主题，默认黑色</td>
+    </tr>
+</table>
+
+<h3><i class="biz-icon">&#xe88e;</i> Tips</h3>
+<ul class="issues">
+    <li>data-tooltip 属性：提示内容，支持简单 HTML 便捷语法。</li>
+    <li>data-tooltip-direction 属性：提示出现位置（right|bottom|left|top），默认 right。</li>
+    <li>Tooltip 的主题默认为黑色，或由参数设置，不受 bizui.theme 影响。</li>
+</ul>

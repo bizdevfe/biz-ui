@@ -1,0 +1,225 @@
+<h3>Calendar</h3>
+
+<div class="example">
+<input type="text" class="date" value="2046-01-01"><span class="icon-date"><i class="biz-icon">&#xe916;</i></span>
+<br><br>
+<!-- range 类型，class 必须含 input-daterange -->
+<div class="input-daterange">
+    <input type="text" class="start" value="2016-01-01"><span class="icon-range">to</span><input type="text" class="end" value="2017-12-31">
+</div>
+<br>
+<!-- inline 类型 -->
+<div class="inline-date" data-date="2017-01-01"></div>
+<div class="log" style="padding-left:70px"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;input type="text" class="date" value="2046-01-01"&gt;
+    &lt;span class="icon-date"&gt;&lt;i class="biz-icon"&gt;&amp;#xe916;&lt;/i&gt;&lt;/span&gt;
+
+    &lt;!-- range 类型，class 必须含 input-daterange --&gt;
+    &lt;div class="input-daterange"&gt;
+        &lt;input type="text" class="start" value="2016-01-01"&gt;
+        &lt;span class="icon-range"&gt;to&lt;/span&gt;
+        &lt;input type="text" class="end" value="2017-12-31"&gt;
+    &lt;/div&gt;
+
+    &lt;!-- inline 类型 --&gt;
+    &lt;div class="inline-date" data-date="2017-01-01"&gt;&lt;/div&gt;
+    &lt;span class="selected-date"&gt;&lt;/span&gt;
+    
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('input').bizInput();
+    $('.date').bizCalendar({
+        daysOfWeekHighlighted: '06',
+        todayBtn: true,
+        todayHighlight: true
+    });
+    $('.input-daterange').bizCalendar({
+        startDate: '2000-01-01',
+        endDate: '2046-12-31'
+    });
+    $('.inline-date').bizCalendar({
+        templates: {
+            leftArrow: '&lt;i class="biz-icon"&gt;&amp;#xe314;&lt;/i&gt;',
+            rightArrow: '&lt;i class="biz-icon"&gt;&amp;#xe315;&lt;/i&gt;'
+        },
+        theme: 'light-green'
+    }).on('changeDate', function(e) {
+        $('.selected-date').html(e.format());
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[autoclose]</td>
+        <td>Boolean</td>
+        <td>选中日期后关闭日历，默认 true</td>
+    </tr>
+    <tr>
+        <td>[calendarWeeks]</td>
+        <td>Boolean</td>
+        <td>显示周数，默认 false</td>
+    </tr>
+    <tr>
+        <td>[clearBtn]</td>
+        <td>Boolean</td>
+        <td>显示清空按钮，默认 false，如果 autoclose 为 true，点击后将关闭日历</td>
+    </tr>
+    <tr>
+        <td>[container]</td>
+        <td>String</td>
+        <td>日历所在容器，默认 'body'</td>
+    </tr>
+    <tr>
+        <td>[datesDisabled]</td>
+        <td>Array|String</td>
+        <td>禁用哪些日期，使用 format 格式的字符串或数组</td>
+    </tr>
+    <tr>
+        <td>[daysOfWeekDisabled]</td>
+        <td>Array|String</td>
+        <td>每周禁用哪几天，格式为 '06'，'0,6' 或 [0,6]</td>
+    </tr>
+    <tr>
+        <td>[daysOfWeekHighlighted]</td>
+        <td>Array|String</td>
+        <td>每周高亮哪几天，格式同 daysOfWeekDisabled</td>
+    </tr>
+    <tr>
+        <td>[defaultViewDate]</td>
+        <td>Object</td>
+        <td>打开日历时的默认视图，格式为 {year: yyyy, month: 0, day: 1}，默认今天</td>
+    </tr>
+    <tr>
+        <td>[disableTouchKeyboard]</td>
+        <td>Boolean</td>
+        <td>移动端禁用键盘，默认 false</td>
+    </tr>
+    <tr>
+        <td>[enableOnReadonly]</td>
+        <td>Boolean</td>
+        <td>可以在 readonly 输入框上启用，默认 true</td>
+    </tr>
+    <tr>
+        <td>[endDate]</td>
+        <td>Date|String</td>
+        <td>最晚结束日期，默认不限制</td>
+    </tr>
+    <tr>
+        <td>[format]</td>
+        <td>String</td>
+        <td>日期格式，默认 'yyyy-mm-dd'</td>
+    </tr>
+    <tr>
+        <td>[language]</td>
+        <td>String</td>
+        <td>语言（zh-CN|en），默认 'zh-CN'</td>
+    </tr>
+    <tr>
+        <td>[startDate]</td>
+        <td>Date|String</td>
+        <td>最早开始日期，默认不限制</td>
+    </tr>
+    <tr>
+        <td>[templates]</td>
+        <td>Object</td>
+        <td>左右箭头模版，默认 {leftArrow: '«', rightArrow: '»'}</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>[title]</td>
+        <td>String</td>
+        <td>标题</td>
+    </tr>
+    <tr>
+        <td>[todayBtn]</td>
+        <td>Boolean|String</td>
+        <td>显示切换到今日视图的按钮，默认 false，如为 'linked'，则点击即选中</td>
+    </tr>
+    <tr>
+        <td>[todayHighlight]</td>
+        <td>Boolean</td>
+        <td>高亮今日，默认 false</td>
+    </tr>
+    <tr>
+        <td>[weekStart]</td>
+        <td>Number</td>
+        <td>每周开始日，默认 1</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<p style="padding-left:40px">调用方法时，目标元素需为 input 元素或嵌入式日历的根元素</p>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>getDate()</h4>
+<p class="des">获取日期</p>
+</div>
+
+<div class="methods">
+<h4>hide()</h4>
+<p class="des">隐藏日历浮层（不适于嵌入式日历）</p>
+</div>
+
+<div class="methods">
+<h4>setDate(Date|String date)</h4>
+<p class="des">设置日期</p>
+</div>
+
+<div class="methods">
+<h4>setDatesDisabled(Array|String|Boolean dates)</h4>
+<p class="des">设置禁用哪些日期</p>
+</div>
+
+<div class="methods">
+<h4>setDaysOfWeekDisabled(Array|String|Boolean days)</h4>
+<p class="des">设置每周禁用哪几天</p>
+</div>
+
+<div class="methods">
+<h4>setDaysOfWeekHighlighted(Array|String|Boolean days)</h4>
+<p class="des">设置每周高亮哪几天</p>
+</div>
+
+<div class="methods">
+<h4>setEndDate(Date|Boolean date)</h4>
+<p class="des">设置最晚结束日期</p>
+</div>
+
+<div class="methods">
+<h4>setStartDate(Date|Boolean date)</h4>
+<p class="des">设置最早开始日期</p>
+</div>
+
+<div class="methods">
+<h4>show()</h4>
+<p class="des">显示日历浮层（不适于嵌入式日历）</p>
+</div>
+
+<br>
+<h4>Events</h4>
+<div class="methods">
+<h4>changeDate(e)</h4>
+<p class="des">日期变更</p>
+</div>

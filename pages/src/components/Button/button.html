@@ -1,0 +1,83 @@
+<h3>Button</h3>
+
+<div class="example">
+<button class="ok">OK</button>
+<button class="search">Search</button>
+<button class="disabled">disabled</button>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;button class="ok"&gt;OK&lt;/button&gt;
+    &lt;button class="search"&gt;Search&lt;/button&gt;
+    &lt;button class="disabled"&gt;disabled&lt;/button&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('.ok').bizButton();
+    $('.search').bizButton({
+        theme: 'light-green',
+        icon: 'search'
+    });
+    $('.disabled').bizButton({
+        disabled: true
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[disabled]</td>
+        <td>Boolean</td>
+        <td>禁用，默认 false</td>
+    </tr>
+    <tr>
+        <td>[icon]</td>
+        <td>String</td>
+        <td>图标名称</td>
+    </tr>
+    <tr>
+        <td>[text]</td>
+        <td>String</td>
+        <td>文字</td>
+    </tr>
+    <tr>
+        <td>[size]</td>
+        <td>String</td>
+        <td>尺寸（small | large），默认 'small'</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>

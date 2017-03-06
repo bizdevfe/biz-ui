@@ -1,0 +1,80 @@
+/**
+ * textline
+ */
+
+.biz-textline {
+    overflow: hidden;
+}
+
+.biz-textline textarea {
+    padding: 5px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+    line-height: 20px;
+    resize: none;
+    vertical-align: middle;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+    border-color: @border;
+    background-color: @background;
+    float: left;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -webkit-appearance: none;
+}
+
+.biz-textline textarea.biz-textline-hover {
+    border-color: @border-hover;
+}
+
+.biz-textline textarea.biz-textline-disable {
+    background-color: @input-disable-background;
+    color: @disable-text;
+}
+
+.biz-textline div {
+    float: left;
+    width: 15px;
+    padding: 5px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.biz-textline pre {
+    font-family: Helvetica, Arial, sans-serif;
+    position: absolute;
+    margin: 0;
+    width: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    color: @light-text;
+}
+
+
+/**
+ * textline themes
+ */
+
+.generate-textline-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-textline-@{name} div {
+        background-color: @@name;
+    }
+    .biz-textline textarea.biz-textline-focus-@{name} {
+        border-color: @@name !important;
+    }
+    .generate-textline-themes(@i - 1);
+}
+
+.generate-textline-themes();
+.biz-textline-yellow pre {
+    color: @yellow-text;
+}

@@ -1,0 +1,23 @@
+/**
+ * radio themes
+ */
+
+.generate-radio-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-label-@{name}.biz-radio-checked .biz-icon,
+    .biz-label-@{name}.biz-radio-unchecked .biz-icon {
+        color: @@name;
+    }
+    .biz-label-@{name}.biz-radio-checked-hover .biz-icon,
+    .biz-label-@{name}.biz-radio-unchecked-hover .biz-icon {
+        color: lighten(@@name, 10%);
+    }
+    .generate-radio-themes(@i - 1);
+}
+
+.generate-radio-themes();
+.biz-radio-checked-disabled,
+.biz-radio-unchecked-disabled {
+    cursor: default;
+    color: @disable-text;
+}

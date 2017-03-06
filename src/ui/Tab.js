@@ -1,153 +1,148 @@
 /**
- * @ignore
+ * Tab
+ * @class
+ * @param {HTMLElement} tab                     目标元素
+ * @param {Object}      [options]               参数
+ * @param {String}      [options.action]        切换方式（click | hover），默认 'click'
+ * @param {String}      [options.customClass]   自定义 class
+ * @param {Number}      [options.selectedIndex] 选中 tab 序号，默认 0
+ * @param {String}      [options.theme]         主题
  */
-define(function(require) {
+function Tab(tab, options) {
+    this.main = tab;
+    this.$main = $(this.main);
+
+    var defaultOption = {
+        action: 'click',
+        customClass: '',
+        selectedIndex: 0,
+        theme: bizui.theme
+    };
+    this.options = $.extend(defaultOption, options || {});
+    this.init(this.options);
+}
+
+var defaultClass = 'biz-tab',
+    prefix = 'biz-tab-',
+    dataKey = 'bizTab';
+
+Tab.prototype = {
     /**
-     * Tab constructor
-     *
-     * <iframe width="100%" height="220" src="//jsfiddle.net/bizdevfe/9t1nzb07/embedded/result,js,html,css/" frameborder="0"></iframe>
-     * @constructor
-     * @param {HTMLElement|jQuery} tab 目标元素
-     * @param {Object} [options] 参数
-     * @param {String} [options.event] 切换tab事件
-     * @param {Function} [options.onChange] 切换回调(data, event)
-     * @param {Function} [options.skin] 皮肤
+     * 初始化
+     * @param {Object} options 参数
+     * @private
      */
-    function Tab(tab, options) {
-        if (tab instanceof jQuery) {
-            if (tab.length > 0) {
-                tab = tab[0]; //只取第一个元素
-            } else {
-                return;
+    init: function(options) {
+        this.$main.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '));
+
+        this.$tabs = this.$main.children('ul').children('li');
+        this.$contents = this.$main.children('div').children('div').hide();
+
+        var self = this;
+        if (options.action === 'hover') {
+            options.action = 'mouseover';
+        }
+        this.$tabs.on(options.action + '.bizTab', function(e) {
+            if (!$(this).hasClass('active')) {
+                var index;
+                self.$tabs.each(function(i, tab) {
+                    if (tab === e.target) {
+                        index = i;
+                        return false;
+                    }
+                });
+
+                self.index(index);
             }
+        });
+
+        this.index(options.selectedIndex, false);
+    },
+
+    /**
+     * 获取/设置当前被选中的 tab
+     * @param {Number}  [selectedIndex] 序号
+     * @param {Boolean} [fire]          触发 change 事件，默认 true
+     * @fires Tab#change
+     * @return {Object}
+     */
+    index: function(selectedIndex, fire) {
+        var curTab, curContent;
+        if (typeof selectedIndex != 'undefined') {
+            this.$tabs.removeClass('active');
+            this.$contents.hide();
+
+            this.options.selectedIndex = selectedIndex;
+            curTab = $(this.$tabs[selectedIndex]).addClass('active');
+            curContent = $(this.$contents[selectedIndex]).show();
+
+            if (fire === undefined || !!fire) {
+                /**
+                 * 切换 tab
+                 * @event Tab#change
+                 * @param {Object} e            事件对象
+                 * @param {Object} data         数据
+                 * @param {Number} data.index   序号
+                 * @param {String} data.title   tab 标题
+                 * @param {String} data.content tab 内容
+                 */
+                curTab.trigger('change', {
+                    index: selectedIndex,
+                    title: curTab.text(),
+                    content: curContent.html()
+                });
+            }
+        } else {
+            var curIndex = this.options.selectedIndex;
+            curTab = $(this.$tabs[curIndex]);
+            curContent = $(this.$contents[curIndex]);
+            return {
+                index: curIndex,
+                title: curTab.text(),
+                content: curContent.html()
+            };
         }
+    },
 
-        if (!isTab(tab)) {
-            return;
-        }
-
-        /**
-         * @property {HTMLElement} main `tab`元素
-         */
-        this.main = tab;
-
-        /**
-         * @property {jQuery} $main `tab`元素的$包装
-         */
-        this.$main = $(this.main);
-
-        var defaultOption = {
-            event: 'click',
-            selectedIndex: 0
-        };
-        this.options = $.extend(defaultOption, options || {});
-        this.init(this.options);
+    /**
+     * 销毁
+     */
+    destroy: function() {
+        this.$main.removeClass([defaultClass, this.options.customClass, (prefix + this.options.theme)].join(' '));
+        this.$tabs.off(this.options.action + '.bizTab');
+        this.$main.data(dataKey, null);
     }
+};
 
-    var defaultClass = 'biz-tab';
+function isTab(elem) {
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
+}
 
-    Tab.prototype = {
-        /**
-         * 初始化
-         * @param {Object} [options] 参数
-         * @protected
-         */
-        init: function(options) {
-            this.skin = options.skin ? (' ' + options.skin) : '';
-
-            this.$main.addClass(defaultClass + this.skin);
-            this.tabs = this.$main.children('ul').children('li');
-            this.contents = this.$main.children('div').children('div').hide();
-            this.select(options.selectedIndex);
-
-            var self = this;
-            this.tabs.on(options.event + '.bizTab', function(e) {
-                var curTab = $(e.target);
-                if (!curTab.hasClass('active')) {
-                    var index;
-                    $.each(self.tabs, function(i, tab) {
-                        if (tab === e.target) {
-                            index = i;
-                        }
-                    });
-
-                    self.select(index);
-
-                    if (options.onChange) {
-                        options.onChange.call(self, {
-                            title: curTab.text(),
-                            index: index
-                        }, e);
+$.extend($.fn, {
+    bizTab: function(method) {
+        var internal_return, args = arguments;
+        this.each(function() {
+            var instance = $(this).data(dataKey);
+            if (instance) {
+                if (typeof method === 'string' && typeof instance[method] === 'function') {
+                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                    if (internal_return !== undefined) {
+                        return false; // break loop
                     }
                 }
-            });
-        },
-
-        /**
-         * 选中tab，或者得到当前被选中的tab
-         * @param  {Number} [selectedIndex] tab索引号
-         * @return {Number} [selectedIndex] 当前tab索引号
-         */
-        select: function(selectedIndex) {
-            if (typeof selectedIndex != 'undefined') {
-                this.tabs.removeClass('active');
-                this.contents.hide();
-                this.options.selectedIndex = selectedIndex;
-                $(this.tabs[selectedIndex]).addClass('active');
-                $(this.contents[selectedIndex]).show();
             } else {
-                return this.options.selectedIndex;
+                if (isTab(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                    $(this).data(dataKey, new Tab(this, method));
+                }
             }
-        },
+        });
 
-        /**
-         * 销毁
-         */
-        destroy: function() {
-            this.$main.removeClass(defaultClass + this.skin);
-            this.$main.off(this.options.event + '.bizTab');
-        }
-    };
-
-    function isTab(elem) {
-        return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
-    }
-
-    var dataKey = 'bizTab';
-
-    $.extend($.fn, {
-        bizTab: function(method, options) {
-            var tab;
-            switch (method) {
-                case 'destroy':
-                    this.each(function() {
-                        tab = $(this).data(dataKey);
-                        if (tab) {
-                            tab.destroy();
-                            $(this).data(dataKey, null);
-                        }
-                    });
-                    break;
-                case 'select':
-                    var selectedIndex;
-                    this.each(function() {
-                        tab = $(this).data(dataKey);
-                        if (tab) {
-                            selectedIndex = tab.select(options);
-                        }
-                    });
-                    return selectedIndex;
-                default:
-                    this.each(function() {
-                        if (!$(this).data(dataKey) && isTab(this)) {
-                            $(this).data(dataKey, new Tab(this, method));
-                        }
-                    });
-            }
-
+        if (internal_return !== undefined) {
+            return internal_return;
+        } else {
             return this;
         }
-    });
-
-    return Tab;
+    }
 });
+
+module.exports = Tab;

@@ -1,0 +1,76 @@
+/**
+ * panel
+ */
+
+.biz-panel {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    font-family: @font-family;
+}
+
+.biz-panel-margin {
+    float: left;
+    height: 100%;
+}
+
+.biz-panel-body {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: -3px 0 8px #aaa;
+    background-color: @background;
+}
+
+.biz-panel-title {
+    position: fixed;
+    width: 100%;
+    padding: 20px 0 20px 60px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: @light-text;
+}
+
+.biz-panel-close {
+    position: absolute;
+    top: 25px;
+    font-size: 30px;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+}
+
+.biz-panel-close:hover {
+    -webkit-transform: rotate(90deg);
+}
+
+.biz-panel-content {
+    padding: 25px 60px;
+    margin-top: 80px;
+}
+
+.biz-panel-bottom {
+    padding: 0 0 60px 60px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+/**
+ * panel themes
+ */
+
+.generate-panel-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-panel-@{name} .biz-panel-title {
+        background-color: @@name;
+    }
+    .generate-panel-themes(@i - 1);
+}
+
+.generate-panel-themes();
+.biz-panel-yellow .biz-panel-title {
+    color: @yellow-text;
+}

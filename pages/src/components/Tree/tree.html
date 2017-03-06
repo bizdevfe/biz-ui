@@ -1,0 +1,56 @@
+<h3>Tree</h3>
+
+<div class="example">
+<div class="tree-container"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="tree-container"&gt;&lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    var treeData = [
+        {
+            id: 100,
+            text: 'Root 1',
+            icon: false
+        },
+        {
+            id: 200,
+            text: 'Root 2',
+            icon: false,
+            children: [
+                {id: 210, text: 'Child 1', children: [
+                    {
+                        id: 211,
+                        text: 'Child 1-1'
+                    }
+                ]},
+                {id: 220, text: 'Child 2', state: {disabled: true}}
+            ]
+        },
+        {
+            id: 300,
+            text: 'Root 3',
+            icon: false,
+            children: [
+                {id: 310, text: 'Child 3'}
+            ]
+        }
+    ];
+    $('.tree-container').on("loaded.jstree", function(e, data) {
+        data.instance.open_all();
+    }).bizTree({
+        core: {
+            data: treeData
+        },
+        plugins : ['checkbox']
+    });
+
+</code></pre>
+
+<h3><i class="biz-icon">&#xe88e;</i> Tips</h3>
+<ul class="issues"><li>bizTree 内部调用 jsTree，初始化选项、方法、事件及插件的使用请参见：<a href="https://www.jstree.com/api/" target="_blank">API</a> 和 <a href="https://www.jstree.com/plugins/" target="_blank">Plugins</a>。</li></ul>

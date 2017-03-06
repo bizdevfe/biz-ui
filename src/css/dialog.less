@@ -1,0 +1,94 @@
+/**
+ * dialog
+ */
+
+.biz-dialog {
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 8px #888;
+    font-family: @font-family;
+    font-size: @font-size;
+    background: @background;
+}
+
+.biz-dialog-title {
+    position: relative;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: @light-text;
+}
+
+.biz-draggble {
+    cursor: move;
+}
+
+.biz-dialog-close {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+}
+
+.biz-dialog-close:hover {
+    -webkit-transform: rotate(90deg);
+}
+
+.biz-dialog-content {
+    padding: 20px;
+    overflow: auto;
+}
+
+.biz-dialog-bottom {
+    padding: 20px 0;
+    height: 30px;
+    text-align: center;
+}
+
+.biz-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.2;
+}
+
+.biz-alert,
+.biz-confirm {
+    overflow: hidden;
+    color: @dark-text;
+}
+
+.biz-alert>i,
+.biz-confirm>i {
+    float: left;
+    font-size: 64px;
+    color: #ccc;
+}
+
+.biz-alert>div,
+.biz-confirm>div {
+    margin-left: 80px;
+}
+
+
+/**
+ * dialog themes
+ */
+
+.generate-dialog-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-dialog-@{name} .biz-dialog-title {
+        background-color: @@name;
+    }
+    .generate-dialog-themes(@i - 1);
+}
+
+.generate-dialog-themes();
+.biz-dialog-yellow .biz-dialog-title {
+    color: @yellow-text;
+}
