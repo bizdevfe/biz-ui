@@ -1,3 +1,8 @@
+## 1.4.1 (March 17, 2017)
+
+* Make Select inline-block.
+* Convert images to base64 before building.
+
 ## 1.4.0 (March 8, 2017)
 
 * Redesign homepage.

@@ -1,6 +1,6 @@
 {
   "name": "biz-ui",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A jQuery plugin for business UI components",
   "author": "BizFE",
   "main": "dist/jquery.bizui.js",
@@ -14,6 +14,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.0",
+    "gulp-css-base64": "^1.3.4",
     "gulp-jsbeautifier": "^2.0.4",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-jshint": "^2.0.4",

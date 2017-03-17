@@ -5,6 +5,7 @@ var pure = require('gulp-pure-cjs');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var clean = require('gulp-clean-css');
+var cssBase64 = require('gulp-css-base64');
 var rename = require("gulp-rename");
 var jsdoc = require('gulp-jsdoc3');
 var sequence = require('gulp-sequence');
@@ -46,6 +47,13 @@ gulp.task('minify-js', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('img2base64', function() {
+    return gulp.src('node_modules/jstree/dist/themes/default/style.css')
+        .pipe(cssBase64())
+        .pipe(rename('style.base64.css'))
+        .pipe(gulp.dest('node_modules/jstree/dist/themes/default'));
+});
+
 gulp.task('merge-css', function() {
     return gulp.src('src/css/bizui.less')
         .pipe(less())
@@ -61,7 +69,7 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('build-js', sequence('merge-js', 'minify-js'));
-gulp.task('build-css', sequence('merge-css', 'minify-css'));
+gulp.task('build-css', sequence('img2base64', 'merge-css', 'minify-css'));
 gulp.task('build', sequence('lint', 'prettify', ['build-js', 'build-css']));
 
 gulp.task('doc', function(cb) {
