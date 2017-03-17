@@ -1,6 +1,6 @@
 {
   "name": "biz-ui",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "A jQuery plugin for business UI components",
   "author": "BizFE",
   "main": "dist/jquery.bizui.js",
@@ -29,7 +29,6 @@
   "dependencies": {
     "bootstrap-datepicker": "^1.6.4",
     "draggable": "^4.1.2",
-    "jquery": "^1.11.0",
     "jquery-placeholder": "^2.3.1",
     "jstree": "^3.3.3",
     "selectric": "^1.11.1",
