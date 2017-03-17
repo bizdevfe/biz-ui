@@ -15,7 +15,7 @@ function Button(button, options) {
     this.$main = $(this.main);
 
     var defaultOption = {
-        theme: bizui.theme,
+        theme: window.bizui.theme,
         customClass: '',
         size: 'small'
     };
@@ -49,7 +49,7 @@ Button.prototype = {
         }
 
         if (options.icon) {
-            var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
+            var iconName = !document.documentMode ? options.icon : window.bizui.codepoints[options.icon];
             this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
         }
 

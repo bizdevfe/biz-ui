@@ -12,7 +12,7 @@ function Radio(radio, options) {
     this.$group = $('input[name="' + this.$main.attr('name') + '"]');
 
     var defaultOption = {
-        theme: bizui.theme
+        theme: window.bizui.theme
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);

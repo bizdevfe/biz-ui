@@ -8325,7 +8325,7 @@
                         this.component = false;
                     this.isInline = !this.component && this.element.is('div');
                     this.picker = $(DPGlobal.template);
-                    this.picker.addClass('biz-calendar-' + (options.theme || bizui.theme));
+                    this.picker.addClass('biz-calendar-' + (options.theme || window.bizui.theme));
                     if (this._check_template(this.o.templates.leftArrow)) {
                         this.picker.find('.prev').html(this.o.templates.leftArrow);
                     }
@@ -10240,7 +10240,7 @@
                             _this.classes.wrapper,
                             _this.$element.prop('class').replace(/\S+/g, _this.classes.prefix + '-$&'),
                             _this.options.responsive ? _this.classes.responsive : '',
-                            'biz-select-' + (_this.options.theme || bizui.theme)
+                            'biz-select-' + (_this.options.theme || window.bizui.theme)
                         ]));
                         if (_this.options.inheritOriginalWidth && originalWidth > 0) {
                             _this.elements.outerWrapper.width(originalWidth);
@@ -10768,7 +10768,7 @@
                 var methods = {
                         init: function (options) {
                             var o = $.extend({
-                                    cssStyle: (options.theme || bizui.theme) + (options.customClass ? ' ' + options.customClass : ''),
+                                    cssStyle: (options.theme || window.bizui.theme) + (options.customClass ? ' ' + options.customClass : ''),
                                     currentPage: options.pageNumber || 0,
                                     items: options.totalNumber || 1,
                                     itemsOnPage: options.pageSize || 1,
@@ -11554,7 +11554,7 @@
                 this.main = button;
                 this.$main = $(this.main);
                 var defaultOption = {
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         customClass: '',
                         size: 'small'
                     };
@@ -11577,7 +11577,7 @@
                         this.$main.html(options.text);
                     }
                     if (options.icon) {
-                        var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
+                        var iconName = !document.documentMode ? options.icon : window.bizui.codepoints[options.icon];
                         this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
                     }
                     if (options.disabled) {
@@ -11675,7 +11675,7 @@
                 this.main = checkbox;
                 this.$main = $(this.main);
                 this.$group = $('input[name="' + this.$main.attr('name') + '"]');
-                var defaultOption = { theme: bizui.theme };
+                var defaultOption = { theme: window.bizui.theme };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
@@ -11799,7 +11799,7 @@
                         customClass: '',
                         position: 'fixed',
                         draggable: false,
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         title: '',
                         buttons: [],
                         destroyOnClose: false
@@ -12127,7 +12127,7 @@
                 this.main = input;
                 this.$main = $(this.main);
                 var defaultOption = {
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         customClass: ''
                     };
                 this.options = $.extend(defaultOption, options || {});
@@ -12244,7 +12244,7 @@
                         customClass: '',
                         marginLeft: 200,
                         speed: 300,
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         title: '',
                         buttons: [],
                         destroyOnClose: false
@@ -12371,7 +12371,7 @@
                 this.main = radio;
                 this.$main = $(this.main);
                 this.$group = $('input[name="' + this.$main.attr('name') + '"]');
-                var defaultOption = { theme: bizui.theme };
+                var defaultOption = { theme: window.bizui.theme };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
@@ -12506,7 +12506,7 @@
                         action: 'click',
                         customClass: '',
                         selectedIndex: 0,
-                        theme: bizui.theme
+                        theme: window.bizui.theme
                     };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
@@ -13131,7 +13131,7 @@
                 this.main = textarea;
                 this.$main = $(this.main);
                 var defaultOption = {
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         customClass: ''
                     };
                 this.options = $.extend(defaultOption, options || {});
@@ -13211,7 +13211,7 @@
                 this.main = textline;
                 this.$main = $(this.main);
                 var defaultOption = {
-                        theme: bizui.theme,
+                        theme: window.bizui.theme,
                         customClass: ''
                     };
                 this.options = $.extend(defaultOption, options || {});

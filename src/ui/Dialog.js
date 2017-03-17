@@ -25,7 +25,7 @@ function Dialog(dialog, options) {
         customClass: '',
         position: 'fixed',
         draggable: false,
-        theme: bizui.theme,
+        theme: window.bizui.theme,
         title: '',
         buttons: [],
         destroyOnClose: false

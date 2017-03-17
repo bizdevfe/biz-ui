@@ -16,7 +16,7 @@ function Tab(tab, options) {
         action: 'click',
         customClass: '',
         selectedIndex: 0,
-        theme: bizui.theme
+        theme: window.bizui.theme
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);

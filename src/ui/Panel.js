@@ -21,7 +21,7 @@ function Panel(panel, options) {
         customClass: '',
         marginLeft: 200,
         speed: 300,
-        theme: bizui.theme,
+        theme: window.bizui.theme,
         title: '',
         buttons: [],
         destroyOnClose: false

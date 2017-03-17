@@ -302,7 +302,7 @@
                     _this.classes.wrapper,
                     _this.$element.prop('class').replace(/\S+/g, _this.classes.prefix + '-$&'),
                     _this.options.responsive ? _this.classes.responsive : '',
-                    'biz-select-' + (_this.options.theme || bizui.theme)
+                    'biz-select-' + (_this.options.theme || window.bizui.theme)
                 ])
             );
 

@@ -108,7 +108,7 @@
         this.picker = $(DPGlobal.template);
 
         // patch: add theme class
-        this.picker.addClass('biz-calendar-' + (options.theme || bizui.theme));
+        this.picker.addClass('biz-calendar-' + (options.theme || window.bizui.theme));
 
         // Checking templates and inserting
         if (this._check_template(this.o.templates.leftArrow)) {

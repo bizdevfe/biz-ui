@@ -14,7 +14,7 @@ function Textarea(textarea, options) {
     this.$main = $(this.main);
 
     var defaultOption = {
-        theme: bizui.theme,
+        theme: window.bizui.theme,
         customClass: ''
     };
     this.options = $.extend(defaultOption, options || {});

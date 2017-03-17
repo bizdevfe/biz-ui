@@ -21,7 +21,7 @@
     var methods = {
         init: function(options) {
             var o = $.extend({
-                cssStyle: (options.theme || bizui.theme) + (options.customClass ? ' ' + options.customClass : ''),
+                cssStyle: (options.theme || window.bizui.theme) + (options.customClass ? ' ' + options.customClass : ''),
                 currentPage: options.pageNumber || 0,
                 items: options.totalNumber || 1,
                 itemsOnPage: options.pageSize || 1,
