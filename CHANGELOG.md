@@ -1,4 +1,4 @@
-## 1.4.1 (March 17, 2017)
+## 1.4.2 (March 17, 2017)
 
 * Make Select inline-block.
 * Convert images to base64 before building.
