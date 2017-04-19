@@ -35,6 +35,18 @@
         vendor: ['jquery', 'biz-ui']
     }
         </code></pre>
+        <p>BizUI 引用了 Iconfont，需要配置字体 loader：</p>
+        <pre><code class="js">
+    module: {
+        loaders: [
+            // stuff
+            {
+                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=]+)?$/,
+                loader: 'file-loader'
+            }
+        ]
+    }
+        </code></pre>
         <p>如果你没有使用构建系统，那么直接在页面中引入 jQuery、BizUI 的 CSS 和 JS 文件：
 		<pre><code class="html">
     &lt;link rel="stylesheet" type="text/css" href="jquery.bizui.css"&gt;
