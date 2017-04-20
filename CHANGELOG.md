@@ -1,3 +1,7 @@
+## 1.4.5 (April 20, 2017)
+
+* Table: new option `flexible`.
+
 ## 1.4.2 (March 17, 2017)
 
 * Make Select inline-block.
