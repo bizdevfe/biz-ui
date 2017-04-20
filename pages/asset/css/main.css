@@ -375,19 +375,23 @@ body.index {
     border: 0;
     border-collapse: collapse;
     table-layout: fixed;
-	margin-left: 40px;
+	width: 100%;
 	margin-bottom: 40px;
 }
 .components table.options th {
     padding: 5px 8px;
     border: 1px #212121 solid;
 	background: #212121;
-	color: #fff
+	color: #fff;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .components table.options td {
 	padding: 5px 8px;
     border: 1px #ccc solid;
 	background: #fff;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .methods {
 	padding: 0 40px;

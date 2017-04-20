@@ -22,6 +22,7 @@ require('../deps/jquery.editabletable');
  * @param {String}         [options.customClass]           自定义 class
  * @param {String}         [options.foot]                  总计行位置（top | bottom），默认无总计行
  * @param {String}         [options.noDataContent]         无数据提示，不转义
+ * @param {Boolean}        [options.flexible]              th 和 td 均强制折行，width无效，默认 false
  * @param {Boolean}        [options.selectable]            可勾选，默认 false
  * @param {Function}       [options.onSelect]              勾选回调，onSelect(Object data, Event e)
  * @param {Function}       [options.onSort]                排序回调，onSort(Object data, Event e)
@@ -40,6 +41,7 @@ function Table(table, options) {
         customClass: '',
         data: [],
         noDataContent: '<p><i class="biz-icon">&#xe001;</i> 没有数据</p>',
+        flexible: false,
         selectable: false,
         defaultSort: 'des',
         lockHead: false,
@@ -87,6 +89,11 @@ Table.prototype = {
         this.$tableBody.html(this.createTableBody(options))
             .addClass([defaultClass, options.customClass, (this.rowSpan > 1 && options.data.length > 0) ? 'biz-rowspan' : ''].join(' '));
 
+        if (options.flexible) {
+            this.$tableHead.addClass('biz-table-flexible');
+            this.$tableBody.addClass('biz-table-flexible');
+        }
+
         // 创建总计行
         if (options.foot && options.data.length > 0) {
             var tbody = this.$tableBody.find('tbody'),
@@ -105,8 +112,10 @@ Table.prototype = {
         }
 
         // 勾选列
-        if (options.selectable && options.data.length > 0) {
-            this.createSelect(options.data);
+        if (options.selectable) {
+            if (options.data.length > 0) {
+                this.createSelect(options.data);
+            }
             this.bindSelect();
         }
 
@@ -132,9 +141,9 @@ Table.prototype = {
 
         // 表头锁定
         if (options.lockHead) {
-            var headHeight = this.$headWrap.height();
             $(window).on('scroll.bizTable', function() {
-                var currentOffsetTop = self.$main.offset().top - options.topOffset;
+                var currentOffsetTop = self.$main.offset().top - options.topOffset,
+                    headHeight = self.$headWrap.height();
                 if ($(window).scrollTop() > currentOffsetTop) {
                     if (!self.hasLocked) {
                         self.$headWrap.css({
@@ -207,6 +216,9 @@ Table.prototype = {
                 width: col.width,
                 field: col.field
             });
+            if (options.flexible) {
+                th.removeAttr('nowrap width');
+            }
 
             var title = (col.escapeTitle === false) ? col.title : escapeHTML(col.title);
             if (col.sortable) {
@@ -265,6 +277,10 @@ Table.prototype = {
 
                 var content = col.content[0].apply(this, [item, index, col.field]).toString();
                 td.html((col.escapeContent === false) ? content : escapeHTML(content)).appendTo(tr);
+
+                if (options.flexible) {
+                    td.removeAttr('width');
+                }
             }
 
             tbody.append(tr);
@@ -286,6 +302,10 @@ Table.prototype = {
                         var _td = $('<td></td>').attr('align', _col.align),
                             _content = _col.content[m].apply(this, [item, index, _col.field]).toString();
                         _td.html((_col.escapeContent === false) ? _content : escapeHTML(_content)).appendTo(_tr);
+
+                        if (options.flexible) {
+                            _td.removeAttr('width');
+                        }
                     }
                     tbody.append(_tr);
                 }
@@ -321,6 +341,10 @@ Table.prototype = {
                 align: col.align,
                 width: col.width
             });
+
+            if (options.flexible) {
+                td.removeAttr('width');
+            }
 
             var content = col.footContent ? col.footContent.call(this, col.field).toString() : '';
             td.html((col.escapeContent === false) ? content : escapeHTML(content)).appendTo(sum);
@@ -576,10 +600,10 @@ Table.prototype = {
      */
     syncWidth: function() {
         this.$headWrap.css({
-            width: this.$main.width()
+            //width: this.$main.width()
         });
         this.$tableHead.css({
-            width: this.$tableBody.width()
+            //width: this.$tableBody.width()
         });
     },
 

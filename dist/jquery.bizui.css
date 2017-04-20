@@ -3635,7 +3635,6 @@
   padding: 5px 8px;
   border: 1px solid #555;
   background: #707070;
-  white-space: nowrap;
   font-weight: normal;
   color: #ffffff;
 }
@@ -3648,6 +3647,11 @@
   word-wrap: break-word;
   outline: none;
   color: #333333;
+}
+.biz-table-flexible th,
+.biz-table-flexible td {
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .biz-table tr:hover {
   background: #fafafa;
@@ -3716,7 +3720,8 @@
   width: 0;
   height: 0;
   position: absolute;
-  top: 3px;
+  top: 50%;
+  margin-top: -7px;
   right: 0;
   border-width: 0 5px 5px;
   border-style: solid;
@@ -3727,7 +3732,8 @@
   width: 0;
   height: 0;
   position: absolute;
-  bottom: 3px;
+  top: 50%;
+  margin-top: 2px;
   right: 0;
   border-width: 5px 5px 0;
   border-style: solid;
@@ -4835,6 +4841,12 @@ div.tooltip.biz-tooltip-yellow {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.jstree-contextmenu .jstree-anchor {
+  -webkit-user-select: none;
+  /* disable selection/Copy of UIWebView */
+  -webkit-touch-callout: none;
+  /* disable the IOS popup when long-press on a link */
 }
 .vakata-context {
   display: none;
