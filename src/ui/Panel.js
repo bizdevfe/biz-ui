@@ -68,9 +68,6 @@ Panel.prototype = {
         this.$container.find('.biz-panel-margin').css({
             width: options.marginLeft
         });
-        this.$container.find('.biz-panel-close').css({
-            right: options.marginLeft + 85
-        });
     },
 
     /**

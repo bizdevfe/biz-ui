@@ -2505,8 +2505,7 @@
   background-color: #ffffff;
 }
 .biz-panel-title {
-  position: fixed;
-  width: 100%;
+  position: relative;
   padding: 20px 0 20px 60px;
   height: 40px;
   line-height: 40px;
@@ -2516,6 +2515,7 @@
 .biz-panel-close {
   position: absolute;
   top: 25px;
+  right: 28px;
   font-size: 30px;
   cursor: pointer;
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
@@ -2525,7 +2525,6 @@
 }
 .biz-panel-content {
   padding: 25px 60px;
-  margin-top: 80px;
 }
 .biz-panel-bottom {
   padding: 0 0 60px 60px;

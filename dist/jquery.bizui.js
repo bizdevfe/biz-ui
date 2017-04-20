@@ -11861,7 +11861,7 @@
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
-            var defaultClass = 'biz-dialog', prefix = 'biz-dialog-', dataKey = 'bizDialog', minWidth = 320, minHeight = 150, currentIndex = 1000;
+            var defaultClass = 'biz-dialog', prefix = 'biz-dialog-', dataKey = 'bizDialog', minWidth = 320, minHeight = 150, currentIndex = 2000;
             Dialog.prototype = {
                 init: function (options) {
                     this.$container = $('<div style="display:none;"></div>');
@@ -11900,6 +11900,7 @@
                         marginLeft: -Math.floor(containerWidth / 2),
                         marginTop: -Math.floor(Math.min(containerHeight, $(window).height()) / 2)
                     });
+                    this.$container.find('.biz-dialog-content').css({ height: containerHeight - 150 });
                     if (options.draggable) {
                         this.draggable = new Draggable(this.$container[0], {
                             handle: this.$container.find('.biz-dialog-title').addClass('biz-draggble')[0],
@@ -12333,7 +12334,6 @@
                     this.$container.find('.biz-panel-content').append(this.$main.show());
                     this.updateButtons(options.buttons);
                     this.$container.find('.biz-panel-margin').css({ width: options.marginLeft });
-                    this.$container.find('.biz-panel-close').css({ right: options.marginLeft + 85 });
                 },
                 open: function () {
                     $('body').css({ overflow: 'hidden' });

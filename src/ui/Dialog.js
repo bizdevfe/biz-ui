@@ -39,7 +39,7 @@ var defaultClass = 'biz-dialog',
     dataKey = 'bizDialog',
     minWidth = 320,
     minHeight = 150,
-    currentIndex = 1000;
+    currentIndex = 2000;
 
 Dialog.prototype = {
     /**
@@ -85,6 +85,9 @@ Dialog.prototype = {
             position: options.position,
             marginLeft: -Math.floor(containerWidth / 2),
             marginTop: -Math.floor(Math.min(containerHeight, $(window).height()) / 2)
+        });
+        this.$container.find('.biz-dialog-content').css({
+            height: containerHeight - 150
         });
 
         // 拖拽
