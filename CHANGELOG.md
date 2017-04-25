@@ -1,14 +1,10 @@
-## 1.4.5 (April 20, 2017)
+## 1.5.0 (April 25, 2017)
+* New component: `Transfer`.
 
+## 1.4.5 (April 20, 2017)
 * Table: new option `flexible`.
 
-## 1.4.2 (March 17, 2017)
-
-* Make Select inline-block.
-* Convert images to base64 before building.
-
 ## 1.4.0 (March 8, 2017)
-
 * Redesign homepage.
 * Rewrite CSS using Less.
 * Rewrap modules with CommonJS specification.
@@ -16,7 +12,6 @@
 * Remove image dependencies by iconfont or base64.
 * JSDoc3 style documentations.
 * 19 new themes: blue(default), light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, brown, blue-gray, gray, deep-orange, red, pink, purple, deep-purple, indigo.
-
 #### Components updates
 * bizui (namespace)
   1. Exposed to global environment.

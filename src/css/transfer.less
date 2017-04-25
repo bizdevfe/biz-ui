@@ -1,0 +1,58 @@
+/**
+ * transfer
+ */
+
+.biz-transfer {
+    display: flex;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+    min-height: 285px;
+}
+
+.biz-transfer-list {
+    width: 200px;
+    border: 1px solid @border;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.biz-transfer-list-header {
+    padding: 10px;
+    height: 24px;
+    border-bottom: 1px solid @border;
+    font-weight: bold;
+}
+
+.biz-transfer-list-body {
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.biz-transfer-list-content-item {
+    padding: 5px 10px;
+}
+
+.biz-transfer label {
+    width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.biz-transfer-operation {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.biz-transfer-operation button {
+    display: block;
+    width: 44px;
+    margin: 5px !important;
+}

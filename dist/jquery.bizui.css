@@ -4734,6 +4734,56 @@ aside.tooltip.biz-tooltip-yellow,
 div.tooltip.biz-tooltip-yellow {
   color: #d0910b;
 }
+/**
+ * transfer
+ */
+.biz-transfer {
+  display: flex;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  min-height: 285px;
+}
+.biz-transfer-list {
+  width: 200px;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+.biz-transfer-list-header {
+  padding: 10px;
+  height: 24px;
+  border-bottom: 1px solid #e2e2e2;
+  font-weight: bold;
+}
+.biz-transfer-list-body {
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.biz-transfer-list-content-item {
+  padding: 5px 10px;
+}
+.biz-transfer label {
+  width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+.biz-transfer-operation {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.biz-transfer-operation button {
+  display: block;
+  width: 44px;
+  margin: 5px !important;
+}
 /* jsTree default theme */
 .jstree-node,
 .jstree-children,

@@ -12,7 +12,7 @@ var sequence = require('gulp-sequence');
 
 gulp.task('lint', function() {
     return gulp.src(['src/*.js', 'src/ui/*.js'])
-      .pipe(jshint())
+      .pipe(jshint({multistr: true}))
       .pipe(jshint.reporter('jshint-stylish'))
       .pipe(jshint.reporter('fail'));
 });

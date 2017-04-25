@@ -1,4 +1,4 @@
-BizUI - A jQuery plugin for business UI components
+BizUI - jQuery Plugin Collections for Business
 ===============
 
 [![NPM Version][npm-image]][npm-url]
