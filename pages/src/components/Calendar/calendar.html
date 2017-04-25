@@ -28,7 +28,7 @@
     &lt;!-- inline 类型 --&gt;
     &lt;div class="inline-date" data-date="2017-01-01"&gt;&lt;/div&gt;
     &lt;span class="selected-date"&gt;&lt;/span&gt;
-    
+
 </code></pre>
 
 <h4>JavaScript</h4>
@@ -37,18 +37,20 @@
     $('.date').bizCalendar({
         daysOfWeekHighlighted: '06',
         todayBtn: true,
-        todayHighlight: true
+        todayHighlight: true,
+        theme: 'light-blue'
     });
     $('.input-daterange').bizCalendar({
         startDate: '2000-01-01',
-        endDate: '2046-12-31'
+        endDate: '2046-12-31',
+        theme: 'light-blue'
     });
     $('.inline-date').bizCalendar({
         templates: {
             leftArrow: '&lt;i class="biz-icon"&gt;&amp;#xe314;&lt;/i&gt;',
             rightArrow: '&lt;i class="biz-icon"&gt;&amp;#xe315;&lt;/i&gt;'
         },
-        theme: 'light-green'
+        theme: 'light-blue'
     }).on('changeDate', function(e) {
         $('.selected-date').html(e.format());
     });

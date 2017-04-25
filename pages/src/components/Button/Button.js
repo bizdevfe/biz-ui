@@ -16,7 +16,6 @@ var Button = Backbone.View.extend({
 	initBizUI: function() {
         $('.ok').bizButton();
         $('.search').bizButton({
-            theme: 'light-green',
             icon: 'search'
         });
         $('.disabled').bizButton({

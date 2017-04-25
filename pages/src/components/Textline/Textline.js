@@ -15,10 +15,11 @@ var Textline = Backbone.View.extend({
 
 	initBizUI: function() {
         $('.line1').bizTextline({
-            val: 'a\nb\nc'
+            val: 'a\nb\nc',
+            theme: 'deep-orange'
         });
         $('.line2').bizTextline({
-            theme: 'blue-gray',
+            theme: 'deep-orange',
             width: 300,
             height: 150,
             maxLine: 3,

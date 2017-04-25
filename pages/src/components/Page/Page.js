@@ -23,7 +23,8 @@ var Page = Backbone.View.extend({
         page.bizPage({
             pageSize: 50,
             pageNumber: 1,
-            totalNumber: 300
+            totalNumber: 300,
+            theme: 'lime'
         });
         $('#b1').click(function() {
             page.bizPage('prevPage');

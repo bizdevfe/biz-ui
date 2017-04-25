@@ -1,0 +1,118 @@
+<h3>Transfer</h3>
+
+<div class="example">
+<div class="transfer-container"></div>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;div class="transfer-container"&gt;&lt;/div&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    var data = [
+        {
+            id: 1,
+            title: 'Apple',
+            chosen: false
+        }, {
+            id: 2,
+            title: 'Banana',
+            chosen: true
+        }, {
+            id: 3,
+            title: 'Cherry',
+            chosen: false
+        }, {
+            id: 4,
+            title: 'Grape',
+            chosen: false
+        }, {
+            id: 5,
+            title: 'Orange',
+            chosen: false
+        }
+    ];
+    $('.transfer-container').bizTransfer({
+        dataSource: data,
+        theme: 'pink'
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table class="options">
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>[customClass]</td>
+        <td>String</td>
+        <td>自定义 class</td>
+    </tr>
+    <tr>
+        <td>[dataSource]</td>
+        <td>Array</td>
+        <td>数据</td>
+    </tr>
+    <tr>
+        <td>[keyMap]</td>
+        <td>Object</td>
+        <td>数据字段，默认 {id: 'id', title: 'title', chosen: 'chosen'}</td>
+    </tr>
+    <tr>
+        <td>[titles]</td>
+        <td>Array</td>
+        <td>标题</td>
+    </tr>
+    <tr>
+        <td>[noContent]</td>
+        <td>String</td>
+        <td>无数据提示，不转义</td>
+    </tr>
+    <tr>
+        <td>[onChange]</td>
+        <td>Function</td>
+        <td>移动数据回调，onChange(Object data, Event e)</td>
+    </tr>
+    <tr>
+        <td>[theme]</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>add(Array data)</h4>
+<p class="des">新增数据项</p>
+</div>
+
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>select(Array data)</h4>
+<p class="des">选中数据项</p>
+</div>
+
+<div class="methods">
+<h4>unselect(Array data)</h4>
+<p class="des">反选数据项</p>
+</div>
+
+<div class="methods">
+<h4>update(Array data)</h4>
+<p class="des">更新数据项</p>
+</div>
+
+<div class="methods">
+<h4>value()</h4>
+<p class="des">获取已选数据项</p>
+</div>

@@ -18,18 +18,20 @@ var Calendar = Backbone.View.extend({
         $('.date').bizCalendar({
             daysOfWeekHighlighted: '06',
             todayBtn: true,
-            todayHighlight: true
+            todayHighlight: true,
+            theme: 'light-blue'
         });
         $('.input-daterange').bizCalendar({
             startDate: new Date('2000-01-01'),
-            endDate: '2046-12-31'
+            endDate: '2046-12-31',
+            theme: 'light-blue'
         });
         $('.inline-date').bizCalendar({
             templates: {
                 leftArrow: '<i class="biz-icon">&#xe314;</i>',
                 rightArrow: '<i class="biz-icon">&#xe315;</i>'
             },
-            theme: 'light-green'
+            theme: 'light-blue'
         }).on('changeDate', function(e) {
             $('.log').html(e.format());
         });

@@ -14,8 +14,9 @@ var Textarea = Backbone.View.extend({
     },
 
 	initBizUI: function() {
-        $('textarea').bizTextarea();
-        $('.content2').bizTextarea('disable');
+        $('textarea').bizTextarea({
+            theme: 'gray'
+        });
         $('button').bizButton({
             theme: 'blue-gray'
         }).click(function() {

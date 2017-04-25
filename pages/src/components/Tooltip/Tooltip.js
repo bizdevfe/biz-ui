@@ -6,7 +6,7 @@ var Tooltip = Backbone.View.extend({
 
         var view = this;
         $.get('src/components/Tooltip/tooltip.html', function(tpl) {
-            view.$el.html(Mustache.render(tpl));view.$el.html(Mustache.render(tpl));
+            view.$el.html(Mustache.render(tpl));
 			view.initBizUI();
 			hljs.initHighlighting.called = false;
 			hljs.initHighlighting();
@@ -18,7 +18,7 @@ var Tooltip = Backbone.View.extend({
         $('button').bizButton();
         bizui.Tooltip({
             element: 'input',
-            theme: 'orange'
+            theme: 'red'
         });
         bizui.Tooltip({
             element: 'button',

@@ -24,9 +24,11 @@ var Dialog = Backbone.View.extend({
                     icon: 'done',
                     onClick: function() {
                         this.close();
-                    }
+                    },
+                    theme: 'teal'
                 }
-            ]
+            ],
+            theme: 'teal'
         });
         $('#b1').click(function() {
             $('.d1').bizDialog('open');
@@ -38,10 +40,12 @@ var Dialog = Backbone.View.extend({
                     icon: 'done',
                     onClick: function() {
                         this.close();
-                    }
+                    },
+                    theme: 'teal'
                 }
             ],
-            position: 'absolute'
+            position: 'absolute',
+            theme: 'teal'
         });
         $('#b2').click(function() {
             $('.d2').bizDialog('open');
@@ -53,10 +57,12 @@ var Dialog = Backbone.View.extend({
                     icon: 'done',
                     onClick: function() {
                         this.close();
-                    }
+                    },
+                    theme: 'teal'
                 }
             ],
-            draggable: true
+            draggable: true,
+            theme: 'teal'
         });
         $('#b3').click(function() {
             $('.d3').bizDialog('open');

@@ -41,7 +41,8 @@
 <h4>JavaScript</h4>
 <pre><code class="js">
     $('#fruit').bizSelect({
-        inheritOriginalWidth: true
+        inheritOriginalWidth: true,
+        theme: 'orange'
     }).on('change', function(e) {
         bizui.alert($(this).val());
     });

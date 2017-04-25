@@ -16,7 +16,7 @@ var Checkbox = Backbone.View.extend({
 	initBizUI: function() {
         var checkboxGroup = $(':checkbox');
         checkboxGroup.bizCheckbox({
-            theme: 'green'
+            theme: 'cyan'
         });
         $('button').bizButton({
             theme: 'blue-gray'

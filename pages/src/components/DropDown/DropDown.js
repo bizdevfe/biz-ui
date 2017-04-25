@@ -18,7 +18,9 @@ var DropDown = Backbone.View.extend({
         $('#b1').bizButton({
             theme: 'blue-gray'
         });
-        $('#b2').bizButton();
+        $('#b2').bizButton({
+            theme: 'green'
+        });
         $('.dropdown-container').bizDropDown({
             trigger: '#b1',
             customClass: 'register'

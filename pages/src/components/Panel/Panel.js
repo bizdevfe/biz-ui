@@ -26,7 +26,8 @@ var Panel = Backbone.View.extend({
                     icon: 'done',
                     onClick: function() {
                         this.close();
-                    }
+                    },
+                    theme: 'yellow'
                 },
                 {
                     text: 'Cancel',
@@ -36,7 +37,8 @@ var Panel = Backbone.View.extend({
                         this.close();
                     }
                 }
-            ]
+            ],
+            theme: 'yellow'
         });
     },
 

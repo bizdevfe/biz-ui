@@ -16,6 +16,7 @@ var Router = Backbone.Router.extend({
         'textarea': 'textarea',
         'textline': 'textline',
         'tooltip': 'tooltip',
+        'transfer': 'transfer',
         'tree': 'tree',
         'treetable': 'treetable'
     },
@@ -90,6 +91,10 @@ var Router = Backbone.Router.extend({
 
     tooltip: function() {
         this.startRout(new Tooltip());
+    },
+
+    transfer: function() {
+        this.startRout(new Transfer());
     },
 
     tree: function() {

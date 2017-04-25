@@ -15,7 +15,8 @@ var Select = Backbone.View.extend({
 
 	initBizUI: function() {
         $('#fruit').bizSelect({
-            inheritOriginalWidth: true
+            inheritOriginalWidth: true,
+            theme: 'orange'
         }).on('change', function(e) {
             bizui.alert($(this).val());
         });

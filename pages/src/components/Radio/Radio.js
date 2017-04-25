@@ -16,7 +16,7 @@ var Radio = Backbone.View.extend({
 	initBizUI: function() {
         var radioGroup = $(':radio');
         radioGroup.bizRadio({
-            theme: 'green'
+            theme: 'amber'
         });
         $('button').bizButton({
             theme: 'blue-gray'
