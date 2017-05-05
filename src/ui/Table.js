@@ -716,7 +716,7 @@ Table.prototype = {
                 newValue: newValue,
                 field: field,
                 item: self.options.data[rowIndex],
-                index: rowIndex
+                index: rowIndex + 1
             }, e);
         });
     },
@@ -740,7 +740,7 @@ Table.prototype = {
                 newValue: newValue,
                 field: field,
                 item: self.options.data[rowIndex],
-                index: rowIndex
+                index: rowIndex + 1
             }, e);
         });
     },

@@ -13115,7 +13115,7 @@
                             newValue: newValue,
                             field: field,
                             item: self.options.data[rowIndex],
-                            index: rowIndex
+                            index: rowIndex + 1
                         }, e);
                     });
                 },
@@ -13131,7 +13131,7 @@
                             newValue: newValue,
                             field: field,
                             item: self.options.data[rowIndex],
-                            index: rowIndex
+                            index: rowIndex + 1
                         }, e);
                     });
                 },
