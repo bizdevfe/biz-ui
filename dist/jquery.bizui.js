@@ -13021,8 +13021,23 @@
                         this.options.onSelect.call(this, this.getSelected());
                     }
                 },
-                getData: function () {
-                    return this.options.data;
+                getData: function (rowIndex) {
+                    if (typeof rowIndex !== 'undefined') {
+                        if ($.isArray(rowIndex)) {
+                            var result = [], self = this;
+                            $.each(rowIndex, function (index, value) {
+                                var item = self.options.data[value - 1];
+                                if (item) {
+                                    result.push(item);
+                                }
+                            });
+                            return result.length !== 0 ? result : null;
+                        } else {
+                            return this.options.data[rowIndex - 1] || null;
+                        }
+                    } else {
+                        return this.options.data;
+                    }
                 },
                 getColumn: function () {
                     return this.options.column;

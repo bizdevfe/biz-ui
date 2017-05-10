@@ -545,10 +545,27 @@ Table.prototype = {
 
     /**
      * 获取列表数据
-     * @return {Array}
+     * @param {Mixed} [rowIndex] 行号或行号数组（从 1 开始）
+     * @return {Mixed}
      */
-    getData: function() {
-        return this.options.data;
+    getData: function(rowIndex) {
+        if (typeof rowIndex !== 'undefined') {
+            if ($.isArray(rowIndex)) {
+                var result = [],
+                    self = this;
+                $.each(rowIndex, function(index, value) {
+                    var item = self.options.data[value - 1];
+                    if (item) {
+                        result.push(item);
+                    }
+                });
+                return result.length !== 0 ? result : null;
+            } else {
+                return this.options.data[rowIndex - 1] || null;
+            }
+        } else {
+            return this.options.data;
+        }
     },
 
     /**
