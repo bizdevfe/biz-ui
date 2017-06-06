@@ -15,6 +15,7 @@ require('./ui/Textline');
 require('./ui/Transfer');
 require('./ui/Tree');
 require('./ui/TreeTable');
+require('./ui/Switch');
 
 /**
  * @namespace

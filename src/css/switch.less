@@ -1,0 +1,84 @@
+/*
+* bizSwitch
+*/
+
+.biz-switch-container {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.biz-switch-container.biz-switch-container-disable {
+    cursor: not-allowed;
+}
+
+.biz-switch-container span {
+    vertical-align: middle;
+}
+
+.biz-switch {
+    margin-right: 5px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 22px;
+    min-width: 44px;
+    line-height: 20px;
+    vertical-align: middle;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, .25);
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.biz-switch-inner {
+    color: #fff;
+    font-size: 12px;
+    margin-left: 24px;
+    margin-right: 6px;
+    display: block;
+}
+
+.biz-switch-checked .biz-switch-inner {
+    margin-left: 6px;
+    margin-right: 24px;
+}
+
+.biz-switch:after {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 1px;
+    top: 1px;
+    border-radius: 18px;
+    background-color: #fff;
+    content: " ";
+    -webkit-transition: all .3s, width .3s;
+    transition: all .3s, width .3s;
+}
+
+.biz-switch-checked:after {
+    left: 100%;
+    margin-left: -19px;
+}
+
+
+/**
+ * switch themes
+ */
+
+.generate-switch-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-switch-container-@{name} .biz-switch-checked {
+        background-color: @@name;
+        border-color: @@name;
+    }
+    .generate-switch-themes(@i - 1);
+}
+
+.generate-switch-themes();
