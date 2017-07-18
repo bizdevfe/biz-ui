@@ -325,7 +325,7 @@ body.index {
 .components aside .calendar {background-position: 0 -46px; background-color: rgb(3, 169, 244);}
 .components aside .checkbox {background-position: 0 -92px; background-color: rgb(0, 188, 212);}
 .components aside .dialog {background-position: 0 -138px; background-color: rgb(0, 150, 136);}
-.components aside .dropdown {background-position: 0 -737px; background-color: rgb(76, 175, 80);}
+.components aside .dropdown {background-position: 0 -736px; background-color: rgb(76, 175, 80);}
 .components aside .input {background-position: 0 -184px; background-color: rgb(139, 195, 74);}
 .components aside .page {background-position: 0 -230px; background-color: rgb(205, 220, 57);}
 .components aside .panel {background-position: 0 -276px; background-color: rgb(255, 227, 142);}
@@ -335,10 +335,11 @@ body.index {
 .components aside .table {background-position: 0 -460px; background-color: rgb(96, 125, 139);}
 .components aside .textarea {background-position: 0 -506px; background-color: rgb(158, 158, 158);}
 .components aside .textline {background-position: 0 -552px; background-color: rgb(255, 87, 34);}
-.components aside .tooltips {background-position: 0 -599px; background-color: rgb(244, 67, 54);}
-.components aside .transfer {background-position: 0 -783px; background-color: rgb(233, 30, 99);}
-.components aside .tree {background-position: 0 -645px; background-color: rgb(156, 39, 176);}
-.components aside .treetable {background-position: 0 -691px; background-color: rgb(103, 58, 183)}
+.components aside .tooltips {background-position: 0 -598px; background-color: rgb(244, 67, 54);}
+.components aside .transfer {background-position: 0 -782px; background-color: rgb(233, 30, 99);}
+.components aside .tree {background-position: 0 -644px; background-color: rgb(156, 39, 176);}
+.components aside .treetable {background-position: 0 -690px; background-color: rgb(103, 58, 183)}
+.components aside .switch {background-position: 0 -828px; background-color: rgb(76, 175, 8);}
 .components .main {
     flex-grow: 1;
     padding-bottom: 120px;
@@ -497,6 +498,7 @@ ul.issues {
     .components aside .treetable {background-position: 0 -345px;}
     .components aside .dropdown {background-position: 0 -368px;}
     .components aside .transfer {background-position: 0 -391px;}
+    .components aside .switch {background-position: 0 -414px;}
     .components table.options {
         margin-left: 0;
         width: 100%;

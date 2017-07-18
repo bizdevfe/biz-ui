@@ -1,11 +1,11 @@
 /**
- * BizSwitch
+ * Switch
  * @class
- * @param {HTMLElement} switchDom        目标元素,switch是JS关键字，所以叫做switchDom
+ * @param {HTMLElement} switchDom       目标元素
  * @param {Object}      [options]       参数
  * @param {String}      [options.theme] 主题
  */
-function BizSwitch(switchDom, options) {
+function Switch(switchDom, options) {
     this.main = switchDom;
     this.$main = $(this.main);
 
@@ -22,7 +22,7 @@ var defaultClass = 'biz-switch',
     checkedClass = 'biz-switch-checked',
     dataKey = 'bizSwitch';
 
-BizSwitch.prototype = {
+Switch.prototype = {
     /**
      * 初始化
      * @param {Object} options 参数
@@ -133,7 +133,7 @@ $.extend($.fn, {
                 }
             } else {
                 if (isSwitch(this) && (method === undefined || jQuery.isPlainObject(method))) {
-                    $(this).data(dataKey, new BizSwitch(this, method));
+                    $(this).data(dataKey, new Switch(this, method));
                 }
             }
         });
@@ -146,4 +146,4 @@ $.extend($.fn, {
     }
 });
 
-module.exports = BizSwitch;
+module.exports = Switch;

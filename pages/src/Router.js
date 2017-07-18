@@ -11,6 +11,7 @@ var Router = Backbone.Router.extend({
         'panel': 'panel',
         'radio': 'radio',
         'select': 'select',
+        'switch': 'switch',
         'tab': 'tab',
         'table': 'table',
         'textarea': 'textarea',
@@ -71,6 +72,10 @@ var Router = Backbone.Router.extend({
 
     select: function() {
         this.startRout(new Select());
+    },
+
+    switch: function() {
+        this.startRout(new Switch());
     },
 
     tab: function() {

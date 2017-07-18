@@ -86,6 +86,7 @@ gulp.task('doc', function(cb) {
         'src/ui/Panel.js',
         'src/ui/Radio.js',
         'src/ui/Select.js',
+        'src/ui/Switch.js',
         'src/ui/Tab.js',
         'src/ui/Table.js',
         'src/ui/Textarea.js',

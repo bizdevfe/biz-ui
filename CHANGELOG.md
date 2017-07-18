@@ -1,3 +1,6 @@
+## 1.6.0 (July 18, 2017)
+* New component: `Switch`.
+
 ## 1.5.0 (April 25, 2017)
 * New component: `Transfer`.
 
