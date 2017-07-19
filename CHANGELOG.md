@@ -1,3 +1,6 @@
+## 1.6.1 (July 19, 2017)
+* Update Table demo.
+
 ## 1.6.0 (July 18, 2017)
 * New component: `Switch`.
 

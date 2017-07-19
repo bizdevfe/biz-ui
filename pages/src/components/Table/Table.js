@@ -119,7 +119,11 @@ var Table = Backbone.View.extend({
                 title: 'Operation',
                 escapeContent: false,
                 content: function(item, index, field) {
-                    return '<a href="javascript:void(0)" id="' + item.id + '">Detail</a>';
+                    return '<select id="' + item.id + '">\
+                        <option value="edit">Edit</option>\
+                        <option value="delete">Delete</option>\
+                        <option value="open">Open</option>\
+                    </select>';
                 }
             }
         ];
@@ -151,6 +155,30 @@ var Table = Backbone.View.extend({
             onFailEdit: function(data) {
                 console.log('Fail', data);
             }
+        });
+
+        $('select').bizSelect()
+        .on('selectric-before-open', function() { // 解决表格遮挡问题
+            $('.biz-table td').css({'overflow': 'visible'});
+            $('.biz-table-body-wrap').css({'overflow': 'visible'});
+            $('.biz-table-head-wrap').css({'overflow': 'visible'});
+        })
+        .on('selectric-close', function() {
+            $('.biz-table td').css({'overflow': 'hidden'});
+            $('.biz-table-body-wrap').css({
+                'overflowX': 'auto',
+                'overflowY': 'hidden'
+            });
+            $('.biz-table-head-wrap').css({
+                'overflowX': 'auto',
+                'overflowY': 'hidden'
+            });
+        });
+
+        bizui.Tooltip({
+            element: '.protocol',
+            preventDefault: true,
+            action: 'click'
         });
 	},
 

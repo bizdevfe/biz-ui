@@ -117,7 +117,11 @@
             title: 'Operation',
             escapeContent: false,
             content: function(item, index, field) {
-                return '&lt;a href="javascript:void(0)" id="' + item.id + '"&gt;Detail&lt;/a&gt;';
+                return '&lt;select id="' + item.id + '"&gt;\
+                    &lt;option value="edit"&gt;Edit&lt;/option&gt;\
+                    &lt;option value="delete"&gt;Delete&lt;/option&gt;\
+                    &lt;option value="open"&gt;Open&lt;/option&gt;\
+                &lt;/select&gt;';
             }
         }
     ];
@@ -149,6 +153,24 @@
         onFailEdit: function(data) {
             console.log('Fail', data);
         }
+    });
+
+    $('select').bizSelect()
+    .on('selectric-before-open', function() { // 解决表格遮挡问题
+        $('.biz-table td').css({'overflow': 'visible'});
+        $('.biz-table-body-wrap').css({'overflow': 'visible'});
+        $('.biz-table-head-wrap').css({'overflow': 'visible'});
+    })
+    .on('selectric-close', function() {
+        $('.biz-table td').css({'overflow': 'hidden'});
+        $('.biz-table-body-wrap').css({
+            'overflowX': 'auto',
+            'overflowY': 'hidden'
+        });
+        $('.biz-table-head-wrap').css({
+            'overflowX': 'auto',
+            'overflowY': 'hidden'
+        });
     });
 
 </code></pre>
