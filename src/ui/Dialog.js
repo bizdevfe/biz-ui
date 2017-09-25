@@ -28,7 +28,8 @@ function Dialog(dialog, options) {
         theme: window.bizui.theme,
         title: '',
         buttons: [],
-        destroyOnClose: false
+        destroyOnClose: false,
+        canClose: true
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);
@@ -47,7 +48,7 @@ Dialog.prototype = {
      * @param {Object} options 参数
      * @private
      */
-    init: function(options) {
+    init: function (options) {
         // 在 body 下创建对话框和遮罩层
         this.$container = $('<div style="display:none;"></div>');
         this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
@@ -59,11 +60,11 @@ Dialog.prototype = {
             .html([
                 '<div class="biz-dialog-title">',
                 '<span class="biz-dialog-title-text">', this.$main.attr('data-title') || options.title, '</span>',
-                '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
+                options.canClose ? '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>' : '</div>',
                 '<div class="biz-dialog-content"></div>',
                 '<div class="biz-dialog-bottom"></div>'
             ].join(''))
-            .on('click.bizDialog', '.biz-dialog-close', function() {
+            .on('click.bizDialog', '.biz-dialog-close', function () {
                 self.close();
             });
         this.$container.find('.biz-dialog-content').append(this.$main.show()); // 把目标元素移至 $container 中
@@ -112,7 +113,7 @@ Dialog.prototype = {
     /**
      * 打开对话框
      */
-    open: function() {
+    open: function () {
         var index = this.options.zIndex || ++currentIndex;
 
         this.$mask.css({
@@ -133,7 +134,7 @@ Dialog.prototype = {
     /**
      * 关闭对话框
      */
-    close: function() {
+    close: function () {
         var result = true;
         if (typeof this.options.onBeforeClose == 'function') {
             result = this.options.onBeforeClose();
@@ -157,15 +158,15 @@ Dialog.prototype = {
      * 更新按钮
      * @param {Array} buttonOption 底部按钮的 option 数组
      */
-    updateButtons: function(buttonOption) {
+    updateButtons: function (buttonOption) {
         buttonOption = buttonOption || [];
         var bottom = this.$container.find('.biz-dialog-bottom'),
             self = this;
         bottom.find('button').bizButton('destroy').off().remove();
-        $.each(buttonOption, function(index, buttonOption) {
+        $.each(buttonOption, function (index, buttonOption) {
             var button = $('<button></button>').appendTo(bottom).bizButton(buttonOption);
             if (buttonOption.onClick) {
-                button.click(function(e) {
+                button.click(function (e) {
                     buttonOption.onClick.call(self, e);
                 });
             }
@@ -177,7 +178,7 @@ Dialog.prototype = {
      * @param {String} [title] 标题
      * @return {String}
      */
-    title: function(title) {
+    title: function (title) {
         var titleElement = this.$container.find('.biz-panel-title-text');
         if (undefined === title) {
             return titleElement.html();
@@ -188,7 +189,7 @@ Dialog.prototype = {
     /**
      * 销毁
      */
-    destroy: function() {
+    destroy: function () {
         if (this.options.draggable) {
             this.draggable.destroy();
         }
@@ -200,7 +201,7 @@ Dialog.prototype = {
     }
 };
 
-var alert = function(options) {
+var alert = function (options) {
     if (!jQuery.isPlainObject(options)) {
         options = {
             content: options
@@ -221,7 +222,7 @@ var alert = function(options) {
         buttons: [{
             text: options.okText,
             theme: options.theme,
-            onClick: function() {
+            onClick: function () {
                 this.close();
             }
         }]
@@ -229,7 +230,7 @@ var alert = function(options) {
     alert.bizDialog('open');
 };
 
-var confirm = function(options) {
+var confirm = function (options) {
     var defaultOption = {
         content: '',
         okText: '确定',
@@ -245,7 +246,7 @@ var confirm = function(options) {
         buttons: [{
             text: options.okText,
             theme: options.theme,
-            onClick: function() {
+            onClick: function () {
                 var result = true;
                 if (typeof options.onOK == 'function') {
                     result = options.onOK();
@@ -258,7 +259,7 @@ var confirm = function(options) {
         }, {
             text: options.cancelText,
             theme: 'gray',
-            onClick: function() {
+            onClick: function () {
                 this.close();
             }
         }]
@@ -267,9 +268,9 @@ var confirm = function(options) {
 };
 
 $.extend($.fn, {
-    bizDialog: function(method) {
+    bizDialog: function (method) {
         var internal_return, args = arguments;
-        this.each(function() {
+        this.each(function () {
             var instance = $(this).data(dataKey);
             if (instance) {
                 if (typeof method === 'string' && typeof instance[method] === 'function') {
