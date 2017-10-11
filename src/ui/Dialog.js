@@ -28,7 +28,8 @@ function Dialog(dialog, options) {
         theme: window.bizui.theme,
         title: '',
         buttons: [],
-        destroyOnClose: false
+        destroyOnClose: false,
+        canClose: true
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);
@@ -59,7 +60,7 @@ Dialog.prototype = {
             .html([
                 '<div class="biz-dialog-title">',
                 '<span class="biz-dialog-title-text">', this.$main.attr('data-title') || options.title, '</span>',
-                '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
+                options.canClose ? '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>' : '</div>',
                 '<div class="biz-dialog-content"></div>',
                 '<div class="biz-dialog-bottom"></div>'
             ].join(''))
