@@ -16,6 +16,7 @@ var Draggable = require('Draggable');
  * @param {Number}      [options.width]          对话框宽度，最小 320px
  * @param {Function}    [options.onBeforeClose]  关闭前回调，返回 false 则不关闭
  * @param {Number}      [options.zIndex]         对话框 z-index
+ * @param {Boolean}     [options.canClose]       显示对话框关闭按钮，默认 true
  */
 function Dialog(dialog, options) {
     this.main = dialog;
