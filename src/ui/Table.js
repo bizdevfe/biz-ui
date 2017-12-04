@@ -18,6 +18,7 @@ require('../deps/jquery.editabletable');
  * @param {Boolean}        [options.column.sortable]           此列排序, 默认 false
  * @param {String}         [options.column.currentSort]        排序方式（des-降序 | asc-升序），仅 sortable 为 true 时生效
  * @param {Boolean}        [options.column.visible]            此列可见，默认 true
+ * @param {Boolean}        [options.column.customClass]        自定义 class
  * @param {Array}          options.data                    数据，data[i].disabledSelect = true 时此行不可选中，默认 false
  * @param {String}         [options.customClass]           自定义 class
  * @param {String}         [options.foot]                  总计行位置（top | bottom），默认无总计行
@@ -266,7 +267,8 @@ Table.prototype = {
 
                 var td = $('<td></td>').attr({
                     align: col.align,
-                    width: col.width
+                    width: col.width,
+                    class: col.customClass
                 });
                 if (col.editable && col.content.length === 1) {
                     td.attr('editable', '');
@@ -299,8 +301,11 @@ Table.prototype = {
                             continue;
                         }
 
-                        var _td = $('<td></td>').attr('align', _col.align),
-                            _content = _col.content[m].apply(this, [item, index, _col.field]).toString();
+                        var _td = $('<td></td>').attr({
+                            align: _col.align,
+                            class: _col.customClass
+                        });
+                        var _content = _col.content[m].apply(this, [item, index, _col.field]).toString();
                         _td.html((_col.escapeContent === false) ? _content : escapeHTML(_content)).appendTo(_tr);
 
                         if (options.flexible) {
@@ -339,7 +344,8 @@ Table.prototype = {
 
             var td = $('<td></td>').attr({
                 align: col.align,
-                width: col.width
+                width: col.width,
+                class: col.customClass
             });
 
             if (options.flexible) {

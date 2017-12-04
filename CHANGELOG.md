@@ -1,3 +1,12 @@
+## 1.6.4 (Dec 4, 2017)
+* Table: new column option `customClass`.
+
+## 1.6.3 (Nov 10, 2017)
+* Dialog: new option `canClose`.
+
+## 1.6.2 (Aug 30, 2017)
+* Update homepage.
+
 ## 1.6.1 (July 19, 2017)
 * Update Table demo.
 

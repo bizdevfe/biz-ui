@@ -12925,7 +12925,8 @@
                             }
                             var td = $('<td></td>').attr({
                                     align: col.align,
-                                    width: col.width
+                                    width: col.width,
+                                    class: col.customClass
                                 });
                             if (col.editable && col.content.length === 1) {
                                 td.attr('editable', '');
@@ -12955,7 +12956,11 @@
                                     if (typeof _col.visible !== 'undefined' && !_col.visible || _col.content.length === 1) {
                                         continue;
                                     }
-                                    var _td = $('<td></td>').attr('align', _col.align), _content = _col.content[m].apply(this, [
+                                    var _td = $('<td></td>').attr({
+                                            align: _col.align,
+                                            class: _col.customClass
+                                        });
+                                    var _content = _col.content[m].apply(this, [
                                             item,
                                             index,
                                             _col.field
@@ -12983,7 +12988,8 @@
                         }
                         var td = $('<td></td>').attr({
                                 align: col.align,
-                                width: col.width
+                                width: col.width,
+                                class: col.customClass
                             });
                         if (options.flexible) {
                             td.removeAttr('width');

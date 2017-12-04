@@ -1,6 +1,6 @@
 {
   "name": "biz-ui",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "A jQuery plugin for business UI components",
   "author": "BizFE",
   "main": "dist/jquery.bizui.js",
